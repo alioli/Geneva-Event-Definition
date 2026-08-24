@@ -440,17 +440,26 @@ D_k(X_i,\mathbf X_{\neq i})
 \ln^k\!\frac{\rnp^{\cut}}{\rn}.
 \label{eq:rnp-contamination-rn}
 \end{equation}
-Hence,
-\begin{equation}
-\boxed{
-\text{power suppressed in the higher unresolved limit}
-\;\not\Rightarrow\;
-\text{nonsingular in the lower resolution variable}
-}.
-\label{eq:key-nonuniformity}
-\end{equation}
 
-For \(p=1\), Eq.~\eqref{eq:rnp-contamination-rn} behaves as
+\medskip
+\noindent
+\fbox{%
+\parbox{0.94\linewidth}{%
+\textbf{Key point.}
+Power suppression with respect to the \emph{higher} unresolved limit does not imply that the
+corresponding projection effect is nonsingular in the \emph{lower} resolution variable.
+The reason is that the projection mismatch multiplies a spectrum that is already singular in
+\(\rn\). Thus, even if the relative mismatch vanishes as
+\((\rnp/\rn)^p\) for \(\rnp/\rn\to0\), after integrating the higher unresolved region up to
+\(\rnp^{\cut}\) it produces an absolute correction scaling parametrically as
+\(\rn^{-1}(\rnp^{\cut}/\rn)^p\), up to logarithms and observable-dependent coefficients.
+The correction is therefore suppressed relative to the leading singular spectrum at fixed
+\(\rn\), but its convergence is nonuniform as \(\rn\) becomes small.
+}%
+}
+\medskip
+
+For \(p=1\), this general behavior becomes
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
 \frac{d\sigma}{d\rn\,dX_i}
@@ -507,7 +516,6 @@ x(\widehat\Ph_N)=x^{\rm LP}(\Ph_{N+1}),
 \label{eq:exact-lower-preservation}
 \end{equation}
 is sufficient and particularly convenient, but LP-consistent preservation is the essential requirement for the LP construction.
-
 If \(x\) is shifted by the map,
 \begin{equation}
 x(\widehat\Ph_N)=x^{\rm LP}+\Delta x,
