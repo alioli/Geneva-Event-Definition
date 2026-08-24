@@ -1,0 +1,158 @@
+name: Pull changes from Overleaf
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/pull-overleaf.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: overleaf-sync
+  cancel-in-progress: false
+
+env:
+  OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+  OVERLEAF_REMOTE: https://git@git.overleaf.com/69ce2c30f9afe0bef5ae7ddf
+  STATE_FILE: .github/overleaf-sync-state
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out GitHub main
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Overleaf authentication
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${OVERLEAF_TOKEN:-}" ]]; then
+            echo "::error::Repository secret OVERLEAF_TOKEN is not configured."
+            exit 1
+          fi
+
+          ASKPASS="$RUNNER_TEMP/overleaf-askpass.sh"
+          cat > "$ASKPASS" <<'EOF'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' 'git' ;;
+            *Password*) printf '%s\n' "$OVERLEAF_TOKEN" ;;
+            *) exit 1 ;;
+          esac
+          EOF
+          chmod 700 "$ASKPASS"
+
+          echo "GIT_ASKPASS=$ASKPASS" >> "$GITHUB_ENV"
+          echo "GIT_TERMINAL_PROMPT=0" >> "$GITHUB_ENV"
+
+      - name: Fetch current Overleaf state
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git remote add overleaf "$OVERLEAF_REMOTE"
+
+          OVERLEAF_BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } \
+            | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
+
+          if [[ -z "$OVERLEAF_BRANCH" ]]; then
+            echo "::error::Could not determine the default branch of the Overleaf repository."
+            exit 1
+          fi
+
+          git fetch --prune overleaf "$OVERLEAF_BRANCH"
+          OVERLEAF_HEAD="$(git rev-parse "overleaf/$OVERLEAF_BRANCH")"
+
+          echo "Using Overleaf branch: $OVERLEAF_BRANCH"
+          echo "Current Overleaf commit: $OVERLEAF_HEAD"
+          echo "OVERLEAF_BRANCH=$OVERLEAF_BRANCH" >> "$GITHUB_ENV"
+          echo "OVERLEAF_HEAD=$OVERLEAF_HEAD" >> "$GITHUB_ENV"
+
+      - name: Build Overleaf change patch
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
+          : > "$PATCH"
+
+          if [[ -f "$STATE_FILE" ]]; then
+            BASE_SHA="$(tr -d '[:space:]' < "$STATE_FILE")"
+
+            if [[ -z "$BASE_SHA" ]]; then
+              echo "::error::The Overleaf sync checkpoint is empty."
+              exit 1
+            fi
+
+            if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+              echo "::error::The previous Overleaf checkpoint $BASE_SHA is not available in the fetched history."
+              exit 1
+            fi
+
+            if ! git merge-base --is-ancestor "$BASE_SHA" "$OVERLEAF_HEAD"; then
+              echo "::error::Overleaf history no longer descends from the stored checkpoint. Refusing to overwrite GitHub."
+              exit 1
+            fi
+
+            if [[ "$BASE_SHA" != "$OVERLEAF_HEAD" ]]; then
+              git diff --binary "$BASE_SHA" "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
+            fi
+          else
+            # First run only: the outbound sync has already made Overleaf the
+            # authoritative project tree. Reconcile any remaining difference
+            # between the two trees and then establish a checkpoint.
+            echo "No previous Overleaf checkpoint found; bootstrapping from the current trees."
+            git diff --binary HEAD "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
+          fi
+
+          if [[ ! -s "$PATCH" ]]; then
+            echo "No project-file changes to import from Overleaf."
+          fi
+
+      - name: Apply Overleaf changes safely
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
+
+          if [[ -s "$PATCH" ]]; then
+            # Three-way application is important here. It lets Git recognize
+            # changes that are already present on GitHub (for example because
+            # they originally travelled GitHub -> Overleaf) while still
+            # importing independent Overleaf edits. Real conflicts stop the
+            # sync instead of overwriting either side.
+            if ! git apply --3way --index "$PATCH"; then
+              echo "::error::Overleaf changes conflict with current GitHub main. Nothing was pushed to GitHub."
+              git status --short
+              exit 1
+            fi
+          fi
+
+          mkdir -p "$(dirname "$STATE_FILE")"
+          printf '%s\n' "$OVERLEAF_HEAD" > "$STATE_FILE"
+          git add "$STATE_FILE"
+
+          if git diff --cached --quiet; then
+            echo "GitHub is already synchronized with Overleaf."
+            exit 0
+          fi
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git commit -m "Sync changes from Overleaf"
+
+          # No force push: if GitHub main moved after checkout, this fails and
+          # the next scheduled run retries from the new GitHub state.
+          git push origin HEAD:main
