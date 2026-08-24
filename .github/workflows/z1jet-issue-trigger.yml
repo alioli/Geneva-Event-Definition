@@ -1,8 +1,7 @@
-name: Z+1-jet correction trigger
+name: Apply Z+1-jet correction
 
 on:
-  issues:
-    types: [opened]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -13,7 +12,6 @@ env:
 
 jobs:
   patch:
-    if: github.event.issue.title == 'Z1JET-CORRECTION'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
