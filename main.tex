@@ -172,8 +172,15 @@ The phase-space identity
 is exact.
 If both regions are analyzed with exact \(\Ph_{N+2}\) kinematics, the final NLO result is independent of
 \(\rnp^{\cut}\).
+In GENEVA this is precisely what happens when the NNLO calculation is studied with the
+\emph{internal analyzer}: each contribution is analyzed on its exact partonic kinematics, so
+Eq.~\eqref{eq:rnp-partition} is only an internal phase-space partition and its dependence cancels
+(up to numerical integration errors). This is therefore the appropriate setup for validating the
+underlying fixed-order NNLO calculation.
 
-A residual dependence appears when configurations below the cut are represented by projected kinematics,
+The situation relevant for MC event generation is different. When events are generated for output to
+the LHEF file, configurations below \(\rnp^{\cut}\) are represented as \((N+1)\)-parton events rather
+than as resolved \((N+2)\)-parton configurations. Their kinematics are therefore projected according to
 \begin{equation}
 \Ph_{N+2}\to\widehat\Ph_{N+1}=\Pi_{N+1}(\Ph_{N+2}),
 \label{eq:rnp-projection}
