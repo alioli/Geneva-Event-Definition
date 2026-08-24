@@ -1201,6 +1201,263 @@ Drell--Yan behavior described above is consistent with the combination of this k
 nested locality away from the shoulder, while the largest local projection differences in the lepton
 transverse-momentum distribution can still arise from the nonuniform response near the shoulder.
 
+\subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} illustration}
+\label{subsubsec:z1jet-illustration}
+
+The colour-singlet-plus-jet case provides a more stringent test of the higher projection than Drell--Yan.
+For the NNLO $Z+1$-jet calculation the relevant multiplicities and neighboring resolution variables are
+\begin{equation}
+\Ph_1\leftrightarrow Z+1\text{ parton},\qquad
+\Ph_2\leftrightarrow Z+2\text{ partons},\qquad
+\Ph_3\leftrightarrow Z+3\text{ partons},
+\label{eq:z1j-multiplicities}
+\end{equation}
+with
+\begin{equation}
+\rnm=\mathcal T_0,\qquad
+\rn=\mathcal T_1,\qquad
+\rnp=\mathcal T_2.
+\label{eq:z1j-resolution-identification}
+\end{equation}
+The LHE replacement relevant here is therefore
+\begin{equation}
+\Ph_3\longrightarrow
+\widehat\Ph_2=\Pi_2(\Ph_3)
+\qquad
+\text{for }\mathcal T_2<\mathcal T_2^{\cut}.
+\label{eq:z1j-higher-projection}
+\end{equation}
+The simultaneous lower unresolved limit is conveniently described by
+\begin{equation}
+\epsilon=\frac{\mathcal T_1}{Q}\to0,
+\qquad
+z=\frac{\mathcal T_2}{\mathcal T_1}=\mathcal O(1).
+\label{eq:z1j-simultaneous-limit}
+\end{equation}
+For the axis-minimized jettiness variables on a three-parton configuration,
+Eq.~\eqref{eq:njettiness-nested-pair-bound} gives the kinematic restriction
+\begin{equation}
+0\le z\le\frac23.
+\label{eq:z1j-t2-t1-bound}
+\end{equation}
+Thus the physically relevant finite-$z$ region is compact, but it need not be strongly ordered.
+
+A qualitative difference from Drell--Yan is that preserving the colour-singlet momentum does not completely
+fix the limiting $\Ph_1$ point. At one-parton Born level, transverse momentum conservation gives
+\begin{equation}
+\vec p_{T,J}=-\vec q_T,
+\qquad
+p_{T,J}=q_T,
+\label{eq:z1j-born-transverse-balance}
+\end{equation}
+while the longitudinal jet coordinate remains independent at fixed $q^\mu$. Locally one may therefore think
+of the limiting one-jet Born manifold as being characterized by $q^\mu$ together with one additional
+longitudinal coordinate, which may equivalently be represented by the jet rapidity or, in a suitable region,
+by $\mathcal T_0$. Schematically, for a beam-thrust-like definition,
+\begin{equation}
+\mathcal T_0(\Ph_1)
+\sim
+q_T\,e^{-|y_J-Y_Z|},
+\label{eq:z1j-t0-born-coordinate}
+\end{equation}
+up to the precise convention used for the resolution measure. Hence preservation of $q^\mu$ alone does not
+imply preservation of the complete one-jet Born configuration.
+
+This point is directly relevant for a $\mathcal T_1^{\rm FR}$ projection that preserves the vector-boson
+four-momentum and the lower resolution variable $\mathcal T_1$, but does not preserve $\mathcal T_0$ exactly.
+The latter fact by itself does \emph{not} imply a failure of uniform nested infrared locality. The decisive
+quantity is the scaling of
+\begin{equation}
+\Delta\mathcal T_0
+=
+\mathcal T_0(\Ph_3)
+-
+\mathcal T_0\!\left(\Pi_2(\Ph_3)\right)
+\label{eq:z1j-delta-t0}
+\end{equation}
+along the finite-$z$ paths of Eq.~\eqref{eq:z1j-simultaneous-limit}. A nested-local map may perfectly well
+satisfy
+\begin{equation}
+\frac{\Delta\mathcal T_0}{Q}
+\sim
+\left(\frac{\mathcal T_1}{Q}\right)^q
+h_0(z,\omega),
+\qquad q>0,
+\label{eq:z1j-t0-nested-local-scaling}
+\end{equation}
+with $h_0$ finite over the allowed range $0\le z\le2/3$. By contrast, a nonzero finite limit
+\begin{equation}
+\lim_{\mathcal T_1\to0}
+\frac{\Delta\mathcal T_0}{Q}
+=h_0(z,\omega)\neq0
+\qquad
+\text{at fixed }z>0
+\label{eq:z1j-t0-nested-failure}
+\end{equation}
+would demonstrate that exact and projected configurations approach different points of the limiting
+$\Ph_1$ manifold.
+
+The geometric reason why this question is not answered by exact preservation of $\mathcal T_1$ is simple.
+The condition $\mathcal T_1\to0$ measures the approach to the one-jet manifold, and is therefore naturally
+viewed as controlling a direction normal to that manifold. Every point of $\Ph_1$ has $\mathcal T_1=0$.
+Preserving $\mathcal T_1$ consequently does not by itself prevent a displacement tangential to $\Ph_1$,
+for example in the jet rapidity or $\mathcal T_0$ direction. Uniform nested infrared locality requires that
+such tangential displacements vanish as the common unresolved scale is taken to zero.
+
+Jet observables introduce a second effect that is logically distinct from the locality of the projection map.
+The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization
+procedure, whereas phenomenological observables are commonly constructed from inclusive anti-$k_T$ jets.
+Consequently, exact preservation of $\mathcal T_1$ does not imply preservation of the anti-$k_T$ leading-jet
+momentum or rapidity. Moreover, the anti-$k_T$ measurement contains non-smooth codimension-one surfaces,
+including the analysis threshold
+\begin{equation}
+p_{T,j_1}=p_T^{\min},
+\label{eq:z1j-jet-threshold-surface}
+\end{equation}
+clustering boundaries and changes in the identity of the leading jet. IRC safety ensures a well-defined
+unresolved limit, but it does not make the differential response to a small projection displacement uniform
+across such surfaces. For the threshold measurement one has distributionally
+\begin{equation}
+\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
+-
+\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
+\simeq
+-\Delta p_{T,j_1}\,
+\delta\!\left(p_{T,j_1}-p_T^{\min}\right),
+\label{eq:z1j-pt-threshold-migration}
+\end{equation}
+with the sign convention
+$\Delta p_{T,j_1}=p_{T,j_1}(\Ph_3)-p_{T,j_1}(\widehat\Ph_2)$.
+A steeply falling jet spectrum can therefore amplify a parametrically small kinematic migration into a
+large relative change of a fiducial cross section.
+
+There is nevertheless an important asymptotic protection for the leading-jet transverse momentum if the
+$\mathcal T_1^{\rm FR}$ map preserves $q^\mu$. In the strict one-jet limit both exact and projected
+configurations must satisfy Eq.~\eqref{eq:z1j-born-transverse-balance}, independently of the jet rapidity.
+Therefore, provided both configurations genuinely approach a one-jet limit,
+\begin{equation}
+\Delta p_{T,j_1}\longrightarrow0
+\qquad
+(\mathcal T_1\to0,\ z\text{ finite}),
+\label{eq:z1j-leading-pt-protected}
+\end{equation}
+even if the limiting jet rapidities differ. A persistent nonzero plateau in $\Delta p_{T,j_1}$ would thus
+signal a stronger problem than the mere non-preservation of $\mathcal T_0$. By contrast, a plateau in
+$\Delta y_{j_1}$ or in $\Delta\mathcal T_0/Q$ at fixed finite $z$ would directly diagnose a failure to
+approach the same point on the one-jet Born manifold.
+
+The numerical hierarchy of the technical cuts must also be treated using their actual definitions. In the
+setup considered here the lower cut is dynamical,
+\begin{equation}
+\mathcal T_1^{\cut}
+=10^{-5}\,m_T^Z,
+\qquad
+m_T^Z=\sqrt{M_Z^2+q_T^2},
+\label{eq:z1j-dynamic-t1cut}
+\end{equation}
+whereas the higher cut is taken to be fixed,
+\begin{equation}
+\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}.
+\label{eq:z1j-fixed-t2cut}
+\end{equation}
+The neighboring-cut ratio is therefore event dependent,
+\begin{equation}
+\rho(\Ph)
+\equiv
+\frac{\mathcal T_2^{\cut}}{\mathcal T_1^{\cut}}
+=
+\frac{100\ {\rm GeV}}{m_T^Z},
+\label{eq:z1j-cut-ratio}
+\end{equation}
+and is generically of order unity for electroweak transverse masses. In particular, the numerical values
+$10^{-5}$ and $10^{-3}$ should not be interpreted as two directly comparable dimensionless cuts differing
+by two orders of magnitude.
+
+Combining Eq.~\eqref{eq:z1j-t2-t1-bound} with the fixed $\mathcal T_2$ cut shows that the higher technical cut
+is kinematically inactive whenever
+\begin{equation}
+\mathcal T_1
+<
+\frac32\,\mathcal T_2^{\cut}
+=
+1.5\times10^{-3}\ {\rm GeV},
+\label{eq:z1j-t2cut-inactive}
+\end{equation}
+so that the full finite-$z$ interval $0\le z\le2/3$ is projected there. The corresponding saturated interval
+above the lower technical boundary exists only if
+\begin{equation}
+10^{-5}m_T^Z
+<1.5\times10^{-3}\ {\rm GeV},
+\qquad\Longleftrightarrow\qquad
+m_T^Z<150\ {\rm GeV}.
+\label{eq:z1j-saturated-condition}
+\end{equation}
+For $m_T^Z\sim100$ GeV, for example, the interval extends only from roughly
+$10^{-3}$ GeV to $1.5\times10^{-3}$ GeV. Hence the current setup does not expose a logarithmically large
+finite-$z$ region spanning the two decades that a naive comparison of $10^{-5}$ and $10^{-3}$ would suggest.
+At larger $m_T^Z$ the ratio in Eq.~\eqref{eq:z1j-cut-ratio} decreases and the higher cut enforces a progressively
+stronger restriction on $z$ already near the lower boundary.
+
+This observation is useful when interpreting the numerically large LHE projection effects found in observables
+involving the hardest anti-$k_T$ jet, including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV.
+Differences at the level of tens of percent cannot be attributed solely to a parametrically huge ratio of the
+technical cuts. They may instead arise from one or a combination of three effects: a genuine failure of
+uniform nested locality in tangential one-jet Born coordinates; a nested-local but slowly convergent recoil
+map; or amplification of a small kinematic displacement by the steep jet spectrum and the non-smooth
+anti-$k_T$ measurement boundaries.
+
+The most direct diagnostic is to apply the competing $\Ph_3\to\Ph_2$ projections, for example an FKS map
+and the $\mathcal T_1^{\rm FR}$ map, to the same exact $\Ph_3$ points and study, in bins of
+\begin{equation}
+z=\frac{\mathcal T_2}{\mathcal T_1},
+\label{eq:z1j-z-diagnostic}
+\end{equation}
+the approach to the lower unresolved limit of
+\begin{equation}
+\frac{\Delta\mathcal T_0}{Q},
+\qquad
+\Delta y_{j_1}^{\rm anti-k_T},
+\qquad
+\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q}.
+\label{eq:z1j-local-diagnostics}
+\end{equation}
+A positive-power fall with $\mathcal T_1/Q$ establishes nested locality for the corresponding coordinate,
+whereas a nonzero plateau at fixed finite $z$ signals its failure. For the fiducial jet cuts one should
+separately monitor the signed classification migration
+\begin{equation}
+\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
+-
+\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
+\label{eq:z1j-signed-threshold-migration}
+\end{equation}
+for the relevant values of $p_T^{\min}$.
+
+A complementary cut study can distinguish formal from merely numerical problems. Keeping the dynamical
+$\mathcal T_1^{\cut}=10^{-5}m_T^Z$ fixed, one may lower the higher cut through, for example,
+\begin{equation}
+\mathcal T_2^{\cut}
+=
+10^{-3},\ 5\times10^{-4},\ 2\times10^{-4},\ 10^{-4}\ {\rm GeV}.
+\label{eq:z1j-t2cut-scan}
+\end{equation}
+If the LHE discrepancy decreases with a positive power of $\mathcal T_2^{\cut}$, the projection remains
+formally convergent even if its coefficient is numerically large. An even cleaner nested test is to lower the
+two cuts together at fixed ratio,
+\begin{equation}
+\mathcal T_2^{\cut}
+=\kappa\,\mathcal T_1^{\cut}
+=\kappa\,10^{-5}m_T^Z,
+\label{eq:z1j-correlated-cut-scan}
+\end{equation}
+with fixed $\kappa$. A residual that survives this joint scaling would point to a failure of the LHE event
+representation in the simultaneous unresolved limit, whereas a vanishing residual with a large finite-cut
+coefficient would indicate slow but formally acceptable convergence.
+
+The $Z+1$-jet example therefore illustrates why exact preservation of the chosen resolution variable is only
+one part of a robust event projection. The map must also approach the correct point of the lower Born manifold
+in all tangential coordinates relevant to the measurement, while the observable itself must be examined for
+nonuniform response near jet-clustering and fiducial boundaries.
+
 \section{Differential locality of the lower map}
 
 We now turn to the lower projection
