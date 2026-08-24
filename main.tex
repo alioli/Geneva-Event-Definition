@@ -654,6 +654,8 @@ only a signal that the expansion in the neighboring-scale ratio has been pushed 
 validity. The behavior of the projection map in the simultaneous unresolved limit has to be examined
 separately, together with any kinematic restrictions specific to the chosen resolution variables.
 
+\subsubsection{Uniform nested infrared locality of the map}
+
 To formulate the map property generically, introduce
 \begin{equation}
 \epsilon=\frac{\rn}{Q},
@@ -836,7 +838,116 @@ common-scale suppression must be modified accordingly. The robust conclusion is 
 nested-local map, a finite cut ratio does not by itself imply an order-one projection error when both absolute
 cuts are taken to zero together.
 
-\paragraph{Special case: minimized \(N\)-jettiness.}
+\subsubsection{Why fixed-order NNLO subtraction does not require uniform nested locality}
+\label{subsec:fixed-order-does-not-require-uniform-nested-locality}
+
+Uniform nested infrared locality is stronger than what is required of an auxiliary map used only inside a
+fixed-order subtraction. A concrete counterexample can be constructed by starting from any ordinary one-step
+IR-local map \(\Pi_{N+1}^{(0)}\), and composing it with a smooth recoil transformation
+\(\mathcal R_\alpha\) acting on the projected \((N+1)\)-body state,
+\begin{equation}
+\Pi_{N+1}^{\rm bad}
+=
+\mathcal R_{\alpha(x,y)}\circ\Pi_{N+1}^{(0)},
+\qquad
+x=\frac{\rn}{Q},
+\qquad
+y=\frac{\rnp}{Q},
+\qquad
+\alpha(x,y)=\frac{y}{x+y}.
+\label{eq:bad-map-definition}
+\end{equation}
+Assume that \(\mathcal R_\alpha\) preserves the on-shell and momentum-conservation constraints of the
+\((N+1)\)-body phase space and changes one smooth lower-multiplicity coordinate \(Y\) according to
+\begin{equation}
+Y\!\left(\mathcal R_\alpha(\Ph_{N+1})\right)
+=
+Y(\Ph_{N+1})
++
+\alpha\,Y_{\rm char}
++
+\mathcal O(\alpha^2),
+\label{eq:bad-map-recoil}
+\end{equation}
+with a finite nonsingular scale \(Y_{\rm char}\). At fixed nonzero \(x\),
+\begin{equation}
+y\to0
+\quad\Longrightarrow\quad
+\alpha(x,y)\to0,
+\label{eq:bad-map-one-step-local}
+\end{equation}
+so \(\Pi_{N+1}^{\rm bad}\) has exactly the same one-step \(N+2\to N+1\) infrared limit as
+\(\Pi_{N+1}^{(0)}\). It is therefore perfectly admissible from the point of view of local NLO subtraction,
+provided the usual phase-space factorization and invertibility requirements are satisfied.
+
+In the simultaneous unresolved limit, however, taking \(y=z x\) gives
+\begin{equation}
+\alpha(x,zx)=\frac{z}{1+z},
+\label{eq:bad-map-simultaneous-alpha}
+\end{equation}
+which remains finite as \(x\to0\) for any fixed nonzero \(z\). Hence
+\begin{equation}
+\frac{
+Y(\Ph_{N+2})
+-Y\!\left(\Pi_{N+1}^{\rm bad}(\Ph_{N+2})\right)
+}{Y_{\rm char}}
+\longrightarrow
+-\frac{z}{1+z}
+\label{eq:bad-map-violates-nested-locality}
+\end{equation}
+up to the convention for the sign of the recoil. The map is one-step IR local but violates uniform nested
+infrared locality maximally: exact and projected configurations approach different points of the limiting
+\(N\)-body phase space along a finite-\(z\) path.
+
+This does not spoil the fixed-order NLO calculation of the \((N+1)\)-body contribution that enters an NNLO
+calculation. Schematically, for \(\rn>\rn^{\cut}\), one has
+\begin{align}
+\sigma_{N+1}^{\rm NLO}[\Ocal]
+={}&
+\int_{\rn>\rn^{\cut}}d\Ph_{N+2}
+\Bigl[
+R_{N+2}(\Ph_{N+2})\Ocal(\Ph_{N+2})
+-
+C_{N+2}(\Ph_{N+2})
+\Ocal\!\left(\Pi_{N+1}^{\rm bad}(\Ph_{N+2})\right)
+\Bigr]
+\nonumber\\
+&+
+\int_{\rn>\rn^{\cut}}d\Ph_{N+1}
+\Bigl[V_{N+1}+I_{N+1}^{\rm bad}\Bigr](\Ph_{N+1})
+\Ocal(\Ph_{N+1}),
+\label{eq:bad-map-subtracted-nlo}
+\end{align}
+where \(I_{N+1}^{\rm bad}\) is obtained by integrating the same counterterm with the same map. The counterterm
+has only been added and subtracted. For every fixed nonzero \(\rn^{\cut}\), ordinary one-step locality is
+sufficient to make the real-minus-counterterm contribution locally integrable in the
+\(\rnp\to0\) limit. The map dependence cancels between the subtracted real contribution and its integrated
+counterpart, so Eq.~\eqref{eq:bad-map-subtracted-nlo} is the exact NLO result independently of the bad
+simultaneous-limit behavior of \(\Pi_{N+1}^{\rm bad}\).
+
+Embedding this exact NLO contribution in a sliced NNLO calculation therefore does not require the higher map
+to be uniformly nested-local. The lower region \(\rn<\rn^{\cut}\) is supplied by the separate
+lower-multiplicity NNLO contribution, while the higher-multiplicity NLO calculation only requires the
+ordinary \(\rnp\to0\) cancellation at fixed resolved \(\rn>\rn^{\cut}\). Individual subtraction pieces may
+develop increasingly large and numerically delicate cancellations as \(\rn^{\cut}\) is reduced, but this is
+a subtraction-scheme issue rather than a loss of formal NNLO accuracy.
+
+The situation changes when the projected \((N+1)\)-body configuration is used as the physical representative
+of the event below \(\rnp^{\cut}\). In that case the replacement
+\begin{equation}
+\Ocal(\Ph_{N+2})
+\longrightarrow
+\Ocal\!\left(\Pi_{N+1}(\Ph_{N+2})\right)
+\label{eq:physical-projection-replacement}
+\end{equation}
+is part of the event definition. There is no compensating integrated counterterm that restores the discarded
+measurement on the exact \(\Ph_{N+2}\) kinematics. A failure of uniform nested locality therefore becomes a
+genuine projection effect in the LHE event sample even though the same map could be entirely legitimate as
+an auxiliary fixed-order subtraction map. This is the precise sense in which the mapping requirements for
+GENEVA event generation are stronger than those required for formal fixed-order NNLO accuracy.
+
+\subsubsection{Kinematic restriction for minimized \(N\)-jettiness}
+
 For an axis-minimized definition of \(N\)-jettiness, increasing the number of final-state jet axes enlarges
 the space over which the observable is minimized. At fixed final-state parton multiplicity \(M\), this
 immediately implies the monotonicity relation
@@ -989,8 +1100,11 @@ For a three-parton configuration, relevant for the next multiplicity in the colo
 calculation, Eq.~\eqref{eq:t1-t0-multiplicity-bound} instead gives
 \(\mathcal T_1/\mathcal T_0\le2/3\).
 
-The size of the migration in phase space is, however, only one part of the problem. The response of the
-observable can introduce a second nonuniformity. Let
+\subsection{Observable response to projection-induced migrations}
+\label{subsec:observable-response-projection}
+
+The size of the migration in phase space is only one part of the problem. The response of the observable can
+introduce a second, logically distinct nonuniformity. Let
 \begin{equation}
 S_i(X_i)=\frac{d\sigma}{dX_i}
 \label{eq:observable-spectrum-S}
@@ -1023,6 +1137,8 @@ however, \(L_i\) can become parametrically much smaller than the hard scale. A d
 absolute terms can then generate a large local change in the distribution. When \(|\Delta X_i|\) becomes
 comparable to the distance from the nonanalytic point, the derivative expansion itself is no longer uniform
 and the effect is better viewed as migration across the feature rather than as a small derivative correction.
+
+\subsubsection{Drell--Yan illustration}
 
 Drell--Yan production provides a useful illustration. Taking
 \begin{equation}
@@ -1514,6 +1630,14 @@ underlying lower-multiplicity point uniformly as \(\rn/Q\to0\) at finite values 
 the kinematically allowed domain. Once this is true, ordinary IRC safety implies that any smooth
 lower-multiplicity observable has a vanishing exact--projected mismatch in the simultaneous unresolved limit.
 The rate of convergence, however, is not fixed by IRC safety.
+
+\item \textbf{Fixed-order NNLO accuracy does not require uniform nested locality of an auxiliary subtraction map.}
+A map may be one-step IR local as \(\rnp\to0\) at fixed resolved \(\rn\), and hence define a valid local NLO
+subtraction, while approaching a different lower-multiplicity point when \(\rn\) and \(\rnp\) vanish together.
+If the same map is used consistently in the local and integrated counterterms, this auxiliary map dependence
+cancels and the higher-multiplicity NLO contribution remains exact. Uniform nested locality becomes a physical
+requirement only when the projected configuration is retained as the event representative rather than being
+used solely inside an add--subtract construction.
 
 \item \textbf{Observable smoothness is a separate source of nonuniformity.}
 Even a uniformly vanishing kinematic displacement can generate a large local difference near a sharp
