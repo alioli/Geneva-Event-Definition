@@ -836,10 +836,53 @@ common-scale suppression must be modified accordingly. The robust conclusion is 
 nested-local map, a finite cut ratio does not by itself imply an order-one projection error when both absolute
 cuts are taken to zero together.
 
-\paragraph{Special case: the \(\mathcal T_1/\mathcal T_0\) ratio.}
-For the usual minimized jettiness variables, the pair \(\mathcal T_1\) and \(\mathcal T_0\) obeys an additional
-kinematic restriction at fixed final-state parton multiplicity. Denoting that multiplicity by \(M\) in order
-to avoid confusion with the multiplicity label \(N\) used elsewhere in this note, one has
+\paragraph{Special case: minimized \(N\)-jettiness.}
+For an axis-minimized definition of \(N\)-jettiness, increasing the number of final-state jet axes enlarges
+the space over which the observable is minimized. At fixed final-state parton multiplicity \(M\), this
+immediately implies the monotonicity relation
+\begin{equation}
+\mathcal T_{K+1}(\Ph_M)
+\le
+\mathcal T_K(\Ph_M),
+\label{eq:njettiness-monotonicity}
+\end{equation}
+for every admissible \(K\). A stronger quantitative bound follows from the same minimization property.
+Let
+\begin{equation}
+\mathcal T_K(\Ph_M)
+=
+\sum_{i=1}^{M} t_i^{(K)},
+\qquad
+t_i^{(K)}\ge0,
+\label{eq:njettiness-parton-contributions}
+\end{equation}
+be the decomposition into the nonnegative parton contributions evaluated for a set of axes that minimizes
+\(\mathcal T_K\). At least one contribution satisfies
+\(t_{\max}^{(K)}\ge \mathcal T_K/M\). In the \((K+1)\)-axis minimization one may keep all the minimizing
+\(K\) axes and add one extra axis aligned with the parton that gives \(t_{\max}^{(K)}\). Its contribution
+then vanishes, while the minimization over an enlarged set of directions cannot increase the contributions
+of the other partons. Hence, provided the axis minimization admits this alignment,
+\begin{equation}
+\boxed{
+\mathcal T_{K+1}(\Ph_M)
+\le
+\frac{M-1}{M}\,
+\mathcal T_K(\Ph_M)
+}.
+\label{eq:njettiness-adjacent-bound}
+\end{equation}
+More generally, adding \(s\) axes aligned with the \(s\) largest contributions to the minimizing
+\(K\)-axis configuration gives
+\begin{equation}
+\mathcal T_{K+s}(\Ph_M)
+\le
+\frac{M-s}{M}\,
+\mathcal T_K(\Ph_M),
+\label{eq:njettiness-multiaxis-bound}
+\end{equation}
+whenever the corresponding \((K+s)\)-axis minimization is admissible.
+
+Equation~(61) of arXiv:2312.06496 is the \(K=0\), \(s=1\) specialization,
 \begin{equation}
 \frac{\mathcal T_1(\Ph_M)}{\mathcal T_0(\Ph_M)}
 \le
@@ -848,11 +891,18 @@ c_M,
 c_M\equiv\frac{M-1}{M}.
 \label{eq:t1-t0-multiplicity-bound}
 \end{equation}
-Thus \(c_2=1/2\) on a two-parton configuration and \(c_3=2/3\) on a three-parton configuration. This is the
-kinematic constraint stated in Eq.~(61) of arXiv:2312.06496 for the multiplicities relevant to the NNLO
-colour-singlet-plus-jet calculation. We do not assume that Eq.~\eqref{eq:t1-t0-multiplicity-bound} generalizes
-to arbitrary neighboring pairs \(\mathcal T_{K+1}/\mathcal T_K\); the generic discussion above remains
-independent of such a bound.
+Thus \(c_2=1/2\) on a two-parton configuration and \(c_3=2/3\) on a three-parton configuration. For the
+neighboring pair relevant to a generic nested step on \(\Ph_{N+2}\), Eq.~\eqref{eq:njettiness-adjacent-bound}
+corresponds to \(K=N\), \(M=N+2\), and therefore gives
+\begin{equation}
+\frac{\mathcal T_{N+1}(\Ph_{N+2})}
+{\mathcal T_N(\Ph_{N+2})}
+\le
+\frac{N+1}{N+2}.
+\label{eq:njettiness-nested-pair-bound}
+\end{equation}
+These quantitative bounds rely on the axis-minimized definition of \(N\)-jettiness and are not assumed for
+generic resolution variables.
 
 At fixed multiplicity \(M\), the region below a technical \(\mathcal T_1\) cut is therefore
 \begin{equation}
@@ -1447,14 +1497,16 @@ The uniform nested-locality discussion is formulated without assuming a universa
 \(\rnp/\rn\). If a particular pair of resolution variables has an additional kinematic restriction, that
 restriction must be imposed separately when determining the physically allowed projected region.
 
-\item \textbf{The \(\mathcal T_1/\mathcal T_0\) ratio has a multiplicity-dependent kinematic bound.}
-For a final state with \(M\) partons,
+\item \textbf{Axis-minimized \(N\)-jettiness obeys monotonicity and a multiplicity-dependent bound.}
+At fixed \(\Ph_M\), axis minimization implies \(\mathcal T_{K+1}\le\mathcal T_K\), and more strongly
 \[
-\frac{\mathcal T_1(\Ph_M)}{\mathcal T_0(\Ph_M)}\le\frac{M-1}{M}.
+\frac{\mathcal T_{K+1}(\Ph_M)}{\mathcal T_K(\Ph_M)}
+\le\frac{M-1}{M}.
 \]
-Thus the upper bounds are \(1/2\) on \(\Ph_2\) and \(2/3\) on \(\Ph_3\), as in Eq.~(61) of
-arXiv:2312.06496. No analogous numerical bound is assumed here for arbitrary neighboring pairs of
-\(N\)-jettiness variables.
+Equation~(61) of arXiv:2312.06496 is the \(K=0\) case. On \(\Ph_{N+2}\) this gives
+\(\mathcal T_{N+1}/\mathcal T_N\le(N+1)/(N+2)\), while for Drell--Yan double-real kinematics
+\(\mathcal T_1/\mathcal T_0\le1/2\). These quantitative statements rely on the axis-minimized definition;
+no analogous numerical bound is assumed for generic resolution variables.
 
 \item \textbf{Uniform nested infrared locality is a property of the projection map.}
 A higher map has uniform nested infrared locality if exact and projected configurations approach the same
@@ -1492,8 +1544,8 @@ When the resolutions are strongly ordered the natural parameters include
 \frac{\rn^{\cut}}{\rnm}.
 \]
 Near finite neighboring ratios, absolute suppression in the common unresolved scale and uniform nested
-infrared locality of the map become the relevant criteria. For the \(\mathcal T_1/\mathcal T_0\) pair, the
-physical ratio is additionally capped at fixed multiplicity by Eq.~\eqref{eq:t1-t0-multiplicity-bound}.
+infrared locality of the map become the relevant criteria. For axis-minimized \(N\)-jettiness the physical
+neighboring ratio is additionally bounded by Eq.~\eqref{eq:njettiness-adjacent-bound}.
 
 \item \textbf{The genuine LP truncation in the setup discussed here}
 is the NNLO lower-multiplicity approximation in \(\rn\), Eq.~\eqref{eq:nnlo-lp-replacement}.
