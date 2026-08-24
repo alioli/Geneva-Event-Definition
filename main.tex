@@ -1,0 +1,441 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb, geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\title{Event Definition in GENEVA and Dependence on $r_N^{\mathrm{cut}}$}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+
+\textbf{Preserving \(r_{N-1}\)} in the projection/splitting map is not just a convenient choice. It is what makes the \textbf{\(N\)-jet spectrum differential in \(r_{N-1}\)} behave the way the GENEVA construction assumes at leading power. Let me make that precise.
+
+\section*{Setup}
+
+You are now considering the \textbf{\(N\)-event contribution above}
+\[
+r_{N-1}^{\rm cut},
+\]
+so the event is differential in an \(N\)-body phase-space point
+\[
+\Phi_N,
+\]
+and one of the coordinates of \(\Phi_N\) may be taken to be
+\[
+r_{N-1}.
+\]
+
+Then the \(N\)-event weight below \(r_N^{\rm cut}\) schematically contains
+\[
+\frac{d\sigma_N^{\rm MC}}{d\Phi_N}
+\sim
+\frac{d\sigma_N^{\rm scet}}{d\Phi_N}
++
+\int d\Phi_{N+1}\,
+\frac{d\sigma_{N+1}}{d\Phi_{N+1}}\,
+\Theta(r_N<r_N^{\rm cut})\,
+\delta\!\big(\Phi_N-\hat\Phi_N(\Phi_{N+1})\big)
+\]
+with support only for
+\[
+r_{N-1}(\Phi_N)>r_{N-1}^{\rm cut}.
+\]
+
+The question is: when \(\Phi_N\) is promoted to \(\Phi_{N+1}\) by an unresolved emission, must the map preserve \(r_{N-1}\)?
+
+The answer is:
+
+\subsection*{At leading power, yes.}
+
+More precisely, the map should satisfy
+\[
+r_{N-1}\!\left(\hat\Phi_N(\Phi_{N+1})\right)
+=
+r_{N-1}^{\rm LP}(\Phi_{N+1})
+\]
+or at least differ from it only by subleading powers in \(r_N\).
+
+In practice, the cleanest choice is to preserve it exactly.
+
+\section*{Why \(r_{N-1}\) should be preserved}
+
+\subsection*{1. Because \(r_{N-1}\) is now one of the measured Born variables}
+
+Once your \(N\)-event distribution is differential in \(\Phi_N\), and \(\Phi_N\) includes \(r_{N-1}\), the projection delta is not merely assigning unresolved radiation to some generic \(N\)-body point. It is assigning it to a point with a \textbf{specific value of \(r_{N-1}\)}.
+
+So if the map changes \(r_{N-1}\), then unresolved radiation generated from an \(N\)-body configuration with one value of \(r_{N-1}\) is deposited into a different bin in \(r_{N-1}\).
+
+That immediately means the real-emission contribution below \(r_N^{\rm cut}\) is no longer local in the measured variable \(r_{N-1}\).
+
+\subsection*{2. Because the singular  factorization/resummation is differential in that variable}
+
+The singular  \(N\)-jet spectrum above \(r_{N-1}^{\rm cut}\) is organized as a distribution in \(\Phi_N\), hence also in \(r_{N-1}\).
+
+The resummed spectrum and its FO expansion know about singular  structures of the form
+\[
+\frac{d\sigma^{\rm scet}}{d\Phi_N}
+\equiv
+\frac{d\sigma^{\rm scet}}{d r_{N-1}\, d\Omega_N}
+\]
+where \(d\Omega_N\) denotes the remaining \(N\)-body variables.
+
+For the unresolved \((N+1)\)-body contribution below \(r_N^{\rm cut}\) to match this \textbf{point-by-point in \(r_{N-1}\)}, the projection must return the same \(r_{N-1}\) that appears in the singular  factorization formula, up to power corrections.
+
+If not, then the cancellation/matching is no longer local in \(r_{N-1}\).
+
+\subsection*{3. Because otherwise the delta expansion generates derivative terms in \(r_{N-1}\)}
+
+Suppose the map does not preserve \(r_{N-1}\), and instead
+\[
+r_{N-1}(\hat\Phi_N)=r_{N-1}^{\rm scet}+\Delta r_{N-1},
+\qquad
+\Delta r_{N-1}\to0 \quad (r_N\to0).
+\]
+
+Then the projection delta contains
+\[
+\delta\!\big(r_{N-1}-r_{N-1}^{\rm scet}-\Delta r_{N-1}\big)
+=
+\delta\!\big(r_{N-1}-r_{N-1}^{\rm scet}\big)
+-
+\Delta r_{N-1}\,\partial_{r_{N-1}}
+\delta\!\big(r_{N-1}-r_{N-1}^{\rm scet}\big)
++\cdots
+\]
+
+The first term is the leading-power singular  term, which is what the resummed-expanded spectrum knows how to reproduce.
+
+The second term is not part of the LP factorization formula. After integrating the unresolved emission with its singular  kernel,
+\[
+\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta r_{N-1},
+\]
+you get a residual contribution proportional to
+\[
+\partial_{r_{N-1}}\frac{d\sigma^{\rm scet}}{d\Phi_N}.
+\]
+
+So when \(r_{N-1}\) is not preserved, the mismatch is precisely a \textbf{migration term in the measured \(r_{N-1}\) spectrum}.
+
+\section*{Physical meaning}
+
+If you do not preserve \(r_{N-1}\), then unresolved radiation below \(r_N^{\rm cut}\) causes an event that should belong to one \(r_{N-1}\) bin to be reassigned to another one.
+
+That has two consequences:
+
+\subsection*{(a) Local spectrum distortion}
+
+The total integrated \(N\)-event rate may still be correct up to power corrections, but the \textbf{differential spectrum in \(r_{N-1}\)} gets distorted by bin-to-bin migration.
+
+\subsection*{(b) Loss of local cancellation}
+
+The LP resummation/expansion cancels the singular  dependence locally at fixed \(r_{N-1}\). If the map shifts \(r_{N-1}\), this cancellation becomes nonlocal in \(r_{N-1}\), leaving a residual subleading term.
+
+\section*{What happens parametrically when it is not preserved}
+
+Let
+\[
+\Delta r_{N-1}\sim r_N^\alpha.
+\]
+
+Then the mismatch behaves like
+\[
+\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta r_{N-1}
+\sim
+\int_0^{r_N^{\rm cut}} dr_N\, r_N^{\alpha-1}.
+\]
+
+So for the natural case \(\alpha=1\),
+\[
+\sim r_N^{\rm cut},
+\]
+and with logarithmic dependence in the coefficient one often gets
+\[
+\sim r_N^{\rm cut}\ln r_N^{\rm cut}.
+\]
+
+Thus the effect is formally a power correction in \(r_N^{\rm cut}\), but it directly multiplies derivatives of the \(r_{N-1}\) spectrum, so it can be numerically enhanced in regions where the spectrum is steep.
+
+This is especially relevant:
+
+\begin{itemize}
+\item near cuts,
+\item near peaks,
+\item near Sudakov shoulders,
+\item or wherever \(\frac{d\sigma}{d r_{N-1}}\) varies rapidly.
+\end{itemize}
+
+\section*{Why exact preservation is especially natural here}
+
+There is a difference between a generic Born variable and \(r_{N-1}\) in your present setup.
+
+Here \(r_{N-1}\) is not just some arbitrary coordinate of \(\Phi_N\). It is the \textbf{very variable that defines the \(N\)-jet event class above \(r_{N-1}^{\rm cut}\)} and often the variable whose spectrum you want to resum/match.
+
+So preserving it ensures that:
+
+\begin{itemize}
+\item the unresolved \((N+1)\)-body contribution is assigned to the correct \(N\)-body point,
+\item the matching to the singular  \(N\)-jet spectrum is local in the measured variable,
+\item there is no spurious migration across \(r_{N-1}\) bins below \(r_N^{\rm cut}\).
+\end{itemize}
+
+\section*{What if it is not preserved?}
+
+Then, even if the map is IR safe, you get:
+
+\begin{itemize}
+\item the same LP singular  structure after integrating over \(r_{N-1}\),
+\item but a \textbf{different differential spectrum in \(r_{N-1}\)},
+\item with residual terms of the form
+\[
+\sim
+\partial_{r_{N-1}}
+\left(\frac{d\sigma^{\rm scet}}{d\Phi_N}\right)
+\times
+\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta r_{N-1}.
+\]
+\end{itemize}
+
+In words:
+
+\textbf{not preserving \(r_{N-1}\) induces subleading-power bin migration in the \(r_{N-1}\) spectrum.}
+
+\section*{Very compact summary}
+
+When the \(N\)-body phase space is differential in \(r_{N-1}\), the unresolved map
+\[
+\Phi_N\to\Phi_{N+1}\to\hat\Phi_N
+\]
+should preserve \(r_{N-1}\) so that the below-\(r_N^{\rm cut}\) contribution remains local in the measured variable \(r_{N-1}\).
+
+If it does not, then unresolved emissions shift the event between \(r_{N-1}\) bins, and the difference shows up as a power-suppressed but potentially sizable distortion of the \(r_{N-1}\) spectrum, typically of order
+\[
+r_N^{\rm cut}
+\quad\text{or}\quad
+r_N^{\rm cut}\ln r_N^{\rm cut}.
+\]
+
+\section*{The sharpest statement}
+
+For an \(N\)-jet spectrum differential in \(r_{N-1}\), preserving \(r_{N-1}\) is the analogue of preserving the Born variables used by the factorization theorem. It guarantees that the singular  FO contribution below \(r_N^{\rm cut}\) and the resummed/expanded \(N\)-jet spectrum are matched \textbf{locally in the measured spectrum variable}.
+
+The cleanest way to see it is with a toy model for the \(N\)-jet spectrum differential in \(x \equiv r_{N-1}\).
+
+\section*{Simple setup}
+
+Assume the singular  unresolved \(N+1\)-body contribution below \(r_N^{\rm cut}\) has the form
+
+\[
+d\sigma_{N+1}^{\rm scet}
+\;\sim\;
+\frac{dr_N}{r_N}\, F(x)\,dx
+\]
+
+with \(x=r_{N-1}\), and the projection map assigns the unresolved configuration to
+
+\[
+x_{\rm proj} = x + \Delta x(r_N).
+\]
+
+Then the projected contribution to the \(x\)-spectrum is schematically
+
+\[
+\frac{d\sigma^{\rm proj}}{dx}
+\sim
+\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,
+F(x-\Delta x(r_N)).
+\]
+
+The resummed-expanded piece subtracts the leading-power term
+
+\[
+\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,F(x),
+\]
+
+so the residual map-dependent mismatch is
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}
+\Bigl[F(x-\Delta x(r_N)) - F(x)\Bigr].
+\]
+
+For small \(\Delta x\),
+
+\[
+F(x-\Delta x)-F(x)
+\simeq
+-\Delta x\,F'(x),
+\]
+
+hence
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+- F'(x)\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta x(r_N).
+\]
+
+This is the master formula.
+
+\section*{Case 1: \(r_{N-1}\) preserved exactly}
+
+\[
+\Delta x(r_N)=0
+\]
+
+so
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)=0.
+\]
+
+No migration, no extra residual dependence from this source.
+
+\section*{Case 2: \(r_{N-1}\) preserved only at leading power}
+
+Suppose
+
+\[
+\Delta x(r_N) \sim c\,r_N.
+\]
+
+Then
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+- c\,F'(x)\int_0^{r_N^{\rm cut}} dr_N
+=
+- c\,F'(x)\,r_N^{\rm cut}.
+\]
+
+So the residual dependence is power suppressed:
+
+\[
+\sim r_N^{\rm cut} F'(x).
+\]
+
+This is the expected good behavior.
+
+\section*{Case 3: \(r_{N-1}\) not preserved at leading power}
+
+Now take a map for which the shift is larger, e.g.
+
+\[
+\Delta x(r_N)\sim c\,x
+\qquad\text{or}\qquad
+\Delta x(r_N)\sim c\,\sqrt{r_N}.
+\]
+
+These still vanish in the strict IR limit in the second example, but not fast enough.
+
+\subsection*{Example A: \(\Delta x \sim c\,x\)}
+
+Then
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+- c\,x\,F'(x)\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}
+=
+- c\,x\,F'(x)\,\ln r_N^{\rm cut}.
+\]
+
+So instead of a power correction, you get a \textbf{logarithmic sensitivity to the cut}.
+
+That is exactly the kind of behavior you do not want: the residual dependence is no longer suppressed as \(r_N^{\rm cut}\to 0\), but grows like \(\ln r_N^{\rm cut}\).
+
+\subsection*{Example B: \(\Delta x \sim c\,\sqrt{r_N}\)}
+
+Then
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+- c\,F'(x)\int_0^{r_N^{\rm cut}} \frac{dr_N}{\sqrt{r_N}}
+=
+-2c\,F'(x)\sqrt{r_N^{\rm cut}}.
+\]
+
+This still vanishes, but much more slowly than the desired \(r_N^{\rm cut}\). So it is parametrically enhanced compared to LP preservation.
+
+\section*{Why this can blow up at small \(r_{N-1}\)}
+
+Now take a steep physical spectrum near \(x=r_{N-1}=0\). For instance, a Sudakov-type behavior
+
+\[
+F(x)\sim \frac{1}{x}\,\exp[-L^2],\qquad L=\ln\frac{1}{x},
+\]
+
+or more simply, for illustration,
+
+\[
+F(x)\sim \frac{1}{x}.
+\]
+
+Then
+
+\[
+F'(x)\sim -\frac{1}{x^2}.
+\]
+
+Plug this into the bad case above.
+
+\subsection*{If \(\Delta x\sim c\,x\)}
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+- c\,x \left(-\frac{1}{x^2}\right)\ln r_N^{\rm cut}
+\sim
+\frac{c}{x}\,\ln r_N^{\rm cut}.
+\]
+
+So as \(x=r_{N-1}\to 0\), the residual becomes large like
+
+\[
+\frac{\ln r_N^{\rm cut}}{r_{N-1}}.
+\]
+
+This is the sense in which the residual cut dependence can \textbf{blow up} in the physically important small-\(r_{N-1}\) region.
+
+Even though the map is IR-safe in the strict \(r_N\to0\) sense, failure to preserve \(r_{N-1}\) at leading power creates a migration term multiplied by the steep derivative of the spectrum, and that becomes large precisely where resummation is supposed to give you the correct physical behavior.
+
+\section*{Practical interpretation}
+
+If \(r_{N-1}\) is not preserved at LP, then unresolved emissions below \(r_N^{\rm cut}\) shift the event by an amount that is too large compared to the power counting of the singular  measure \(dr_N/r_N\). The consequence is:
+
+\begin{itemize}
+\item the cancellation with the resummed-expanded result is no longer local in \(r_{N-1}\),
+\item the residual dependence on \(r_N^{\rm cut}\) is no longer of the desired \(\mathcal O(r_N^{\rm cut})\) type,
+\item and in the small-\(r_{N-1}\) region it can be amplified by the steep slope of the physical spectrum.
+\end{itemize}
+
+\section*{Compact takeaway to add}
+
+A simple toy model makes the point transparent. Writing \(x=r_{N-1}\), the residual map dependence after FO–resummation matching behaves as
+
+\[
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+- F'(x)\int_0^{r_N^{\rm cut}}\frac{dr_N}{r_N}\,\Delta x(r_N).
+\]
+
+\begin{itemize}
+\item If \(x\) is preserved exactly, \(\Delta x=0\), there is no such residual.
+\item If \(x\) is preserved only at leading power, \(\Delta x\sim r_N\), the residual is \(\sim r_N^{\rm cut}F'(x)\), i.e. power suppressed.
+\item If \(x\) is not preserved at leading power, e.g. \(\Delta x\sim x\), the residual becomes \(\sim xF'(x)\ln r_N^{\rm cut}\). For a steep spectrum \(F(x)\sim 1/x\), this gives \(\sim \ln r_N^{\rm cut}/x\), which becomes large as \(x=r_{N-1}\to0\).
+\end{itemize}
+
+This shows why preserving \(r_{N-1}\) at least at leading power is essential to obtain the correct physical small-\(r_{N-1}\) behavior once resummation is included.
+
+\end{document}
+    
