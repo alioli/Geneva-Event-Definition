@@ -89,12 +89,22 @@ jobs:
           set -euo pipefail
 
           git remote add overleaf "$OVERLEAF_REMOTE"
-          git fetch --prune overleaf master
 
-          # Work on top of the current Overleaf master, not on top of the
+          OVERLEAF_BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } \
+            | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
+
+          if [[ -z "$OVERLEAF_BRANCH" ]]; then
+            echo "::error::Could not determine the default branch of the Overleaf repository."
+            exit 1
+          fi
+
+          echo "Using Overleaf branch: $OVERLEAF_BRANCH"
+          git fetch --prune overleaf "$OVERLEAF_BRANCH"
+
+          # Work on top of the current Overleaf branch, not on top of the
           # possibly stale GitHub copy. This preserves edits made directly
           # in Overleaf.
-          git switch --detach overleaf/master
+          git switch --detach "overleaf/$OVERLEAF_BRANCH"
 
           PATCH="$RUNNER_TEMP/github-to-overleaf.patch"
           if [[ ! -s "$PATCH" ]]; then
@@ -118,7 +128,7 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git commit -m "Sync GitHub changes ${GITHUB_SHA::12}"
-          git push overleaf HEAD:master
+          git push overleaf "HEAD:$OVERLEAF_BRANCH"
 
       - name: Mark sync successful
         if: success()
