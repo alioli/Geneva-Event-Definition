@@ -109,6 +109,9 @@ jobs:
               git diff --binary "$BASE_SHA" "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
             fi
           else
+            # First run only: the outbound sync has already made Overleaf the
+            # authoritative project tree. Reconcile any remaining difference
+            # between the two trees and then establish a checkpoint.
             echo "No previous Overleaf checkpoint found; bootstrapping from the current trees."
             git diff --binary HEAD "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
           fi
@@ -125,6 +128,11 @@ jobs:
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
 
           if [[ -s "$PATCH" ]]; then
+            # Three-way application is important here. It lets Git recognize
+            # changes that are already present on GitHub (for example because
+            # they originally travelled GitHub -> Overleaf) while still
+            # importing independent Overleaf edits. Real conflicts stop the
+            # sync instead of overwriting either side.
             if ! git apply --3way --index "$PATCH"; then
               echo "::error::Overleaf changes conflict with current GitHub main. Nothing was pushed to GitHub."
               git status --short
@@ -136,228 +144,15 @@ jobs:
           printf '%s\n' "$OVERLEAF_HEAD" > "$STATE_FILE"
           git add "$STATE_FILE"
 
-          if ! git diff --cached --quiet; then
-            git config user.name "GitHub Actions"
-            git config user.email "actions@github.com"
-            git commit -m "Sync changes from Overleaf"
-            git push origin HEAD:main
-          else
+          if git diff --cached --quiet; then
             echo "GitHub is already synchronized with Overleaf."
-          fi
-
-      - name: Insert Z+1-jet subsection once
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch origin main
-          git switch main
-          git reset --hard origin/main
-
-          python3 - <<'PY'
-          from pathlib import Path
-
-          p = Path('main.tex')
-          text = p.read_text()
-          title = r'\subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} illustration}'
-          if title in text:
-              print('Z+1-jet subsection already present.')
-              raise SystemExit(0)
-
-          marker = r'\section{Differential locality of the lower map}'
-          if marker not in text:
-              raise SystemExit('Insertion marker not found.')
-
-          section = r'''
-\subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} illustration}
-\label{subsubsec:z1jet-illustration}
-
-The colour-singlet-plus-jet case probes the higher projection more stringently than Drell--Yan. For the NNLO
-$Z+1$-jet calculation the neighboring resolution variables are
-\begin{equation}
-\rnm=\mathcal T_0,\qquad
-\rn=\mathcal T_1,\qquad
-\rnp=\mathcal T_2,
-\label{eq:z1j-resolution-identification}
-\end{equation}
-and the LHE replacement of the double-real kinematics is
-\begin{equation}
-\Ph_3\longrightarrow\widehat\Ph_2=\Pi_2(\Ph_3)
-\qquad\text{for }\mathcal T_2<\mathcal T_2^{\cut}.
-\label{eq:z1j-higher-projection}
-\end{equation}
-The simultaneous lower unresolved limit is described by
-\begin{equation}
-\epsilon=\frac{\mathcal T_1}{Q}\to0,
-\qquad
-z=\frac{\mathcal T_2}{\mathcal T_1}=\mathcal O(1),
-\label{eq:z1j-simultaneous-limit}
-\end{equation}
-with, for the axis-minimized jettiness variables on $\Ph_3$,
-\begin{equation}
-0\le z\le\frac23.
-\label{eq:z1j-t2-t1-bound}
-\end{equation}
-
-A qualitative difference from Drell--Yan is that preserving the colour-singlet four-momentum does not fully
-fix the limiting one-jet Born configuration. At one-parton Born level,
-\begin{equation}
-\vec p_{T,J}=-\vec q_T,
-\qquad
-p_{T,J}=q_T,
-\label{eq:z1j-born-transverse-balance}
-\end{equation}
-while the longitudinal jet coordinate remains independent at fixed $q^\mu$. Locally the limiting $\Ph_1$
-manifold may therefore be characterized by $q^\mu$ together with one additional coordinate, such as $y_J$
-or, in a suitable region, $\mathcal T_0$. Schematically,
-\begin{equation}
-\mathcal T_0(\Ph_1)\sim q_T e^{-|y_J-Y_Z|},
-\label{eq:z1j-t0-born-coordinate}
-\end{equation}
-up to the precise convention used for the resolution measure. Hence preservation of $q^\mu$ alone does not
-imply preservation of the complete one-jet Born point.
-
-This distinction is directly relevant for a $\mathcal T_1^{\rm FR}$ projection that preserves $q^\mu$ and
-$\mathcal T_1$, but does not preserve $\mathcal T_0$ exactly. The latter fact by itself does \emph{not}
-constitute a violation of uniform nested infrared locality. The decisive quantity is the scaling of
-\begin{equation}
-\Delta\mathcal T_0
-=\mathcal T_0(\Ph_3)-\mathcal T_0\!\left(\Pi_2(\Ph_3)\right)
-\label{eq:z1j-delta-t0}
-\end{equation}
-for $\mathcal T_1\to0$ at fixed finite $z$. A nested-local map may satisfy
-\begin{equation}
-\frac{\Delta\mathcal T_0}{Q}
-\sim
-\left(\frac{\mathcal T_1}{Q}\right)^q h_0(z,\omega),
-\qquad q>0,
-\label{eq:z1j-t0-nested-local-scaling}
-\end{equation}
-with $h_0$ finite over $0\le z\le2/3$. By contrast, a nonzero plateau in
-$\Delta\mathcal T_0/Q$ at fixed $z>0$ would demonstrate that exact and projected configurations approach
-different points of the limiting $\Ph_1$ manifold. Geometrically, $\mathcal T_1$ controls the approach
-normal to the one-jet manifold, whereas $y_J$ or $\mathcal T_0$ parameterize motion tangential to it.
-Exact preservation of $\mathcal T_1$ therefore does not by itself constrain the latter displacement.
-
-Jet observables introduce a second effect, distinct from the locality of the projection map. The $\mathcal T_1$
-resolution variable is defined through its own exclusive clustering or minimization procedure, whereas the
-phenomenological analysis commonly uses inclusive anti-$k_T$ jets. Exact preservation of $\mathcal T_1$
-therefore does not imply preservation of the anti-$k_T$ leading-jet momentum or rapidity. In addition, the
-measurement contains non-smooth surfaces such as
-\begin{equation}
-p_{T,j_1}=p_T^{\min},
-\label{eq:z1j-jet-threshold-surface}
-\end{equation}
-clustering boundaries, and changes in the identity of the leading jet. For a small displacement,
-\begin{equation}
-\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
--
-\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
-\simeq
--\Delta p_{T,j_1}\,
-\delta\!\left(p_{T,j_1}-p_T^{\min}\right),
-\label{eq:z1j-pt-threshold-migration}
-\end{equation}
-so a steeply falling jet spectrum can amplify a parametrically small kinematic migration into a large
-relative change of the accepted cross section.
-
-There is nevertheless an important asymptotic protection for $p_{T,j_1}$ if the $\mathcal T_1^{\rm FR}$ map
-preserves $q^\mu$. In the strict one-jet limit both the exact and projected configurations satisfy
-$p_{T,j_1}=q_T$, and therefore
-\begin{equation}
-\Delta p_{T,j_1}\longrightarrow0
-\qquad
-(\mathcal T_1\to0,\ z\text{ finite}),
-\label{eq:z1j-leading-pt-protected}
-\end{equation}
-provided both configurations genuinely approach a one-jet state. A persistent nonzero plateau in
-$\Delta p_{T,j_1}$ would thus signal a stronger problem than the mere non-preservation of $\mathcal T_0$.
-By contrast, a plateau in $\Delta y_{j_1}$ or $\Delta\mathcal T_0/Q$ directly probes a possible failure to
-approach the same point on the one-jet Born manifold.
-
-The actual technical cuts are also important. In the setup considered here,
-\begin{equation}
-\mathcal T_1^{\cut}=10^{-5}m_T^Z,
-\qquad
-m_T^Z=\sqrt{M_Z^2+q_T^2},
-\label{eq:z1j-dynamic-t1cut}
-\end{equation}
-while the higher cut is fixed,
-\begin{equation}
-\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}.
-\label{eq:z1j-fixed-t2cut}
-\end{equation}
-The neighboring-cut ratio is therefore event dependent,
-\begin{equation}
-\rho(\Ph)=\frac{\mathcal T_2^{\cut}}{\mathcal T_1^{\cut}}
-=\frac{100\ {\rm GeV}}{m_T^Z},
-\label{eq:z1j-cut-ratio}
-\end{equation}
-and is generically of order unity rather than $10^2$. Combining
-Eq.~\eqref{eq:z1j-t2-t1-bound} with the fixed higher cut shows that $\mathcal T_2^{\cut}$ is kinematically
-inactive whenever
-\begin{equation}
-\mathcal T_1<\frac32\mathcal T_2^{\cut}=1.5\times10^{-3}\ {\rm GeV}.
-\label{eq:z1j-t2cut-inactive}
-\end{equation}
-The interval in which the full range $0\le z\le2/3$ is projected above the lower technical boundary exists
-only if
-\begin{equation}
-10^{-5}m_T^Z<1.5\times10^{-3}\ {\rm GeV}
-\qquad\Longleftrightarrow\qquad
-m_T^Z<150\ {\rm GeV}.
-\label{eq:z1j-saturated-condition}
-\end{equation}
-For $m_T^Z\sim100$ GeV this interval is only roughly $10^{-3}$--$1.5\times10^{-3}$ GeV. Hence the observed
-large LHE projection effects in hardest-jet observables cannot be attributed simply to a two-decade hierarchy
-between the numerical coefficients $10^{-5}$ and $10^{-3}$.
-
-A useful diagnostic is to apply competing $\Ph_3\to\Ph_2$ maps, for example an FKS map and the
-$\mathcal T_1^{\rm FR}$ map, to the same exact $\Ph_3$ points. In bins of
-\begin{equation}
-z=\frac{\mathcal T_2}{\mathcal T_1},
-\end{equation}
-one should study the approach to the lower unresolved limit of
-\begin{equation}
-\frac{\Delta\mathcal T_0}{Q},
-\qquad
-\Delta y_{j_1}^{\rm anti-k_T},
-\qquad
-\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q}.
-\label{eq:z1j-local-diagnostics}
-\end{equation}
-A positive-power fall with $\mathcal T_1/Q$ is consistent with nested locality, whereas a nonzero plateau at
-fixed finite $z$ signals its failure for the corresponding coordinate. Separately, the signed migration
-across the analysis threshold should be monitored for $p_T^{\min}=10$, $50$ and $100$ GeV.
-
-Finally, the cut dependence provides a direct test of whether the large numerical effect is nevertheless
-formally convergent. Keeping $\mathcal T_1^{\cut}=10^{-5}m_T^Z$ fixed, one may scan
-\begin{equation}
-\mathcal T_2^{\cut}=10^{-3},\ 5\times10^{-4},\ 2\times10^{-4},\ 10^{-4}\ {\rm GeV}.
-\label{eq:z1j-t2cut-scan}
-\end{equation}
-If the LHE discrepancy decreases with a positive power of $\mathcal T_2^{\cut}$, the higher projection remains
-formally convergent even if its coefficient is numerically large. A cleaner nested test is to lower both cuts
-together at fixed ratio,
-\begin{equation}
-\mathcal T_2^{\cut}=\kappa\mathcal T_1^{\cut}
-=\kappa\,10^{-5}m_T^Z,
-\label{eq:z1j-correlated-cut-scan}
-\end{equation}
-with fixed $\kappa$. A residual that survives this joint scaling would indicate a genuine failure of the LHE
-event representation in the simultaneous unresolved limit, while a vanishing residual with a large finite-cut
-coefficient would instead indicate slow but formally acceptable convergence.
-
-'''
-          p.write_text(text.replace(marker, section + marker, 1))
-          PY
-
-          if git diff --quiet -- main.tex; then
-            echo "No subsection insertion needed."
             exit 0
           fi
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add main.tex
-          git commit -m "Add Z+1-jet illustration"
+          git commit -m "Sync changes from Overleaf"
+
+          # No force push: if GitHub main moved after checkout, this fails and
+          # the next scheduled run retries from the new GitHub state.
           git push origin HEAD:main
