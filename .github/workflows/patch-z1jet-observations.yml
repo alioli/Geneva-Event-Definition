@@ -113,3 +113,5 @@ diagnostic is to apply the two projections to the same exact $\Ph_3$ points and 
           git add main.tex
           git commit -m 'Refine Z+1-jet mapping comparison'
           git push origin HEAD:main
+
+# trigger
