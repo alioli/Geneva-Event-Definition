@@ -328,7 +328,7 @@ for a small migration one obtains
 \begin{equation}
 \Theta\!\left(X_i(\widehat\Ph_{N+1})-X_{i,\rm cut}\right)
 -
-\Theta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right)
+\Theta\!\left(X_i(\Ph_{N+2})-X_i(\Ph_{N+2})+X_i(\Ph_{N+2})-X_{i,\rm cut}\right)
 \simeq
 -\Delta X_i\,
 \delta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right).
@@ -611,12 +611,13 @@ cancels, provided no fiducial boundary or other non-preserved measurement preven
 \label{subsec:uniform-nested-locality}
 
 The result in Eq.~\eqref{eq:integrated-ratio-scaling} must not be extrapolated to a situation in which the
-two technical cuts are comparable. This is particularly transparent when
+two technical cuts are comparable. For a generic pair of resolution variables we do not assume any universal
+kinematic upper bound on the ratio \(\rnp/\rn\). If, for example,
 \begin{equation}
-\rnp^{\cut}>\rn^{\cut}.
+\rnp^{\cut}>\rn^{\cut},
 \label{eq:inverted-cuts}
 \end{equation}
-The integration over the lower resolution variable can then be split as
+it is useful to make the purely algebraic decomposition
 \begin{equation}
 \int_{\rn^{\cut}}^Q d\rn
 =
@@ -625,22 +626,35 @@ The integration over the lower resolution variable can then be split as
 \int_{\rnp^{\cut}}^Qd\rn.
 \label{eq:split-rn-inverted-cuts}
 \end{equation}
-In the second region the higher cut enforces
+In the second region the higher technical cut itself enforces
 \(\rnp/\rn<\rnp^{\cut}/\rn<1\), and sufficiently far above
 \(\rnp^{\cut}\) one recovers the strongly ordered situation of
-Sec.~\ref{subsec:strongly-ordered-higher-projection}. In the first region, however, the condition
-\(\rnp<\rnp^{\cut}\) does not force \(\rnp/\rn\) to be small. Configurations with
-\(\rnp/\rn=\mathcal O(1)\) are part of the projected sample. The same issue occurs for comparable cuts
-\(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\), even if the higher cut is slightly smaller: the region near the
-lower endpoint \(\rn\sim\rn^{\cut}\) is then not parametrically strongly ordered.
+Sec.~\ref{subsec:strongly-ordered-higher-projection}. In the first region, by contrast, the condition
+\(\rnp<\rnp^{\cut}\) alone does not force \(\rnp/\rn\) to be small. The same issue can occur for comparable
+cuts \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\), even if the higher cut is somewhat smaller, because the region
+near the lower endpoint need not be parametrically strongly ordered.
 
-It follows that inserting \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\) into
+Equation~\eqref{eq:split-rn-inverted-cuts} should not be interpreted as a universal separation between a
+non-strongly-ordered and a strongly ordered domain. It only illustrates what follows from the technical cuts
+alone. Particular choices of resolution variables can impose additional kinematic restrictions on the
+allowed values of \(\rnp\) at fixed \(\rn\). In that case the actual projected region is
+\begin{equation}
+0\le \rnp <
+\min\!\left\{
+\rnp^{\cut},\,np^{\rm kin,max}(\rn,\mathbf X,\ldots)
+\right\},
+\label{eq:generic-kinematic-cap}
+\end{equation}
+and the point at which the technical cut becomes active is determined by the equality of the two entries in
+Eq.~\eqref{eq:generic-kinematic-cap}, not necessarily by \(\rn=\rnp^{\cut}\).
+
+It follows in particular that inserting \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\) into
 Eq.~\eqref{eq:integrated-ratio-scaling} is not a prediction of an \(\mathcal O(1)\) projection effect. It is
 only a signal that the expansion in the neighboring-scale ratio has been pushed outside its domain of
 validity. The behavior of the projection map in the simultaneous unresolved limit has to be examined
-separately.
+separately, together with any kinematic restrictions specific to the chosen resolution variables.
 
-To formulate this limit, introduce
+To formulate the map property generically, introduce
 \begin{equation}
 \epsilon=\frac{\rn}{Q},
 \qquad
@@ -657,7 +671,8 @@ limit is
 z=\mathcal O(1),
 \label{eq:simultaneous-unresolved}
 \end{equation}
-so that \(\rn\) and \(\rnp\) approach zero together rather than hierarchically.
+where \(z\) is understood to remain finite inside the kinematically allowed domain of the particular
+resolution variables. Thus \(\rn\) and \(\rnp\) approach zero together rather than hierarchically.
 
 It is useful to distinguish clearly a property of the projection map from a property of the measured
 observable. Ordinary one-step infrared locality of \(\Pi_{N+1}\) requires that, at fixed nonzero \(\rn\),
@@ -669,10 +684,10 @@ itself guarantee uniform behavior when the projected \((N+1)\)-body state simult
 We shall say that \(\Pi_{N+1}\) has \emph{uniform nested infrared locality} if, whenever an exact
 \((N+2)\)-parton configuration approaches an underlying \(N\)-parton configuration in the simultaneous
 limit of Eq.~\eqref{eq:simultaneous-unresolved}, the projected \((N+1)\)-parton configuration approaches the
-\emph{same} underlying \(N\)-parton point, uniformly for finite values of \(z\). Equivalently, for every
-finite set of smooth IRC-safe coordinates \(\mathbf Y=(Y_1,\ldots,Y_s)\) that characterize the relevant
-lower-multiplicity kinematics, with finite nonsingular characteristic scales \(Y_{a,\rm char}\), the map
-must satisfy
+\emph{same} underlying \(N\)-parton point, uniformly for finite kinematically allowed values of \(z\).
+Equivalently, for every finite set of smooth IRC-safe coordinates
+\(\mathbf Y=(Y_1,\ldots,Y_s)\) that characterize the relevant lower-multiplicity kinematics, with finite
+nonsingular characteristic scales \(Y_{a,\rm char}\), the map must satisfy
 \begin{equation}
 \lim_{\epsilon\to0}
 \sup_{0\le z\le z_*}
@@ -686,19 +701,20 @@ Y_a(\Ph_{N+2}(\epsilon,z,\omega))
 =0,
 \label{eq:uniform-nested-locality-definition}
 \end{equation}
-for every fixed \(z_*=\mathcal O(1)\) in the kinematically allowed simultaneous-unresolved region, and for
-fixed \(\omega\) away from additional singular boundaries. The quantification over lower-multiplicity
-coordinates is what makes Eq.~\eqref{eq:uniform-nested-locality-definition} a property of the map rather than of
-one chosen observable. The uniformity in \(z\) is essential: a map that is local only for \(z\to0\) but
-approaches a different lower-multiplicity point along some path with \(z=\mathcal O(1)\) does not satisfy
-uniform nested infrared locality.
+for every fixed \(z_*\) whose interval lies inside the kinematically allowed simultaneous-unresolved region,
+and for fixed \(\omega\) away from additional singular boundaries. No universal numerical value of
+\(z_*\) is assumed here. The quantification over lower-multiplicity coordinates is what makes
+Eq.~\eqref{eq:uniform-nested-locality-definition} a property of the map rather than of one chosen observable.
+The uniformity in \(z\) is essential: a map that is local only for \(z\to0\) but approaches a different
+lower-multiplicity point along some allowed path with finite \(z\) does not satisfy uniform nested infrared
+locality.
 
 The qualifier \emph{nested} refers to the fact that the \(N+2\to N+1\) projection must remain local not only
 with respect to its own unresolved emission, but also while the projected \((N+1)\)-parton state itself
 approaches the next lower \(N\)-parton limit. The qualifier \emph{uniform} stresses that this agreement must
-persist for finite values of \(z\), rather than only after taking \(z\to0\) first. Operationally, the two
-operations ``remove the higher unresolved emission'' and ``approach the lower unresolved configuration'' must
-lead to the same underlying \(N\)-body kinematics.
+persist for finite allowed values of \(z\), rather than only after taking \(z\to0\) first. Operationally, the
+two operations ``remove the higher unresolved emission'' and ``approach the lower unresolved configuration''
+must lead to the same underlying \(N\)-body kinematics.
 
 Once the map has uniform nested infrared locality, ordinary IRC safety of a particular observable \(X_i\) is
 enough to imply
@@ -708,7 +724,7 @@ enough to imply
 X_i(\Ph_{N+2})-X_i(\Pi_{N+1}(\Ph_{N+2}))
 \longrightarrow0
 \qquad
-(\epsilon\to0,\ z=\mathcal O(1)).
+(\epsilon\to0,\ z\text{ finite and allowed}).
 \label{eq:irc-safe-consequence-uniform-map}
 \end{equation}
 Thus the vanishing of \(\Delta X_i\) in the simultaneous limit should not be regarded as an additional
@@ -728,7 +744,7 @@ H_i(\epsilon,z,\omega)
 \qquad q_i>0,
 \label{eq:uniform-nested-locality-power}
 \end{equation}
-with \(h_i\) finite for \(z=\mathcal O(1)\). The exponent \(q_i\) is not fixed by IRC safety. It depends on
+with \(h_i\) finite for finite allowed \(z\). The exponent \(q_i\) is not fixed by IRC safety. It depends on
 the recoil prescription, on the resolution variables and on how the particular observable responds to the
 small kinematic displacement. The approach need not even be a pure power; Eq.~\eqref{eq:uniform-nested-locality-power}
 is a convenient parametrization when a power expansion exists. In the overlap with the strongly ordered
@@ -757,9 +773,9 @@ d\mu(z,\omega)\,
 \label{eq:simultaneous-singular-measure}
 \end{equation}
 where \(d\mu(z,\omega)\) contains the remaining unresolved-emission measure and reduces to a logarithmic
-\(dz/z\)-type measure in the strongly ordered \(z\to0\) limit. No expansion in \(z\) is made when
-\(z=\mathcal O(1)\). Combining Eq.~\eqref{eq:simultaneous-singular-measure} with the power-like realization
-of uniform nested infrared locality gives schematically
+\(dz/z\)-type measure in the strongly ordered \(z\to0\) limit. No expansion in \(z\) is made when \(z\) is
+finite. Combining Eq.~\eqref{eq:simultaneous-singular-measure} with the power-like realization of uniform
+nested infrared locality gives schematically
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
 \frac{d\sigma}{d\rn\,dX_i}
@@ -777,14 +793,15 @@ G_i\!\left(
 \right],
 \label{eq:uniform-nested-locality-spectrum}
 \end{equation}
-where \(G_i\) denotes the integral over \(z\) and the remaining radiation variables, including
-\(h_i\), and \(z_{\max}\) is set by the higher cut together with the kinematic range. Uniform nested infrared
-locality requires the underlying map mismatch to remain uniformly small when \(z=\mathcal O(1)\); under the
-power-like assumption above, \(G_i\) remains parametrically finite and the suppression is supplied by the
-common lower scale \((\rn/Q)^{q_i}\), not by a small value of \(\rnp/\rn\).
+where \(G_i\) denotes the integral over \(z\) and the remaining radiation variables, including \(h_i\), and
+\(z_{\max}\) is set jointly by the higher technical cut and the kinematic range. Uniform nested infrared
+locality requires the underlying map mismatch to remain uniformly small over any finite allowed range of
+\(z\); under the power-like assumption above, \(G_i\) remains parametrically finite and the suppression is
+supplied by the common lower scale \((\rn/Q)^{q_i}\), not by requiring \(z\) itself to be small.
 
-For \(\rnp^{\cut}>\rn^{\cut}\), the contribution from the non-strongly-ordered interval in
-Eq.~\eqref{eq:split-rn-inverted-cuts} consequently has the generic power counting
+For a generic pair of resolution variables, and in the absence of an additional kinematic cap that becomes
+active before \(\rn\sim\rnp^{\cut}\), the contribution from the interval displayed in
+Eq.~\eqref{eq:split-rn-inverted-cuts} has the illustrative power counting
 \begin{align}
 \int_{\rn^{\cut}}^{\rnp^{\cut}}
 \frac{d\rn}{\rn}
@@ -795,18 +812,16 @@ Eq.~\eqref{eq:split-rn-inverted-cuts} consequently has the generic power countin
 \left(\frac{\rnp^{\cut}}{Q}\right)^{q_i}
 -
 \left(\frac{\rn^{\cut}}{Q}\right)^{q_i}
-\right],
+\right].
 \label{eq:uniform-nested-integrated-region}
 \end{align}
-up to logarithms, observable-dependent derivatives and the finite \(z\)-integrated coefficients contained
-in \(G_i\). This immediately distinguishes two limiting procedures. If the cuts are lowered together at a
-fixed ratio
+If the cuts are lowered together at a fixed ratio
 \begin{equation}
 \rnp^{\cut}=\kappa\,\rn^{\cut},
 \qquad \kappa=\mathcal O(1),
 \label{eq:fixed-kappa-cuts}
 \end{equation}
-then
+this gives
 \begin{equation}
 \Delta_{\rm proj}^{\rm sim}
 \sim
@@ -815,13 +830,121 @@ then
 \times\text{logs and finite coefficients},
 \label{eq:fixed-kappa-uniform-nested-scaling}
 \end{equation}
-for the interval present when \(\kappa>1\). Thus a fixed ratio of order one, or even larger than one, does
-not by itself imply an order-one projection error. If the map has uniform nested infrared locality and the
-relevant observable has a power-like approach, the correction still vanishes with the absolute unresolved
-scale. By contrast, if \(\rn^{\cut}\to0\) while \(\rnp^{\cut}\) is held fixed, lowering the lower cut eventually
-ceases to improve this contribution; its natural size is then controlled by \((\rnp^{\cut}/Q)^{q_i}\). This
-provides a qualitatively different interpretation from a naive extrapolation of
-Eq.~\eqref{eq:integrated-ratio-scaling}.
+for this interval when \(\kappa>1\). The formula is not universal: if the chosen resolution variables impose
+a stronger kinematic restriction, the integration range and therefore the finite coefficient multiplying the
+common-scale suppression must be modified accordingly. The robust conclusion is only that, for a uniformly
+nested-local map, a finite cut ratio does not by itself imply an order-one projection error when both absolute
+cuts are taken to zero together.
+
+\paragraph{Special case: \(N\)-jettiness.}
+For the usual minimized \(N\)-jettiness variables there is an additional exact kinematic restriction that is
+not shared by generic resolution variables. On an \((N+2)\)-parton configuration,
+\begin{equation}
+\frac{\mathcal T_{N+1}(\Ph_{N+2})}
+{\mathcal T_N(\Ph_{N+2})}
+\le
+c_N,
+\qquad
+c_N\equiv\frac{N+1}{N+2}.
+\label{eq:njettiness-neighbor-bound}
+\end{equation}
+One way to see the bound is to write \(\mathcal T_N\) as the sum of the \(N+2\) nonnegative contributions
+from the final-state partons after minimizing over the \(N\) jet axes (with the beam directions included in
+the measure). At least one parton contributes at least \(\mathcal T_N/(N+2)\). When passing to
+\(\mathcal T_{N+1}\), the additional jet axis can be aligned with that parton, setting its contribution to
+zero while the minimization cannot increase any of the remaining contributions. Hence at least a fraction
+\(1/(N+2)\) of \(\mathcal T_N\) can be removed, which gives Eq.~\eqref{eq:njettiness-neighbor-bound}.
+This argument and the bound are specific to \(N\)-jettiness; no analogous numerical bound is assumed in the
+generic discussion above.
+
+For \(N\)-jettiness the projected region below the higher technical cut is therefore
+\begin{equation}
+0\le\mathcal T_{N+1}
+<
+\min\!\left\{
+\mathcal T_{N+1}^{\cut},\,
+c_N\,\mathcal T_N
+\right\},
+\label{eq:njettiness-effective-upper-bound}
+\end{equation}
+so that
+\begin{equation}
+z_{\max}
+=
+\min\!\left\{
+\frac{\mathcal T_{N+1}^{\cut}}{\mathcal T_N},\,
+c_N
+\right\}.
+\label{eq:njettiness-zmax}
+\end{equation}
+The higher technical cut is kinematically inactive whenever
+\begin{equation}
+\mathcal T_N
+<
+\frac{\mathcal T_{N+1}^{\cut}}{c_N},
+\label{eq:njettiness-cut-inactive}
+\end{equation}
+and becomes the limiting upper bound only above that value. Thus the transition is at
+\(\mathcal T_N=\mathcal T_{N+1}^{\cut}/c_N\), rather than at
+\(\mathcal T_N=\mathcal T_{N+1}^{\cut}\).
+
+If \(\mathcal T_N^{\cut}<\mathcal T_{N+1}^{\cut}/c_N\), the interval in which the kinematic bound, rather
+than the higher technical cut, sets the full allowed \(z\) range is
+\begin{equation}
+\mathcal T_N^{\cut}
+<\mathcal T_N
+<\frac{\mathcal T_{N+1}^{\cut}}{c_N}.
+\label{eq:njettiness-saturated-interval}
+\end{equation}
+For a power-like nested-local mismatch, the common-scale part of its integral over this interval behaves as
+\begin{align}
+\int_{\mathcal T_N^{\cut}}^{\mathcal T_{N+1}^{\cut}/c_N}
+\frac{d\mathcal T_N}{\mathcal T_N}
+\left(\frac{\mathcal T_N}{Q}\right)^{q_i}
+&=
+\frac{1}{q_i}
+\left[
+\left(\frac{\mathcal T_{N+1}^{\cut}}{c_N Q}\right)^{q_i}
+-
+\left(\frac{\mathcal T_N^{\cut}}{Q}\right)^{q_i}
+\right],
+\label{eq:njettiness-uniform-integrated-region}
+\end{align}
+up to logarithms and finite coefficients from the integration over \(z\) in its allowed range. At fixed
+\begin{equation}
+\mathcal T_{N+1}^{\cut}
+=\kappa\,\mathcal T_N^{\cut},
+\label{eq:njettiness-fixed-kappa}
+\end{equation}
+this saturated interval exists for \(\kappa>c_N\), and Eq.~\eqref{eq:njettiness-uniform-integrated-region}
+scales as
+\begin{equation}
+\left(\frac{\mathcal T_N^{\cut}}{Q}\right)^{q_i}
+\frac{(\kappa/c_N)^{q_i}-1}{q_i}
+\times\text{logs and finite coefficients}.
+\label{eq:njettiness-fixed-kappa-scaling}
+\end{equation}
+Thus even a technical-cut ratio larger than the kinematic bound does not allow the physical ratio
+\(\mathcal T_{N+1}/\mathcal T_N\) to grow: the latter simply saturates at \(c_N\), while the projection
+mismatch still vanishes with the common unresolved scale if the map has uniform nested infrared locality.
+
+For Drell--Yan, the relevant case is \(N=0\), so that
+\begin{equation}
+\mathcal T_1(\Ph_2)
+\le\frac{1}{2}\,\mathcal T_0(\Ph_2),
+\qquad
+0\le z=\frac{\mathcal T_1}{\mathcal T_0}\le\frac12.
+\label{eq:dy-t1-t0-bound}
+\end{equation}
+The higher-cut transition therefore occurs at
+\begin{equation}
+\mathcal T_0=2\,\mathcal T_1^{\cut}.
+\label{eq:dy-t1cut-transition}
+\end{equation}
+In particular, if \(\mathcal T_0^{\cut}\ll2\mathcal T_1^{\cut}\), the region near the lower
+\(\mathcal T_0\) cut is not probing a parametrically large value of
+\(\mathcal T_1/\mathcal T_0\): the physical ratio is always at most \(1/2\). The higher technical cut is
+simply inactive there.
 
 The size of the migration in phase space is, however, only one part of the problem. The response of the
 observable can introduce a second nonuniformity. Let
@@ -871,14 +994,20 @@ the vector-boson rapidity is preserved by the projection and therefore has no mi
 here. The transverse momenta of the decay leptons are IRC safe but are not exactly preserved. Nevertheless,
 in GENEVA one finds that making \(\mathcal T_0^{\cut}\) very small while keeping
 \(\mathcal T_1^{\cut}\) not hierarchically smaller does not by itself produce the large effects suggested by
-a naive use of Eq.~\eqref{eq:integrated-ratio-scaling}. Away from special kinematic regions, the differences
-between the fixed-order internal analysis and the projected LHE event definition remain small. This behavior
-is naturally consistent with uniform nested infrared locality of the map: because the exact and projected
-states approach the same Born configuration, IRC safety implies that the absolute displacement of the lepton
-transverse momentum vanishes in the common unresolved limit even when
-\(\mathcal T_1/\mathcal T_0=\mathcal O(1)\). If instead \(\mathcal T_1^{\cut}\) is held fixed while
-\(\mathcal T_0^{\cut}\) is made much smaller, that fixed higher cut sets the residual absolute unresolved
-scale relevant for this projection effect.
+a naive use of Eq.~\eqref{eq:integrated-ratio-scaling}. There are two conceptually separate reasons. First,
+Eq.~\eqref{eq:dy-t1-t0-bound} guarantees that the physical ratio \(\mathcal T_1/\mathcal T_0\) never exceeds
+\(1/2\), independently of the ratio of the two technical cuts. Second, if the map has uniform nested infrared
+locality, the exact and projected states approach the same Born configuration as \(\mathcal T_0\to0\) for
+all finite allowed values \(0\le\mathcal T_1/\mathcal T_0\le1/2\). IRC safety then implies that the absolute
+displacement of the lepton transverse momentum vanishes in this common unresolved limit.
+
+If \(\mathcal T_1^{\cut}\) is held fixed while \(\mathcal T_0^{\cut}\) is made much smaller, the higher cut
+becomes kinematically inactive near the lower endpoint and the fully allowed interval
+\(0\le\mathcal T_1/\mathcal T_0\le1/2\) is sampled there. Lowering \(\mathcal T_0^{\cut}\) further therefore
+does not generate a growing cut-ratio enhancement. The transition to a cut-limited region occurs only around
+\(\mathcal T_0\sim2\mathcal T_1^{\cut}\); correspondingly, for a power-like nested-local mismatch the
+residual integrated scale associated with the saturated region is parametrically set by
+\((2\mathcal T_1^{\cut}/Q)^{q_i}\), up to logarithms and finite coefficients.
 
 The important exception is the region
 \begin{equation}
@@ -903,11 +1032,15 @@ one should not expect the linearized measurement expansion to be quantitatively 
 migration across the shoulder must be retained.
 
 The two sources of nonuniformity should therefore be kept conceptually separate. Strong ordering can fail
-because the neighboring resolution scales become comparable, in which case uniform nested infrared locality
-of the map controls the simultaneous unresolved limit. Independently, even an IRC-safe observable can have a
-nonuniform differential response to a uniformly vanishing displacement when its spectrum contains a sharp
-kinematic feature. The Drell--Yan behavior described above is consistent with the second mechanism being
-responsible for the largest observed projection differences in the lepton transverse-momentum distribution.
+because neighboring resolution scales remain at a finite ratio inside their allowed kinematic domain, in
+which case uniform nested infrared locality controls the simultaneous unresolved limit. Independently, even
+an IRC-safe observable can have a nonuniform differential response to a uniformly vanishing displacement when
+its spectrum contains a sharp kinematic feature. For \(N\)-jettiness there is in addition the separate
+kinematic bound in Eq.~\eqref{eq:njettiness-neighbor-bound}, which limits how large the neighboring physical
+resolution ratio can become. The Drell--Yan behavior described above is consistent with the combination of
+this kinematic restriction and nested locality away from the shoulder, while the largest local projection
+differences in the lepton transverse-momentum distribution can still arise from the nonuniform response near
+the shoulder.
 
 \section{Differential locality of the lower map}
 
@@ -1316,10 +1449,24 @@ The scaling in \(\rnp^{\cut}/\rn^{\cut}\) derived in Sec.~\ref{subsec:strongly-o
 requires a genuine hierarchy. For comparable or inverted cuts, substituting an order-one ratio into the
 strongly ordered formula is not a valid estimate of the projection error.
 
+\item \textbf{Generic resolution variables need not obey a neighboring-ratio bound.}
+The uniform nested-locality discussion is formulated without assuming a universal upper limit on
+\(\rnp/\rn\). If a particular pair of resolution variables has an additional kinematic restriction, that
+restriction must be imposed separately when determining the physically allowed projected region.
+
+\item \textbf{\(N\)-jettiness has an additional kinematic bound.}
+For the usual minimized \(N\)-jettiness variables evaluated on \(\Ph_{N+2}\),
+\[
+\frac{\mathcal T_{N+1}}{\mathcal T_N}\le\frac{N+1}{N+2}.
+\]
+For Drell--Yan this gives \(\mathcal T_1/\mathcal T_0\le1/2\). Hence a large ratio of the technical cuts does
+not imply a large physical neighboring-jettiness ratio; once the kinematic bound is reached, the higher cut
+is simply inactive until \(\mathcal T_N\) becomes large enough.
+
 \item \textbf{Uniform nested infrared locality is a property of the projection map.}
 A higher map has uniform nested infrared locality if exact and projected configurations approach the same
-underlying lower-multiplicity point uniformly as \(\rn/Q\to0\) with
-\(\rnp/\rn=\mathcal O(1)\). Once this is true, ordinary IRC safety implies that any smooth
+underlying lower-multiplicity point uniformly as \(\rn/Q\to0\) at finite values of \(\rnp/\rn\) throughout
+the kinematically allowed domain. Once this is true, ordinary IRC safety implies that any smooth
 lower-multiplicity observable has a vanishing exact--projected mismatch in the simultaneous unresolved limit.
 The rate of convergence, however, is not fixed by IRC safety.
 
@@ -1351,8 +1498,9 @@ When the resolutions are strongly ordered the natural parameters include
 \qquad
 \frac{\rn^{\cut}}{\rnm}.
 \]
-Near comparable cuts, absolute suppression in the common unresolved scale and uniform nested infrared locality
-of the map become the relevant criteria instead of the ratio alone.
+Near finite neighboring ratios, absolute suppression in the common unresolved scale and uniform nested
+infrared locality of the map become the relevant criteria. For \(N\)-jettiness the physical neighboring ratio
+is additionally capped by Eq.~\eqref{eq:njettiness-neighbor-bound}.
 
 \item \textbf{The genuine LP truncation in the setup discussed here}
 is the NNLO lower-multiplicity approximation in \(\rn\), Eq.~\eqref{eq:nnlo-lp-replacement}.
