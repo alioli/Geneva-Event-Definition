@@ -308,3 +308,5 @@ nonuniform response near jet-clustering and fiducial boundaries.
           git add main.tex
           git commit -m "Add Z+1-jet projection illustration"
           git push origin HEAD:main
+
+# Retrigger after workflow creation.
