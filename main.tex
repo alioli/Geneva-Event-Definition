@@ -328,7 +328,7 @@ for a small migration one obtains
 \begin{equation}
 \Theta\!\left(X_i(\widehat\Ph_{N+1})-X_{i,\rm cut}\right)
 -
-\Theta\!\left(X_i(\Ph_{N+2})-X_i(\Ph_{N+2})+X_i(\Ph_{N+2})-X_{i,\rm cut}\right)
+\Theta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right)
 \simeq
 -\Delta X_i\,
 \delta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right).
@@ -641,7 +641,7 @@ allowed values of \(\rnp\) at fixed \(\rn\). In that case the actual projected r
 \begin{equation}
 0\le \rnp <
 \min\!\left\{
-\rnp^{\cut},\,np^{\rm kin,max}(\rn,\mathbf X,\ldots)
+\rnp^{\cut},\,\rnp^{\rm kin,max}(\rn,\mathbf X,\ldots)
 \right\},
 \label{eq:generic-kinematic-cap}
 \end{equation}
@@ -836,99 +836,93 @@ common-scale suppression must be modified accordingly. The robust conclusion is 
 nested-local map, a finite cut ratio does not by itself imply an order-one projection error when both absolute
 cuts are taken to zero together.
 
-\paragraph{Special case: \(N\)-jettiness.}
-For the usual minimized \(N\)-jettiness variables there is an additional exact kinematic restriction that is
-not shared by generic resolution variables. On an \((N+2)\)-parton configuration,
+\paragraph{Special case: the \(\mathcal T_1/\mathcal T_0\) ratio.}
+For the usual minimized jettiness variables, the pair \(\mathcal T_1\) and \(\mathcal T_0\) obeys an additional
+kinematic restriction at fixed final-state parton multiplicity. Denoting that multiplicity by \(M\) in order
+to avoid confusion with the multiplicity label \(N\) used elsewhere in this note, one has
 \begin{equation}
-\frac{\mathcal T_{N+1}(\Ph_{N+2})}
-{\mathcal T_N(\Ph_{N+2})}
+\frac{\mathcal T_1(\Ph_M)}{\mathcal T_0(\Ph_M)}
 \le
-c_N,
+c_M,
 \qquad
-c_N\equiv\frac{N+1}{N+2}.
-\label{eq:njettiness-neighbor-bound}
+c_M\equiv\frac{M-1}{M}.
+\label{eq:t1-t0-multiplicity-bound}
 \end{equation}
-One way to see the bound is to write \(\mathcal T_N\) as the sum of the \(N+2\) nonnegative contributions
-from the final-state partons after minimizing over the \(N\) jet axes (with the beam directions included in
-the measure). At least one parton contributes at least \(\mathcal T_N/(N+2)\). When passing to
-\(\mathcal T_{N+1}\), the additional jet axis can be aligned with that parton, setting its contribution to
-zero while the minimization cannot increase any of the remaining contributions. Hence at least a fraction
-\(1/(N+2)\) of \(\mathcal T_N\) can be removed, which gives Eq.~\eqref{eq:njettiness-neighbor-bound}.
-This argument and the bound are specific to \(N\)-jettiness; no analogous numerical bound is assumed in the
-generic discussion above.
+Thus \(c_2=1/2\) on a two-parton configuration and \(c_3=2/3\) on a three-parton configuration. This is the
+kinematic constraint stated in Eq.~(61) of arXiv:2312.06496 for the multiplicities relevant to the NNLO
+colour-singlet-plus-jet calculation. We do not assume that Eq.~\eqref{eq:t1-t0-multiplicity-bound} generalizes
+to arbitrary neighboring pairs \(\mathcal T_{K+1}/\mathcal T_K\); the generic discussion above remains
+independent of such a bound.
 
-For \(N\)-jettiness the projected region below the higher technical cut is therefore
+At fixed multiplicity \(M\), the region below a technical \(\mathcal T_1\) cut is therefore
 \begin{equation}
-0\le\mathcal T_{N+1}
+0\le\mathcal T_1
 <
 \min\!\left\{
-\mathcal T_{N+1}^{\cut},\,
-c_N\,\mathcal T_N
+\mathcal T_1^{\cut},\,
+c_M\,\mathcal T_0
 \right\},
-\label{eq:njettiness-effective-upper-bound}
+\label{eq:t1-t0-effective-upper-bound}
 \end{equation}
 so that
 \begin{equation}
 z_{\max}
 =
 \min\!\left\{
-\frac{\mathcal T_{N+1}^{\cut}}{\mathcal T_N},\,
-c_N
-\right\}.
-\label{eq:njettiness-zmax}
+\frac{\mathcal T_1^{\cut}}{\mathcal T_0},\,
+c_M
+\right\},
+\qquad
+z\equiv\frac{\mathcal T_1}{\mathcal T_0}.
+\label{eq:t1-t0-zmax}
 \end{equation}
 The higher technical cut is kinematically inactive whenever
 \begin{equation}
-\mathcal T_N
+\mathcal T_0
 <
-\frac{\mathcal T_{N+1}^{\cut}}{c_N},
-\label{eq:njettiness-cut-inactive}
+\frac{\mathcal T_1^{\cut}}{c_M},
+\label{eq:t1-cut-inactive}
 \end{equation}
-and becomes the limiting upper bound only above that value. Thus the transition is at
-\(\mathcal T_N=\mathcal T_{N+1}^{\cut}/c_N\), rather than at
-\(\mathcal T_N=\mathcal T_{N+1}^{\cut}\).
+and becomes the limiting upper bound only above this value.
 
-If \(\mathcal T_N^{\cut}<\mathcal T_{N+1}^{\cut}/c_N\), the interval in which the kinematic bound, rather
-than the higher technical cut, sets the full allowed \(z\) range is
+If \(\mathcal T_0^{\cut}<\mathcal T_1^{\cut}/c_M\), the interval in which the kinematic bound rather than
+the technical \(\mathcal T_1\) cut sets the full allowed \(z\) range is
 \begin{equation}
-\mathcal T_N^{\cut}
-<\mathcal T_N
-<\frac{\mathcal T_{N+1}^{\cut}}{c_N}.
-\label{eq:njettiness-saturated-interval}
+\mathcal T_0^{\cut}
+<\mathcal T_0
+<\frac{\mathcal T_1^{\cut}}{c_M}.
+\label{eq:t1-t0-saturated-interval}
 \end{equation}
 For a power-like nested-local mismatch, the common-scale part of its integral over this interval behaves as
 \begin{align}
-\int_{\mathcal T_N^{\cut}}^{\mathcal T_{N+1}^{\cut}/c_N}
-\frac{d\mathcal T_N}{\mathcal T_N}
-\left(\frac{\mathcal T_N}{Q}\right)^{q_i}
+\int_{\mathcal T_0^{\cut}}^{\mathcal T_1^{\cut}/c_M}
+\frac{d\mathcal T_0}{\mathcal T_0}
+\left(\frac{\mathcal T_0}{Q}\right)^{q_i}
 &=
 \frac{1}{q_i}
 \left[
-\left(\frac{\mathcal T_{N+1}^{\cut}}{c_N Q}\right)^{q_i}
+\left(\frac{\mathcal T_1^{\cut}}{c_M Q}\right)^{q_i}
 -
-\left(\frac{\mathcal T_N^{\cut}}{Q}\right)^{q_i}
+\left(\frac{\mathcal T_0^{\cut}}{Q}\right)^{q_i}
 \right],
-\label{eq:njettiness-uniform-integrated-region}
+\label{eq:t1-t0-uniform-integrated-region}
 \end{align}
 up to logarithms and finite coefficients from the integration over \(z\) in its allowed range. At fixed
 \begin{equation}
-\mathcal T_{N+1}^{\cut}
-=\kappa\,\mathcal T_N^{\cut},
-\label{eq:njettiness-fixed-kappa}
+\mathcal T_1^{\cut}
+=\kappa\,\mathcal T_0^{\cut},
+\label{eq:t1-t0-fixed-kappa}
 \end{equation}
-this saturated interval exists for \(\kappa>c_N\), and Eq.~\eqref{eq:njettiness-uniform-integrated-region}
-scales as
+this saturated interval exists for \(\kappa>c_M\), and the common-scale factor becomes
 \begin{equation}
-\left(\frac{\mathcal T_N^{\cut}}{Q}\right)^{q_i}
-\frac{(\kappa/c_N)^{q_i}-1}{q_i}
-\times\text{logs and finite coefficients}.
-\label{eq:njettiness-fixed-kappa-scaling}
+\left(\frac{\mathcal T_0^{\cut}}{Q}\right)^{q_i}
+\frac{(\kappa/c_M)^{q_i}-1}{q_i},
+\label{eq:t1-t0-fixed-kappa-scaling}
 \end{equation}
-Thus even a technical-cut ratio larger than the kinematic bound does not allow the physical ratio
-\(\mathcal T_{N+1}/\mathcal T_N\) to grow: the latter simply saturates at \(c_N\), while the projection
-mismatch still vanishes with the common unresolved scale if the map has uniform nested infrared locality.
+up to logarithms and finite coefficients. Hence a large ratio of the technical cuts cannot make the physical
+ratio \(\mathcal T_1/\mathcal T_0\) arbitrarily large at fixed multiplicity; it simply saturates at \(c_M\).
 
-For Drell--Yan, the relevant case is \(N=0\), so that
+For Drell--Yan double-real kinematics, the relevant configuration is \(\Ph_2\), and therefore
 \begin{equation}
 \mathcal T_1(\Ph_2)
 \le\frac{1}{2}\,\mathcal T_0(\Ph_2),
@@ -936,15 +930,14 @@ For Drell--Yan, the relevant case is \(N=0\), so that
 0\le z=\frac{\mathcal T_1}{\mathcal T_0}\le\frac12.
 \label{eq:dy-t1-t0-bound}
 \end{equation}
-The higher-cut transition therefore occurs at
+The higher-cut transition consequently occurs at
 \begin{equation}
 \mathcal T_0=2\,\mathcal T_1^{\cut}.
 \label{eq:dy-t1cut-transition}
 \end{equation}
-In particular, if \(\mathcal T_0^{\cut}\ll2\mathcal T_1^{\cut}\), the region near the lower
-\(\mathcal T_0\) cut is not probing a parametrically large value of
-\(\mathcal T_1/\mathcal T_0\): the physical ratio is always at most \(1/2\). The higher technical cut is
-simply inactive there.
+For a three-parton configuration, relevant for the next multiplicity in the colour-singlet-plus-jet NNLO
+calculation, Eq.~\eqref{eq:t1-t0-multiplicity-bound} instead gives
+\(\mathcal T_1/\mathcal T_0\le2/3\).
 
 The size of the migration in phase space is, however, only one part of the problem. The response of the
 observable can introduce a second nonuniformity. Let
@@ -996,10 +989,11 @@ in GENEVA one finds that making \(\mathcal T_0^{\cut}\) very small while keeping
 \(\mathcal T_1^{\cut}\) not hierarchically smaller does not by itself produce the large effects suggested by
 a naive use of Eq.~\eqref{eq:integrated-ratio-scaling}. There are two conceptually separate reasons. First,
 Eq.~\eqref{eq:dy-t1-t0-bound} guarantees that the physical ratio \(\mathcal T_1/\mathcal T_0\) never exceeds
-\(1/2\), independently of the ratio of the two technical cuts. Second, if the map has uniform nested infrared
-locality, the exact and projected states approach the same Born configuration as \(\mathcal T_0\to0\) for
-all finite allowed values \(0\le\mathcal T_1/\mathcal T_0\le1/2\). IRC safety then implies that the absolute
-displacement of the lepton transverse momentum vanishes in this common unresolved limit.
+\(1/2\) on the \(\Ph_2\) configurations relevant to the higher projection, independently of the ratio of the
+two technical cuts. Second, if the map has uniform nested infrared locality, the exact and projected states
+approach the same Born configuration as \(\mathcal T_0\to0\) for all finite allowed values
+\(0\le\mathcal T_1/\mathcal T_0\le1/2\). IRC safety then implies that the absolute displacement of the lepton
+transverse momentum vanishes in this common unresolved limit.
 
 If \(\mathcal T_1^{\cut}\) is held fixed while \(\mathcal T_0^{\cut}\) is made much smaller, the higher cut
 becomes kinematically inactive near the lower endpoint and the fully allowed interval
@@ -1035,12 +1029,11 @@ The two sources of nonuniformity should therefore be kept conceptually separate.
 because neighboring resolution scales remain at a finite ratio inside their allowed kinematic domain, in
 which case uniform nested infrared locality controls the simultaneous unresolved limit. Independently, even
 an IRC-safe observable can have a nonuniform differential response to a uniformly vanishing displacement when
-its spectrum contains a sharp kinematic feature. For \(N\)-jettiness there is in addition the separate
-kinematic bound in Eq.~\eqref{eq:njettiness-neighbor-bound}, which limits how large the neighboring physical
-resolution ratio can become. The Drell--Yan behavior described above is consistent with the combination of
-this kinematic restriction and nested locality away from the shoulder, while the largest local projection
-differences in the lepton transverse-momentum distribution can still arise from the nonuniform response near
-the shoulder.
+its spectrum contains a sharp kinematic feature. For the \(\mathcal T_1/\mathcal T_0\) pair there is in
+addition the multiplicity-dependent kinematic bound in Eq.~\eqref{eq:t1-t0-multiplicity-bound}. The
+Drell--Yan behavior described above is consistent with the combination of this kinematic restriction and
+nested locality away from the shoulder, while the largest local projection differences in the lepton
+transverse-momentum distribution can still arise from the nonuniform response near the shoulder.
 
 \section{Differential locality of the lower map}
 
@@ -1454,14 +1447,14 @@ The uniform nested-locality discussion is formulated without assuming a universa
 \(\rnp/\rn\). If a particular pair of resolution variables has an additional kinematic restriction, that
 restriction must be imposed separately when determining the physically allowed projected region.
 
-\item \textbf{\(N\)-jettiness has an additional kinematic bound.}
-For the usual minimized \(N\)-jettiness variables evaluated on \(\Ph_{N+2}\),
+\item \textbf{The \(\mathcal T_1/\mathcal T_0\) ratio has a multiplicity-dependent kinematic bound.}
+For a final state with \(M\) partons,
 \[
-\frac{\mathcal T_{N+1}}{\mathcal T_N}\le\frac{N+1}{N+2}.
+\frac{\mathcal T_1(\Ph_M)}{\mathcal T_0(\Ph_M)}\le\frac{M-1}{M}.
 \]
-For Drell--Yan this gives \(\mathcal T_1/\mathcal T_0\le1/2\). Hence a large ratio of the technical cuts does
-not imply a large physical neighboring-jettiness ratio; once the kinematic bound is reached, the higher cut
-is simply inactive until \(\mathcal T_N\) becomes large enough.
+Thus the upper bounds are \(1/2\) on \(\Ph_2\) and \(2/3\) on \(\Ph_3\), as in Eq.~(61) of
+arXiv:2312.06496. No analogous numerical bound is assumed here for arbitrary neighboring pairs of
+\(N\)-jettiness variables.
 
 \item \textbf{Uniform nested infrared locality is a property of the projection map.}
 A higher map has uniform nested infrared locality if exact and projected configurations approach the same
@@ -1499,8 +1492,8 @@ When the resolutions are strongly ordered the natural parameters include
 \frac{\rn^{\cut}}{\rnm}.
 \]
 Near finite neighboring ratios, absolute suppression in the common unresolved scale and uniform nested
-infrared locality of the map become the relevant criteria. For \(N\)-jettiness the physical neighboring ratio
-is additionally capped by Eq.~\eqref{eq:njettiness-neighbor-bound}.
+infrared locality of the map become the relevant criteria. For the \(\mathcal T_1/\mathcal T_0\) pair, the
+physical ratio is additionally capped at fixed multiplicity by Eq.~\eqref{eq:t1-t0-multiplicity-bound}.
 
 \item \textbf{The genuine LP truncation in the setup discussed here}
 is the NNLO lower-multiplicity approximation in \(\rn\), Eq.~\eqref{eq:nnlo-lp-replacement}.
