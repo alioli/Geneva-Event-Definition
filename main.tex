@@ -160,7 +160,7 @@ in this contribution.
 Hence, in the setup considered here, there is no genuine dynamical LP truncation associated with
 \(\rnp^{\cut}\).
 
-\section{\texorpdfstring{\(r_{N+1}^{\rm cut}\)}{rN+1cut}: internal NNLO analysis versus LHE event generation}
+\section{\texorpdfstring{\(r_{N+1}^{\rm cut}\)}{rN+1cut}: fixed-order analysis versus LHE event generation}
 
 The phase-space identity
 \begin{equation}
@@ -173,12 +173,13 @@ The phase-space identity
 is exact.
 If both regions are analyzed with exact \(\Ph_{N+2}\) kinematics, the final NLO result is independent of
 \(\rnp^{\cut}\).
-In GENEVA this is precisely what happens when the NNLO calculation is studied with the
+In GENEVA this is precisely what happens when a fixed-order calculation is analyzed with the
 \emph{internal analyzer}: every contribution is filled using its exact partonic kinematics.
 Equation~\eqref{eq:rnp-partition} is then only an internal partition of phase space and the dependence on
 \(\rnp^{\cut}\) cancels, up to numerical integration errors. No fiducial-power-correction restoration is
 needed for the \(N+2\to N+1\) step in this setup, because no kinematic information has been discarded.
-This is the appropriate setup for validating the underlying fixed-order NNLO calculation.
+This is the appropriate setup for validating the underlying fixed-order calculation at the perturbative
+order under consideration.
 
 The situation relevant for MC event generation is different. When events are generated for output to
 the LHEF file, configurations below \(\rnp^{\cut}\) are represented as \((N+1)\)-parton events rather
@@ -192,7 +193,7 @@ so that
 \Mcal(\Ph_{N+2})\to\Mcal(\widehat\Ph_{N+1}).
 \label{eq:rnp-measurement-replacement}
 \end{equation}
-The difference between the LHE event definition and the exact internal-analyzer result is therefore
+The difference between the LHE event definition and the exact fixed-order internal-analyzer result is therefore
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}[\Mcal]
 =
@@ -742,7 +743,7 @@ The conclusions can be organized as follows.
 \item \textbf{Exact higher-multiplicity NLO dynamics.}
 The NLO \(N+1\) contribution is computed with local subtraction and does not use an LP approximation in \(\rnp\).
 
-\item \textbf{Internal NNLO analysis and LHE event generation are different objects.}
+\item \textbf{Fixed-order analysis and LHE event generation are different objects.}
 With the internal analyzer, the \(N+2\) contribution is analyzed on its exact kinematics and no FPC
 restoration is needed for the \(N+2\to N+1\) step. The \(\Pi_{N+1}\) projection enters when constructing
 \(N+1\)-parton LHE events below \(\rnp^{\cut}\).
