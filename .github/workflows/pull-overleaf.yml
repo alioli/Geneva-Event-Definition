@@ -109,9 +109,6 @@ jobs:
               git diff --binary "$BASE_SHA" "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
             fi
           else
-            # First run only: the outbound sync has already made Overleaf the
-            # authoritative project tree. Reconcile any remaining difference
-            # between the two trees and then establish a checkpoint.
             echo "No previous Overleaf checkpoint found; bootstrapping from the current trees."
             git diff --binary HEAD "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
           fi
@@ -128,11 +125,6 @@ jobs:
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
 
           if [[ -s "$PATCH" ]]; then
-            # Three-way application is important here. It lets Git recognize
-            # changes that are already present on GitHub (for example because
-            # they originally travelled GitHub -> Overleaf) while still
-            # importing independent Overleaf edits. Real conflicts stop the
-            # sync instead of overwriting either side.
             if ! git apply --3way --index "$PATCH"; then
               echo "::error::Overleaf changes conflict with current GitHub main. Nothing was pushed to GitHub."
               git status --short
@@ -144,15 +136,107 @@ jobs:
           printf '%s\n' "$OVERLEAF_HEAD" > "$STATE_FILE"
           git add "$STATE_FILE"
 
-          if git diff --cached --quiet; then
+          if ! git diff --cached --quiet; then
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git commit -m "Sync changes from Overleaf"
+            git push origin HEAD:main
+          else
             echo "GitHub is already synchronized with Overleaf."
+          fi
+
+      - name: Refine Z+1-jet mapping comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git switch main
+          git reset --hard origin/main
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('main.tex')
+          text = p.read_text()
+
+          if 'eq:z1j-generation-cut' in text:
+              raise SystemExit(0)
+
+          anchor = r'''At larger $m_T^Z$ the ratio in Eq.~\eqref{eq:z1j-cut-ratio} decreases and the higher cut enforces a progressively
+stronger restriction on $z$ already near the lower boundary.
+'''
+          insert = anchor + r'''
+The event sample is defined with the generation cut
+\begin{equation}
+q_T>q_T^{\rm gen}=10^{-3}\ {\rm GeV}.
+\label{eq:z1j-generation-cut}
+\end{equation}
+This boundary is exactly preserved by both the FKS and the $\mathcal T_1^{\rm FR}$ projections considered
+here. Hence
+\begin{equation}
+\Theta\!\left(q_T(\widehat\Ph_2)-q_T^{\rm gen}\right)
+=
+\Theta\!\left(q_T(\Ph_3)-q_T^{\rm gen}\right)
+\label{eq:z1j-generation-cut-preserved}
+\end{equation}
+for the projected events, and the observed LHE differences cannot be attributed to migration across the
+process-defining generation boundary. In particular, the non-preservation of $\mathcal T_0$ is relevant here
+as a diagnostic of motion along the limiting one-jet Born manifold, not as a generation-cut migration.
+'''
+          if anchor not in text:
+              raise SystemExit('Cut-hierarchy anchor not found')
+          text = text.replace(anchor, insert, 1)
+
+          old = r'''This observation is useful when interpreting the numerically large LHE projection effects found in observables
+involving the hardest anti-$k_T$ jet, including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV.
+Differences at the level of tens of percent cannot be attributed solely to a parametrically huge ratio of the
+technical cuts. They may instead arise from one or a combination of three effects: a genuine failure of
+uniform nested locality in tangential one-jet Born coordinates; a nested-local but slowly convergent recoil
+map; or amplification of a small kinematic displacement by the steep jet spectrum and the non-smooth
+anti-$k_T$ measurement boundaries.
+'''
+          new = r'''The direct comparison of mappings is particularly informative. With
+$\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}$, the LHE differences obtained with the FKS projection are much smaller,
+whereas the $\mathcal T_1^{\rm FR}$ projection still produces substantially larger distortions in observables
+involving the hardest anti-$k_T$ jet, including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV.
+For both mappings the differences increase when the higher technical cut is enlarged, and become much larger
+for $\mathcal T_2^{\cut}=1\ {\rm GeV}$. The common increase with $\mathcal T_2^{\cut}$ confirms that the effect
+is associated with the region represented through the $\Ph_3\to\widehat\Ph_2$ projection. At the same time,
+the much smaller residual obtained with FKS at $10^{-3}\ {\rm GeV}$ shows that the large effect seen with the
+$\mathcal T_1^{\rm FR}$ map is not an unavoidable consequence of the anti-$k_T$ measurement or of the jet
+thresholds themselves: it is strongly map dependent. The jet measurement can still amplify a kinematic
+migration, but it cannot by itself explain why two projections with the same generation boundary and the same
+analysis behave so differently.
+
+This pattern does not by itself establish a formal failure of uniform nested infrared locality. It is
+compatible either with a nested-local $\mathcal T_1^{\rm FR}$ map having a much larger coefficient or a slower
+power of convergence than FKS, or with a genuine failure to approach the same point of the limiting $\Ph_1$
+manifold along finite-$z$ paths. The comparison with FKS therefore provides an empirical benchmark showing
+that the dominant residual is map specific, while a local scaling test is still required to distinguish slow
+convergence from a failure of the simultaneous unresolved limit.
+'''
+          if old not in text:
+              raise SystemExit('Observed-effects paragraph not found')
+          text = text.replace(old, new, 1)
+
+          old2 = r'''The most direct diagnostic is to apply the competing $\Ph_3\to\Ph_2$ projections, for example an FKS map
+and the $\mathcal T_1^{\rm FR}$ map, to the same exact $\Ph_3$ points and study, in bins of
+'''
+          new2 = r'''Since the inclusive FKS-versus-$\mathcal T_1^{\rm FR}$ comparison is already available, the decisive next
+diagnostic is to apply the two projections to the same exact $\Ph_3$ points and study, in bins of
+'''
+          if old2 not in text:
+              raise SystemExit('Diagnostic paragraph not found')
+          text = text.replace(old2, new2, 1)
+          p.write_text(text)
+          PY
+
+          if git diff --quiet -- main.tex; then
+            echo "Z+1-jet subsection already up to date."
             exit 0
           fi
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git commit -m "Sync changes from Overleaf"
-
-          # No force push: if GitHub main moved after checkout, this fails and
-          # the next scheduled run retries from the new GitHub state.
+          git add main.tex
+          git commit -m "Refine Z+1-jet mapping comparison"
           git push origin HEAD:main
