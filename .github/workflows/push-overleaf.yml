@@ -22,8 +22,9 @@ env:
 jobs:
   sync:
     # Commits produced by the inverse Overleaf -> GitHub sync already
-    # originate from Overleaf and must not be sent back again.
-    if: github.actor != 'github-actions[bot]'
+    # originate from Overleaf and must not be sent back again. Other bot
+    # commits (for example a scripted edit of main.tex) are allowed.
+    if: github.event.head_commit.message != 'Sync changes from Overleaf'
     runs-on: ubuntu-latest
 
     steps:
