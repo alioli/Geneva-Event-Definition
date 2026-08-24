@@ -21,6 +21,9 @@ env:
 
 jobs:
   sync:
+    # Commits produced by the inverse Overleaf -> GitHub sync already
+    # originate from Overleaf and must not be sent back again.
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
