@@ -1,1 +1,2 @@
 Temporary file used to verify the GitHub-to-Overleaf sync workflow.
+Status-enabled sync test.
