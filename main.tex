@@ -108,7 +108,8 @@ with, for example,
 \Theta_{\rm fid}^{\rm phys}(\Ph_M).
 \label{eq:measurement-physical}
 \end{equation}
-The variables \(X_a\) may be Born-like and completely inclusive over additional QCD radiation,
+The variables \(X_a\), collected into the vector
+\(\mathbf X=(X_1,\ldots,X_{n_X})\), may be Born-like and completely inclusive over additional QCD radiation,
 while still being changed by the projection maps.
 
 We shall use
@@ -210,35 +211,36 @@ lower \(N+1\to N\) projection at fixed-order NNLO.
 
 \section{Preserved and violated observables}
 
-Suppose a variable \(X\) is exactly preserved by \(\Pi_{N+1}\),
+Suppose a particular Born-like variable \(X_i\) is exactly preserved by \(\Pi_{N+1}\),
 \begin{equation}
-X(\widehat\Ph_{N+1})=X(\Ph_{N+2}).
+X_i(\widehat\Ph_{N+1})=X_i(\Ph_{N+2}).
 \label{eq:x-preserved}
 \end{equation}
 Then for a distribution depending only on preserved variables and on variables integrated over their full ranges,
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{dX}=0.
+\frac{d\sigma}{dX_i}=0.
 \label{eq:x-preserved-zero}
 \end{equation}
 
 In general, however, preserving one Born-like variable does not imply preservation of all the others.
-Consider, for example,
+When focusing on one specific component \(X_i\) of \(\mathbf X\), we denote the remaining Born-like variables
+collectively by \(\mathbf X_{\neq i}\). Consider, for example,
 \begin{equation}
-\frac{d\sigma}{d\rn\,dX},
+\frac{d\sigma}{d\rn\,dX_i},
 \label{eq:rn-x-spectrum}
 \end{equation}
 with
 \begin{equation}
 \rn(\widehat\Ph_{N+1})=\rn(\Ph_{N+2}),
 \qquad
-X(\widehat\Ph_{N+1})\neq X(\Ph_{N+2}).
+X_i(\widehat\Ph_{N+1})\neq X_i(\Ph_{N+2}).
 \label{eq:rn-preserved-x-not}
 \end{equation}
 Then
 \begin{align}
 \Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{d\rn\,dX}
+\frac{d\sigma}{d\rn\,dX_i}
 ={}&
 \int d\Ph_{N+2}\,
 R_{N+2}(\Ph_{N+2})
@@ -247,39 +249,39 @@ R_{N+2}(\Ph_{N+2})
 \nonumber\\
 &\times
 \left[
-\delta\!\left(X-X(\widehat\Ph_{N+1})\right)
+\delta\!\left(X_i-X_i(\widehat\Ph_{N+1})\right)
 -
-\delta\!\left(X-X(\Ph_{N+2})\right)
+\delta\!\left(X_i-X_i(\Ph_{N+2})\right)
 \right].
 \label{eq:rn-x-proj}
 \end{align}
 
-The cancellation after integrating over the \emph{full} range of \(X\) is immediate. If the integration
-range contains both the exact and projected values of \(X\) for every phase-space point, then
+The cancellation after integrating over the \emph{full} range of \(X_i\) is immediate. If the integration
+range contains both the exact and projected values of \(X_i\) for every phase-space point, then
 \begin{equation}
-\int_{\rm full} dX\,
+\int_{\rm full} dX_i\,
 \left[
-\delta\!\left(X-X(\widehat\Ph_{N+1})\right)
+\delta\!\left(X_i-X_i(\widehat\Ph_{N+1})\right)
 -
-\delta\!\left(X-X(\Ph_{N+2})\right)
+\delta\!\left(X_i-X_i(\Ph_{N+2})\right)
 \right]
 =1-1=0.
 \label{eq:x-full-range-cancellation}
 \end{equation}
 Hence, provided \(\rn\) is itself preserved by the projection,
 \begin{equation}
-\int_{\rm full} dX\,
+\int_{\rm full} dX_i\,
 \Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{d\rn\,dX}
+\frac{d\sigma}{d\rn\,dX_i}
 =0.
 \label{eq:x-integrated-zero}
 \end{equation}
-The interpretation is simple: the projection can move an event from one value of \(X\) to another, but
-it does not change the total weight. Once all values of \(X\) are summed inclusively, this migration is
+The interpretation is simple: the projection can move an event from one value of \(X_i\) to another, but
+it does not change the total weight. Once all values of \(X_i\) are summed inclusively, this migration is
 invisible.
 
-This cancellation is lost as soon as the integration over \(X\) is not fully inclusive. To make this
-explicit, introduce an acceptance function \(A_X(X)\), equal to one in the accepted fiducial region and
+This cancellation is lost as soon as the integration over \(X_i\) is not fully inclusive. To make this
+explicit, introduce an acceptance function \(A_{X_i}(X_i)\), equal to one in the accepted fiducial region and
 zero outside. Integrating Eq.~\eqref{eq:rn-x-proj} with this acceptance gives
 \begin{align}
 \Delta_{\rm proj}^{(\rnp)}
@@ -292,9 +294,9 @@ R_{N+2}(\Ph_{N+2})
 \nonumber\\
 &\times
 \left[
-A_X\!\left(X(\widehat\Ph_{N+1})\right)
+A_{X_i}\!\left(X_i(\widehat\Ph_{N+1})\right)
 -
-A_X\!\left(X(\Ph_{N+2})\right)
+A_{X_i}\!\left(X_i(\Ph_{N+2})\right)
 \right].
 \label{eq:x-fiducial-migration}
 \end{align}
@@ -305,45 +307,45 @@ lie on opposite sides of a fiducial boundary.
 
 For a single lower cut,
 \begin{equation}
-A_X(X)=\Theta(X-X_{\rm cut}),
+A_{X_i}(X_i)=\Theta(X_i-X_{i,\rm cut}),
 \label{eq:x-lower-acceptance}
 \end{equation}
 Eq.~\eqref{eq:x-fiducial-migration} contains the factor
 \begin{equation}
-\Theta\!\left(X(\widehat\Ph_{N+1})-X_{\rm cut}\right)
+\Theta\!\left(X_i(\widehat\Ph_{N+1})-X_{i,\rm cut}\right)
 -
-\Theta\!\left(X(\Ph_{N+2})-X_{\rm cut}\right).
+\Theta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right).
 \label{eq:x-cut-classification-difference}
 \end{equation}
-Define the migration in \(X\) as
+Define the migration in \(X_i\) as
 \begin{equation}
-\Delta X
+\Delta X_i
 =
-X(\Ph_{N+2})-X(\widehat\Ph_{N+1}),
+X_i(\Ph_{N+2})-X_i(\widehat\Ph_{N+1}),
 \label{eq:delta-x-fiducial}
 \end{equation}
 for a small migration one obtains
 \begin{equation}
-\Theta\!\left(X(\widehat\Ph_{N+1})-X_{\rm cut}\right)
+\Theta\!\left(X_i(\widehat\Ph_{N+1})-X_{i,\rm cut}\right)
 -
-\Theta\!\left(X(\Ph_{N+2})-X_{\rm cut}\right)
+\Theta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right)
 \simeq
--\Delta X\,
-\delta\!\left(X(\Ph_{N+2})-X_{\rm cut}\right).
+-\Delta X_i\,
+\delta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right).
 \label{eq:x-boundary-localization}
 \end{equation}
 Therefore the projection effect from a hard fiducial cut is localized at the cut boundary. Its size is
-controlled by the amount by which the projection moves \(X\), multiplied by the event density at the
-boundary. This makes the effect potentially important even when \(\Delta X\) is parametrically small:
+controlled by the amount by which the projection moves \(X_i\), multiplied by the event density at the
+boundary. This makes the effect potentially important even when \(\Delta X_i\) is parametrically small:
 a steep spectrum or a large cross section near the fiducial boundary can enhance the resulting migration.
 For a two-sided window the same reasoning applies independently at both boundaries, with opposite signs.
 
-More generally, if several variables are changed by the projection, integrating over the full range of
-one of them removes only the migration associated with that variable. Any remaining differential
-measurement or fiducial cut on another non-preserved variable can still produce a nonzero projection
+More generally, if several components of \(\mathbf X\) are changed by the projection, integrating over the
+full range of one of them removes only the migration associated with that component. Any remaining differential
+measurement or fiducial cut on another non-preserved component can still produce a nonzero projection
 effect. The actual criterion for cancellation is therefore invariance of the \emph{full measurement
 function}, not merely inclusiveness with respect to QCD radiation. Likewise, if \(\rn\) itself is not
-preserved, integrating over \(X\) does not eliminate migration in the \(\rn\) distribution.
+preserved, integrating over \(X_i\) does not eliminate migration in the \(\rn\) distribution.
 
 \section{How a higher cut can contaminate a lower singular spectrum}
 
@@ -357,24 +359,34 @@ The relevant region is the nested unresolved limit
 \rnp\ll\rn\ll Q,
 \label{eq:strong-ordering}
 \end{equation}
-where the two emissions are strongly ordered in resolution scale. In this region the singular part of the
-\((N+2)\)-parton cross section can be viewed, at leading power, as the lower-multiplicity hard spectrum,
-differential in the Born-like variables \(X\), multiplied by two successive unresolved-emission factors:
-one associated with the \(N+1\to N\) limit and one with the further \(N+2\to N+1\) limit.
+where the two emissions are strongly ordered in resolution scale. Here \(Q\) denotes a generic hard scale
+characterizing the underlying \((N-1)\)-parton process and remaining finite in the nested unresolved limits.
+Depending on the process, it may be an invariant mass, a hard transverse momentum, or another characteristic
+short-distance scale. Its precise definition is immaterial for the argument below; it simply provides the
+hard reference scale with respect to which \(\rn\) is parametrically small.
+
+In this region the singular part of the \((N+2)\)-parton cross section can be viewed, at leading power, as
+the lower-multiplicity hard spectrum, differential in the Born-like variables \(\mathbf X\), multiplied by
+two successive unresolved-emission factors: one associated with the \(N+1\to N\) limit and one with the
+further \(N+2\to N+1\) limit.
 
 For resolution variables with the usual soft/collinear scaling, a single unresolved emission produces a
 logarithmic measure of the form \(d r_i/r_i\), together with splitting kernels, angular variables, colour
 factors and couplings. Equivalently, at fixed order the singular terms generated by one unresolved limit
 have the familiar schematic form \(\ln^m(r_i/Q_i)/r_i\). Iterating two strongly ordered unresolved limits
 therefore produces a leading singular structure containing one inverse power of each resolution variable.
-Writing \(\Omega\) for the remaining splitting coordinates, this gives schematically
+We focus on the migration of one particular component \(X_i\) of \(\mathbf X\), while
+\(\mathbf X_{\neq i}\) denotes all the remaining Born-like variables. We use \(\Ph_{\rm rad}\) collectively
+for the remaining radiation variables associated with the unresolved emissions, including energy fractions,
+angles, recoil variables, and any other coordinates needed to parametrize the corresponding splittings.
+This gives schematically
 \begin{equation}
 \frac{d\sigma_{N+2}}
-{d\rn\,d\rnp\,dX\,d\Omega}
+{d\rn\,d\rnp\,dX_i\,d\mathbf X_{\neq i}\,d\Ph_{\rm rad}}
 \sim
 \frac{1}{\rn}\frac{1}{\rnp}
 F\!\left(
-X,\Omega,
+\mathbf X,\Ph_{\rm rad},
 \ln\frac{\rn}{Q},
 \ln\frac{\rnp}{\rn}
 \right).
@@ -392,27 +404,39 @@ canonical scaling and on the detailed factorization theorem. What matters for th
 higher unresolved singular measure in \(\rnp\) multiplies a spectrum that is already singular in the lower
 resolution variable \(\rn\).
 
-The projection mismatch \(\Delta X\) has already been defined in Eq.~\eqref{eq:delta-x-fiducial}. If the map
-approaches the exact kinematics smoothly, a generic nested scaling is
+The projection mismatch \(\Delta X_i\) has already been defined in Eq.~\eqref{eq:delta-x-fiducial}. To
+characterize its size, introduce a nonsingular characteristic scale \(X_{i,\rm char}\) associated with the
+particular Born-like variable \(X_i\) whose migration is being studied. Its role is only to render the relative
+shift \(\Delta X_i/X_{i,\rm char}\) dimensionless. The scale \(X_{i,\rm char}\) may depend on the underlying
+Born kinematics \(\mathbf X\), but it should remain finite and nonzero in the region in which the scaling is
+considered. In particular, it should not generically be identified with \(X_i\) itself, since \(X_i\) may
+vanish in an otherwise regular region of phase space.
+
+If the map approaches the exact kinematics smoothly, the relative migration can then have a generic nested
+scaling
 \begin{equation}
-\frac{\Delta X}{X_{\rm char}}
+\frac{\Delta X_i}{X_{i,\rm char}}
 \sim
-c_X(\Omega)
+c_i(\mathbf X,\Ph_{\rm rad})
 \left(\frac{\rnp}{\rn}\right)^p,
 \qquad p>0,
 \label{eq:delta-x-scaling}
 \end{equation}
-where \(p\) is nonuniversal and depends on the resolution variables and recoil prescription.
+where \(c_i\) is a nonsingular dimensionless coefficient and \(p\) is nonuniversal and depends on the
+resolution variables and recoil prescription. Equation~\eqref{eq:delta-x-scaling} should therefore be
+understood only as a parametrization of how rapidly the projection becomes local in \(X_i\) as the second
+emission becomes unresolved relative to the first one; it does not assume that the absolute shift
+\(\Delta X_i\) is set by \(\rnp\) itself.
 
 Expanding the measurement function gives parametrically
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{d\rn\,dX}
+\frac{d\sigma}{d\rn\,dX_i}
 \sim
 \frac{1}{\rn}
 \left(\frac{\rnp^{\cut}}{\rn}\right)^p
 \sum_k
-D_k(X)
+D_k(X_i,\mathbf X_{\neq i})
 \ln^k\!\frac{\rnp^{\cut}}{\rn}.
 \label{eq:rnp-contamination-rn}
 \end{equation}
@@ -429,7 +453,7 @@ Hence,
 For \(p=1\), Eq.~\eqref{eq:rnp-contamination-rn} behaves as
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{d\rn\,dX}
+\frac{d\sigma}{d\rn\,dX_i}
 \sim
 \frac{\rnp^{\cut}}{\rn^2}
 \label{eq:p1-scaling}
