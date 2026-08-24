@@ -1,441 +1,736 @@
 \documentclass[11pt]{article}
 
-\usepackage{amsmath, amssymb, geometry}
+\usepackage{amsmath,amssymb,mathtools,geometry}
 \usepackage{booktabs}
 \usepackage{hyperref}
-
+\usepackage{enumitem}
 \geometry{margin=1in}
 
-\title{Event Definition in GENEVA and Dependence on $r_N^{\mathrm{cut}}$}
+\newcommand{\rnm}{r_{N-1}}
+\newcommand{\rn}{r_N}
+\newcommand{\rnp}{r_{N+1}}
+\newcommand{\cut}{\mathrm{cut}}
+\newcommand{\Ph}{\Phi}
+\newcommand{\Mcal}{\mathcal{M}}
+\newcommand{\Ocal}{\mathcal{O}}
+\newcommand{\ThetaB}{\Theta_B}
+
+\title{Nested Resolution Cuts, Projection Effects, and Event Definitions in GENEVA}
 \author{}
 \date{}
 
 \begin{document}
-
 \maketitle
 
+\section{Purpose and scope}
 
-\textbf{Preserving \(r_{N-1}\)} in the projection/splitting map is not just a convenient choice. It is what makes the \textbf{\(N\)-jet spectrum differential in \(r_{N-1}\)} behave the way the GENEVA construction assumes at leading power. Let me make that precise.
+This note collects in a unified form a number of related observations concerning the definition of
+exclusive event samples in GENEVA when several nested resolution variables are used.
+The main aim is to distinguish clearly between
+\begin{enumerate}[label=(\roman*)]
+\item genuine leading-power (LP) approximations in the lower-multiplicity NNLO contribution,
+\item kinematic or fiducial power corrections induced by phase-space projections,
+\item locality requirements on the projection maps for distributions differential in lower resolution variables,
+\item and additional constraints induced by optional Born-level fiducial or generation cuts.
+\end{enumerate}
 
-\section*{Setup}
+The discussion is formulated for a lowest explicitly generated multiplicity \(N\), together with three
+nested resolution variables,
+\begin{equation}
+\rnm(\Ph_N),\qquad
+\rn(\Ph_{N+1}),\qquad
+\rnp(\Ph_{N+2}),
+\label{eq:nested-variables}
+\end{equation}
+with the unresolved limits
+\begin{equation}
+\rnm\to0:\ N\to N-1,\qquad
+\rn\to0:\ N+1\to N,\qquad
+\rnp\to0:\ N+2\to N+1.
+\label{eq:unresolved-limits}
+\end{equation}
 
-You are now considering the \textbf{\(N\)-event contribution above}
-\[
-r_{N-1}^{\rm cut},
-\]
-so the event is differential in an \(N\)-body phase-space point
-\[
-\Phi_N,
-\]
-and one of the coordinates of \(\Phi_N\) may be taken to be
-\[
-r_{N-1}.
-\]
+The Born process at multiplicity \(N\) may be either finite or singular.
+If it is finite, no lower generation cut is required.
+If it is singular, or if one deliberately restricts the Born-like phase space, one may impose
+\begin{equation}
+\rnm(\Ph_N)>\rnm^{\cut}.
+\label{eq:born-cut}
+\end{equation}
+It is useful to encode this optional restriction in a generic Born-level acceptance factor,
+\begin{equation}
+\ThetaB(\Ph_M)=
+\begin{cases}
+1, & \text{no lower Born-level restriction},\\[2mm]
+\Theta\!\left(\rnm^{(M)}(\Ph_M)-\rnm^{\cut}\right),
+& \text{if the restriction \eqref{eq:born-cut} is imposed},
+\end{cases}
+\label{eq:thetaB}
+\end{equation}
+where \(\rnm^{(M)}\) denotes the extension of the lower resolution variable to multiplicity \(M\).
 
-Then the \(N\)-event weight below \(r_N^{\rm cut}\) schematically contains
-\[
-\frac{d\sigma_N^{\rm MC}}{d\Phi_N}
-\sim
-\frac{d\sigma_N^{\rm scet}}{d\Phi_N}
-+
-\int d\Phi_{N+1}\,
-\frac{d\sigma_{N+1}}{d\Phi_{N+1}}\,
-\Theta(r_N<r_N^{\rm cut})\,
-\delta\!\big(\Phi_N-\hat\Phi_N(\Phi_{N+1})\big)
-\]
-with support only for
-\[
-r_{N-1}(\Phi_N)>r_{N-1}^{\rm cut}.
-\]
+At NNLO one then introduces the technical resolution cuts
+\begin{equation}
+\rn^{\cut},\qquad \rnp^{\cut}.
+\label{eq:technical-cuts}
+\end{equation}
+The roles of the three cuts, when all are present, are conceptually different:
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+cut & role \\
+\midrule
+\(\rnm^{\cut}\) & optional Born-level fiducial/generation cut \\
+\(\rn^{\cut}\) & NNLO slicing/resolution cut between \(N\) and \(N+1\) \\
+\(\rnp^{\cut}\) & higher-multiplicity separation inside the NLO \(N+1\) contribution \\
+\bottomrule
+\end{tabular}
+\end{center}
 
-The question is: when \(\Phi_N\) is promoted to \(\Phi_{N+1}\) by an unresolved emission, must the map preserve \(r_{N-1}\)?
+\section{Measurement functions and projection maps}
 
-The answer is:
-
-\subsection*{At leading power, yes.}
-
-More precisely, the map should satisfy
-\[
-r_{N-1}\!\left(\hat\Phi_N(\Phi_{N+1})\right)
+For a generic observable we write
+\begin{equation}
+\Mcal(\Ph_M)
 =
-r_{N-1}^{\rm LP}(\Phi_{N+1})
-\]
-or at least differ from it only by subleading powers in \(r_N\).
+\ThetaB(\Ph_M)\,
+\Mcal_{\rm phys}(\Ph_M),
+\label{eq:measurement-full}
+\end{equation}
+with, for example,
+\begin{equation}
+\Mcal_{\rm phys}(\Ph_M)
+=
+\prod_{a=1}^{n_X}
+\delta\!\left(X_a-X_a(\Ph_M)\right)
+\,
+\Theta_{\rm fid}^{\rm phys}(\Ph_M).
+\label{eq:measurement-physical}
+\end{equation}
+The variables \(X_a\) may be Born-like and completely inclusive over additional QCD radiation,
+while still being changed by the projection maps.
 
-In practice, the cleanest choice is to preserve it exactly.
-
-\section*{Why \(r_{N-1}\) should be preserved}
-
-\subsection*{1. Because \(r_{N-1}\) is now one of the measured Born variables}
-
-Once your \(N\)-event distribution is differential in \(\Phi_N\), and \(\Phi_N\) includes \(r_{N-1}\), the projection delta is not merely assigning unresolved radiation to some generic \(N\)-body point. It is assigning it to a point with a \textbf{specific value of \(r_{N-1}\)}.
-
-So if the map changes \(r_{N-1}\), then unresolved radiation generated from an \(N\)-body configuration with one value of \(r_{N-1}\) is deposited into a different bin in \(r_{N-1}\).
-
-That immediately means the real-emission contribution below \(r_N^{\rm cut}\) is no longer local in the measured variable \(r_{N-1}\).
-
-\subsection*{2. Because the singular  factorization/resummation is differential in that variable}
-
-The singular  \(N\)-jet spectrum above \(r_{N-1}^{\rm cut}\) is organized as a distribution in \(\Phi_N\), hence also in \(r_{N-1}\).
-
-The resummed spectrum and its FO expansion know about singular  structures of the form
-\[
-\frac{d\sigma^{\rm scet}}{d\Phi_N}
-\equiv
-\frac{d\sigma^{\rm scet}}{d r_{N-1}\, d\Omega_N}
-\]
-where \(d\Omega_N\) denotes the remaining \(N\)-body variables.
-
-For the unresolved \((N+1)\)-body contribution below \(r_N^{\rm cut}\) to match this \textbf{point-by-point in \(r_{N-1}\)}, the projection must return the same \(r_{N-1}\) that appears in the singular  factorization formula, up to power corrections.
-
-If not, then the cancellation/matching is no longer local in \(r_{N-1}\).
-
-\subsection*{3. Because otherwise the delta expansion generates derivative terms in \(r_{N-1}\)}
-
-Suppose the map does not preserve \(r_{N-1}\), and instead
-\[
-r_{N-1}(\hat\Phi_N)=r_{N-1}^{\rm scet}+\Delta r_{N-1},
+We shall use
+\begin{equation}
+P_N:\Ph_{N+1}\to\widehat\Ph_N,
 \qquad
-\Delta r_{N-1}\to0 \quad (r_N\to0).
-\]
+P_{N+1}:\Ph_{N+2}\to\widehat\Ph_{N+1},
+\label{eq:projection-maps}
+\end{equation}
+for the two successive projections.
 
-Then the projection delta contains
-\[
-\delta\!\big(r_{N-1}-r_{N-1}^{\rm scet}-\Delta r_{N-1}\big)
-=
-\delta\!\big(r_{N-1}-r_{N-1}^{\rm scet}\big)
+Two logically distinct notions of map consistency will be important:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{differential locality}: preservation, at least at LP, of variables in which the singular lower-multiplicity prediction is kept differential;
+\item \emph{fiducial-boundary preservation}: avoidance of migration across any lower-multiplicity cut that is part of the process definition.
+\end{enumerate}
+The first requirement can be relevant even when no generation cut exists; the second is conditional on such a boundary being present.
+
+\section{Exact NLO higher-multiplicity contribution}
+
+For \(\rn>\rn^{\cut}\), the NNLO construction contains the NLO prediction for multiplicity \(N+1\).
+With a local subtraction term \(C_{N+2}\),
+\begin{align}
+\sigma_{N+1}^{\rm NLO}[\Mcal]
+={}&
+\int d\Ph_{N+1}\,
+\left[
+B_{N+1}+V_{N+1}+I_{N+1}
+\right](\Ph_{N+1})
+\Mcal(\Ph_{N+1})
+\nonumber\\
+&+
+\int d\Ph_{N+2}\,
+\Bigl[
+R_{N+2}(\Ph_{N+2})\Mcal(\Ph_{N+2})
 -
-\Delta r_{N-1}\,\partial_{r_{N-1}}
-\delta\!\big(r_{N-1}-r_{N-1}^{\rm scet}\big)
-+\cdots
-\]
+C_{N+2}(\Ph_{N+2})\Mcal(\widehat\Ph_{N+1})
+\Bigr].
+\label{eq:nlo-nplus1}
+\end{align}
 
-The first term is the leading-power singular  term, which is what the resummed-expanded spectrum knows how to reproduce.
+The important point is that this is a dynamically exact NLO calculation.
+There is no replacement
+\begin{equation}
+R_{N+2}\longrightarrow R_{N+2}^{\rm LP}(\rnp)
+\label{eq:no-lp-rnp}
+\end{equation}
+in this contribution.
+Hence, in the setup considered here, there is no genuine dynamical LP truncation associated with
+\(\rnp^{\cut}\).
 
-The second term is not part of the LP factorization formula. After integrating the unresolved emission with its singular  kernel,
-\[
-\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta r_{N-1},
-\]
-you get a residual contribution proportional to
-\[
-\partial_{r_{N-1}}\frac{d\sigma^{\rm scet}}{d\Phi_N}.
-\]
+\section{\texorpdfstring{\(r_{N+1}^{\rm cut}\)}{rN+1cut}: projection effects only}
 
-So when \(r_{N-1}\) is not preserved, the mismatch is precisely a \textbf{migration term in the measured \(r_{N-1}\) spectrum}.
+The phase-space identity
+\begin{equation}
+1=
+\Theta\!\left(\rnp<\rnp^{\cut}\right)
++
+\Theta\!\left(\rnp>\rnp^{\cut}\right)
+\label{eq:rnp-partition}
+\end{equation}
+is exact.
+If both regions are analyzed with exact \(\Ph_{N+2}\) kinematics, the final NLO result is independent of
+\(\rnp^{\cut}\).
 
-\section*{Physical meaning}
+A residual dependence appears when configurations below the cut are represented by projected kinematics,
+\begin{equation}
+\Ph_{N+2}\to\widehat\Ph_{N+1}=P_{N+1}(\Ph_{N+2}),
+\label{eq:rnp-projection}
+\end{equation}
+so that
+\begin{equation}
+\Mcal(\Ph_{N+2})\to\Mcal(\widehat\Ph_{N+1}).
+\label{eq:rnp-measurement-replacement}
+\end{equation}
+The corresponding projection correction is
+\begin{equation}
+\Delta_{\rm proj}^{(\rnp)}[\Mcal]
+=
+\int d\Ph_{N+2}\,
+R_{N+2}(\Ph_{N+2})
+\Theta\!\left(\rnp(\Ph_{N+2})<\rnp^{\cut}\right)
+\left[
+\Mcal(\widehat\Ph_{N+1})-\Mcal(\Ph_{N+2})
+\right].
+\label{eq:rnp-proj-correction}
+\end{equation}
+This is a kinematic/fiducial power correction, not a dynamical LP correction.
 
-If you do not preserve \(r_{N-1}\), then unresolved radiation below \(r_N^{\rm cut}\) causes an event that should belong to one \(r_{N-1}\) bin to be reassigned to another one.
+One should distinguish the correction itself, \(\Delta_{\rm proj}\), from any \emph{residual}
+projection error left after an explicit FPC restoration has been included.
 
-That has two consequences:
+\section{Preserved and violated observables}
 
-\subsection*{(a) Local spectrum distortion}
+Suppose a variable \(X\) is exactly preserved by \(P_{N+1}\),
+\begin{equation}
+X(\widehat\Ph_{N+1})=X(\Ph_{N+2}).
+\label{eq:x-preserved}
+\end{equation}
+Then for a distribution depending only on preserved variables and on variables integrated over their full ranges,
+\begin{equation}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{dX}=0.
+\label{eq:x-preserved-zero}
+\end{equation}
 
-The total integrated \(N\)-event rate may still be correct up to power corrections, but the \textbf{differential spectrum in \(r_{N-1}\)} gets distorted by bin-to-bin migration.
+In general, however, preserving one Born-like variable does not imply preservation of all the others.
+Consider, for example,
+\begin{equation}
+\frac{d\sigma}{d\rn\,dX},
+\label{eq:rn-x-spectrum}
+\end{equation}
+with
+\begin{equation}
+\rn(\widehat\Ph_{N+1})=\rn(\Ph_{N+2}),
+\qquad
+X(\widehat\Ph_{N+1})\neq X(\Ph_{N+2}).
+\label{eq:rn-preserved-x-not}
+\end{equation}
+Then
+\begin{align}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX}
+={}&
+\int d\Ph_{N+2}\,
+R_{N+2}(\Ph_{N+2})
+\Theta\!\left(\rnp<\rnp^{\cut}\right)
+\delta\!\left(\rn-\rn(\Ph_{N+2})\right)
+\nonumber\\
+&\times
+\left[
+\delta\!\left(X-X(\widehat\Ph_{N+1})\right)
+-
+\delta\!\left(X-X(\Ph_{N+2})\right)
+\right].
+\label{eq:rn-x-proj}
+\end{align}
 
-\subsection*{(b) Loss of local cancellation}
+Thus, being inclusive over QCD radiation does not by itself imply projection independence.
+The relevant criterion is invariance of the \emph{full measurement function}.
 
-The LP resummation/expansion cancels the singular  dependence locally at fixed \(r_{N-1}\). If the map shifts \(r_{N-1}\), this cancellation becomes nonlocal in \(r_{N-1}\), leaving a residual subleading term.
+If all variables violated by the map are integrated over their complete ranges, while \(\rn\) is preserved,
+their migration cancels in the pure \(d\sigma/d\rn\) distribution.
+Any fiducial cut or differential dependence on those variables spoils this cancellation.
 
-\section*{What happens parametrically when it is not preserved}
+\section{How a higher cut can contaminate a lower singular spectrum}
 
-Let
-\[
-\Delta r_{N-1}\sim r_N^\alpha.
-\]
-
-Then the mismatch behaves like
-\[
-\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta r_{N-1}
+In the strongly ordered region
+\begin{equation}
+\rnp\ll\rn\ll Q,
+\label{eq:strong-ordering}
+\end{equation}
+the double-real cross section has schematically the singular structure
+\begin{equation}
+\frac{d\sigma_{N+2}}
+{d\rn\,d\rnp\,d\zeta}
 \sim
-\int_0^{r_N^{\rm cut}} dr_N\, r_N^{\alpha-1}.
-\]
+\frac{1}{\rn}\frac{1}{\rnp}
+F\!\left(
+\ln\frac{\rn}{Q},
+\ln\frac{\rnp}{\rn},
+\zeta
+\right),
+\label{eq:double-singular}
+\end{equation}
+where \(\zeta\) denotes the remaining Born-like and splitting variables.
 
-So for the natural case \(\alpha=1\),
-\[
-\sim r_N^{\rm cut},
-\]
-and with logarithmic dependence in the coefficient one often gets
-\[
-\sim r_N^{\rm cut}\ln r_N^{\rm cut}.
-\]
-
-Thus the effect is formally a power correction in \(r_N^{\rm cut}\), but it directly multiplies derivatives of the \(r_{N-1}\) spectrum, so it can be numerically enhanced in regions where the spectrum is steep.
-
-This is especially relevant:
-
-\begin{itemize}
-\item near cuts,
-\item near peaks,
-\item near Sudakov shoulders,
-\item or wherever \(\frac{d\sigma}{d r_{N-1}}\) varies rapidly.
-\end{itemize}
-
-\section*{Why exact preservation is especially natural here}
-
-There is a difference between a generic Born variable and \(r_{N-1}\) in your present setup.
-
-Here \(r_{N-1}\) is not just some arbitrary coordinate of \(\Phi_N\). It is the \textbf{very variable that defines the \(N\)-jet event class above \(r_{N-1}^{\rm cut}\)} and often the variable whose spectrum you want to resum/match.
-
-So preserving it ensures that:
-
-\begin{itemize}
-\item the unresolved \((N+1)\)-body contribution is assigned to the correct \(N\)-body point,
-\item the matching to the singular  \(N\)-jet spectrum is local in the measured variable,
-\item there is no spurious migration across \(r_{N-1}\) bins below \(r_N^{\rm cut}\).
-\end{itemize}
-
-\section*{What if it is not preserved?}
-
-Then, even if the map is IR safe, you get:
-
-\begin{itemize}
-\item the same LP singular  structure after integrating over \(r_{N-1}\),
-\item but a \textbf{different differential spectrum in \(r_{N-1}\)},
-\item with residual terms of the form
-\[
+For a variable violated by the map define
+\begin{equation}
+\Delta X
+=
+X(\Ph_{N+2})-X(\widehat\Ph_{N+1}).
+\label{eq:delta-x-higher}
+\end{equation}
+If the map approaches the exact kinematics smoothly, a generic nested scaling is
+\begin{equation}
+\frac{\Delta X}{X_{\rm char}}
 \sim
-\partial_{r_{N-1}}
-\left(\frac{d\sigma^{\rm scet}}{d\Phi_N}\right)
-\times
-\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta r_{N-1}.
-\]
-\end{itemize}
+c_X(\zeta)
+\left(\frac{\rnp}{\rn}\right)^p,
+\qquad p>0,
+\label{eq:delta-x-scaling}
+\end{equation}
+where \(p\) is nonuniversal and depends on the resolution variables and recoil prescription.
 
-In words:
+Expanding the measurement function gives parametrically
+\begin{equation}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX}
+\sim
+\frac{1}{\rn}
+\left(\frac{\rnp^{\cut}}{\rn}\right)^p
+\sum_k
+D_k(X)
+\ln^k\!\frac{\rnp^{\cut}}{\rn}.
+\label{eq:rnp-contamination-rn}
+\end{equation}
+Hence,
+\begin{equation}
+\boxed{
+\text{power suppressed in the higher unresolved limit}
+\;\not\Rightarrow\;
+\text{nonsingular in the lower resolution variable}
+}.
+\label{eq:key-nonuniformity}
+\end{equation}
 
-\textbf{not preserving \(r_{N-1}\) induces subleading-power bin migration in the \(r_{N-1}\) spectrum.}
+For \(p=1\), Eq.~\eqref{eq:rnp-contamination-rn} behaves as
+\begin{equation}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX}
+\sim
+\frac{\rnp^{\cut}}{\rn^2}
+\label{eq:p1-scaling}
+\end{equation}
+up to logarithms and observable-dependent coefficients.
+This expression is meaningful only in the ordered regime
+\(\rnp^{\cut}\ll\rn\); it is not a uniform expansion down to arbitrarily small \(\rn\) at fixed
+\(\rnp^{\cut}\).
 
-\section*{Very compact summary}
+Integrating the ordered estimate over \(\rn>\rn^{\cut}\), one obtains parametrically
+\begin{equation}
+\Delta\sigma_{\rm proj}^{(\rnp)}
+\sim
+\left(
+\frac{\rnp^{\cut}}{\rn^{\cut}}
+\right)^p
+\label{eq:integrated-ratio-scaling}
+\end{equation}
+up to logarithms and details of the map.
+This is the origin of a potentially enhanced nested-cut dependence.
 
-When the \(N\)-body phase space is differential in \(r_{N-1}\), the unresolved map
-\[
-\Phi_N\to\Phi_{N+1}\to\hat\Phi_N
-\]
-should preserve \(r_{N-1}\) so that the below-\(r_N^{\rm cut}\) contribution remains local in the measured variable \(r_{N-1}\).
+\section{Differential locality of the lower map}
 
-If it does not, then unresolved emissions shift the event between \(r_{N-1}\) bins, and the difference shows up as a power-suppressed but potentially sizable distortion of the \(r_{N-1}\) spectrum, typically of order
-\[
-r_N^{\rm cut}
-\quad\text{or}\quad
-r_N^{\rm cut}\ln r_N^{\rm cut}.
-\]
+We now turn to the lower projection
+\begin{equation}
+P_N:\Ph_{N+1}\to\widehat\Ph_N.
+\label{eq:lower-map}
+\end{equation}
+Suppose the singular \(N\)-body prediction is kept differential in
+\begin{equation}
+x\equiv\rnm.
+\label{eq:x-def}
+\end{equation}
+This requirement exists independently of whether a generation cut on \(x\) is imposed.
 
-\section*{The sharpest statement}
+For local matching in the measured variable \(x\), one wants
+\begin{equation}
+x(\widehat\Ph_N)
+=
+x^{\rm LP}(\Ph_{N+1})
++
+\Delta x,
+\qquad
+\frac{\Delta x}{x}\to0
+\quad\text{in the unresolved limit}.
+\label{eq:lp-locality-lower}
+\end{equation}
+Exact preservation,
+\begin{equation}
+x(\widehat\Ph_N)=x^{\rm LP}(\Ph_{N+1}),
+\label{eq:exact-lower-preservation}
+\end{equation}
+is sufficient and particularly convenient, but LP-consistent preservation is the essential requirement for the LP construction.
 
-For an \(N\)-jet spectrum differential in \(r_{N-1}\), preserving \(r_{N-1}\) is the analogue of preserving the Born variables used by the factorization theorem. It guarantees that the singular  FO contribution below \(r_N^{\rm cut}\) and the resummed/expanded \(N\)-jet spectrum are matched \textbf{locally in the measured spectrum variable}.
+If \(x\) is shifted by the map,
+\begin{equation}
+x(\widehat\Ph_N)=x^{\rm LP}+\Delta x,
+\label{eq:shift-lower}
+\end{equation}
+the projection delta expands as
+\begin{align}
+\delta\!\left(x-x^{\rm LP}-\Delta x\right)
+={}&
+\delta\!\left(x-x^{\rm LP}\right)
+-
+\Delta x\,
+\partial_x
+\delta\!\left(x-x^{\rm LP}\right)
++\mathcal{O}(\Delta x^2).
+\label{eq:delta-expansion}
+\end{align}
+The first term is the LP contribution.
+The second is a migration term and, after integration over the unresolved emission, generates derivatives of the singular lower-multiplicity spectrum.
 
-The cleanest way to see it is with a toy model for the \(N\)-jet spectrum differential in \(x \equiv r_{N-1}\).
+\section{Toy model for migration in \texorpdfstring{\(r_{N-1}\)}{rN-1}}
 
-\section*{Simple setup}
-
-Assume the singular  unresolved \(N+1\)-body contribution below \(r_N^{\rm cut}\) has the form
-
-\[
-d\sigma_{N+1}^{\rm scet}
-\;\sim\;
-\frac{dr_N}{r_N}\, F(x)\,dx
-\]
-
-with \(x=r_{N-1}\), and the projection map assigns the unresolved configuration to
-
-\[
-x_{\rm proj} = x + \Delta x(r_N).
-\]
-
-Then the projected contribution to the \(x\)-spectrum is schematically
-
-\[
+Take \(x=\rnm\) and assume the singular unresolved \(N+1\)-body contribution below \(\rn^{\cut}\) behaves as
+\begin{equation}
+d\sigma_{N+1}^{\rm sing}
+\sim
+\frac{d\rn}{\rn}\,
+F(x)\,dx.
+\label{eq:toy-singular}
+\end{equation}
+Let the map assign
+\begin{equation}
+x_{\rm proj}=x+\Delta x(\rn).
+\label{eq:toy-map}
+\end{equation}
+Then the projected contribution is
+\begin{equation}
 \frac{d\sigma^{\rm proj}}{dx}
 \sim
-\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,
-F(x-\Delta x(r_N)).
-\]
-
-The resummed-expanded piece subtracts the leading-power term
-
-\[
-\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,F(x),
-\]
-
-so the residual map-dependent mismatch is
-
-\[
+\int_0^{\rn^{\cut}}
+\frac{d\rn}{\rn}\,
+F\!\left(x-\Delta x(\rn)\right),
+\label{eq:toy-projected}
+\end{equation}
+whereas the LP subtraction/resummed-expanded contribution contains
+\begin{equation}
+\int_0^{\rn^{\cut}}
+\frac{d\rn}{\rn}\,
+F(x).
+\label{eq:toy-lp}
+\end{equation}
+The residual map-dependent term is therefore
+\begin{equation}
 \Delta\!\left(\frac{d\sigma}{dx}\right)
 \sim
-\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}
-\Bigl[F(x-\Delta x(r_N)) - F(x)\Bigr].
-\]
-
+\int_0^{\rn^{\cut}}
+\frac{d\rn}{\rn}
+\left[
+F\!\left(x-\Delta x(\rn)\right)-F(x)
+\right].
+\label{eq:toy-residual}
+\end{equation}
 For small \(\Delta x\),
-
-\[
+\begin{equation}
 F(x-\Delta x)-F(x)
-\simeq
--\Delta x\,F'(x),
-\]
-
-hence
-
-\[
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
-- F'(x)\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}\,\Delta x(r_N).
-\]
-
-This is the master formula.
-
-\section*{Case 1: \(r_{N-1}\) preserved exactly}
-
-\[
-\Delta x(r_N)=0
-\]
-
+=
+-\Delta x\,F'(x)+\mathcal{O}(\Delta x^2),
+\label{eq:toy-expand-F}
+\end{equation}
 so
-
-\[
-\Delta\!\left(\frac{d\sigma}{dx}\right)=0.
-\]
-
-No migration, no extra residual dependence from this source.
-
-\section*{Case 2: \(r_{N-1}\) preserved only at leading power}
-
-Suppose
-
-\[
-\Delta x(r_N) \sim c\,r_N.
-\]
-
-Then
-
-\[
+\begin{equation}
+\boxed{
 \Delta\!\left(\frac{d\sigma}{dx}\right)
 \sim
-- c\,F'(x)\int_0^{r_N^{\rm cut}} dr_N
+-F'(x)
+\int_0^{\rn^{\cut}}
+\frac{d\rn}{\rn}\,
+\Delta x(\rn)
+}.
+\label{eq:toy-master}
+\end{equation}
+
+A useful nested scaling is
+\begin{equation}
+\frac{\Delta x}{x}
+\sim
+c(\zeta)
+\left(\frac{\rn}{x}\right)^p,
+\qquad p>0,
+\label{eq:toy-nested-scaling}
+\end{equation}
+whenever \(\rn\) and \(x\) admit such a homogeneous comparison.
+Equation~\eqref{eq:toy-master} then yields
+\begin{equation}
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+-\frac{1}{p}\,
+xF'(x)
+\left(\frac{\rn^{\cut}}{x}\right)^p.
+\label{eq:toy-general-scaling}
+\end{equation}
+
+For a singular spectrum
+\begin{equation}
+F(x)\sim\frac{1}{x},
+\label{eq:toy-1overx}
+\end{equation}
+one obtains
+\begin{equation}
+\frac{
+\Delta(d\sigma/dx)
+}{
+d\sigma/dx
+}
+\sim
+\left(\frac{\rn^{\cut}}{x}\right)^p.
+\label{eq:toy-relative}
+\end{equation}
+The projection effect therefore vanishes at fixed \(x\) when \(\rn^{\cut}\to0\), but the convergence is not uniform as \(x\to0\).
+Near an active lower cut \(x\sim\rnm^{\cut}\), the relevant ratio becomes
+\begin{equation}
+\frac{\rn^{\cut}}{\rnm^{\cut}}.
+\label{eq:toy-cut-ratio}
+\end{equation}
+
+\subsection{Pathological and slowly convergent maps}
+
+A shift
+\begin{equation}
+\Delta x\sim c\,x
+\label{eq:pathological-map}
+\end{equation}
+does not vanish at fixed \(x\) as \(\rn\to0\), and therefore does not define an IR-local projection for the variable \(x\).
+It leads to logarithmic sensitivity,
+\begin{equation}
+\Delta\!\left(\frac{d\sigma}{dx}\right)
+\sim
+-c\,xF'(x)\ln \rn^{\cut},
+\label{eq:pathological-log}
+\end{equation}
+but this case should be regarded as a deliberately pathological example, not as an acceptable IR-safe map.
+
+By contrast, a map with a slower but still vanishing shift, e.g.
+\begin{equation}
+\frac{\Delta x}{X_{\rm char}}
+\sim
+c\left(\frac{\rn}{X_{\rm char}}\right)^{1/2},
+\label{eq:sqrt-map}
+\end{equation}
+is IR local but converges more slowly than a linear power correction.
+
+\section{Optional Born-level fiducial or generation boundaries}
+
+If \(\ThetaB=1\), there is no additional lower-boundary migration issue.
+If instead the process is defined in a restricted Born-like region,
+\begin{equation}
+\ThetaB(\Ph_M)
 =
-- c\,F'(x)\,r_N^{\rm cut}.
-\]
+\Theta\!\left(
+\rnm^{(M)}(\Ph_M)-\rnm^{\cut}
+\right),
+\label{eq:active-born-boundary}
+\end{equation}
+then the local NLO subtraction between \(N\) and \(N+1\) must also treat this boundary consistently.
 
-So the residual dependence is power suppressed:
-
-\[
-\sim r_N^{\rm cut} F'(x).
-\]
-
-This is the expected good behavior.
-
-\section*{Case 3: \(r_{N-1}\) not preserved at leading power}
-
-Now take a map for which the shift is larger, e.g.
-
-\[
-\Delta x(r_N)\sim c\,x
-\qquad\text{or}\qquad
-\Delta x(r_N)\sim c\,\sqrt{r_N}.
-\]
-
-These still vanish in the strict IR limit in the second example, but not fast enough.
-
-\subsection*{Example A: \(\Delta x \sim c\,x\)}
-
-Then
-
-\[
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
-- c\,x\,F'(x)\int_0^{r_N^{\rm cut}} \frac{dr_N}{r_N}
+For the lower map \(P_N\), the real and counterterm contributions contain the acceptances
+\begin{align}
+&
+R_{N+1}(\Ph_{N+1})
+\Theta\!\left(
+\rnm^{(N+1)}(\Ph_{N+1})-\rnm^{\cut}
+\right),
+\nonumber\\
+&
+C_{N+1}(\Ph_{N+1})
+\Theta\!\left(
+\rnm(\widehat\Ph_N)-\rnm^{\cut}
+\right).
+\label{eq:real-counter-born-cut}
+\end{align}
+Their difference contains the boundary mismatch
+\begin{equation}
+\Delta\Theta_B
 =
-- c\,x\,F'(x)\,\ln r_N^{\rm cut}.
-\]
-
-So instead of a power correction, you get a \textbf{logarithmic sensitivity to the cut}.
-
-That is exactly the kind of behavior you do not want: the residual dependence is no longer suppressed as \(r_N^{\rm cut}\to 0\), but grows like \(\ln r_N^{\rm cut}\).
-
-\subsection*{Example B: \(\Delta x \sim c\,\sqrt{r_N}\)}
-
-Then
-
-\[
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
-- c\,F'(x)\int_0^{r_N^{\rm cut}} \frac{dr_N}{\sqrt{r_N}}
+\Theta\!\left(
+\rnm(\widehat\Ph_N)-\rnm^{\cut}
+\right)
+-
+\Theta\!\left(
+\rnm^{(N+1)}(\Ph_{N+1})-\rnm^{\cut}
+\right).
+\label{eq:delta-thetaB}
+\end{equation}
+Defining
+\begin{equation}
+\Delta\rnm
 =
--2c\,F'(x)\sqrt{r_N^{\rm cut}}.
-\]
+\rnm^{(N+1)}(\Ph_{N+1})
+-
+\rnm(\widehat\Ph_N),
+\label{eq:delta-rnm}
+\end{equation}
+one finds near the boundary
+\begin{equation}
+\Delta\Theta_B
+\simeq
+-\Delta\rnm\,
+\delta\!\left(
+\rnm(\widehat\Ph_N)-\rnm^{\cut}
+\right).
+\label{eq:boundary-expansion}
+\end{equation}
+This is a fiducial boundary correction localized at \(\rnm=\rnm^{\cut}\).
 
-This still vanishes, but much more slowly than the desired \(r_N^{\rm cut}\). So it is parametrically enhanced compared to LP preservation.
+Exact preservation,
+\begin{equation}
+\rnm(\widehat\Ph_N)
+=
+\rnm^{(N+1)}(\Ph_{N+1}),
+\label{eq:exact-born-boundary-preservation}
+\end{equation}
+eliminates this migration.
+A weaker condition sufficient to avoid crossing the chosen boundary is
+\begin{equation}
+\Theta\!\left(
+\rnm(\widehat\Ph_N)-\rnm^{\cut}
+\right)
+=
+\Theta\!\left(
+\rnm^{(N+1)}(\Ph_{N+1})-\rnm^{\cut}
+\right)
+\label{eq:theta-boundary-preservation}
+\end{equation}
+in the relevant singular region.
 
-\section*{Why this can blow up at small \(r_{N-1}\)}
+If the underlying Born process is itself singular as \(\rnm\to0\), the coefficient of the boundary correction may be enhanced because the cut can lie near a region where the Born spectrum is large.
+If the Born process is finite, the same migration mechanism exists whenever the fiducial boundary is imposed, but without this additional singular enhancement.
 
-Now take a steep physical spectrum near \(x=r_{N-1}=0\). For instance, a Sudakov-type behavior
+\section{Nested consistency of the higher map}
 
-\[
-F(x)\sim \frac{1}{x}\,\exp[-L^2],\qquad L=\ln\frac{1}{x},
-\]
+For
+\begin{equation}
+P_{N+1}:\Ph_{N+2}\to\widehat\Ph_{N+1},
+\label{eq:higher-map-repeat}
+\end{equation}
+the most important nested-locality condition is preservation of the already-defined \(\rn\) boundary,
+\begin{equation}
+\rn(\widehat\Ph_{N+1})
+=
+\rn(\Ph_{N+2}),
+\label{eq:rn-preservation-higher-map}
+\end{equation}
+or at least preservation to the accuracy required by the construction.
+Otherwise the \(\rnp<\rnp^{\cut}\) projection can migrate events across the lower multiplicity boundary \(\rn=\rn^{\cut}\).
 
-or more simply, for illustration,
+If an additional lower Born-level fiducial boundary is active, the higher map should also preserve its classification,
+\begin{equation}
+\ThetaB(\widehat\Ph_{N+1})
+=
+\ThetaB(\Ph_{N+2}),
+\label{eq:higher-map-born-boundary}
+\end{equation}
+again at least in the singular region relevant for the projection.
 
-\[
-F(x)\sim \frac{1}{x}.
-\]
+This suggests the general principle:
+\begin{equation}
+\boxed{
+\text{a nested projection should preserve all lower resolution/fiducial boundaries
+that are already active in the event definition}
+}.
+\label{eq:nested-principle}
+\end{equation}
+In addition, it should preserve at LP the Born-like coordinates in which the corresponding lower-multiplicity singular prediction is kept differential.
 
-Then
+\section{Genuine LP approximation in the lower-multiplicity NNLO contribution}
 
-\[
-F'(x)\sim -\frac{1}{x^2}.
-\]
-
-Plug this into the bad case above.
-
-\subsection*{If \(\Delta x\sim c\,x\)}
-
-\[
-\Delta\!\left(\frac{d\sigma}{dx}\right)
+The situation below \(\rn^{\cut}\) is conceptually different from the \(\rnp^{\cut}\) discussion.
+The NNLO correction to multiplicity \(N\) is approximated using the LP factorization theorem in \(\rn\),
+\begin{equation}
+\frac{d\Sigma_N^{\rm NNLO}}{d\Ph_N}(\rn^{\cut})
+\longrightarrow
+\frac{d\Sigma_{N,\rm LP}^{\rm NNLO}}{d\Ph_N}(\rn^{\cut}).
+\label{eq:nnlo-lp-replacement}
+\end{equation}
+The genuine dynamical power correction is
+\begin{equation}
+\Delta_{\rm dyn}^{(\rn)}
+=
+\frac{d\Sigma_N^{\rm NNLO}}{d\Ph_N}(\rn^{\cut})
+-
+\frac{d\Sigma_{N,\rm LP}^{\rm NNLO}}{d\Ph_N}(\rn^{\cut}),
+\label{eq:dynamic-pc}
+\end{equation}
+with a generic scaling
+\begin{equation}
+\Delta_{\rm dyn}^{(\rn)}
 \sim
-- c\,x \left(-\frac{1}{x^2}\right)\ln r_N^{\rm cut}
-\sim
-\frac{c}{x}\,\ln r_N^{\rm cut}.
-\]
+\left(\frac{\rn^{\cut}}{Q}\right)^q
+\sum_k
+a_k(\Ph_N)
+\ln^k\!\frac{\rn^{\cut}}{Q}.
+\label{eq:dynamic-pc-scaling}
+\end{equation}
+This is distinct from projection/fiducial corrections generated by
+\(\Ph_{N+1}\to\widehat\Ph_N\) or \(\Ph_{N+2}\to\widehat\Ph_{N+1}\).
 
-So as \(x=r_{N-1}\to 0\), the residual becomes large like
+Schematically,
+\begin{equation}
+\Delta^{(\rn)}
+=
+\Delta_{\rm dyn}^{(\rn)}
++
+\Delta_{\rm proj}^{(\rn)},
+\qquad
+\Delta^{(\rnp)}
+=
+\Delta_{\rm proj}^{(\rnp)}
+\label{eq:error-decomposition}
+\end{equation}
+for the setup considered here, where the higher-multiplicity NLO calculation is exact.
 
+\section{Summary of mapping requirements}
+
+The conclusions can be organized as follows.
+
+\begin{enumerate}
+\item \textbf{Exact higher-multiplicity NLO dynamics.}
+The NLO \(N+1\) contribution is computed with local subtraction and does not use an LP approximation in \(\rnp\).
+
+\item \textbf{Projection effects can remain singular in lower variables.}
+A correction suppressed in \(\rnp/\rn\) may still multiply the singular \(1/\rn\) spectrum.
+
+\item \textbf{Differential locality is independent of generation cuts.}
+If the singular \(N\)-body result is differential in \(\rnm\), then \(P_N\) should preserve \(\rnm\) at least to LP accuracy even when no cut on \(\rnm\) is imposed.
+
+\item \textbf{Active lower boundaries impose extra conditions.}
+If a cut such as \(\rnm>\rnm^{\cut}\) is part of the process definition, the map should in addition avoid migration across that boundary.
+
+\item \textbf{Exact preservation is sufficient but not always necessary.}
+Exact preservation removes the corresponding projection correction identically.
+LP-consistent preservation leaves only a subleading correction, which may still require explicit FPC restoration.
+
+\item \textbf{Nested convergence is controlled by ratios of neighboring resolution scales.}
+In ordered regions the relevant parameters are naturally of the form
 \[
-\frac{\ln r_N^{\rm cut}}{r_{N-1}}.
+\frac{\rnp^{\cut}}{\rn},
+\qquad
+\frac{\rn^{\cut}}{\rnm},
 \]
-
-This is the sense in which the residual cut dependence can \textbf{blow up} in the physically important small-\(r_{N-1}\) region.
-
-Even though the map is IR-safe in the strict \(r_N\to0\) sense, failure to preserve \(r_{N-1}\) at leading power creates a migration term multiplied by the steep derivative of the spectrum, and that becomes large precisely where resummation is supposed to give you the correct physical behavior.
-
-\section*{Practical interpretation}
-
-If \(r_{N-1}\) is not preserved at LP, then unresolved emissions below \(r_N^{\rm cut}\) shift the event by an amount that is too large compared to the power counting of the singular  measure \(dr_N/r_N\). The consequence is:
-
-\begin{itemize}
-\item the cancellation with the resummed-expanded result is no longer local in \(r_{N-1}\),
-\item the residual dependence on \(r_N^{\rm cut}\) is no longer of the desired \(\mathcal O(r_N^{\rm cut})\) type,
-\item and in the small-\(r_{N-1}\) region it can be amplified by the steep slope of the physical spectrum.
-\end{itemize}
-
-\section*{Compact takeaway to add}
-
-A simple toy model makes the point transparent. Writing \(x=r_{N-1}\), the residual map dependence after FO–resummation matching behaves as
-
+and near lower active cuts by
 \[
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
-- F'(x)\int_0^{r_N^{\rm cut}}\frac{dr_N}{r_N}\,\Delta x(r_N).
+\frac{\rnp^{\cut}}{\rn^{\cut}},
+\qquad
+\frac{\rn^{\cut}}{\rnm^{\cut}}.
 \]
 
-\begin{itemize}
-\item If \(x\) is preserved exactly, \(\Delta x=0\), there is no such residual.
-\item If \(x\) is preserved only at leading power, \(\Delta x\sim r_N\), the residual is \(\sim r_N^{\rm cut}F'(x)\), i.e. power suppressed.
-\item If \(x\) is not preserved at leading power, e.g. \(\Delta x\sim x\), the residual becomes \(\sim xF'(x)\ln r_N^{\rm cut}\). For a steep spectrum \(F(x)\sim 1/x\), this gives \(\sim \ln r_N^{\rm cut}/x\), which becomes large as \(x=r_{N-1}\to0\).
-\end{itemize}
-
-This shows why preserving \(r_{N-1}\) at least at leading power is essential to obtain the correct physical small-\(r_{N-1}\) behavior once resummation is included.
+\item \textbf{The only genuine LP truncation in the setup discussed here}
+is the NNLO lower-multiplicity approximation in \(\rn\), Eq.~\eqref{eq:nnlo-lp-replacement}.
+\end{enumerate}
 
 \end{document}
-    
