@@ -541,18 +541,56 @@ The hard scale \(Q\) therefore remains important through the logarithmic structu
 \(\rn\) spectrum, while the additional power suppression induced by the projection is controlled by the ratio
 of the two neighboring resolution scales, \(\rnp^{\cut}/\rn\).
 
-Integrating the ordered estimate over \(\rn>\rn^{\cut}\), one obtains parametrically
+To see explicitly how the neighboring-cut ratio arises after integrating over the lower resolution variable,
+consider first only the power-counting part of Eq.~\eqref{eq:rnp-contamination-rn}, keeping the distribution
+differential in \(X_i\). For \(p>0\),
+\begin{align}
+\int_{\rn^{\cut}}^Q
+\frac{d\rn}{\rn}
+\left(\frac{\rnp^{\cut}}{\rn}\right)^p
+&=
+(\rnp^{\cut})^p
+\int_{\rn^{\cut}}^Q
+\frac{d\rn}{\rn^{p+1}}
+\nonumber\\
+&=
+\frac{1}{p}
+\left[
+\left(\frac{\rnp^{\cut}}{\rn^{\cut}}\right)^p
+-
+\left(\frac{\rnp^{\cut}}{Q}\right)^p
+\right].
+\label{eq:integrated-power-counting}
+\end{align}
+Thus, when \(Q\gg\rn^{\cut}\gg\rnp^{\cut}\), the integral is parametrically dominated by its lower endpoint.
+Restoring the migration derivative, logarithms, and nonsingular Born coefficients, the correction integrated
+only over \(\rn\) has the schematic scaling
 \begin{equation}
-\Delta\sigma_{\rm proj}^{(\rnp)}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{dX_i}
+\equiv
+\int_{\rn^{\cut}}^Q d\rn\,
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX_i}
 \sim
+\frac{1}{p}
 \left(
 \frac{\rnp^{\cut}}{\rn^{\cut}}
 \right)^p
+\left[
+X_{i,\rm char}\partial_{X_i}
+\times\text{logs}
+\times\text{nonsingular Born coefficients}
+\right].
 \label{eq:integrated-ratio-scaling}
 \end{equation}
-up to logarithms and details of the map, provided the lower limit itself lies in the ordered region,
-\(Q\gg\rn^{\cut}\gg\rnp^{\cut}\). This is the origin of a potentially enhanced nested-cut dependence in
-the LHE event definition.
+The second term in Eq.~\eqref{eq:integrated-power-counting}, proportional to
+\((\rnp^{\cut}/Q)^p\), is parametrically smaller in this hierarchy. Equation~\eqref{eq:integrated-ratio-scaling}
+therefore states that the \emph{integration over \(\rn\)} converts the local suppression
+\((\rnp^{\cut}/\rn)^p\) into a dependence controlled by the ratio of the two technical cuts,
+\((\rnp^{\cut}/\rn^{\cut})^p\). It does not imply a nonzero fully inclusive correction. If \(X_i\) is
+subsequently integrated over its complete range, the migration derivative becomes a boundary term and
+cancels, provided no fiducial boundary or other non-preserved measurement prevents that cancellation.
 
 \section{Differential locality of the lower map}
 
