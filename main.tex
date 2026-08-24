@@ -563,8 +563,8 @@ differential in \(X_i\). For \(p>0\),
 \label{eq:integrated-power-counting}
 \end{align}
 Thus, when \(Q\gg\rn^{\cut}\gg\rnp^{\cut}\), the integral is parametrically dominated by its lower endpoint.
-Restoring the migration derivative, logarithms, and nonsingular Born coefficients, the correction integrated
-only over \(\rn\) has the schematic scaling
+Restoring the migration derivative and the logarithmic structure, the correction integrated only over
+\(\rn\) has the schematic scaling
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
 \frac{d\sigma}{dX_i}
@@ -577,13 +577,22 @@ only over \(\rn\) has the schematic scaling
 \left(
 \frac{\rnp^{\cut}}{\rn^{\cut}}
 \right)^p
+\sum_{m,k}
+\partial_{X_i}
 \left[
-X_{i,\rm char}\partial_{X_i}
-\times\text{logs}
-\times\text{nonsingular Born coefficients}
+X_{i,\rm char}\,
+\widetilde C_{mk}(\mathbf X)
+\ln^m\!\frac{\rn^{\cut}}{Q}
+\ln^k\!\frac{\rnp^{\cut}}{\rn^{\cut}}
 \right].
 \label{eq:integrated-ratio-scaling}
 \end{equation}
+The coefficient functions \(\widetilde C_{mk}(\mathbf X)\) are not new independent ingredients. They denote
+linear combinations of the coefficients \(C_{m'k'}(\mathbf X)\) appearing before the \(\rn\) integration in
+Eqs.~\eqref{eq:rnp-contamination-rn}--\eqref{eq:p1-scaling}. The integration reshuffles the powers of
+\(\ln(\rn/Q)\) and \(\ln(\rnp^{\cut}/\rn)\), so the coefficients multiplying the logarithms evaluated at
+\(\rn=\rn^{\cut}\) are in general different linear combinations of the original \(C_{m'k'}\).
+
 The second term in Eq.~\eqref{eq:integrated-power-counting}, proportional to
 \((\rnp^{\cut}/Q)^p\), is parametrically smaller in this hierarchy. Equation~\eqref{eq:integrated-ratio-scaling}
 therefore states that the \emph{integration over \(\rn\)} converts the local suppression
