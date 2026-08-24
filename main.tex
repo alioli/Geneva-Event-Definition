@@ -607,7 +607,7 @@ therefore states that the \emph{integration over \(\rn\)} converts the local sup
 subsequently integrated over its complete range, the migration derivative becomes a boundary term and
 cancels, provided no fiducial boundary or other non-preserved measurement prevents that cancellation.
 
-\subsection{Comparable or inverted cuts and recursive locality}
+\subsection{Comparable or inverted cuts and recursive infrared locality}
 \label{subsec:recursive-locality}
 
 The result in Eq.~\eqref{eq:integrated-ratio-scaling} must not be extrapolated to a situation in which the
@@ -637,7 +637,8 @@ lower endpoint \(\rn\sim\rn^{\cut}\) is then not parametrically strongly ordered
 It follows that inserting \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\) into
 Eq.~\eqref{eq:integrated-ratio-scaling} is not a prediction of an \(\mathcal O(1)\) projection effect. It is
 only a signal that the expansion in the neighboring-scale ratio has been pushed outside its domain of
-validity. The behavior of the map in the simultaneous unresolved limit has to be examined separately.
+validity. The behavior of the projection map in the simultaneous unresolved limit has to be examined
+separately.
 
 To formulate this limit, introduce
 \begin{equation}
@@ -658,42 +659,77 @@ z=\mathcal O(1),
 \end{equation}
 so that \(\rn\) and \(\rnp\) approach zero together rather than hierarchically.
 
-Ordinary one-step infrared locality of \(\Pi_{N+1}\) only requires that, at fixed nonzero \(\rn\), the
-projected and exact configurations become indistinguishable for infrared-safe measurements when
-\(\rnp\to0\), or equivalently \(z\to0\). For nested event definitions a stronger property is useful.
-We shall call the higher map \emph{recursively local with respect to a lower-multiplicity coordinate
-\(X_i\)} if the exact and projected configurations approach the same value of \(X_i\) also in the
-simultaneous limit, uniformly for finite values of the ratio \(z\). More precisely, for a coordinate with a
-finite nonsingular characteristic scale \(X_{i,\rm char}\), recursive locality means
+It is useful to distinguish clearly a property of the projection map from a property of the measured
+observable. Ordinary one-step infrared locality of \(\Pi_{N+1}\) requires that, at fixed nonzero \(\rn\),
+removing the additional unresolved emission sends the projected configuration to the same \((N+1)\)-body
+infrared limit as the exact configuration. This controls \(\rnp\to0\) at fixed \(\rn\), but does not by
+itself guarantee uniform behavior when the projected \((N+1)\)-body state simultaneously approaches its own
+\(N\)-body unresolved limit.
+
+We shall call \(\Pi_{N+1}\) \emph{recursively infrared local} if, whenever an exact
+\((N+2)\)-parton configuration approaches an underlying \(N\)-parton configuration in the simultaneous
+limit of Eq.~\eqref{eq:simultaneous-unresolved}, the projected \((N+1)\)-parton configuration approaches the
+\emph{same} underlying \(N\)-parton point, uniformly for finite values of \(z\). Equivalently, for every
+finite set of smooth IRC-safe coordinates \(\mathbf Y=(Y_1,\ldots,Y_s)\) that characterize the relevant
+lower-multiplicity kinematics, with finite nonsingular characteristic scales \(Y_{a,\rm char}\), the map
+must satisfy
 \begin{equation}
 \lim_{\epsilon\to0}
 \sup_{0\le z\le z_*}
+\max_a
 \left|
 \frac{
-X_i(\Ph_{N+2}(\epsilon,z,\omega))
--X_i(\Pi_{N+1}(\Ph_{N+2}(\epsilon,z,\omega)))
-}{X_{i,\rm char}}
+Y_a(\Ph_{N+2}(\epsilon,z,\omega))
+-Y_a(\Pi_{N+1}(\Ph_{N+2}(\epsilon,z,\omega)))
+}{Y_{a,\rm char}}
 \right|
 =0,
 \label{eq:recursive-locality-definition}
 \end{equation}
 for every fixed \(z_*=\mathcal O(1)\) in the kinematically allowed simultaneous-unresolved region, and for
-fixed \(\omega\) away from additional singular boundaries. The uniformity in \(z\) is essential: a map
-that is local only for \(z\to0\) but develops a finite mismatch along some path with \(z=\mathcal O(1)\)
-does not satisfy Eq.~\eqref{eq:recursive-locality-definition}.
+fixed \(\omega\) away from additional singular boundaries. The quantification over lower-multiplicity
+coordinates is what makes Eq.~\eqref{eq:recursive-locality-definition} a property of the map rather than of
+one chosen observable. The uniformity in \(z\) is essential: a map that is local only for \(z\to0\) but
+approaches a different lower-multiplicity point along some path with \(z=\mathcal O(1)\) is not recursively
+infrared local.
 
 The adjective \emph{recursive} refers to the fact that the \(N+2\to N+1\) projection must remain local not
 only with respect to its own unresolved emission, but also while the projected \((N+1)\)-parton state itself
-approaches the next lower \(N\)-parton limit. Operationally, the higher projection must not spoil the approach
-to the same underlying \(N\)-body point. Exact preservation of a lower variable, such as
+approaches the next lower \(N\)-parton limit. Operationally, the two operations ``remove the higher
+unresolved emission'' and ``approach the lower unresolved configuration'' must lead to the same underlying
+\(N\)-body kinematics. Exact preservation of a lower variable, such as
 \(\rn(\widehat\Ph_{N+1})=\rn(\Ph_{N+2})\), is a particularly strong realization of this requirement for that
-variable. For lower Born-like coordinates that are not exactly preserved, Eq.~\eqref{eq:recursive-locality-definition}
-is the corresponding asymptotic condition. If an active lower fiducial boundary is present, the analogous
-statement is that exact and projected configurations have the same classification away from a boundary layer
-whose width vanishes with the common unresolved scale.
+variable. If an active lower fiducial boundary is present, the corresponding classification should likewise
+agree away from a boundary layer whose width vanishes with the common unresolved scale.
 
-When the approach to the common lower-multiplicity point is power-like, recursive locality can be
-parametrized as
+This notion is deliberately analogous to, but distinct from, the \emph{recursive infrared and collinear
+(rIRC) safety} introduced in the CAESAR framework by Banfi, Salam and Zanderighi\footnote{A.~Banfi,
+G.~P.~Salam and G.~Zanderighi, \emph{Principles of general final-state resummation and automated
+implementation}, JHEP 03 (2005) 073, arXiv:hep-ph/0407286.}. CAESAR rIRC safety is a property of an
+observable: it requires its scaling to remain well behaved when several emissions are taken unresolved with
+fixed relative scalings and under further softer or more collinear branchings. Recursive infrared locality as
+defined here is instead a property of a nested \emph{phase-space map}: it requires exact and projected
+configurations to approach the same lower-multiplicity point under simultaneous and hierarchical infrared
+limits. The common conceptual ingredient is uniformity under nested unresolved limits, but neither condition
+should be identified with the other.
+
+Once the map is recursively infrared local, ordinary IRC safety of a particular observable \(X_i\) is enough
+to imply
+\begin{equation}
+\Delta X_i
+=
+X_i(\Ph_{N+2})-X_i(\Pi_{N+1}(\Ph_{N+2}))
+\longrightarrow0
+\qquad
+(\epsilon\to0,\ z=\mathcal O(1)).
+\label{eq:irc-safe-consequence-recursive-map}
+\end{equation}
+Thus the vanishing of \(\Delta X_i\) in the simultaneous limit should not be regarded as an additional
+independent requirement on every IRC-safe observable. What IRC safety alone does \emph{not} guarantee is
+that an arbitrary projection map approaches the same lower-multiplicity point, nor does it determine the
+rate at which the difference in Eq.~\eqref{eq:irc-safe-consequence-recursive-map} vanishes.
+
+When this approach is power-like, the latter rate can be parametrized as
 \begin{equation}
 H_i(\epsilon,z,\omega)
 \equiv
@@ -705,7 +741,11 @@ H_i(\epsilon,z,\omega)
 \qquad q_i>0,
 \label{eq:recursive-locality-power}
 \end{equation}
-with \(h_i\) finite for \(z=\mathcal O(1)\). In the overlap with the strongly ordered limit one expects
+with \(h_i\) finite for \(z=\mathcal O(1)\). The exponent \(q_i\) is not fixed by IRC safety. It depends on
+the recoil prescription, on the resolution variables and on how the particular observable responds to the
+small kinematic displacement. The approach need not even be a pure power; Eq.~\eqref{eq:recursive-locality-power}
+is a convenient parametrization when a power expansion exists. In the overlap with the strongly ordered
+limit one expects
 \begin{equation}
 h_i(z,\omega)\sim z^{p_i}
 \qquad (z\to0),
@@ -731,8 +771,8 @@ d\mu(z,\omega)\,
 \end{equation}
 where \(d\mu(z,\omega)\) contains the remaining unresolved-emission measure and reduces to a logarithmic
 \(dz/z\)-type measure in the strongly ordered \(z\to0\) limit. No expansion in \(z\) is made when
-\(z=\mathcal O(1)\). Combining Eq.~\eqref{eq:simultaneous-singular-measure} with recursive locality gives
-schematically
+\(z=\mathcal O(1)\). Combining Eq.~\eqref{eq:simultaneous-singular-measure} with the power-like realization
+of recursive infrared locality gives schematically
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
 \frac{d\sigma}{d\rn\,dX_i}
@@ -751,10 +791,10 @@ G_i\!\left(
 \label{eq:recursive-locality-spectrum}
 \end{equation}
 where \(G_i\) denotes the integral over \(z\) and the remaining radiation variables, including
-\(h_i\), and \(z_{\max}\) is set by the higher cut together with the kinematic range. Recursive locality
-requires \(G_i\) to remain parametrically finite when \(z_{\max}=\mathcal O(1)\); the power suppression in
-that region is then supplied by the common lower scale \((\rn/Q)^{q_i}\), not by a small value of
-\(\rnp/\rn\).
+\(h_i\), and \(z_{\max}\) is set by the higher cut together with the kinematic range. Recursive infrared
+locality requires the underlying map mismatch to remain uniformly small when \(z=\mathcal O(1)\); under the
+power-like assumption above, \(G_i\) remains parametrically finite and the suppression is supplied by the
+common lower scale \((\rn/Q)^{q_i}\), not by a small value of \(\rnp/\rn\).
 
 For \(\rnp^{\cut}>\rn^{\cut}\), the contribution from the non-strongly-ordered interval in
 Eq.~\eqref{eq:split-rn-inverted-cuts} consequently has the generic power counting
@@ -789,11 +829,12 @@ then
 \label{eq:fixed-kappa-recursive-scaling}
 \end{equation}
 for the interval present when \(\kappa>1\). Thus a fixed ratio of order one, or even larger than one, does
-not by itself imply an order-one projection error. If the map is recursively local, the correction still
-vanishes with the absolute unresolved scale. By contrast, if \(\rn^{\cut}\to0\) while
-\(\rnp^{\cut}\) is held fixed, lowering the lower cut eventually ceases to improve this contribution; its
-natural size is then controlled by \((\rnp^{\cut}/Q)^{q_i}\). This provides a qualitatively different
-interpretation from a naive extrapolation of Eq.~\eqref{eq:integrated-ratio-scaling}.
+not by itself imply an order-one projection error. If the map is recursively infrared local and the relevant
+observable has a power-like approach, the correction still vanishes with the absolute unresolved scale. By
+contrast, if \(\rn^{\cut}\to0\) while \(\rnp^{\cut}\) is held fixed, lowering the lower cut eventually ceases
+to improve this contribution; its natural size is then controlled by \((\rnp^{\cut}/Q)^{q_i}\). This provides
+a qualitatively different interpretation from a naive extrapolation of
+Eq.~\eqref{eq:integrated-ratio-scaling}.
 
 The size of the migration in phase space is, however, only one part of the problem. The response of the
 observable can introduce a second nonuniformity. Let
@@ -823,12 +864,12 @@ Then a small displacement produces parametrically
 \label{eq:relative-observable-sensitivity}
 \end{equation}
 when \(|\Delta X_i|\ll L_i\). In a smooth region \(L_i\) is of the order of a hard or characteristic
-kinematic scale, so recursive locality of the map directly translates into a small projection effect. Near a
-kinematic boundary, Jacobian feature or Sudakov shoulder, however, \(L_i\) can become parametrically much
-smaller than the hard scale. A displacement that is small in absolute terms can then generate a large local
-change in the distribution. When \(|\Delta X_i|\) becomes comparable to the distance from the nonanalytic
-point, the derivative expansion itself is no longer uniform and the effect is better viewed as migration
-across the feature rather than as a small derivative correction.
+kinematic scale, so recursive infrared locality of the map together with IRC safety of the observable
+translates into a small projection effect. Near a kinematic boundary, Jacobian feature or Sudakov shoulder,
+however, \(L_i\) can become parametrically much smaller than the hard scale. A displacement that is small in
+absolute terms can then generate a large local change in the distribution. When \(|\Delta X_i|\) becomes
+comparable to the distance from the nonanalytic point, the derivative expansion itself is no longer uniform
+and the effect is better viewed as migration across the feature rather than as a small derivative correction.
 
 Drell--Yan production provides a useful illustration. Taking
 \begin{equation}
@@ -840,14 +881,17 @@ Q\sim M_{\ell\ell},
 \label{eq:dy-resolution-identification}
 \end{equation}
 the vector-boson rapidity is preserved by the projection and therefore has no migration of the type discussed
-here. The transverse momenta of the decay leptons are not exactly preserved. Nevertheless, in GENEVA one
-finds that making \(\mathcal T_0^{\cut}\) very small while keeping \(\mathcal T_1^{\cut}\) not hierarchically
-smaller does not by itself produce the large effects suggested by a naive use of
-Eq.~\eqref{eq:integrated-ratio-scaling}. Away from special kinematic regions, the differences between the
-fixed-order internal analysis and the projected LHE event definition remain small. This behavior is naturally
-consistent with recursive locality: the absolute displacement of the lepton transverse momentum can vanish
-with the common unresolved scale even when \(\mathcal T_1/\mathcal T_0=\mathcal O(1)\), while a fixed nonzero
-\(\mathcal T_1^{\cut}\) sets the residual absolute scale once \(\mathcal T_0^{\cut}\) is made much smaller.
+here. The transverse momenta of the decay leptons are IRC safe but are not exactly preserved. Nevertheless,
+in GENEVA one finds that making \(\mathcal T_0^{\cut}\) very small while keeping
+\(\mathcal T_1^{\cut}\) not hierarchically smaller does not by itself produce the large effects suggested by
+a naive use of Eq.~\eqref{eq:integrated-ratio-scaling}. Away from special kinematic regions, the differences
+between the fixed-order internal analysis and the projected LHE event definition remain small. This behavior
+is naturally consistent with recursive infrared locality of the map: because the exact and projected states
+approach the same Born configuration, IRC safety implies that the absolute displacement of the lepton
+transverse momentum vanishes in the common unresolved limit even when
+\(\mathcal T_1/\mathcal T_0=\mathcal O(1)\). If instead \(\mathcal T_1^{\cut}\) is held fixed while
+\(\mathcal T_0^{\cut}\) is made much smaller, that fixed higher cut sets the residual absolute unresolved
+scale relevant for this projection effect.
 
 The important exception is the region
 \begin{equation}
@@ -859,8 +903,8 @@ included. There the spectrum varies rapidly and its fixed-order derivatives are 
 local variation scale in Eq.~\eqref{eq:local-variation-scale} becomes small. A projection-induced shift
 \(\Delta p_{T,\ell}\) can therefore be much smaller than \(M_{\ell\ell}\) and still be comparable to the
 scale over which the spectrum changes. Large local discrepancies near the shoulder are thus compatible with
-a recursively local map: they need not signal a failure of the nested unresolved limit, but rather a
-nonuniform response of the measurement to a small kinematic migration. Very close to the shoulder, where
+a recursively infrared-local map: they need not signal a failure of the nested unresolved limit, but rather
+a nonuniform response of the measurement to a small kinematic migration. Very close to the shoulder, where
 \begin{equation}
 \left|p_{T,\ell}-\frac{M_{\ell\ell}}{2}\right|
 \lesssim
@@ -871,11 +915,11 @@ one should not expect the linearized measurement expansion to be quantitatively 
 migration across the shoulder must be retained.
 
 The two sources of nonuniformity should therefore be kept conceptually separate. Strong ordering can fail
-because the neighboring resolution scales become comparable, in which case recursive locality controls the
-simultaneous unresolved limit. Independently, even a recursively small displacement can be amplified when the
-measured spectrum contains a sharp kinematic feature. The Drell--Yan behavior described above is consistent
-with the second mechanism being responsible for the largest observed projection differences in the lepton
-transverse-momentum distribution.
+because the neighboring resolution scales become comparable, in which case recursive infrared locality of
+the map controls the simultaneous unresolved limit. Independently, even an IRC-safe observable can have a
+nonuniform differential response to a recursively small displacement when its spectrum contains a sharp
+kinematic feature. The Drell--Yan behavior described above is consistent with the second mechanism being
+responsible for the largest observed projection differences in the lepton transverse-momentum distribution.
 
 \section{Differential locality of the lower map}
 
@@ -1181,7 +1225,7 @@ that are already active in the event definition}
 }.
 \label{eq:nested-principle}
 \end{equation}
-In addition, it should preserve at LP the Born-like coordinates in which the corresponding lower-multiplicity singular prediction is kept differential. For comparable neighboring resolution scales, the stronger recursive-locality condition of Sec.~\ref{subsec:recursive-locality} ensures that this locality persists in the simultaneous unresolved limit.
+In addition, it should preserve at LP the Born-like coordinates in which the corresponding lower-multiplicity singular prediction is kept differential. For comparable neighboring resolution scales, the recursive-infrared-locality condition of Sec.~\ref{subsec:recursive-locality} ensures that the map continues to approach the same lower-multiplicity kinematics in the simultaneous unresolved limit.
 
 \section{Lower \texorpdfstring{\(N+1\to N\)}{N+1 to N} projection, NNLO power corrections, and P2B}
 
@@ -1284,11 +1328,12 @@ The scaling in \(\rnp^{\cut}/\rn^{\cut}\) derived in Sec.~\ref{subsec:strongly-o
 requires a genuine hierarchy. For comparable or inverted cuts, substituting an order-one ratio into the
 strongly ordered formula is not a valid estimate of the projection error.
 
-\item \textbf{Recursive locality controls the simultaneous unresolved limit.}
-A higher map is recursively local for a lower-multiplicity coordinate if exact and projected configurations
-approach the same lower-multiplicity value uniformly as \(\rn/Q\to0\) with \(\rnp/\rn=\mathcal O(1)\).
-When this approach is power suppressed, comparable technical cuts can be lowered together at fixed ratio
-without generating an order-one projection error.
+\item \textbf{Recursive infrared locality is a property of the projection map.}
+A higher map is recursively infrared local if exact and projected configurations approach the same underlying
+lower-multiplicity point uniformly as \(\rn/Q\to0\) with \(\rnp/\rn=\mathcal O(1)\). Once this is true,
+ordinary IRC safety implies that any smooth lower-multiplicity observable has a vanishing exact--projected
+mismatch in the simultaneous unresolved limit. The rate of convergence, however, is not fixed by IRC safety.
+This map property is analogous to, but distinct from, the rIRC safety condition on observables used in CAESAR.
 
 \item \textbf{Observable smoothness is a separate source of nonuniformity.}
 Even a recursively small kinematic displacement can generate a large local difference near a sharp
@@ -1318,8 +1363,8 @@ When the resolutions are strongly ordered the natural parameters include
 \qquad
 \frac{\rn^{\cut}}{\rnm}.
 \]
-Near comparable cuts, absolute suppression in the common unresolved scale and recursive locality become the
-relevant criteria instead of the ratio alone.
+Near comparable cuts, absolute suppression in the common unresolved scale and recursive infrared locality of
+the map become the relevant criteria instead of the ratio alone.
 
 \item \textbf{The genuine LP truncation in the setup discussed here}
 is the NNLO lower-multiplicity approximation in \(\rn\), Eq.~\eqref{eq:nnlo-lp-replacement}.
