@@ -173,13 +173,12 @@ The phase-space identity
 is exact.
 If both regions are analyzed with exact \(\Ph_{N+2}\) kinematics, the final NLO result is independent of
 \(\rnp^{\cut}\).
-In GENEVA this is precisely what happens when a fixed-order calculation is analyzed with the
+In GENEVA this is precisely what happens in a fixed-order calculation with the
 \emph{internal analyzer}: every contribution is filled using its exact partonic kinematics.
 Equation~\eqref{eq:rnp-partition} is then only an internal partition of phase space and the dependence on
 \(\rnp^{\cut}\) cancels, up to numerical integration errors. No fiducial-power-correction restoration is
 needed for the \(N+2\to N+1\) step in this setup, because no kinematic information has been discarded.
-This is the appropriate setup for validating the underlying fixed-order calculation at the perturbative
-order under consideration.
+This is the appropriate setup for validating the underlying fixed-order calculation.
 
 The situation relevant for MC event generation is different. When events are generated for output to
 the LHEF file, configurations below \(\rnp^{\cut}\) are represented as \((N+1)\)-parton events rather
@@ -193,7 +192,7 @@ so that
 \Mcal(\Ph_{N+2})\to\Mcal(\widehat\Ph_{N+1}).
 \label{eq:rnp-measurement-replacement}
 \end{equation}
-The difference between the LHE event definition and the exact fixed-order internal-analyzer result is therefore
+The difference between the LHE event definition and the exact fixed-order result is therefore
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}[\Mcal]
 =
@@ -255,12 +254,96 @@ R_{N+2}(\Ph_{N+2})
 \label{eq:rn-x-proj}
 \end{align}
 
-Thus, being inclusive over QCD radiation does not by itself imply projection independence.
-The relevant criterion is invariance of the \emph{full measurement function}.
+The cancellation after integrating over the \emph{full} range of \(X\) is immediate. If the integration
+range contains both the exact and projected values of \(X\) for every phase-space point, then
+\begin{equation}
+\int_{\rm full} dX\,
+\left[
+\delta\!\left(X-X(\widehat\Ph_{N+1})\right)
+-
+\delta\!\left(X-X(\Ph_{N+2})\right)
+\right]
+=1-1=0.
+\label{eq:x-full-range-cancellation}
+\end{equation}
+Hence, provided \(\rn\) is itself preserved by the projection,
+\begin{equation}
+\int_{\rm full} dX\,
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX}
+=0.
+\label{eq:x-integrated-zero}
+\end{equation}
+The interpretation is simple: the projection can move an event from one value of \(X\) to another, but
+it does not change the total weight. Once all values of \(X\) are summed inclusively, this migration is
+invisible.
 
-If all variables violated by the map are integrated over their complete ranges, while \(\rn\) is preserved,
-their migration cancels in the pure \(d\sigma/d\rn\) distribution.
-Any fiducial cut or differential dependence on those variables spoils this cancellation.
+This cancellation is lost as soon as the integration over \(X\) is not fully inclusive. To make this
+explicit, introduce an acceptance function \(A_X(X)\), equal to one in the accepted fiducial region and
+zero outside. Integrating Eq.~\eqref{eq:rn-x-proj} with this acceptance gives
+\begin{align}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma^{\rm fid}}{d\rn}
+={}&
+\int d\Ph_{N+2}\,
+R_{N+2}(\Ph_{N+2})
+\Theta\!\left(\rnp<\rnp^{\cut}\right)
+\delta\!\left(\rn-\rn(\Ph_{N+2})\right)
+\nonumber\\
+&\times
+\left[
+A_X\!\left(X(\widehat\Ph_{N+1})\right)
+-
+A_X\!\left(X(\Ph_{N+2})\right)
+\right].
+\label{eq:x-fiducial-migration}
+\end{align}
+Thus a fiducial cut does not merely reduce the integration range: it converts the trivial \(1-1\)
+cancellation in Eq.~\eqref{eq:x-full-range-cancellation} into a difference of two event classifications.
+The contribution is nonzero precisely for configurations for which the exact and projected kinematics
+lie on opposite sides of a fiducial boundary.
+
+For a single lower cut,
+\begin{equation}
+A_X(X)=\Theta(X-X_{\rm cut}),
+\label{eq:x-lower-acceptance}
+\end{equation}
+Eq.~\eqref{eq:x-fiducial-migration} contains the factor
+\begin{equation}
+\Theta\!\left(X(\widehat\Ph_{N+1})-X_{\rm cut}\right)
+-
+\Theta\!\left(X(\Ph_{N+2})-X_{\rm cut}\right).
+\label{eq:x-cut-classification-difference}
+\end{equation}
+Defining, consistently with Eq.~\eqref{eq:delta-x-higher} below,
+\begin{equation}
+\Delta X
+=
+X(\Ph_{N+2})-X(\widehat\Ph_{N+1}),
+\label{eq:delta-x-fiducial}
+\end{equation}
+for a small migration one obtains
+\begin{equation}
+\Theta\!\left(X(\widehat\Ph_{N+1})-X_{\rm cut}\right)
+-
+\Theta\!\left(X(\Ph_{N+2})-X_{\rm cut}\right)
+\simeq
+-\Delta X\,
+\delta\!\left(X(\Ph_{N+2})-X_{\rm cut}\right).
+\label{eq:x-boundary-localization}
+\end{equation}
+Therefore the projection effect from a hard fiducial cut is localized at the cut boundary. Its size is
+controlled by the amount by which the projection moves \(X\), multiplied by the event density at the
+boundary. This makes the effect potentially important even when \(\Delta X\) is parametrically small:
+a steep spectrum or a large cross section near the fiducial boundary can enhance the resulting migration.
+For a two-sided window the same reasoning applies independently at both boundaries, with opposite signs.
+
+More generally, if several variables are changed by the projection, integrating over the full range of
+one of them removes only the migration associated with that variable. Any remaining differential
+measurement or fiducial cut on another non-preserved variable can still produce a nonzero projection
+effect. The actual criterion for cancellation is therefore invariance of the \emph{full measurement
+function}, not merely inclusiveness with respect to QCD radiation. Likewise, if \(\rn\) itself is not
+preserved, integrating over \(X\) does not eliminate migration in the \(\rn\) distribution.
 
 \section{How a higher cut can contaminate a lower singular spectrum}
 
@@ -733,7 +816,7 @@ Schematically, the lower-cut error structure can be written as
 where \(\Delta_{\rm proj}^{(\rn)}\) is precisely the kinematic mismatch that a fixed-order P2B/FPC
 construction such as Eq.~\eqref{eq:p2b-fpc-correlated} is designed to restore. By contrast,
 \(\Delta_{\rm proj}^{(\rnp)}\) in Eq.~\eqref{eq:rnp-proj-correction} is absent when using the exact
-internal analyzer and appears only when the \(N+2\) configuration is replaced by an \(N+1\) LHE event.
+fixed-order analyzer and appears only when the \(N+2\) configuration is replaced by an \(N+1\) LHE event.
 
 \section{Summary of mapping requirements}
 
