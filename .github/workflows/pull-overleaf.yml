@@ -109,9 +109,6 @@ jobs:
               git diff --binary "$BASE_SHA" "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
             fi
           else
-            # First run only: the outbound sync has already made Overleaf the
-            # authoritative project tree. Reconcile any remaining difference
-            # between the two trees and then establish a checkpoint.
             echo "No previous Overleaf checkpoint found; bootstrapping from the current trees."
             git diff --binary HEAD "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
           fi
@@ -128,11 +125,6 @@ jobs:
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
 
           if [[ -s "$PATCH" ]]; then
-            # Three-way application is important here. It lets Git recognize
-            # changes that are already present on GitHub (for example because
-            # they originally travelled GitHub -> Overleaf) while still
-            # importing independent Overleaf edits. Real conflicts stop the
-            # sync instead of overwriting either side.
             if ! git apply --3way --index "$PATCH"; then
               echo "::error::Overleaf changes conflict with current GitHub main. Nothing was pushed to GitHub."
               git status --short
@@ -146,13 +138,41 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "GitHub is already synchronized with Overleaf."
-            exit 0
+          else
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git commit -m "Sync changes from Overleaf"
+            git push origin HEAD:main
           fi
+
+      - name: Remove tau0 generation-cut wording from Z+1-jet example
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git switch main
+          git reset --hard origin/main
+
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('main.tex')
+          text = p.read_text()
+          old = r'''Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
+this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to a
+migration across the generation cut; the non-preservation of $\mathcal T_0$ by the $\mathcal T_1^{\rm FR}$ map
+is relevant instead as a diagnostic of motion along the limiting one-jet Born manifold.
+'''
+          new = r'''Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
+this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to
+migration across the generation cut.
+'''
+          if old not in text:
+              raise SystemExit('Expected generation-cut paragraph not found; refusing to edit.')
+          p.write_text(text.replace(old, new, 1))
+          PY
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git commit -m "Sync changes from Overleaf"
-
-          # No force push: if GitHub main moved after checkout, this fails and
-          # the next scheduled run retries from the new GitHub state.
+          git add main.tex
+          git commit -m "Keep Z+1-jet generation-cut discussion qT-only"
           git push origin HEAD:main
