@@ -1,0 +1,78 @@
+name: Sync final note rewrite to Overleaf
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/run-sync-final-rewrite-overleaf'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: overleaf-sync
+  cancel-in-progress: false
+
+env:
+  OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
+  OVERLEAF_REMOTE: https://git@git.overleaf.com/69ce2c30f9afe0bef5ae7ddf
+  STATE_FILE: .github/overleaf-sync-state
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Configure authentication
+        shell: bash
+        run: |
+          set -euo pipefail
+          ASKPASS="$RUNNER_TEMP/overleaf-askpass.sh"
+          cat > "$ASKPASS" <<'EOF'
+          #!/bin/sh
+          case "$1" in
+            *Username*) printf '%s\n' 'git' ;;
+            *Password*) printf '%s\n' "$OVERLEAF_TOKEN" ;;
+            *) exit 1 ;;
+          esac
+          EOF
+          chmod 700 "$ASKPASS"
+          echo "GIT_ASKPASS=$ASKPASS" >> "$GITHUB_ENV"
+          echo "GIT_TERMINAL_PROMPT=0" >> "$GITHUB_ENV"
+      - name: Apply GitHub note patch to current Overleaf history
+        shell: bash
+        run: |
+          set -euo pipefail
+          GH_HEAD="$(git rev-parse HEAD)"
+          BASE_OL="$(tr -d '[:space:]' < "$STATE_FILE")"
+          git remote add overleaf "$OVERLEAF_REMOTE"
+          BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
+          git fetch --prune overleaf "$BRANCH"
+          OL_HEAD="$(git rev-parse "overleaf/$BRANCH")"
+          echo "Checkpoint Overleaf commit: $BASE_OL"
+          echo "Current Overleaf commit:    $OL_HEAD"
+          if [[ "$OL_HEAD" != "$BASE_OL" ]]; then
+            echo '::error::Overleaf changed after the pre-rewrite pull. Refusing to overwrite it.'
+            exit 1
+          fi
+          PATCH="$RUNNER_TEMP/github-note.patch"
+          git diff --binary "$BASE_OL" "$GH_HEAD" -- main.tex > "$PATCH"
+          if [[ ! -s "$PATCH" ]]; then
+            echo '::error::No main.tex patch found to sync.'
+            exit 1
+          fi
+          git switch --detach "$OL_HEAD"
+          git apply --3way --index "$PATCH"
+          git config user.name 'GitHub Actions'
+          git config user.email 'actions@github.com'
+          git commit -m 'Sync reorganized note from GitHub'
+          NEW_OL="$(git rev-parse HEAD)"
+          git push overleaf HEAD:"$BRANCH"
+          git switch main
+          printf '%s\n' "$NEW_OL" > "$STATE_FILE"
+          git add "$STATE_FILE"
+          git commit -m 'Update Overleaf sync checkpoint'
+          git push origin HEAD:main
