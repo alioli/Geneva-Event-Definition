@@ -125,46 +125,44 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Reorganize note into local and integrated layers
+      - name: Polish reorganized note
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin main
-          git switch -C note-reorg origin/main
-          python3 .github/scripts/reorganize_note.py
+          git switch -C note-polish origin/main
+          python3 .github/scripts/polish_reorganized_note.py
           git diff --check
           if git diff --quiet -- main.tex; then
             echo 'NOTE_COMMIT=' >> "$GITHUB_ENV"
-            echo 'No note changes were needed.'
             exit 0
           fi
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add main.tex
-          git commit -m "Separate local singular analysis from NNLO integrated effects"
+          git commit -m "Polish local versus integrated note structure"
           NOTE_COMMIT="$(git rev-parse HEAD)"
           echo "NOTE_COMMIT=$NOTE_COMMIT" >> "$GITHUB_ENV"
           git push origin HEAD:main
 
-      - name: Sync reorganized note directly to Overleaf
+      - name: Sync polished note directly to Overleaf
         if: env.NOTE_COMMIT != ''
         shell: bash
         run: |
           set -euo pipefail
           PATCH_COMMIT="$NOTE_COMMIT"
-          git diff --binary "${PATCH_COMMIT}^" "$PATCH_COMMIT" -- main.tex > "$RUNNER_TEMP/note-reorg.patch"
+          git diff --binary "${PATCH_COMMIT}^" "$PATCH_COMMIT" -- main.tex > "$RUNNER_TEMP/note-polish.patch"
           git fetch --prune overleaf "$OVERLEAF_BRANCH"
           git switch --detach "overleaf/$OVERLEAF_BRANCH"
-          if ! git apply --3way --index "$RUNNER_TEMP/note-reorg.patch"; then
-            echo "::error::The note reorganization conflicts with newer Overleaf edits. Nothing was pushed."
+          if ! git apply --3way --index "$RUNNER_TEMP/note-polish.patch"; then
+            echo "::error::The note polish conflicts with newer Overleaf edits. Nothing was pushed."
             exit 1
           fi
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git commit -m "Sync reorganized note ${PATCH_COMMIT::12}"
+          git commit -m "Sync polished note ${PATCH_COMMIT::12}"
           git push overleaf "HEAD:$OVERLEAF_BRANCH"
           NEW_OVERLEAF_HEAD="$(git rev-parse HEAD)"
-
           git fetch origin main
           git switch -C sync-state origin/main
           printf '%s\n' "$NEW_OVERLEAF_HEAD" > "$STATE_FILE"
