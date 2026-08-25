@@ -4,11 +4,6 @@ on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - '.github/run-fresh-outline-pull'
 
 permissions:
   contents: write
@@ -91,7 +86,7 @@ jobs:
             BASE_SHA="$(tr -d '[:space:]' < "$STATE_FILE")"
 
             if [[ -z "$BASE_SHA" ]]; then
-              echo "::error::The Overleaf sync checkpoint is empty."
+              echo "::error::The previous Overleaf checkpoint is empty."
               exit 1
             fi
 
