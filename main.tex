@@ -718,8 +718,27 @@ G_i\!\left(
 where \(G_i\) denotes the integral over \(z\) and the remaining radiation variables, including \(h_i\), and
 \(z_{\max}\) is set jointly by the higher technical cut and the kinematic range. Uniform nested infrared
 locality requires the underlying map mismatch to remain uniformly small over any finite allowed range of
-\(z\); under the power-like assumption above, \(G_i\) remains parametrically finite and the suppression is
-supplied by the common lower scale \((\rn/Q)^{q_i}\), not by requiring \(z\) itself to be small.
+\(z\). Here ``finite'' should be understood in the power-counting sense: \(G_i\) need not approach a constant
+when \(\rn/Q\to0\). At any fixed perturbative order it can contain powers of the large logarithm
+\(L_N=\ln(Q/\rn)\), inherited from the singular lower-resolution spectrum, as well as logarithms generated
+by the integration over the finite or strongly ordered \(z\) region. These logarithms can become numerically
+large and can spoil the usefulness of a fixed-order expansion if they are not resummed, but they do not by
+themselves change the power classification of the \(\rn\) singularity. Provided \(G_i\) contains no additional
+inverse powers of \(\rn/Q\), for every finite logarithmic power \(m\) and every \(q_i>0\),
+\[
+\left(\frac{\rn}{Q}\right)^{q_i}
+\ln^m\!\frac{Q}{\rn}
+\longrightarrow0
+\qquad (\rn/Q\to0).
+\]
+Thus the logarithms can enhance and modify the logarithmic structure of the correction, but they cannot
+compensate the positive-power suppression implied by uniform nested locality. Parametrically a term in
+Eq.~\eqref{eq:uniform-nested-locality-spectrum} behaves as
+\(\rn^{q_i-1}L_N^m\): for \(0<q_i<1\) it can still diverge as \(\rn\to0\), but only through an integrable
+singularity weaker than the leading \(1/\rn\) spectrum; for \(q_i=1\) at most a logarithmic singularity remains;
+and for \(q_i>1\) the spectrum-level correction vanishes up to logarithms. An inverse-power growth hidden
+inside \(G_i\) would instead signal that the assumed nested-local power counting is incomplete, for example
+because an additional singular region has not been isolated.
 
 
 \subsubsection{Kinematic restriction for minimized \(N\)-jettiness}
