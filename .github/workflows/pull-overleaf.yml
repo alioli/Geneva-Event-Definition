@@ -36,10 +36,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           if [[ -z "${OVERLEAF_TOKEN:-}" ]]; then
             echo "::error::Repository secret OVERLEAF_TOKEN is not configured."
             exit 1
           fi
+
           ASKPASS="$RUNNER_TEMP/overleaf-askpass.sh"
           cat > "$ASKPASS" <<'EOF'
           #!/bin/sh
@@ -50,6 +52,7 @@ jobs:
           esac
           EOF
           chmod 700 "$ASKPASS"
+
           echo "GIT_ASKPASS=$ASKPASS" >> "$GITHUB_ENV"
           echo "GIT_TERMINAL_PROMPT=0" >> "$GITHUB_ENV"
 
@@ -57,14 +60,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           git remote add overleaf "$OVERLEAF_REMOTE"
-          OVERLEAF_BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
+
+          OVERLEAF_BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } \
+            | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
+
           if [[ -z "$OVERLEAF_BRANCH" ]]; then
             echo "::error::Could not determine the default branch of the Overleaf repository."
             exit 1
           fi
+
           git fetch --prune overleaf "$OVERLEAF_BRANCH"
           OVERLEAF_HEAD="$(git rev-parse "overleaf/$OVERLEAF_BRANCH")"
+
           echo "Using Overleaf branch: $OVERLEAF_BRANCH"
           echo "Current Overleaf commit: $OVERLEAF_HEAD"
           echo "OVERLEAF_BRANCH=$OVERLEAF_BRANCH" >> "$GITHUB_ENV"
@@ -74,29 +83,39 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
           : > "$PATCH"
+
           if [[ -f "$STATE_FILE" ]]; then
             BASE_SHA="$(tr -d '[:space:]' < "$STATE_FILE")"
+
             if [[ -z "$BASE_SHA" ]]; then
               echo "::error::The Overleaf sync checkpoint is empty."
               exit 1
             fi
+
             if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
               echo "::error::The previous Overleaf checkpoint $BASE_SHA is not available in the fetched history."
               exit 1
             fi
+
             if ! git merge-base --is-ancestor "$BASE_SHA" "$OVERLEAF_HEAD"; then
               echo "::error::Overleaf history no longer descends from the stored checkpoint. Refusing to overwrite GitHub."
               exit 1
             fi
+
             if [[ "$BASE_SHA" != "$OVERLEAF_HEAD" ]]; then
               git diff --binary "$BASE_SHA" "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
             fi
           else
+            # First run only: the outbound sync has already made Overleaf the
+            # authoritative project tree. Reconcile any remaining difference
+            # between the two trees and then establish a checkpoint.
             echo "No previous Overleaf checkpoint found; bootstrapping from the current trees."
             git diff --binary HEAD "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
           fi
+
           if [[ ! -s "$PATCH" ]]; then
             echo "No project-file changes to import from Overleaf."
           fi
@@ -105,91 +124,35 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
+
           if [[ -s "$PATCH" ]]; then
+            # Three-way application is important here. It lets Git recognize
+            # changes that are already present on GitHub (for example because
+            # they originally travelled GitHub -> Overleaf) while still
+            # importing independent Overleaf edits. Real conflicts stop the
+            # sync instead of overwriting either side.
             if ! git apply --3way --index "$PATCH"; then
               echo "::error::Overleaf changes conflict with current GitHub main. Nothing was pushed to GitHub."
               git status --short
               exit 1
             fi
           fi
+
           mkdir -p "$(dirname "$STATE_FILE")"
           printf '%s\n' "$OVERLEAF_HEAD" > "$STATE_FILE"
           git add "$STATE_FILE"
+
           if git diff --cached --quiet; then
             echo "GitHub is already synchronized with Overleaf."
-          else
-            git config user.name "GitHub Actions"
-            git config user.email "actions@github.com"
-            git commit -m "Sync changes from Overleaf"
-            git push origin HEAD:main
-          fi
-
-      - name: Apply concise Z+1-jet note correction
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch origin main
-          git switch main
-          git reset --hard origin/main
-          python3 - <<'PY'
-          from pathlib import Path
-          import base64
-          dec = lambda s: base64.b64decode(s).decode()
-          p = Path('main.tex')
-          text = p.read_text()
-          if 'eq:z1j-generation-cut' in text and 'eq:z1j-leading-jet-boundary' in text:
-              print('Z+1-jet correction already present.')
-              raise SystemExit(0)
-          old_jet = dec('SmV0IG9ic2VydmFibGVzIGludHJvZHVjZSBhIHNlY29uZCBlZmZlY3QgdGhhdCBpcyBsb2dpY2FsbHkgZGlzdGluY3QgZnJvbSB0aGUgbG9jYWxpdHkgb2YgdGhlIHByb2plY3Rpb24gbWFwLgpUaGUgJFxtYXRoY2FsIFRfMSQgcmVzb2x1dGlvbiB2YXJpYWJsZSBpcyBkZWZpbmVkIHRocm91Z2ggaXRzIG93biBleGNsdXNpdmUgY2x1c3RlcmluZyBvciBtaW5pbWl6YXRpb24KcHJvY2VkdXJlLCB3aGVyZWFzIHBoZW5vbWVub2xvZ2ljYWwgb2JzZXJ2YWJsZXMgYXJlIGNvbW1vbmx5IGNvbnN0cnVjdGVkIGZyb20gaW5jbHVzaXZlIGFudGktJGtfVCQgamV0cy4KQ29uc2VxdWVudGx5LCBleGFjdCBwcmVzZXJ2YXRpb24gb2YgJFxtYXRoY2FsIFRfMSQgZG9lcyBub3QgaW1wbHkgcHJlc2VydmF0aW9uIG9mIHRoZSBhbnRpLSRrX1QkIGxlYWRpbmctamV0Cm1vbWVudHVtIG9yIHJhcGlkaXR5LiBNb3Jlb3ZlciwgdGhlIGFudGktJGtfVCQgbWVhc3VyZW1lbnQgY29udGFpbnMgbm9uLXNtb290aCBjb2RpbWVuc2lvbi1vbmUgc3VyZmFjZXMsCmluY2x1ZGluZyB0aGUgYW5hbHlzaXMgdGhyZXNob2xkClxiZWdpbntlcXVhdGlvbn0KcF97VCxqXzF9PXBfVF57XG1pbn0sClxsYWJlbHtlcTp6MWotamV0LXRocmVzaG9sZC1zdXJmYWNlfQpcZW5ke2VxdWF0aW9ufQpjbHVzdGVyaW5nIGJvdW5kYXJpZXMgYW5kIGNoYW5nZXMgaW4gdGhlIGlkZW50aXR5IG9mIHRoZSBsZWFkaW5nIGpldC4gSVJDIHNhZmV0eSBlbnN1cmVzIGEgd2VsbC1kZWZpbmVkCnVucmVzb2x2ZWQgbGltaXQsIGJ1dCBpdCBkb2VzIG5vdCBtYWtlIHRoZSBkaWZmZXJlbnRpYWwgcmVzcG9uc2UgdG8gYSBzbWFsbCBwcm9qZWN0aW9uIGRpc3BsYWNlbWVudCB1bmlmb3JtCmFjcm9zcyBzdWNoIHN1cmZhY2VzLiBGb3IgdGhlIHRocmVzaG9sZCBtZWFzdXJlbWVudCBvbmUgaGFzIGRpc3RyaWJ1dGlvbmFsbHkKXGJlZ2lue2VxdWF0aW9ufQpcVGhldGFcIVxsZWZ0KFx3aWRlaGF0IHBfe1Qsal8xfS1wX1Ree1xtaW59XHJpZ2h0KQotClxUaGV0YVwhXGxlZnQocF97VCxqXzF9LXBfVF57XG1pbn1ccmlnaHQpClxzaW1lcQotXERlbHRhIHBfe1Qsal8xfVwsClxkZWx0YVwhXGxlZnQocF97VCxqXzF9LXBfVF57XG1pbn1ccmlnaHQpLApcbGFiZWx7ZXE6ejFqLXB0LXRocmVzaG9sZC1taWdyYXRpb259ClxlbmR7ZXF1YXRpb259CndpdGggdGhlIHNpZ24gY29udmVudGlvbgokXERlbHRhIHBfe1Qsal8xfT1wX3tULGpfMX0oXFBoXzMpLXBfe1Qsal8xfShcd2lkZWhhdFxQaF8yKSQuCkEgc3RlZXBseSBmYWxsaW5nIGpldCBzcGVjdHJ1bSBjYW4gdGhlcmVmb3JlIGFtcGxpZnkgYSBwYXJhbWV0cmljYWxseSBzbWFsbCBraW5lbWF0aWMgbWlncmF0aW9uIGludG8gYQpsYXJnZSByZWxhdGl2ZSBjaGFuZ2Ugb2YgYSBmaWR1Y2lhbCBjcm9zcyBzZWN0aW9uLgo=')
-          new_jet = dec('SmV0IG9ic2VydmFibGVzIGludHJvZHVjZSBhIHNlY29uZCBlZmZlY3QgdGhhdCBpcyBsb2dpY2FsbHkgZGlzdGluY3QgZnJvbSB0aGUgbG9jYWxpdHkgb2YgdGhlIHByb2plY3Rpb24gbWFwLgpUaGUgJFxtYXRoY2FsIFRfMSQgcmVzb2x1dGlvbiB2YXJpYWJsZSBpcyBkZWZpbmVkIHRocm91Z2ggaXRzIG93biBleGNsdXNpdmUgY2x1c3RlcmluZyBvciBtaW5pbWl6YXRpb24sCndoZXJlYXMgdGhlIGFuYWx5c2lzIGNvbW1vbmx5IHVzZXMgaW5jbHVzaXZlIGFudGktJGtfVCQgamV0cy4gVGhlIGFudGktJGtfVCQgbWVhc3VyZW1lbnQgaXMgb25seSBwaWVjZXdpc2UKc21vb3RoIGluIHBoYXNlIHNwYWNlOiB0aGUgY2x1c3RlcmluZyBoaXN0b3J5IGNoYW5nZXMgYWNyb3NzIGJvdW5kYXJpZXMgd2hlcmUgdHdvIGNhbmRpZGF0ZSBkaXN0YW5jZXMgYmVjb21lCmVxdWFsLCBmb3IgZXhhbXBsZSAkZF97aWp9PWRfe2tCfSQsIHdoaWxlIHRoZSBpZGVudGl0eSBvZiB0aGUgbGVhZGluZyBqZXQgY2hhbmdlcyBhY3Jvc3MKXGJlZ2lue2VxdWF0aW9ufQpwX3tULGpfYX09cF97VCxqX2J9LgpcbGFiZWx7ZXE6ejFqLWxlYWRpbmctamV0LWJvdW5kYXJ5fQpcZW5ke2VxdWF0aW9ufQpUaGVzZSBhcmUgY29kaW1lbnNpb24tb25lIGJvdW5kYXJpZXMsIHNpbmNlIG9uZSBlcXVhbGl0eSBzZXBhcmF0ZXMgbmVpZ2hib3JpbmcgcGhhc2Utc3BhY2UgcmVnaW9ucyB3aXRoCmRpZmZlcmVudCBjbHVzdGVyaW5nIG9yIGpldCBvcmRlcmluZy4gSVJDIHNhZmV0eSBndWFyYW50ZWVzIHRoZSBjb3JyZWN0IHNvZnQgYW5kIGNvbGxpbmVhciBsaW1pdCwgYnV0IG5vdAp1bmlmb3JtIGRpZmZlcmVudGlhYmlsaXR5IG9mIHRoZSBtZWFzdXJlbWVudCBhY3Jvc3Mgc3VjaCBib3VuZGFyaWVzLgoKQSBwYXJ0aWN1bGFybHkgcmVsZXZhbnQgYm91bmRhcnkgaXMgdGhlIGFuYWx5c2lzIHJlcXVpcmVtZW50ICRwX3tULGpfMX0+cF9UXntcbWlufSQuIEZvciB0aGUgcHJvamVjdGlvbi1pbmR1Y2VkCnNoaWZ0ICRcRGVsdGEgcF97VCxqXzF9PXBfe1Qsal8xfShcUGhfMyktcF97VCxqXzF9KFx3aWRlaGF0XFBoXzIpJCBvbmUgaGFzIGRpc3RyaWJ1dGlvbmFsbHkKXGJlZ2lue2VxdWF0aW9ufQpcVGhldGFcIVxsZWZ0KFx3aWRlaGF0IHBfe1Qsal8xfS1wX1Ree1xtaW59XHJpZ2h0KQotClxUaGV0YVwhXGxlZnQocF97VCxqXzF9LXBfVF57XG1pbn1ccmlnaHQpClxzaW1lcQotXERlbHRhIHBfe1Qsal8xfVwsClxkZWx0YVwhXGxlZnQocF97VCxqXzF9LXBfVF57XG1pbn1ccmlnaHQpLgpcbGFiZWx7ZXE6ejFqLXB0LXRocmVzaG9sZC1taWdyYXRpb259ClxlbmR7ZXF1YXRpb259ClRodXMgYSBwYXJhbWV0cmljYWxseSBzbWFsbCBkaXNwbGFjZW1lbnQgY2FuIGdlbmVyYXRlIGEgc2l6ZWFibGUgcmVsYXRpdmUgY29ycmVjdGlvbiB3aGVuIHRoZSBqZXQgc3BlY3RydW0KaXMgc3RlZXAgb3IgdGhlIGV2ZW50IGxpZXMgY2xvc2UgdG8gYSBjbHVzdGVyaW5nLCBvcmRlcmluZyBvciBhY2NlcHRhbmNlIGJvdW5kYXJ5LiBUaGlzIGVuaGFuY2VtZW50IGRvZXMgbm90CmJ5IGl0c2VsZiBzaWduYWwgYSBmYWlsdXJlIG9mIG5lc3RlZCBsb2NhbGl0eTogZm9yIGEgc21vb3RoIHVuZGVybHlpbmcgZGlzdHJpYnV0aW9uIHRoZSBwaGFzZS1zcGFjZSBsYXllcgp0aGF0IGNoYW5nZXMgY2xhc3NpZmljYXRpb24gc3RpbGwgc2hyaW5rcyB3aXRoIHRoZSBzaXplIG9mIHRoZSBkaXNwbGFjZW1lbnQuCg==')
-          anchor = dec('QXQgbGFyZ2VyICRtX1ReWiQgdGhlIHJhdGlvIGluIEVxLn5cZXFyZWZ7ZXE6ejFqLWN1dC1yYXRpb30gZGVjcmVhc2VzIGFuZCB0aGUgaGlnaGVyIGN1dCBlbmZvcmNlcyBhIHByb2dyZXNzaXZlbHkKc3Ryb25nZXIgcmVzdHJpY3Rpb24gb24gJHokIGFscmVhZHkgbmVhciB0aGUgbG93ZXIgYm91bmRhcnkuCg==')
-          generation = dec('QXQgbGFyZ2VyICRtX1ReWiQgdGhlIHJhdGlvIGluIEVxLn5cZXFyZWZ7ZXE6ejFqLWN1dC1yYXRpb30gZGVjcmVhc2VzIGFuZCB0aGUgaGlnaGVyIGN1dCBlbmZvcmNlcyBhIHByb2dyZXNzaXZlbHkKc3Ryb25nZXIgcmVzdHJpY3Rpb24gb24gJHokIGFscmVhZHkgbmVhciB0aGUgbG93ZXIgYm91bmRhcnkuCgpUaGUgZXZlbnQgc2FtcGxlIGlzIGRlZmluZWQgd2l0aCB0aGUgZ2VuZXJhdGlvbiBjdXQKXGJlZ2lue2VxdWF0aW9ufQpxX1Q+cV9UXntccm0gZ2VufT0xMF57LTN9XCB7XHJtIEdlVn0uClxsYWJlbHtlcTp6MWotZ2VuZXJhdGlvbi1jdXR9ClxlbmR7ZXF1YXRpb259CkJvdGggdGhlIEZLUyBhbmQgdGhlICRcbWF0aGNhbCBUXzFee1xybSBGUn0kIG1hcHBpbmdzIGNvbnNpZGVyZWQgaGVyZSBwcmVzZXJ2ZSAkcV9UJCwgYW5kIHRoZXJlZm9yZSBwcmVzZXJ2ZQp0aGlzIHByb2Nlc3MtZGVmaW5pbmcgYm91bmRhcnkgZXhhY3RseS4gVGhlIG9ic2VydmVkIExIRSBkaWZmZXJlbmNlcyBjYW5ub3QgY29uc2VxdWVudGx5IGJlIGF0dHJpYnV0ZWQgdG8gYQptaWdyYXRpb24gYWNyb3NzIHRoZSBnZW5lcmF0aW9uIGN1dDsgdGhlIG5vbi1wcmVzZXJ2YXRpb24gb2YgJFxtYXRoY2FsIFRfMCQgYnkgdGhlICRcbWF0aGNhbCBUXzFee1xybSBGUn0kIG1hcAppcyByZWxldmFudCBpbnN0ZWFkIGFzIGEgZGlhZ25vc3RpYyBvZiBtb3Rpb24gYWxvbmcgdGhlIGxpbWl0aW5nIG9uZS1qZXQgQm9ybiBtYW5pZm9sZC4K')
-          old_obs = dec('VGhpcyBvYnNlcnZhdGlvbiBpcyB1c2VmdWwgd2hlbiBpbnRlcnByZXRpbmcgdGhlIG51bWVyaWNhbGx5IGxhcmdlIExIRSBwcm9qZWN0aW9uIGVmZmVjdHMgZm91bmQgaW4gb2JzZXJ2YWJsZXMKaW52b2x2aW5nIHRoZSBoYXJkZXN0IGFudGktJGtfVCQgamV0LCBpbmNsdWRpbmcgYW5hbHlzZXMgd2l0aCAkcF97VCxqfV57XG1pbn09MTAkLCAkNTAkIGFuZCAkMTAwJCBHZVYuCkRpZmZlcmVuY2VzIGF0IHRoZSBsZXZlbCBvZiB0ZW5zIG9mIHBlcmNlbnQgY2Fubm90IGJlIGF0dHJpYnV0ZWQgc29sZWx5IHRvIGEgcGFyYW1ldHJpY2FsbHkgaHVnZSByYXRpbyBvZiB0aGUKdGVjaG5pY2FsIGN1dHMuIFRoZXkgbWF5IGluc3RlYWQgYXJpc2UgZnJvbSBvbmUgb3IgYSBjb21iaW5hdGlvbiBvZiB0aHJlZSBlZmZlY3RzOiBhIGdlbnVpbmUgZmFpbHVyZSBvZgp1bmlmb3JtIG5lc3RlZCBsb2NhbGl0eSBpbiB0YW5nZW50aWFsIG9uZS1qZXQgQm9ybiBjb29yZGluYXRlczsgYSBuZXN0ZWQtbG9jYWwgYnV0IHNsb3dseSBjb252ZXJnZW50IHJlY29pbAptYXA7IG9yIGFtcGxpZmljYXRpb24gb2YgYSBzbWFsbCBraW5lbWF0aWMgZGlzcGxhY2VtZW50IGJ5IHRoZSBzdGVlcCBqZXQgc3BlY3RydW0gYW5kIHRoZSBub24tc21vb3RoCmFudGktJGtfVCQgbWVhc3VyZW1lbnQgYm91bmRhcmllcy4KClRoZSBtb3N0IGRpcmVjdCBkaWFnbm9zdGljIGlzIHRvIGFwcGx5IHRoZSBjb21wZXRpbmcgJFxQaF8zXHRvXFBoXzIkIHByb2plY3Rpb25zLCBmb3IgZXhhbXBsZSBhbiBGS1MgbWFwCmFuZCB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwLCB0byB0aGUgc2FtZSBleGFjdCAkXFBoXzMkIHBvaW50cyBhbmQgc3R1ZHksIGluIGJpbnMgb2YK')
-          new_obs = dec('VGhlIGRpcmVjdCBjb21wYXJpc29uIG9mIG1hcHBpbmdzIGlzIHBhcnRpY3VsYXJseSBpbmZvcm1hdGl2ZS4gRm9yCiRcbWF0aGNhbCBUXzJee1xjdXR9PTEwXnstM31cIHtccm0gR2VWfSQgdGhlIExIRSBkaWZmZXJlbmNlcyBvYnRhaW5lZCB3aXRoIHRoZSBGS1MgbWFwcGluZyBhcmUgbXVjaCBzbWFsbGVyIHRoYW4KdGhvc2Ugb2J0YWluZWQgd2l0aCB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwcGluZyBmb3Igb2JzZXJ2YWJsZXMgaW52b2x2aW5nIHRoZSBoYXJkZXN0IGFudGktJGtfVCQgamV0LAppbmNsdWRpbmcgYW5hbHlzZXMgd2l0aCAkcF97VCxqfV57XG1pbn09MTAkLCAkNTAkIGFuZCAkMTAwJCBHZVYuIEZvciBib3RoIG1hcHBpbmdzIHRoZSBkaWZmZXJlbmNlcyBncm93IHdoZW4KJFxtYXRoY2FsIFRfMl57XGN1dH0kIGlzIGluY3JlYXNlZCwgYmVjb21pbmcgbXVjaCBsYXJnZXIgZm9yICRcbWF0aGNhbCBUXzJee1xjdXR9PTFcIHtccm0gR2VWfSQsIGJ1dCB0aGUKJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgcmVzaWR1YWwgcmVtYWlucyBzdWJzdGFudGlhbGx5IGxhcmdlciBldmVuIGF0IHRoZSBzbWFsbGVzdCBjdXQuIFNpbmNlIHRoZSB0d28gbWFwcGluZ3MKYXJlIGV4cG9zZWQgdG8gdGhlIHNhbWUgYW50aS0ka19UJCBjbHVzdGVyaW5nIGFuZCB0aHJlc2hvbGQgYm91bmRhcmllcyBhbmQgcHJlc2VydmUgdGhlIHNhbWUgZ2VuZXJhdGlvbiBjdXQsCnRoaXMgc2hvd3MgdGhhdCB0aGUgbGFyZ2UgcmVzaWR1YWwgaXMgbWFwIGRlcGVuZGVudC4gVGhlIGpldCBtZWFzdXJlbWVudCBjYW4gYW1wbGlmeSB0aGUgbWlncmF0aW9uLCBidXQgY2Fubm90CmJ5IGl0c2VsZiBiZSBpdHMgcHJpbWFyeSBvcmlnaW4uCgpUaGlzIHBhdHRlcm4gZG9lcyBub3QgeWV0IGVzdGFibGlzaCBhIGZvcm1hbCBmYWlsdXJlIG9mIHVuaWZvcm0gbmVzdGVkIGluZnJhcmVkIGxvY2FsaXR5LiBUaGUKJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwIGNvdWxkIGluc3RlYWQgYmUgbmVzdGVkLWxvY2FsIHdpdGggYSBsYXJnZXIgY29lZmZpY2llbnQgb3IgYSBzbG93ZXIgYXBwcm9hY2ggdG8gdGhlCnNpbXVsdGFuZW91cyB1bnJlc29sdmVkIGxpbWl0IHRoYW4gRktTLiBUaGUgZGVjaXNpdmUgbmV4dCB0ZXN0IGlzIHRoZXJlZm9yZSBsb2NhbDogYXBwbHkgYm90aCBwcm9qZWN0aW9ucyB0bwp0aGUgc2FtZSBleGFjdCAkXFBoXzMkIGNvbmZpZ3VyYXRpb25zIGFuZCBzdHVkeSwgaW4gYmlucyBvZgo=')
-          for old, new, label in [(old_jet, new_jet, 'anti-kT paragraph'), (anchor, generation, 'generation-cut insertion'), (old_obs, new_obs, 'FKS comparison paragraph')]:
-              if old not in text:
-                  raise SystemExit(f'Expected {label} not found; refusing to edit.')
-              text = text.replace(old, new, 1)
-          p.write_text(text)
-          PY
-          if git diff --quiet -- main.tex; then
-            echo "No Z+1-jet text changes to commit."
-            echo "Z1JET_PATCH_COMMIT=" >> "$GITHUB_ENV"
             exit 0
           fi
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add main.tex
-          git commit -m "Clarify jet-boundary response in Z+1-jet example"
-          Z1JET_PATCH_COMMIT="$(git rev-parse HEAD)"
-          echo "Z1JET_PATCH_COMMIT=$Z1JET_PATCH_COMMIT" >> "$GITHUB_ENV"
-          git push origin HEAD:main
 
-      - name: Sync Z+1-jet correction directly to Overleaf
-        if: ${{ env.Z1JET_PATCH_COMMIT != '' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          PATCH_COMMIT="$Z1JET_PATCH_COMMIT"
-          BASE_COMMIT="$(git rev-parse "${PATCH_COMMIT}^")"
-          git diff --binary "$BASE_COMMIT" "$PATCH_COMMIT" -- main.tex > "$RUNNER_TEMP/z1jet-note.patch"
-          git fetch --prune overleaf "$OVERLEAF_BRANCH"
-          git switch --detach "overleaf/$OVERLEAF_BRANCH"
-          if ! git apply --3way --index "$RUNNER_TEMP/z1jet-note.patch"; then
-            echo "::error::The Z+1-jet correction conflicts with newer Overleaf edits. Nothing was pushed to Overleaf."
-            git status --short
-            exit 1
-          fi
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git commit -m "Sync Z+1-jet note correction"
-          git push overleaf "HEAD:$OVERLEAF_BRANCH"
-          NEW_OVERLEAF_HEAD="$(git rev-parse HEAD)"
-          git switch main
-          git fetch origin main
-          git reset --hard origin/main
-          printf '%s\n' "$NEW_OVERLEAF_HEAD" > "$STATE_FILE"
-          git add "$STATE_FILE"
           git commit -m "Sync changes from Overleaf"
+
+          # No force push: if GitHub main moved after checkout, this fails and
+          # the next scheduled run retries from the new GitHub state.
           git push origin HEAD:main
