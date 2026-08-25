@@ -1,0 +1,31 @@
+name: Reorganize note structure
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/run-rewrite-note-structure'
+
+permissions:
+  contents: write
+
+jobs:
+  rewrite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reorganize note
+        run: python3 .github/rewrite_note_structure.py
+      - name: Validate and commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          git config user.name 'GitHub Actions'
+          git config user.email 'actions@github.com'
+          git add main.tex
+          git commit -m 'Separate LHE and fixed-order slicing issues'
+          git push origin HEAD:main
