@@ -125,16 +125,32 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Keep Z+1-jet generation-cut discussion qT-only
+      - name: Push qT-only wording patch to Overleaf
         shell: bash
         run: |
           set -euo pipefail
-          git fetch origin main
+          PATCH_COMMIT="ad0849020c09f74ff3779627f8efdc7763d1bb82"
+          git diff --binary "${PATCH_COMMIT}^" "$PATCH_COMMIT" -- main.tex > "$RUNNER_TEMP/qt-only.patch"
+          git fetch --prune overleaf "$OVERLEAF_BRANCH"
+          git switch --detach "overleaf/$OVERLEAF_BRANCH"
+          if git apply --reverse --check "$RUNNER_TEMP/qt-only.patch" >/dev/null 2>&1; then
+            echo "Overleaf already contains the qT-only wording patch."
+          else
+            git apply --3way --index "$RUNNER_TEMP/qt-only.patch"
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git commit -m "Sync qT-only generation-cut wording"
+            git push overleaf "HEAD:$OVERLEAF_BRANCH"
+          fi
+          NEW_OVERLEAF_HEAD="$(git rev-parse HEAD)"
           git switch main
+          git fetch origin main
           git reset --hard origin/main
-          python3 -c "from pathlib import Path; import base64; p=Path('main.tex'); t=p.read_text(); old=base64.b64decode('Qm90aCB0aGUgRktTIGFuZCB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwcGluZ3MgY29uc2lkZXJlZCBoZXJlIHByZXNlcnZlICRxX1QkLCBhbmQgdGhlcmVmb3JlIHByZXNlcnZlCnRoaXMgcHJvY2Vzcy1kZWZpbmluZyBib3VuZGFyeSBleGFjdGx5LiBUaGUgb2JzZXJ2ZWQgTEhFIGRpZmZlcmVuY2VzIGNhbm5vdCBjb25zZXF1ZW50bHkgYmUgYXR0cmlidXRlZCB0byBhCm1pZ3JhdGlvbiBhY3Jvc3MgdGhlIGdlbmVyYXRpb24gY3V0OyB0aGUgbm9uLXByZXNlcnZhdGlvbiBvZiAkXG1hdGhjYWwgVF8wJCBieSB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwCmlzIHJlbGV2YW50IGluc3RlYWQgYXMgYSBkaWFnbm9zdGljIG9mIG1vdGlvbiBhbG9uZyB0aGUgbGltaXRpbmcgb25lLWpldCBCb3JuIG1hbmlmb2xkLgo=').decode(); new=base64.b64decode('Qm90aCB0aGUgRktTIGFuZCB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwcGluZ3MgY29uc2lkZXJlZCBoZXJlIHByZXNlcnZlICRxX1QkLCBhbmQgdGhlcmVmb3JlIHByZXNlcnZlCnRoaXMgcHJvY2Vzcy1kZWZpbmluZyBib3VuZGFyeSBleGFjdGx5LiBUaGUgb2JzZXJ2ZWQgTEhFIGRpZmZlcmVuY2VzIGNhbm5vdCBjb25zZXF1ZW50bHkgYmUgYXR0cmlidXRlZCB0bwptaWdyYXRpb24gYWNyb3NzIHRoZSBnZW5lcmF0aW9uIGN1dC4K').decode(); assert old in t, 'Expected generation-cut paragraph not found'; p.write_text(t.replace(old,new,1))"
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add main.tex
-          git commit -m "Keep Z+1-jet generation-cut discussion qT-only"
-          git push origin HEAD:main
+          printf '%s\n' "$NEW_OVERLEAF_HEAD" > "$STATE_FILE"
+          git add "$STATE_FILE"
+          if ! git diff --cached --quiet; then
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git commit -m "Sync changes from Overleaf"
+            git push origin HEAD:main
+          fi
