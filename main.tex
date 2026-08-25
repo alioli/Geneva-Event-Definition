@@ -348,6 +348,15 @@ function}, not merely inclusiveness with respect to QCD radiation. Likewise, if 
 preserved, integrating over \(X_i\) does not eliminate migration in the \(\rn\) distribution.
 
 \section{How a higher cut can contaminate a lower singular spectrum}
+\label{sec:higher-singular-spectrum}
+
+Throughout this section the lower resolution variable $\rn$ is kept differential.  The object of interest is
+therefore the projection-induced modification of the singular spectrum
+$d\sigma/(d\rn\,dX_i)$ at fixed $\rn$.  No integration over $\rn$ is used here to infer the size of a final
+NNLO distribution differential only in $X_i$.  That separate step, and the resulting dependence on the
+technical cuts after the $\rn$ integration, are discussed only in
+Sec.~\ref{sec:nnlo-differential-predictions}.
+
 
 The purpose of this section is to understand a potentially important feature of the LHE projection discussed
 above. Although the difference between the exact \((N+2)\)-parton kinematics and the projected
@@ -547,112 +556,17 @@ The hard scale \(Q\) therefore remains important through the logarithmic structu
 \(\rn\) spectrum, while the additional power suppression induced by the projection is controlled by the ratio
 of the two neighboring resolution scales, \(\rnp^{\cut}/\rn\).
 
-To see explicitly how the neighboring-cut ratio arises after integrating over the lower resolution variable,
-consider first only the power-counting part of Eq.~\eqref{eq:rnp-contamination-rn}, keeping the distribution
-differential in \(X_i\). For \(p>0\),
-\begin{align}
-\int_{\rn^{\cut}}^Q
-\frac{d\rn}{\rn}
-\left(\frac{\rnp^{\cut}}{\rn}\right)^p
-&=
-(\rnp^{\cut})^p
-\int_{\rn^{\cut}}^Q
-\frac{d\rn}{\rn^{p+1}}
-\nonumber\\
-&=
-\frac{1}{p}
-\left[
-\left(\frac{\rnp^{\cut}}{\rn^{\cut}}\right)^p
--
-\left(\frac{\rnp^{\cut}}{Q}\right)^p
-\right].
-\label{eq:integrated-power-counting}
-\end{align}
-Thus, when \(Q\gg\rn^{\cut}\gg\rnp^{\cut}\), the integral is parametrically dominated by its lower endpoint.
-Restoring the migration derivative and the logarithmic structure, the correction integrated only over
-\(\rn\) has the schematic scaling
-\begin{equation}
-\Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{dX_i}
-\equiv
-\int_{\rn^{\cut}}^Q d\rn\,
-\Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{d\rn\,dX_i}
-\sim
-\frac{1}{p}
-\left(
-\frac{\rnp^{\cut}}{\rn^{\cut}}
-\right)^p
-\sum_{m,k}
-\partial_{X_i}
-\left[
-X_{i,\rm char}\,
-\widetilde C_{mk}(\mathbf X)
-\ln^m\!\frac{\rn^{\cut}}{Q}
-\ln^k\!\frac{\rnp^{\cut}}{\rn^{\cut}}
-\right].
-\label{eq:integrated-ratio-scaling}
-\end{equation}
-The coefficient functions \(\widetilde C_{mk}(\mathbf X)\) are not new independent ingredients. They denote
-linear combinations of the coefficients \(C_{m'k'}(\mathbf X)\) appearing before the \(\rn\) integration in
-Eqs.~\eqref{eq:rnp-contamination-rn}--\eqref{eq:p1-scaling}. The integration reshuffles the powers of
-\(\ln(\rn/Q)\) and \(\ln(\rnp^{\cut}/\rn)\), so the coefficients multiplying the logarithms evaluated at
-\(\rn=\rn^{\cut}\) are in general different linear combinations of the original \(C_{m'k'}\).
-
-The second term in Eq.~\eqref{eq:integrated-power-counting}, proportional to
-\((\rnp^{\cut}/Q)^p\), is parametrically smaller in this hierarchy. Equation~\eqref{eq:integrated-ratio-scaling}
-therefore states that the \emph{integration over \(\rn\)} converts the local suppression
-\((\rnp^{\cut}/\rn)^p\) into a dependence controlled by the ratio of the two technical cuts,
-\((\rnp^{\cut}/\rn^{\cut})^p\). It does not imply a nonzero fully inclusive correction. If \(X_i\) is
-subsequently integrated over its complete range, the migration derivative becomes a boundary term and
-cancels, provided no fiducial boundary or other non-preserved measurement prevents that cancellation.
 
 \subsection{Comparable or inverted cuts and uniform nested infrared locality}
 \label{subsec:uniform-nested-locality}
 
-The result in Eq.~\eqref{eq:integrated-ratio-scaling} must not be extrapolated to a situation in which the
-two technical cuts are comparable. For a generic pair of resolution variables we do not assume any universal
-kinematic upper bound on the ratio \(\rnp/\rn\). If, for example,
-\begin{equation}
-\rnp^{\cut}>\rn^{\cut},
-\label{eq:inverted-cuts}
-\end{equation}
-it is useful to make the purely algebraic decomposition
-\begin{equation}
-\int_{\rn^{\cut}}^Q d\rn
-=
-\int_{\rn^{\cut}}^{\rnp^{\cut}}d\rn
-+
-\int_{\rnp^{\cut}}^Qd\rn.
-\label{eq:split-rn-inverted-cuts}
-\end{equation}
-In the second region the higher technical cut itself enforces
-\(\rnp/\rn<\rnp^{\cut}/\rn<1\), and sufficiently far above
-\(\rnp^{\cut}\) one recovers the strongly ordered situation of
-Sec.~\ref{subsec:strongly-ordered-higher-projection}. In the first region, by contrast, the condition
-\(\rnp<\rnp^{\cut}\) alone does not force \(\rnp/\rn\) to be small. The same issue can occur for comparable
-cuts \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\), even if the higher cut is somewhat smaller, because the region
-near the lower endpoint need not be parametrically strongly ordered.
-
-Equation~\eqref{eq:split-rn-inverted-cuts} should not be interpreted as a universal separation between a
-non-strongly-ordered and a strongly ordered domain. It only illustrates what follows from the technical cuts
-alone. Particular choices of resolution variables can impose additional kinematic restrictions on the
-allowed values of \(\rnp\) at fixed \(\rn\). In that case the actual projected region is
-\begin{equation}
-0\le \rnp <
-\min\!\left\{
-\rnp^{\cut},\,\rnp^{\rm kin,max}(\rn,\mathbf X,\ldots)
-\right\},
-\label{eq:generic-kinematic-cap}
-\end{equation}
-and the point at which the technical cut becomes active is determined by the equality of the two entries in
-Eq.~\eqref{eq:generic-kinematic-cap}, not necessarily by \(\rn=\rnp^{\cut}\).
-
-It follows in particular that inserting \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\) into
-Eq.~\eqref{eq:integrated-ratio-scaling} is not a prediction of an \(\mathcal O(1)\) projection effect. It is
-only a signal that the expansion in the neighboring-scale ratio has been pushed outside its domain of
-validity. The behavior of the projection map in the simultaneous unresolved limit has to be examined
-separately, together with any kinematic restrictions specific to the chosen resolution variables.
+The strong-ordering estimate of Sec.~\ref{subsec:strongly-ordered-higher-projection} is a statement at
+fixed $\rn$ and cannot be extrapolated to configurations with a finite neighboring ratio
+$z=\rnp/\rn$.  At fixed $\rn$, if $\rn\gg\rnp^{\cut}$ the higher technical cut enforces
+$z\ll1$, whereas for $\rn$ comparable to or smaller than $\rnp^{\cut}$ it need not do so.  Particular
+resolution variables can impose additional kinematic restrictions on the finite allowed range of $z$.
+The singular spectrum in this region must therefore be analyzed directly in the simultaneous unresolved
+limit, independently of the later integration over $\rn$.
 
 \subsubsection{Uniform nested infrared locality of the map}
 
@@ -801,42 +715,6 @@ locality requires the underlying map mismatch to remain uniformly small over any
 \(z\); under the power-like assumption above, \(G_i\) remains parametrically finite and the suppression is
 supplied by the common lower scale \((\rn/Q)^{q_i}\), not by requiring \(z\) itself to be small.
 
-For a generic pair of resolution variables, and in the absence of an additional kinematic cap that becomes
-active before \(\rn\sim\rnp^{\cut}\), the contribution from the interval displayed in
-Eq.~\eqref{eq:split-rn-inverted-cuts} has the illustrative power counting
-\begin{align}
-\int_{\rn^{\cut}}^{\rnp^{\cut}}
-\frac{d\rn}{\rn}
-\left(\frac{\rn}{Q}\right)^{q_i}
-&=
-\frac{1}{q_i}
-\left[
-\left(\frac{\rnp^{\cut}}{Q}\right)^{q_i}
--
-\left(\frac{\rn^{\cut}}{Q}\right)^{q_i}
-\right].
-\label{eq:uniform-nested-integrated-region}
-\end{align}
-If the cuts are lowered together at a fixed ratio
-\begin{equation}
-\rnp^{\cut}=\kappa\,\rn^{\cut},
-\qquad \kappa=\mathcal O(1),
-\label{eq:fixed-kappa-cuts}
-\end{equation}
-this gives
-\begin{equation}
-\Delta_{\rm proj}^{\rm sim}
-\sim
-\left(\frac{\rn^{\cut}}{Q}\right)^{q_i}
-\frac{\kappa^{q_i}-1}{q_i}
-\times\text{logs and finite coefficients},
-\label{eq:fixed-kappa-uniform-nested-scaling}
-\end{equation}
-for this interval when \(\kappa>1\). The formula is not universal: if the chosen resolution variables impose
-a stronger kinematic restriction, the integration range and therefore the finite coefficient multiplying the
-common-scale suppression must be modified accordingly. The robust conclusion is only that, for a uniformly
-nested-local map, a finite cut ratio does not by itself imply an order-one projection error when both absolute
-cuts are taken to zero together.
 
 \subsubsection{Why fixed-order NNLO slicing does not require uniform nested locality}
 \label{subsec:fixed-order-does-not-require-uniform-nested-locality}
@@ -1046,42 +924,6 @@ The higher technical cut is kinematically inactive whenever
 \end{equation}
 and becomes the limiting upper bound only above this value.
 
-If \(\mathcal T_0^{\cut}<\mathcal T_1^{\cut}/c_M\), the interval in which the kinematic bound rather than
-the technical \(\mathcal T_1\) cut sets the full allowed \(z\) range is
-\begin{equation}
-\mathcal T_0^{\cut}
-<\mathcal T_0
-<\frac{\mathcal T_1^{\cut}}{c_M}.
-\label{eq:t1-t0-saturated-interval}
-\end{equation}
-For a power-like nested-local mismatch, the common-scale part of its integral over this interval behaves as
-\begin{align}
-\int_{\mathcal T_0^{\cut}}^{\mathcal T_1^{\cut}/c_M}
-\frac{d\mathcal T_0}{\mathcal T_0}
-\left(\frac{\mathcal T_0}{Q}\right)^{q_i}
-&=
-\frac{1}{q_i}
-\left[
-\left(\frac{\mathcal T_1^{\cut}}{c_M Q}\right)^{q_i}
--
-\left(\frac{\mathcal T_0^{\cut}}{Q}\right)^{q_i}
-\right],
-\label{eq:t1-t0-uniform-integrated-region}
-\end{align}
-up to logarithms and finite coefficients from the integration over \(z\) in its allowed range. At fixed
-\begin{equation}
-\mathcal T_1^{\cut}
-=\kappa\,\mathcal T_0^{\cut},
-\label{eq:t1-t0-fixed-kappa}
-\end{equation}
-this saturated interval exists for \(\kappa>c_M\), and the common-scale factor becomes
-\begin{equation}
-\left(\frac{\mathcal T_0^{\cut}}{Q}\right)^{q_i}
-\frac{(\kappa/c_M)^{q_i}-1}{q_i},
-\label{eq:t1-t0-fixed-kappa-scaling}
-\end{equation}
-up to logarithms and finite coefficients. Hence a large ratio of the technical cuts cannot make the physical
-ratio \(\mathcal T_1/\mathcal T_0\) arbitrarily large at fixed multiplicity; it simply saturates at \(c_M\).
 
 For Drell--Yan double-real kinematics, the relevant configuration is \(\Ph_2\), and therefore
 \begin{equation}
@@ -1104,22 +946,22 @@ calculation, Eq.~\eqref{eq:t1-t0-multiplicity-bound} instead gives
 \label{subsec:observable-response-projection}
 
 The size of the migration in phase space is only one part of the problem. The response of the observable can
-introduce a second, logically distinct nonuniformity. Let
+introduce a second, logically distinct nonuniformity. At fixed $\rn$, let
 \begin{equation}
-S_i(X_i)=\frac{d\sigma}{dX_i}
+S_i(\rn,X_i)=\frac{d\sigma}{d\rn\,dX_i}
 \label{eq:observable-spectrum-S}
 \end{equation}
-denote the relevant smooth spectrum in a region where a first-order migration expansion is meaningful, and
-define its local variation scale by
+denote the relevant smooth singular spectrum in a region where a first-order migration expansion is meaningful,
+and define its local variation scale in $X_i$ by
 \begin{equation}
-L_i(X_i)
+L_i(\rn,X_i)
 =
 \left|
-\partial_{X_i}\ln S_i(X_i)
+\partial_{X_i}\ln S_i(\rn,X_i)
 \right|^{-1}
 =
 \left|
-\frac{S_i(X_i)}{S_i'(X_i)}
+\frac{S_i(\rn,X_i)}{\partial_{X_i}S_i(\rn,X_i)}
 \right|.
 \label{eq:local-variation-scale}
 \end{equation}
@@ -1139,6 +981,7 @@ comparable to the distance from the nonanalytic point, the derivative expansion 
 and the effect is better viewed as migration across the feature rather than as a small derivative correction.
 
 \subsubsection{Drell--Yan illustration}
+\label{subsubsec:dy-illustration}
 
 Drell--Yan production provides a useful illustration. Taking
 \begin{equation}
@@ -1150,10 +993,7 @@ Q\sim M_{\ell\ell},
 \label{eq:dy-resolution-identification}
 \end{equation}
 the vector-boson rapidity is preserved by the projection in both the FKS and $\mathcal T_0^{\mathrm FR}$-preserving mappings and therefore has no migration of the type discussed
-here. On the other end, the transverse momenta of the decay leptons are IRC safe but are not preserved by either mapping. Nevertheless,
-in GENEVA one finds that making \(\mathcal T_0^{\cut}\) very small while keeping
-\(\mathcal T_1^{\cut}\) not hierarchically smaller does not by itself produce the large effects suggested by
-a naive use of Eq.~\eqref{eq:integrated-ratio-scaling}. There are two conceptually separate reasons. First,
+here. On the other end, the transverse momenta of the decay leptons are IRC safe but are not preserved by either mapping. For the local singular spectrum at fixed \(\mathcal T_0\), two features are important. First,
 Eq.~\eqref{eq:dy-t1-t0-bound} guarantees that the physical ratio \(\mathcal T_1/\mathcal T_0\) never exceeds
 \(1/2\) on the \(\Ph_2\) configurations relevant to the higher projection, independently of the ratio of the
 two technical cuts. Second, since both maps have uniform nested infrared locality, the exact and projected states
@@ -1161,13 +1001,6 @@ approach the same Born configuration as \(\mathcal T_0\to0\) for all finite allo
 \(0\le\mathcal T_1/\mathcal T_0\le1/2\). IRC safety then implies that the absolute displacement of the lepton
 transverse momentum vanishes in this common unresolved limit.
 
-If \(\mathcal T_1^{\cut}\) is held fixed while \(\mathcal T_0^{\cut}\) is made much smaller, the higher cut
-becomes kinematically inactive near the lower endpoint and the fully allowed interval
-\(0\le\mathcal T_1/\mathcal T_0\le1/2\) is sampled there. Lowering \(\mathcal T_0^{\cut}\) further therefore
-does not generate a growing cut-ratio enhancement. The transition to a cut-limited region occurs only around
-\(\mathcal T_0\sim2\mathcal T_1^{\cut}\); correspondingly, for a power-like nested-local mismatch the
-residual integrated scale associated with the saturated region is parametrically set by
-\((2\mathcal T_1^{\cut}/Q)^{q_i}\), up to logarithms and finite coefficients.
 
 The important exception is the region
 \begin{equation}
@@ -1350,80 +1183,8 @@ signal a stronger problem than the mere non-preservation of $\mathcal T_0$. By c
 $\Delta y_{j_1}$ or in $\Delta\mathcal T_0/Q$ at fixed finite $z$ would directly diagnose a failure to
 approach the same point on the one-jet Born manifold.
 
-The numerical hierarchy of the technical cuts must also be treated using their actual definitions. In the
-setup considered here the lower cut is dynamical,
-\begin{equation}
-\mathcal T_1^{\cut}
-=10^{-5}\,m_T^Z,
-\qquad
-m_T^Z=\sqrt{M_Z^2+q_T^2},
-\label{eq:z1j-dynamic-t1cut}
-\end{equation}
-whereas the higher cut is taken to be fixed,
-\begin{equation}
-\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}.
-\label{eq:z1j-fixed-t2cut}
-\end{equation}
-The neighboring-cut ratio is therefore event dependent,
-\begin{equation}
-\rho(\Ph)
-\equiv
-\frac{\mathcal T_2^{\cut}}{\mathcal T_1^{\cut}}
-=
-\frac{100\ {\rm GeV}}{m_T^Z},
-\label{eq:z1j-cut-ratio}
-\end{equation}
-and is generically of order unity for electroweak transverse masses. In particular, the numerical values
-$10^{-5}$ and $10^{-3}$ should not be interpreted as two directly comparable dimensionless cuts differing
-by two orders of magnitude.
 
-Combining Eq.~\eqref{eq:z1j-t2-t1-bound} with the fixed $\mathcal T_2$ cut shows that the higher technical cut
-is kinematically inactive whenever
-\begin{equation}
-\mathcal T_1
-<
-\frac32\,\mathcal T_2^{\cut}
-=
-1.5\times10^{-3}\ {\rm GeV},
-\label{eq:z1j-t2cut-inactive}
-\end{equation}
-so that the full finite-$z$ interval $0\le z\le2/3$ is projected there. The corresponding saturated interval
-above the lower technical boundary exists only if
-\begin{equation}
-10^{-5}m_T^Z
-<1.5\times10^{-3}\ {\rm GeV},
-\qquad\Longleftrightarrow\qquad
-m_T^Z<150\ {\rm GeV}.
-\label{eq:z1j-saturated-condition}
-\end{equation}
-For $m_T^Z\sim100$ GeV, for example, the interval extends only from roughly
-$10^{-3}$ GeV to $1.5\times10^{-3}$ GeV. Hence the current setup does not expose a logarithmically large
-finite-$z$ region spanning the two decades that a naive comparison of $10^{-5}$ and $10^{-3}$ would suggest.
-At larger $m_T^Z$ the ratio in Eq.~\eqref{eq:z1j-cut-ratio} decreases and the higher cut enforces a progressively
-stronger restriction on $z$ already near the lower boundary.
-
-The event sample is defined with the generation cut
-\begin{equation}
-q_T>q_T^{\rm gen}=10^{-3}\ {\rm GeV}.
-\label{eq:z1j-generation-cut}
-\end{equation}
-Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
-this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to
-migration across the generation cut.
-
-The direct comparison of mappings is particularly informative. For
-$\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}$ the LHE differences obtained with the FKS mapping are much smaller than
-those obtained with the $\mathcal T_1^{\rm FR}$ mapping for observables involving the hardest anti-$k_T$ jet,
-including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV. For both mappings the differences grow when
-$\mathcal T_2^{\cut}$ is increased, becoming much larger for $\mathcal T_2^{\cut}=1\ {\rm GeV}$, but the
-$\mathcal T_1^{\rm FR}$ residual remains substantially larger even at the smallest cut. Since the two mappings
-are exposed to the same anti-$k_T$ clustering and threshold boundaries and preserve the same generation cut,
-this shows that the large residual is map dependent. The jet measurement can amplify the migration, but cannot
-by itself be its primary origin.
-
-This pattern does not yet establish a formal failure of uniform nested infrared locality. The
-$\mathcal T_1^{\rm FR}$ map could instead be nested-local with a larger coefficient or a slower approach to the
-simultaneous unresolved limit than FKS. The decisive next test is therefore local: apply both projections to
+The decisive test of the nested-locality properties of the two mappings is local: apply both projections to
 the same exact $\Ph_3$ configurations and study, in bins of
 \begin{equation}
 z=\frac{\mathcal T_2}{\mathcal T_1},
@@ -1449,36 +1210,14 @@ separately monitor the signed classification migration
 \end{equation}
 for the relevant values of $p_T^{\min}$.
 
-A complementary cut study can distinguish formal from merely numerical problems. Keeping the dynamical
-$\mathcal T_1^{\cut}=10^{-5}m_T^Z$ fixed, one may lower the higher cut through, for example,
-\begin{equation}
-\mathcal T_2^{\cut}
-=
-10^{-3},\ 5\times10^{-4},\ 2\times10^{-4},\ 10^{-4}\ {\rm GeV}.
-\label{eq:z1j-t2cut-scan}
-\end{equation}
-If the LHE discrepancy decreases with a positive power of $\mathcal T_2^{\cut}$, the projection remains
-formally convergent even if its coefficient is numerically large. An even cleaner nested test is to lower the
-two cuts together at fixed ratio,
-\begin{equation}
-\mathcal T_2^{\cut}
-=\kappa\,\mathcal T_1^{\cut}
-=\kappa\,10^{-5}m_T^Z,
-\label{eq:z1j-correlated-cut-scan}
-\end{equation}
-with fixed $\kappa$. A residual that survives this joint scaling would point to a failure of the LHE event
-representation in the simultaneous unresolved limit, whereas a vanishing residual with a large finite-cut
-coefficient would indicate slow but formally acceptable convergence.
 
 The $Z+1$-jet example therefore illustrates why exact preservation of the chosen resolution variable is only
 one part of a robust event projection. The map must also approach the correct point of the lower Born manifold
 in all tangential coordinates relevant to the measurement, while the observable itself must be examined for
 nonuniform response near jet-clustering and fiducial boundaries.
 
-
-{\bfseries NOTE REVIEWED ONLY UP TO THIS POINT, THE MATERIAL BELOW STILL NEEDS TO BE REVIEWED }
-
 \section{Differential locality of the lower map}
+\label{sec:lower-map-locality}
 
 We now turn to the lower projection
 \begin{equation}
@@ -1531,6 +1270,7 @@ The first term is the LP contribution.
 The second is a migration term and, after integration over the unresolved emission, generates derivatives of the singular lower-multiplicity spectrum.
 
 \section{Toy model for migration in \texorpdfstring{\(r_{N-1}\)}{rN-1}}
+\label{sec:lower-map-toy}
 
 Take \(x=\rnm\) and assume the singular unresolved \(N+1\)-body contribution below \(\rn^{\cut}\) behaves as
 \begin{equation}
@@ -1662,6 +1402,7 @@ c\left(\frac{\rn}{X_{\rm char}}\right)^{1/2},
 is IR local but converges more slowly than a linear power correction.
 
 \section{Optional Born-level fiducial or generation boundaries}
+\label{sec:born-boundaries}
 
 If \(\ThetaB=1\), there is no additional lower-boundary migration issue.
 If instead the process is defined in a restricted Born-like region,
@@ -1748,7 +1489,8 @@ in the relevant singular region.
 If the underlying Born process is itself singular as \(\rnm\to0\), the coefficient of the boundary correction may be enhanced because the cut can lie near a region where the Born spectrum is large.
 If the Born process is finite, the same migration mechanism exists whenever the fiducial boundary is imposed, but without this additional singular enhancement.
 
-\section{Nested consistency of the higher map}
+\section{Consistency conditions for the nested event definition}
+\label{sec:nested-event-consistency}
 
 For
 \begin{equation}
@@ -1784,7 +1526,340 @@ that are already active in the event definition}
 \end{equation}
 In addition, it should preserve at LP the Born-like coordinates in which the corresponding lower-multiplicity singular prediction is kept differential. For comparable neighboring resolution scales, the uniform nested infrared locality condition of Sec.~\ref{subsec:uniform-nested-locality} ensures that the map continues to approach the same lower-multiplicity kinematics in the simultaneous unresolved limit.
 
-\section{Lower \texorpdfstring{\(N+1\to N\)}{N+1 to N} projection, NNLO power corrections, and P2B}
+
+The conditions on the lower map $\Pi_N$ are complementary rather than redundant.  As discussed in
+Secs.~\ref{sec:lower-map-locality}--\ref{sec:born-boundaries}, $\Pi_N$ must be local in any lower variable in
+which the singular prediction is kept differential, and it must preserve the classification of any active
+Born-level generation or fiducial boundary.  The complete event definition therefore contains two distinct
+locality layers: the nested behavior of $\Pi_{N+1}$ in the $N+2\to N+1\to N$ limit and the differential and
+boundary locality of $\Pi_N$ in the $N+1\to N\to N-1$ limit.  Only after these local properties have been
+specified is it useful to integrate over $\rn$ and discuss their net effect on an NNLO prediction.
+
+\section{From local projection effects to NNLO differential predictions}
+\label{sec:nnlo-differential-predictions}
+
+Sections~\ref{sec:higher-singular-spectrum}--\ref{sec:nested-event-consistency} characterized the local
+singular structure and the locality requirements of the nested maps.  We now perform the logically separate
+step of integrating over the lower resolution variable.  Schematically, the contribution of the higher
+projection to a distribution differential only in $X_i$ is obtained from
+\begin{equation}
+\left.\Delta_{\rm proj}^{(\rnp)}\frac{d\sigma}{dX_i}\right|_{\rn>\rn^{\cut}}
+=
+\int_{\rn^{\cut}}^{\rn^{\rm max}} d\rn\,
+\Delta_{\rm proj}^{(\rnp)}\frac{d\sigma}{d\rn\,dX_i}.
+\label{eq:integrated-higher-projection-definition}
+\end{equation}
+This integration can convert a local neighboring-scale suppression into a dependence on the technical cuts,
+but it must not be confused with the singularity analysis of the fixed-$\rn$ spectrum carried out above.
+
+\subsection{Higher $\Ph_{N+2}\to\widehat\Ph_{N+1}$ LHE projection}
+\label{subsec:higher-projection-nnlo}
+
+\subsubsection{Strongly ordered hierarchy}
+
+To see explicitly how the neighboring-cut ratio arises after integrating over the lower resolution variable,
+consider first only the power-counting part of Eq.~\eqref{eq:rnp-contamination-rn}, keeping the distribution
+differential in \(X_i\). For \(p>0\),
+\begin{align}
+\int_{\rn^{\cut}}^Q
+\frac{d\rn}{\rn}
+\left(\frac{\rnp^{\cut}}{\rn}\right)^p
+&=
+(\rnp^{\cut})^p
+\int_{\rn^{\cut}}^Q
+\frac{d\rn}{\rn^{p+1}}
+\nonumber\\
+&=
+\frac{1}{p}
+\left[
+\left(\frac{\rnp^{\cut}}{\rn^{\cut}}\right)^p
+-
+\left(\frac{\rnp^{\cut}}{Q}\right)^p
+\right].
+\label{eq:integrated-power-counting}
+\end{align}
+Thus, when \(Q\gg\rn^{\cut}\gg\rnp^{\cut}\), the integral is parametrically dominated by its lower endpoint.
+Restoring the migration derivative and the logarithmic structure, the correction integrated only over
+\(\rn\) has the schematic scaling
+\begin{equation}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{dX_i}
+\equiv
+\int_{\rn^{\cut}}^Q d\rn\,
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX_i}
+\sim
+\frac{1}{p}
+\left(
+\frac{\rnp^{\cut}}{\rn^{\cut}}
+\right)^p
+\sum_{m,k}
+\partial_{X_i}
+\left[
+X_{i,\rm char}\,
+\widetilde C_{mk}(\mathbf X)
+\ln^m\!\frac{\rn^{\cut}}{Q}
+\ln^k\!\frac{\rnp^{\cut}}{\rn^{\cut}}
+\right].
+\label{eq:integrated-ratio-scaling}
+\end{equation}
+The coefficient functions \(\widetilde C_{mk}(\mathbf X)\) are not new independent ingredients. They denote
+linear combinations of the coefficients \(C_{m'k'}(\mathbf X)\) appearing before the \(\rn\) integration in
+Eqs.~\eqref{eq:rnp-contamination-rn}--\eqref{eq:p1-scaling}. The integration reshuffles the powers of
+\(\ln(\rn/Q)\) and \(\ln(\rnp^{\cut}/\rn)\), so the coefficients multiplying the logarithms evaluated at
+\(\rn=\rn^{\cut}\) are in general different linear combinations of the original \(C_{m'k'}\).
+
+The second term in Eq.~\eqref{eq:integrated-power-counting}, proportional to
+\((\rnp^{\cut}/Q)^p\), is parametrically smaller in this hierarchy. Equation~\eqref{eq:integrated-ratio-scaling}
+therefore states that the \emph{integration over \(\rn\)} converts the local suppression
+\((\rnp^{\cut}/\rn)^p\) into a dependence controlled by the ratio of the two technical cuts,
+\((\rnp^{\cut}/\rn^{\cut})^p\). It does not imply a nonzero fully inclusive correction. If \(X_i\) is
+subsequently integrated over its complete range, the migration derivative becomes a boundary term and
+cancels, provided no fiducial boundary or other non-preserved measurement prevents that cancellation.
+
+\subsubsection{Comparable cuts and uniform nested scaling}
+
+The result in Eq.~\eqref{eq:integrated-ratio-scaling} must not be extrapolated to a situation in which the
+two technical cuts are comparable. For a generic pair of resolution variables we do not assume any universal
+kinematic upper bound on the ratio \(\rnp/\rn\). If, for example,
+\begin{equation}
+\rnp^{\cut}>\rn^{\cut},
+\label{eq:inverted-cuts}
+\end{equation}
+it is useful to make the purely algebraic decomposition
+\begin{equation}
+\int_{\rn^{\cut}}^Q d\rn
+=
+\int_{\rn^{\cut}}^{\rnp^{\cut}}d\rn
++
+\int_{\rnp^{\cut}}^Qd\rn.
+\label{eq:split-rn-inverted-cuts}
+\end{equation}
+In the second region the higher technical cut itself enforces
+\(\rnp/\rn<\rnp^{\cut}/\rn<1\), and sufficiently far above
+\(\rnp^{\cut}\) one recovers the strongly ordered situation of
+Sec.~\ref{subsec:strongly-ordered-higher-projection}. In the first region, by contrast, the condition
+\(\rnp<\rnp^{\cut}\) alone does not force \(\rnp/\rn\) to be small. The same issue can occur for comparable
+cuts \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\), even if the higher cut is somewhat smaller, because the region
+near the lower endpoint need not be parametrically strongly ordered.
+
+Equation~\eqref{eq:split-rn-inverted-cuts} should not be interpreted as a universal separation between a
+non-strongly-ordered and a strongly ordered domain. It only illustrates what follows from the technical cuts
+alone. Particular choices of resolution variables can impose additional kinematic restrictions on the
+allowed values of \(\rnp\) at fixed \(\rn\). In that case the actual projected region is
+\begin{equation}
+0\le \rnp <
+\min\!\left\{
+\rnp^{\cut},\,\rnp^{\rm kin,max}(\rn,\mathbf X,\ldots)
+\right\},
+\label{eq:generic-kinematic-cap}
+\end{equation}
+and the point at which the technical cut becomes active is determined by the equality of the two entries in
+Eq.~\eqref{eq:generic-kinematic-cap}, not necessarily by \(\rn=\rnp^{\cut}\).
+
+It follows in particular that inserting \(\rnp^{\cut}/\rn^{\cut}=\mathcal O(1)\) into
+Eq.~\eqref{eq:integrated-ratio-scaling} is not a prediction of an \(\mathcal O(1)\) projection effect. It is
+only a signal that the expansion in the neighboring-scale ratio has been pushed outside its domain of
+validity. The behavior of the projection map in the simultaneous unresolved limit has to be examined
+separately, together with any kinematic restrictions specific to the chosen resolution variables.
+
+For a generic pair of resolution variables, and in the absence of an additional kinematic cap that becomes
+active before \(\rn\sim\rnp^{\cut}\), the contribution from the interval displayed in
+Eq.~\eqref{eq:split-rn-inverted-cuts} has the illustrative power counting
+\begin{align}
+\int_{\rn^{\cut}}^{\rnp^{\cut}}
+\frac{d\rn}{\rn}
+\left(\frac{\rn}{Q}\right)^{q_i}
+&=
+\frac{1}{q_i}
+\left[
+\left(\frac{\rnp^{\cut}}{Q}\right)^{q_i}
+-
+\left(\frac{\rn^{\cut}}{Q}\right)^{q_i}
+\right].
+\label{eq:uniform-nested-integrated-region}
+\end{align}
+If the cuts are lowered together at a fixed ratio
+\begin{equation}
+\rnp^{\cut}=\kappa\,\rn^{\cut},
+\qquad \kappa=\mathcal O(1),
+\label{eq:fixed-kappa-cuts}
+\end{equation}
+this gives
+\begin{equation}
+\Delta_{\rm proj}^{\rm sim}
+\sim
+\left(\frac{\rn^{\cut}}{Q}\right)^{q_i}
+\frac{\kappa^{q_i}-1}{q_i}
+\times\text{logs and finite coefficients},
+\label{eq:fixed-kappa-uniform-nested-scaling}
+\end{equation}
+for this interval when \(\kappa>1\). The formula is not universal: if the chosen resolution variables impose
+a stronger kinematic restriction, the integration range and therefore the finite coefficient multiplying the
+common-scale suppression must be modified accordingly. The robust conclusion is only that, for a uniformly
+nested-local map, a finite cut ratio does not by itself imply an order-one projection error when both absolute
+cuts are taken to zero together.
+
+\subsubsection{Axis-minimized $N$-jettiness}
+
+Using the kinematic bounds derived in Sec.~\ref{subsec:uniform-nested-locality}, the corresponding integrated
+region is obtained only after the fixed-$\mathcal T_0$ spectrum has been understood.  In particular,
+
+If \(\mathcal T_0^{\cut}<\mathcal T_1^{\cut}/c_M\), the interval in which the kinematic bound rather than
+the technical \(\mathcal T_1\) cut sets the full allowed \(z\) range is
+\begin{equation}
+\mathcal T_0^{\cut}
+<\mathcal T_0
+<\frac{\mathcal T_1^{\cut}}{c_M}.
+\label{eq:t1-t0-saturated-interval}
+\end{equation}
+For a power-like nested-local mismatch, the common-scale part of its integral over this interval behaves as
+\begin{align}
+\int_{\mathcal T_0^{\cut}}^{\mathcal T_1^{\cut}/c_M}
+\frac{d\mathcal T_0}{\mathcal T_0}
+\left(\frac{\mathcal T_0}{Q}\right)^{q_i}
+&=
+\frac{1}{q_i}
+\left[
+\left(\frac{\mathcal T_1^{\cut}}{c_M Q}\right)^{q_i}
+-
+\left(\frac{\mathcal T_0^{\cut}}{Q}\right)^{q_i}
+\right],
+\label{eq:t1-t0-uniform-integrated-region}
+\end{align}
+up to logarithms and finite coefficients from the integration over \(z\) in its allowed range. At fixed
+\begin{equation}
+\mathcal T_1^{\cut}
+=\kappa\,\mathcal T_0^{\cut},
+\label{eq:t1-t0-fixed-kappa}
+\end{equation}
+this saturated interval exists for \(\kappa>c_M\), and the common-scale factor becomes
+\begin{equation}
+\left(\frac{\mathcal T_0^{\cut}}{Q}\right)^{q_i}
+\frac{(\kappa/c_M)^{q_i}-1}{q_i},
+\label{eq:t1-t0-fixed-kappa-scaling}
+\end{equation}
+up to logarithms and finite coefficients. Hence a large ratio of the technical cuts cannot make the physical
+ratio \(\mathcal T_1/\mathcal T_0\) arbitrarily large at fixed multiplicity; it simply saturates at \(c_M\).
+
+\subsubsection{Drell--Yan consequence}
+
+The local Drell--Yan analysis in Sec.~\ref{subsubsec:dy-illustration} can now be integrated over
+$\mathcal T_0$.  In the saturated region,
+
+If \(\mathcal T_1^{\cut}\) is held fixed while \(\mathcal T_0^{\cut}\) is made much smaller, the higher cut
+becomes kinematically inactive near the lower endpoint and the fully allowed interval
+\(0\le\mathcal T_1/\mathcal T_0\le1/2\) is sampled there. Lowering \(\mathcal T_0^{\cut}\) further therefore
+does not generate a growing cut-ratio enhancement. The transition to a cut-limited region occurs only around
+\(\mathcal T_0\sim2\mathcal T_1^{\cut}\); correspondingly, for a power-like nested-local mismatch the
+residual integrated scale associated with the saturated region is parametrically set by
+\((2\mathcal T_1^{\cut}/Q)^{q_i}\), up to logarithms and finite coefficients.
+
+\subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} consequence}
+
+The local map and jet-response diagnostics were discussed in Sec.~\ref{subsubsec:z1jet-illustration}.  For the
+actual NNLO LHE comparison, the technical cuts and process definition are
+
+The numerical hierarchy of the technical cuts must also be treated using their actual definitions. In the
+setup considered here the lower cut is dynamical,
+\begin{equation}
+\mathcal T_1^{\cut}
+=10^{-5}\,m_T^Z,
+\qquad
+m_T^Z=\sqrt{M_Z^2+q_T^2},
+\label{eq:z1j-dynamic-t1cut}
+\end{equation}
+whereas the higher cut is taken to be fixed,
+\begin{equation}
+\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}.
+\label{eq:z1j-fixed-t2cut}
+\end{equation}
+The neighboring-cut ratio is therefore event dependent,
+\begin{equation}
+\rho(\Ph)
+\equiv
+\frac{\mathcal T_2^{\cut}}{\mathcal T_1^{\cut}}
+=
+\frac{100\ {\rm GeV}}{m_T^Z},
+\label{eq:z1j-cut-ratio}
+\end{equation}
+and is generically of order unity for electroweak transverse masses. In particular, the numerical values
+$10^{-5}$ and $10^{-3}$ should not be interpreted as two directly comparable dimensionless cuts differing
+by two orders of magnitude.
+
+Combining Eq.~\eqref{eq:z1j-t2-t1-bound} with the fixed $\mathcal T_2$ cut shows that the higher technical cut
+is kinematically inactive whenever
+\begin{equation}
+\mathcal T_1
+<
+\frac32\,\mathcal T_2^{\cut}
+=
+1.5\times10^{-3}\ {\rm GeV},
+\label{eq:z1j-t2cut-inactive}
+\end{equation}
+so that the full finite-$z$ interval $0\le z\le2/3$ is projected there. The corresponding saturated interval
+above the lower technical boundary exists only if
+\begin{equation}
+10^{-5}m_T^Z
+<1.5\times10^{-3}\ {\rm GeV},
+\qquad\Longleftrightarrow\qquad
+m_T^Z<150\ {\rm GeV}.
+\label{eq:z1j-saturated-condition}
+\end{equation}
+For $m_T^Z\sim100$ GeV, for example, the interval extends only from roughly
+$10^{-3}$ GeV to $1.5\times10^{-3}$ GeV. Hence the current setup does not expose a logarithmically large
+finite-$z$ region spanning the two decades that a naive comparison of $10^{-5}$ and $10^{-3}$ would suggest.
+At larger $m_T^Z$ the ratio in Eq.~\eqref{eq:z1j-cut-ratio} decreases and the higher cut enforces a progressively
+stronger restriction on $z$ already near the lower boundary.
+
+The event sample is defined with the generation cut
+\begin{equation}
+q_T>q_T^{\rm gen}=10^{-3}\ {\rm GeV}.
+\label{eq:z1j-generation-cut}
+\end{equation}
+Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
+this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to
+migration across the generation cut.
+
+The direct comparison of mappings is particularly informative. For
+$\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}$ the LHE differences obtained with the FKS mapping are much smaller than
+those obtained with the $\mathcal T_1^{\rm FR}$ mapping for observables involving the hardest anti-$k_T$ jet,
+including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV. For both mappings the differences grow when
+$\mathcal T_2^{\cut}$ is increased, becoming much larger for $\mathcal T_2^{\cut}=1\ {\rm GeV}$, but the
+$\mathcal T_1^{\rm FR}$ residual remains substantially larger even at the smallest cut. Since the two mappings
+are exposed to the same anti-$k_T$ clustering and threshold boundaries and preserve the same generation cut,
+this shows that the large residual is map dependent. The jet measurement can amplify the migration, but cannot
+by itself be its primary origin.
+
+The observed hierarchy between the two mappings does not by itself establish a formal failure of uniform
+nested infrared locality.  The $\mathcal T_1^{\rm FR}$ map could instead be nested-local with a larger
+coefficient or a slower approach to the simultaneous unresolved limit than FKS.  The event-by-event scaling
+test of Eq.~\eqref{eq:z1j-local-diagnostics}, performed at fixed finite $z$, is the appropriate way to
+distinguish these possibilities.
+
+A complementary cut study can distinguish formal from merely numerical problems. Keeping the dynamical
+$\mathcal T_1^{\cut}=10^{-5}m_T^Z$ fixed, one may lower the higher cut through, for example,
+\begin{equation}
+\mathcal T_2^{\cut}
+=
+10^{-3},\ 5\times10^{-4},\ 2\times10^{-4},\ 10^{-4}\ {\rm GeV}.
+\label{eq:z1j-t2cut-scan}
+\end{equation}
+If the LHE discrepancy decreases with a positive power of $\mathcal T_2^{\cut}$, the projection remains
+formally convergent even if its coefficient is numerically large. An even cleaner nested test is to lower the
+two cuts together at fixed ratio,
+\begin{equation}
+\mathcal T_2^{\cut}
+=\kappa\,\mathcal T_1^{\cut}
+=\kappa\,10^{-5}m_T^Z,
+\label{eq:z1j-correlated-cut-scan}
+\end{equation}
+with fixed $\kappa$. A residual that survives this joint scaling would point to a failure of the LHE event
+representation in the simultaneous unresolved limit, whereas a vanishing residual with a large finite-cut
+coefficient would indicate slow but formally acceptable convergence.
+
+\subsection{Lower \texorpdfstring{$N+1\to N$}{N+1 to N} projection, NNLO power corrections, and P2B}
+
 
 The situation below \(\rn^{\cut}\) is conceptually different from the \(\rnp^{\cut}\) discussion.
 The NNLO correction to multiplicity \(N\) is approximated using the LP factorization theorem in \(\rn\),
@@ -1881,8 +1956,8 @@ A kinematic difference suppressed in \(\rnp/\rn\) may still multiply the singula
 in the LHE event definition.
 
 \item \textbf{Strong-ordering ratios do not control comparable-cut configurations.}
-The scaling in \(\rnp^{\cut}/\rn^{\cut}\) derived in Sec.~\ref{subsec:strongly-ordered-higher-projection}
-requires a genuine hierarchy. For comparable or inverted cuts, substituting an order-one ratio into the
+The local strong-ordering expansion of Sec.~\ref{subsec:strongly-ordered-higher-projection} and its
+integrated consequence in Sec.~\ref{subsec:higher-projection-nnlo} require a genuine hierarchy. For comparable or inverted cuts, substituting an order-one ratio into the
 strongly ordered formula is not a valid estimate of the projection error.
 
 \item \textbf{Generic resolution variables need not obey a neighboring-ratio bound.}
