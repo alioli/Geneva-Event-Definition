@@ -36,12 +36,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           if [[ -z "${OVERLEAF_TOKEN:-}" ]]; then
             echo "::error::Repository secret OVERLEAF_TOKEN is not configured."
             exit 1
           fi
-
           ASKPASS="$RUNNER_TEMP/overleaf-askpass.sh"
           cat > "$ASKPASS" <<'EOF'
           #!/bin/sh
@@ -52,7 +50,6 @@ jobs:
           esac
           EOF
           chmod 700 "$ASKPASS"
-
           echo "GIT_ASKPASS=$ASKPASS" >> "$GITHUB_ENV"
           echo "GIT_TERMINAL_PROMPT=0" >> "$GITHUB_ENV"
 
@@ -60,20 +57,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           git remote add overleaf "$OVERLEAF_REMOTE"
-
-          OVERLEAF_BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } \
-            | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
-
+          OVERLEAF_BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
           if [[ -z "$OVERLEAF_BRANCH" ]]; then
             echo "::error::Could not determine the default branch of the Overleaf repository."
             exit 1
           fi
-
           git fetch --prune overleaf "$OVERLEAF_BRANCH"
           OVERLEAF_HEAD="$(git rev-parse "overleaf/$OVERLEAF_BRANCH")"
-
           echo "Using Overleaf branch: $OVERLEAF_BRANCH"
           echo "Current Overleaf commit: $OVERLEAF_HEAD"
           echo "OVERLEAF_BRANCH=$OVERLEAF_BRANCH" >> "$GITHUB_ENV"
@@ -83,28 +74,22 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
           : > "$PATCH"
-
           if [[ -f "$STATE_FILE" ]]; then
             BASE_SHA="$(tr -d '[:space:]' < "$STATE_FILE")"
-
             if [[ -z "$BASE_SHA" ]]; then
               echo "::error::The Overleaf sync checkpoint is empty."
               exit 1
             fi
-
             if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
               echo "::error::The previous Overleaf checkpoint $BASE_SHA is not available in the fetched history."
               exit 1
             fi
-
             if ! git merge-base --is-ancestor "$BASE_SHA" "$OVERLEAF_HEAD"; then
               echo "::error::Overleaf history no longer descends from the stored checkpoint. Refusing to overwrite GitHub."
               exit 1
             fi
-
             if [[ "$BASE_SHA" != "$OVERLEAF_HEAD" ]]; then
               git diff --binary "$BASE_SHA" "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
             fi
@@ -112,7 +97,6 @@ jobs:
             echo "No previous Overleaf checkpoint found; bootstrapping from the current trees."
             git diff --binary HEAD "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
           fi
-
           if [[ ! -s "$PATCH" ]]; then
             echo "No project-file changes to import from Overleaf."
           fi
@@ -121,9 +105,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
-
           if [[ -s "$PATCH" ]]; then
             if ! git apply --3way --index "$PATCH"; then
               echo "::error::Overleaf changes conflict with current GitHub main. Nothing was pushed to GitHub."
@@ -131,11 +113,9 @@ jobs:
               exit 1
             fi
           fi
-
           mkdir -p "$(dirname "$STATE_FILE")"
           printf '%s\n' "$OVERLEAF_HEAD" > "$STATE_FILE"
           git add "$STATE_FILE"
-
           if git diff --cached --quiet; then
             echo "GitHub is already synchronized with Overleaf."
           else
@@ -145,32 +125,14 @@ jobs:
             git push origin HEAD:main
           fi
 
-      - name: Remove tau0 generation-cut wording from Z+1-jet example
+      - name: Keep Z+1-jet generation-cut discussion qT-only
         shell: bash
         run: |
           set -euo pipefail
           git fetch origin main
           git switch main
           git reset --hard origin/main
-
-          python3 - <<'PY'
-          from pathlib import Path
-          p = Path('main.tex')
-          text = p.read_text()
-          old = r'''Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
-this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to a
-migration across the generation cut; the non-preservation of $\mathcal T_0$ by the $\mathcal T_1^{\rm FR}$ map
-is relevant instead as a diagnostic of motion along the limiting one-jet Born manifold.
-'''
-          new = r'''Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
-this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to
-migration across the generation cut.
-'''
-          if old not in text:
-              raise SystemExit('Expected generation-cut paragraph not found; refusing to edit.')
-          p.write_text(text.replace(old, new, 1))
-          PY
-
+          python3 -c "from pathlib import Path; import base64; p=Path('main.tex'); t=p.read_text(); old=base64.b64decode('Qm90aCB0aGUgRktTIGFuZCB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwcGluZ3MgY29uc2lkZXJlZCBoZXJlIHByZXNlcnZlICRxX1QkLCBhbmQgdGhlcmVmb3JlIHByZXNlcnZlCnRoaXMgcHJvY2Vzcy1kZWZpbmluZyBib3VuZGFyeSBleGFjdGx5LiBUaGUgb2JzZXJ2ZWQgTEhFIGRpZmZlcmVuY2VzIGNhbm5vdCBjb25zZXF1ZW50bHkgYmUgYXR0cmlidXRlZCB0byBhCm1pZ3JhdGlvbiBhY3Jvc3MgdGhlIGdlbmVyYXRpb24gY3V0OyB0aGUgbm9uLXByZXNlcnZhdGlvbiBvZiAkXG1hdGhjYWwgVF8wJCBieSB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwCmlzIHJlbGV2YW50IGluc3RlYWQgYXMgYSBkaWFnbm9zdGljIG9mIG1vdGlvbiBhbG9uZyB0aGUgbGltaXRpbmcgb25lLWpldCBCb3JuIG1hbmlmb2xkLgo=').decode(); new=base64.b64decode('Qm90aCB0aGUgRktTIGFuZCB0aGUgJFxtYXRoY2FsIFRfMV57XHJtIEZSfSQgbWFwcGluZ3MgY29uc2lkZXJlZCBoZXJlIHByZXNlcnZlICRxX1QkLCBhbmQgdGhlcmVmb3JlIHByZXNlcnZlCnRoaXMgcHJvY2Vzcy1kZWZpbmluZyBib3VuZGFyeSBleGFjdGx5LiBUaGUgb2JzZXJ2ZWQgTEhFIGRpZmZlcmVuY2VzIGNhbm5vdCBjb25zZXF1ZW50bHkgYmUgYXR0cmlidXRlZCB0bwptaWdyYXRpb24gYWNyb3NzIHRoZSBnZW5lcmF0aW9uIGN1dC4K').decode(); assert old in t, 'Expected generation-cut paragraph not found'; p.write_text(t.replace(old,new,1))"
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add main.tex
