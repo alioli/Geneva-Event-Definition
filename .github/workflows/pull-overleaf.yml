@@ -156,3 +156,5 @@ jobs:
           # No force push: if GitHub main moved after checkout, this fails and
           # the next scheduled run retries from the new GitHub state.
           git push origin HEAD:main
+
+# refresh-trigger
