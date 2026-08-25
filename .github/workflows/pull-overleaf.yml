@@ -109,9 +109,6 @@ jobs:
               git diff --binary "$BASE_SHA" "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
             fi
           else
-            # First run only: the outbound sync has already made Overleaf the
-            # authoritative project tree. Reconcile any remaining difference
-            # between the two trees and then establish a checkpoint.
             echo "No previous Overleaf checkpoint found; bootstrapping from the current trees."
             git diff --binary HEAD "$OVERLEAF_HEAD" -- . ':(exclude).github/**' > "$PATCH"
           fi
@@ -128,11 +125,6 @@ jobs:
           PATCH="$RUNNER_TEMP/overleaf-to-github.patch"
 
           if [[ -s "$PATCH" ]]; then
-            # Three-way application is important here. It lets Git recognize
-            # changes that are already present on GitHub (for example because
-            # they originally travelled GitHub -> Overleaf) while still
-            # importing independent Overleaf edits. Real conflicts stop the
-            # sync instead of overwriting either side.
             if ! git apply --3way --index "$PATCH"; then
               echo "::error::Overleaf changes conflict with current GitHub main. Nothing was pushed to GitHub."
               git status --short
@@ -146,13 +138,194 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "GitHub is already synchronized with Overleaf."
+          else
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git commit -m "Sync changes from Overleaf"
+            git push origin HEAD:main
+          fi
+
+      - name: Apply concise Z+1-jet note correction
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Work from the just-synchronized GitHub state, including any
+          # Overleaf edits imported by the previous step.
+          git fetch origin main
+          git switch main
+          git reset --hard origin/main
+
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('main.tex')
+          text = p.read_text()
+
+          if 'eq:z1j-generation-cut' in text and 'eq:z1j-leading-jet-boundary' in text:
+              print('Z+1-jet correction already present.')
+              raise SystemExit(0)
+
+          old_jet = r'''Jet observables introduce a second effect that is logically distinct from the locality of the projection map.
+The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization
+procedure, whereas phenomenological observables are commonly constructed from inclusive anti-$k_T$ jets.
+Consequently, exact preservation of $\mathcal T_1$ does not imply preservation of the anti-$k_T$ leading-jet
+momentum or rapidity. Moreover, the anti-$k_T$ measurement contains non-smooth codimension-one surfaces,
+including the analysis threshold
+\begin{equation}
+p_{T,j_1}=p_T^{\min},
+\label{eq:z1j-jet-threshold-surface}
+\end{equation}
+clustering boundaries and changes in the identity of the leading jet. IRC safety ensures a well-defined
+unresolved limit, but it does not make the differential response to a small projection displacement uniform
+across such surfaces. For the threshold measurement one has distributionally
+\begin{equation}
+\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
+-
+\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
+\simeq
+-\Delta p_{T,j_1}\,
+\delta\!\left(p_{T,j_1}-p_T^{\min}\right),
+\label{eq:z1j-pt-threshold-migration}
+\end{equation}
+with the sign convention
+$\Delta p_{T,j_1}=p_{T,j_1}(\Ph_3)-p_{T,j_1}(\widehat\Ph_2)$.
+A steeply falling jet spectrum can therefore amplify a parametrically small kinematic migration into a
+large relative change of a fiducial cross section.
+'''
+
+          new_jet = r'''Jet observables introduce a second effect that is logically distinct from the locality of the projection map.
+The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization,
+whereas the analysis commonly uses inclusive anti-$k_T$ jets. The anti-$k_T$ measurement is only piecewise
+smooth in phase space: the clustering history changes across boundaries where two candidate distances become
+equal, for example $d_{ij}=d_{kB}$, while the identity of the leading jet changes across
+\begin{equation}
+p_{T,j_a}=p_{T,j_b}.
+\label{eq:z1j-leading-jet-boundary}
+\end{equation}
+These are codimension-one boundaries, since one equality separates neighboring phase-space regions with
+different clustering or jet ordering. IRC safety guarantees the correct soft and collinear limit, but not
+uniform differentiability of the measurement across such boundaries.
+
+A particularly relevant boundary is the analysis requirement $p_{T,j_1}>p_T^{\min}$. For the projection-induced
+shift $\Delta p_{T,j_1}=p_{T,j_1}(\Ph_3)-p_{T,j_1}(\widehat\Ph_2)$ one has distributionally
+\begin{equation}
+\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
+-
+\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
+\simeq
+-\Delta p_{T,j_1}\,
+\delta\!\left(p_{T,j_1}-p_T^{\min}\right).
+\label{eq:z1j-pt-threshold-migration}
+\end{equation}
+Thus a parametrically small displacement can generate a sizeable relative correction when the jet spectrum
+is steep or the event lies close to a clustering, ordering or acceptance boundary. This enhancement does not
+by itself signal a failure of nested locality: for a smooth underlying distribution the phase-space layer
+that changes classification still shrinks with the size of the displacement.
+'''
+
+          if old_jet not in text:
+              raise SystemExit('Expected anti-kT paragraph not found; refusing to edit.')
+          text = text.replace(old_jet, new_jet, 1)
+
+          anchor = r'''At larger $m_T^Z$ the ratio in Eq.~\eqref{eq:z1j-cut-ratio} decreases and the higher cut enforces a progressively
+stronger restriction on $z$ already near the lower boundary.
+'''
+
+          generation = anchor + r'''
+The event sample is defined with the generation cut
+\begin{equation}
+q_T>q_T^{\rm gen}=10^{-3}\ {\rm GeV}.
+\label{eq:z1j-generation-cut}
+\end{equation}
+Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
+this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to a
+migration across the generation cut; the non-preservation of $\mathcal T_0$ by the $\mathcal T_1^{\rm FR}$ map
+is relevant instead as a diagnostic of motion along the limiting one-jet Born manifold.
+'''
+
+          if anchor not in text:
+              raise SystemExit('Expected cut-hierarchy anchor not found; refusing to edit.')
+          text = text.replace(anchor, generation, 1)
+
+          old_obs = r'''This observation is useful when interpreting the numerically large LHE projection effects found in observables
+involving the hardest anti-$k_T$ jet, including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV.
+Differences at the level of tens of percent cannot be attributed solely to a parametrically huge ratio of the
+technical cuts. They may instead arise from one or a combination of three effects: a genuine failure of
+uniform nested locality in tangential one-jet Born coordinates; a nested-local but slowly convergent recoil
+map; or amplification of a small kinematic displacement by the steep jet spectrum and the non-smooth
+anti-$k_T$ measurement boundaries.
+
+The most direct diagnostic is to apply the competing $\Ph_3\to\Ph_2$ projections, for example an FKS map
+and the $\mathcal T_1^{\rm FR}$ map, to the same exact $\Ph_3$ points and study, in bins of
+'''
+
+          new_obs = r'''The direct comparison of mappings is particularly informative. For
+$\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}$ the LHE differences obtained with the FKS mapping are much smaller than
+those obtained with the $\mathcal T_1^{\rm FR}$ mapping for observables involving the hardest anti-$k_T$ jet,
+including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV. For both mappings the differences grow when
+$\mathcal T_2^{\cut}$ is increased, becoming much larger for $\mathcal T_2^{\cut}=1\ {\rm GeV}$, but the
+$\mathcal T_1^{\rm FR}$ residual remains substantially larger even at the smallest cut. Since the two mappings
+are exposed to the same anti-$k_T$ clustering and threshold boundaries and preserve the same generation cut,
+this shows that the large residual is map dependent. The jet measurement can amplify the migration, but cannot
+by itself be its primary origin.
+
+This pattern does not yet establish a formal failure of uniform nested infrared locality. The
+$\mathcal T_1^{\rm FR}$ map could instead be nested-local with a larger coefficient or a slower approach to the
+simultaneous unresolved limit than FKS. The decisive next test is therefore local: apply both projections to
+the same exact $\Ph_3$ configurations and study, in bins of
+'''
+
+          if old_obs not in text:
+              raise SystemExit('Expected Z+1-jet interpretation paragraph not found; refusing to edit.')
+          text = text.replace(old_obs, new_obs, 1)
+
+          p.write_text(text)
+          PY
+
+          if git diff --quiet -- main.tex; then
+            echo "No Z+1-jet text changes to commit."
+            echo "Z1JET_PATCH_COMMIT=" >> "$GITHUB_ENV"
             exit 0
           fi
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git commit -m "Sync changes from Overleaf"
+          git add main.tex
+          git commit -m "Clarify jet-boundary response in Z+1-jet example"
+          Z1JET_PATCH_COMMIT="$(git rev-parse HEAD)"
+          echo "Z1JET_PATCH_COMMIT=$Z1JET_PATCH_COMMIT" >> "$GITHUB_ENV"
+          git push origin HEAD:main
 
-          # No force push: if GitHub main moved after checkout, this fails and
-          # the next scheduled run retries from the new GitHub state.
+      - name: Sync Z+1-jet correction directly to Overleaf
+        if: env.Z1JET_PATCH_COMMIT != ''
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PATCH_COMMIT="$Z1JET_PATCH_COMMIT"
+          BASE_COMMIT="$(git rev-parse "${PATCH_COMMIT}^")"
+          git diff --binary "$BASE_COMMIT" "$PATCH_COMMIT" -- main.tex > "$RUNNER_TEMP/z1jet-note.patch"
+
+          git fetch --prune overleaf "$OVERLEAF_BRANCH"
+          git switch --detach "overleaf/$OVERLEAF_BRANCH"
+
+          if ! git apply --3way --index "$RUNNER_TEMP/z1jet-note.patch"; then
+            echo "::error::The Z+1-jet correction conflicts with newer Overleaf edits. Nothing was pushed to Overleaf."
+            git status --short
+            exit 1
+          fi
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git commit -m "Sync Z+1-jet note correction ${PATCH_COMMIT::12}"
+          git push overleaf "HEAD:$OVERLEAF_BRANCH"
+          NEW_OVERLEAF_HEAD="$(git rev-parse HEAD)"
+
+          git switch main
+          git fetch origin main
+          git reset --hard origin/main
+          printf '%s\n' "$NEW_OVERLEAF_HEAD" > "$STATE_FILE"
+          git add "$STATE_FILE"
+          git commit -m "Sync changes from Overleaf"
           git push origin HEAD:main
