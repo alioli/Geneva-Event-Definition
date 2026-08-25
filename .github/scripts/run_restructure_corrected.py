@@ -101,22 +101,20 @@ if idx < 0:
 process_block = '\\subsection{Complete process examples}\n\n' + dy_complete + z_complete
 t = t[:idx] + process_block + t[idx:]
 
-# Explain at the end of Sec. 6 why examples are postponed until the NNLO observable is assembled.
-last = (
-    'when $|\\Delta X_i|\\ll L_i$. In a smooth region \\(L_i\\) is of the order of a hard or characteristic\n'
-    'kinematic scale, so uniform nested infrared locality of the map together with IRC safety of the observable\n'
-    'translates into a small projection effect. Near a kinematic boundary, Jacobian feature or Sudakov shoulder,\n'
-    'however, \\(L_i\\) can become parametrically much smaller than the hard scale. A displacement that is small in\n'
-    'absolute terms can then generate a large local change in the distribution. When \\(|\\Delta X_i|\\) becomes\n'
-    'comparable to the distance from the nonanalytic point, the derivative expansion itself is no longer uniform\n'
-    'and the effect is better viewed as migration across the feature rather than as a small derivative correction.\n')
-if last not in t:
-    raise SystemExit('end of generic observable-response discussion not found')
-t = t.replace(last, last + (
-    '\nThe statements in this subsection concern the spectrum at fixed $\\rn$. Concrete process examples are\n'
-    'postponed to Sec.~\\ref{sec:nnlo-differential-predictions}, where the $\\rn$ integration and the complete NNLO\n'
-    'measurement can be discussed at the same time rather than splitting each example between local and integrated\n'
-    'arguments.\n'), 1)
+# Explain explicitly why the process examples are postponed.  Use the new
+# Section-7 heading as a structural marker rather than matching the precise
+# wording of the preceding observable-response paragraph.
+sec7_marker = '\\section{Lower-map locality and nested consistency before NNLO observables}\n'
+idx7 = t.find(sec7_marker)
+if idx7 < 0:
+    raise SystemExit('new lower-locality section marker not found')
+bridge = (
+    'The preceding discussion deliberately stops at the singular spectrum differential in $\\rn$. '
+    'Concrete process examples are postponed until Sec.~\\ref{sec:nnlo-differential-predictions}, where '
+    'the $\\rn$ integration and the complete NNLO measurement can be considered together. Before performing '
+    'that integration, however, the representation of the complementary $\\rn<\\rn^{\\cut}$ bin must first '
+    'be examined, which requires the lower projection $\\Pi_N$.\n\n')
+t = t[:idx7] + bridge + t[idx7:]
 
 old_intro = (
     'Sections~\\ref{sec:higher-singular-spectrum}--\\ref{sec:nested-event-consistency} characterized the local\n'
