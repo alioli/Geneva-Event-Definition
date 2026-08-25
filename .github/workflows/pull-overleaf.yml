@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/pull-overleaf.yml'
 
 permissions:
   contents: write
@@ -131,13 +136,82 @@ jobs:
           printf '%s\n' "$OVERLEAF_HEAD" > "$STATE_FILE"
           git add "$STATE_FILE"
 
-          if git diff --cached --quiet; then
+          if ! git diff --cached --quiet; then
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git commit -m "Sync changes from Overleaf"
+            git push origin HEAD:main
+          else
             echo "GitHub is already synchronized with Overleaf."
-            exit 0
           fi
 
+      - name: Clarify logarithms after Eq. 39
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('main.tex')
+          t=p.read_text()
+          old=r'''where \(G_i\) denotes the integral over \(z\) and the remaining radiation variables, including \(h_i\), and
+\(z_{\max}\) is set jointly by the higher technical cut and the kinematic range. Uniform nested infrared
+locality requires the underlying map mismatch to remain uniformly small over any finite allowed range of
+\(z\); under the power-like assumption above, \(G_i\) remains parametrically finite and the suppression is
+supplied by the common lower scale \((\rn/Q)^{q_i}\), not by requiring \(z\) itself to be small.'''
+          new=r'''where \(G_i\) denotes the integral over \(z\) and the remaining radiation variables, including \(h_i\), and
+\(z_{\max}\) is set jointly by the higher technical cut and the kinematic range. Uniform nested infrared
+locality requires the underlying map mismatch to remain uniformly small over any finite allowed range of
+\(z\). The function \(G_i\) should not, however, be understood as numerically of order one when
+\(\rn/Q\to0\). At fixed order it can contain powers of the large logarithm
+\begin{equation}
+L_N=\ln\frac{Q}{\rn},
+\label{eq:uniform-nested-large-log}
+\end{equation}
+inherited from the singular lower-resolution spectrum and, in the overlap with the strongly ordered region,
+additional logarithms of neighboring resolution-scale ratios. Such logarithms can significantly enhance the
+numerical size of the projection correction and can require resummation when the fixed-order logarithmic
+expansion ceases to be well behaved. What uniform nested locality excludes is an additional \emph{inverse
+power} of the common unresolved scale hidden inside \(G_i\). Consequently, for every finite logarithmic power
+\(m\) and every \(q_i>0\),
+\begin{equation}
+\left(\frac{\rn}{Q}\right)^{q_i}L_N^m\longrightarrow0
+\qquad (\rn/Q\to0).
+\label{eq:power-beats-log}
+\end{equation}
+The logarithms can therefore modify the logarithmic structure of the \(\rn\) spectrum, but they cannot
+compensate the positive-power suppression implied by nested locality. Parametrically the correction behaves
+as \(\rn^{q_i-1}L_N^m\): for \(0<q_i<1\) it may still diverge as \(\rn\to0\), but only with an integrable
+singularity and always less strongly than the leading \(1/\rn\) spectrum; for \(q_i=1\) at most a logarithmic
+singularity remains, while for \(q_i>1\) the spectrum-level correction vanishes up to logarithms. An actual
+power-like growth of \(G_i\) as \(\rn/Q\to0\) would instead signal that the assumed nested-local power counting
+is incomplete, for example because an additional singular region has not been factorized.'''
+          if t.count(old)!=1:
+              raise SystemExit('Target paragraph after Eq.39 not found uniquely')
+          p.write_text(t.replace(old,new,1))
+          PY
+          git add main.tex
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git commit -m "Sync changes from Overleaf"
+          git commit -m "Clarify logarithms in nested-local spectrum"
+          EDIT_HEAD="$(git rev-parse HEAD)"
+          git push origin HEAD:main
+          echo "EDIT_HEAD=$EDIT_HEAD" >> "$GITHUB_ENV"
 
+      - name: Push clarification directly to Overleaf and update checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          PATCH="$RUNNER_TEMP/github-to-overleaf.patch"
+          git diff --binary "$OVERLEAF_HEAD" "$EDIT_HEAD" -- . ':(exclude).github/**' > "$PATCH"
+          git switch --detach "$OVERLEAF_HEAD"
+          git apply --3way --index "$PATCH"
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git commit -m "Sync Eq.39 logarithm clarification"
+          git push overleaf "HEAD:$OVERLEAF_BRANCH"
+          NEW_OVERLEAF_HEAD="$(git rev-parse HEAD)"
+          git switch -C main "$EDIT_HEAD"
+          printf '%s\n' "$NEW_OVERLEAF_HEAD" > "$STATE_FILE"
+          git add "$STATE_FILE"
+          git commit -m "Update Overleaf sync checkpoint"
           git push origin HEAD:main
