@@ -963,7 +963,7 @@ absolute terms can then generate a large local change in the distribution. When 
 comparable to the distance from the nonanalytic point, the derivative expansion itself is no longer uniform
 and the effect is better viewed as migration across the feature rather than as a small derivative correction.
 
-The preceding discussion deliberately stops at the singular spectrum differential in $\rn$. Concrete process examples are postponed until Sec.~\ref{sec:nnlo-differential-predictions}, where the $\rn$ integration and the complete NNLO measurement can be considered together. Before performing that integration, however, the representation of the complementary $\rn<\rn^{\cut}$ bin must first be examined, which requires the lower projection $\Pi_N$.
+The preceding discussion deliberately stops at the singular spectrum differential in $\rn$. Before integrating it into a final NNLO observable, the complementary $\rn<\rn^{\cut}$ event representation and its lower projection $\Pi_N$ must first be understood.
 
 \section{Lower-map locality and nested consistency before NNLO observables}
 \label{sec:lower-map-locality}
@@ -1096,6 +1096,10 @@ F(\rnm,\ldots)\,\Delta\rnm
 \right].
 \label{eq:lower-map-migration-master}
 \end{equation}
+The integration over $\rn$ in Eq.~\eqref{eq:lower-map-migration-master} should not be confused with the
+final integration that constructs an NNLO distribution in the physical observables $\mathbf X$.  Here it is
+performed only to expose how the lower projection feeds into the next lower singular spectrum, which remains
+differential in $\rnm$.
 This is the direct lower-level counterpart of the migration derivative in
 Eq.~\eqref{eq:rnp-contamination-rn}.  A projection mismatch that is power suppressed in the unresolved
 emission can still multiply a spectrum that is singular in the next lower resolution variable.
@@ -1523,7 +1527,7 @@ For the NNLO $Z+1$-jet calculation the relevant multiplicities and neighboring r
 \end{equation}
 with
 \begin{equation}
-\rnm=\mathcal T_0\ \mathrm{or}\ q_T ,\qquad
+\rnm=q_T,\qquad
 \rn=\mathcal T_1,\qquad
 \rnp=\mathcal T_2.
 \label{eq:z1j-resolution-identification}
@@ -1550,6 +1554,10 @@ Eq.~\eqref{eq:njettiness-nested-pair-bound} gives the kinematic restriction
 \label{eq:z1j-t2-t1-bound}
 \end{equation}
 Thus the physically relevant finite-$z$ region is compact, but it need not be strongly ordered.
+
+In the setup considered here $q_T$ is the actual lower process-defining variable.  The quantity
+$\mathcal T_0$ introduced below is not used as a generation cut; it is only a useful diagnostic coordinate
+for identifying the point approached on the limiting one-jet Born manifold.
 
 A qualitative difference from Drell--Yan is that preserving the colour-singlet momentum does not completely
 fix the limiting $\Ph_1$ point. At one-parton Born level, transverse momentum conservation gives
