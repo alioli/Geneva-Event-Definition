@@ -925,23 +925,6 @@ The higher technical cut is kinematically inactive whenever
 and becomes the limiting upper bound only above this value.
 
 
-For Drell--Yan double-real kinematics, the relevant configuration is \(\Ph_2\), and therefore
-\begin{equation}
-\mathcal T_1(\Ph_2)
-\le\frac{1}{2}\,\mathcal T_0(\Ph_2),
-\qquad
-0\le z=\frac{\mathcal T_1}{\mathcal T_0}\le\frac12.
-\label{eq:dy-t1-t0-bound}
-\end{equation}
-The higher-cut transition consequently occurs at
-\begin{equation}
-\mathcal T_0=2\,\mathcal T_1^{\cut}.
-\label{eq:dy-t1cut-transition}
-\end{equation}
-For a three-parton configuration, relevant for the next multiplicity in the colour-singlet-plus-jet NNLO
-calculation, Eq.~\eqref{eq:t1-t0-multiplicity-bound} instead gives
-\(\mathcal T_1/\mathcal T_0\le2/3\).
-
 \subsection{Observable response to projection-induced migrations}
 \label{subsec:observable-response-projection}
 
@@ -980,567 +963,273 @@ absolute terms can then generate a large local change in the distribution. When 
 comparable to the distance from the nonanalytic point, the derivative expansion itself is no longer uniform
 and the effect is better viewed as migration across the feature rather than as a small derivative correction.
 
-\subsubsection{Drell--Yan illustration}
-\label{subsubsec:dy-illustration}
+The preceding discussion deliberately stops at the singular spectrum differential in $\rn$. Concrete process examples are postponed until Sec.~\ref{sec:nnlo-differential-predictions}, where the $\rn$ integration and the complete NNLO measurement can be considered together. Before performing that integration, however, the representation of the complementary $\rn<\rn^{\cut}$ bin must first be examined, which requires the lower projection $\Pi_N$.
 
-Drell--Yan production provides a useful illustration. Taking
-\begin{equation}
-\rn=\mathcal T_0,
-\qquad
-\rnp=\mathcal T_1,
-\qquad
-Q\sim M_{\ell\ell},
-\label{eq:dy-resolution-identification}
-\end{equation}
-the vector-boson rapidity is preserved by the projection in both the FKS and $\mathcal T_0^{\mathrm FR}$-preserving mappings and therefore has no migration of the type discussed
-here. On the other end, the transverse momenta of the decay leptons are IRC safe but are not preserved by either mapping. For the local singular spectrum at fixed \(\mathcal T_0\), two features are important. First,
-Eq.~\eqref{eq:dy-t1-t0-bound} guarantees that the physical ratio \(\mathcal T_1/\mathcal T_0\) never exceeds
-\(1/2\) on the \(\Ph_2\) configurations relevant to the higher projection, independently of the ratio of the
-two technical cuts. Second, since both maps have uniform nested infrared locality, the exact and projected states
-approach the same Born configuration as \(\mathcal T_0\to0\) for all finite allowed values
-\(0\le\mathcal T_1/\mathcal T_0\le1/2\). IRC safety then implies that the absolute displacement of the lepton
-transverse momentum vanishes in this common unresolved limit.
-
-
-The important exception is the region
-\begin{equation}
-p_{T,\ell}\simeq \frac{M_{\ell\ell}}{2},
-\label{eq:dy-sudakov-shoulder}
-\end{equation}
-which corresponds to the Born kinematic endpoint and develops a Sudakov shoulder once QCD radiation is
-included. There the spectrum varies rapidly and its fixed-order derivatives are enhanced. Consequently the
-local variation scale in Eq.~\eqref{eq:local-variation-scale} becomes small. A projection-induced shift
-\(\Delta p_{T,\ell}\) can therefore be much smaller than \(M_{\ell\ell}\) and still be comparable to the
-scale over which the spectrum changes. Large local discrepancies near the shoulder are thus compatible with
-a map satisfying uniform nested infrared locality: they need not signal a failure of the nested unresolved
-limit, but rather a nonuniform response of the measurement to a small kinematic migration. Very close to the
-shoulder, where
-\begin{equation}
-\left|p_{T,\ell}-\frac{M_{\ell\ell}}{2}\right|
-\lesssim
-|\Delta p_{T,\ell}|,
-\label{eq:shoulder-migration-region}
-\end{equation}
-one should not expect the linearized measurement expansion to be quantitatively reliable; the exact
-migration across the shoulder must be retained.
-
-In summary, these two sources of nonuniformity should therefore be kept conceptually separate. Strong ordering can fail
-because neighboring resolution scales remain at a finite ratio inside their allowed kinematic domain, in
-which case uniform nested infrared locality controls the simultaneous unresolved limit. Independently, even
-an IRC-safe observable can have a nonuniform differential response to a uniformly vanishing displacement when
-its spectrum contains a sharp kinematic feature. For the \(\mathcal T_1/\mathcal T_0\) pair there is in
-addition the multiplicity-dependent kinematic bound in Eq.~\eqref{eq:t1-t0-multiplicity-bound}. The
-Drell--Yan behavior described above is consistent with the combination of this kinematic restriction and
-nested locality away from the shoulder, while the largest local projection differences in the lepton
-transverse-momentum distribution can still arise from the nonuniform response near the shoulder.
-
-\subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} illustration}
-\label{subsubsec:z1jet-illustration}
-
-The colour-singlet-plus-jet case provides a more stringent test of the higher projection than Drell--Yan.
-For the NNLO $Z+1$-jet calculation the relevant multiplicities and neighboring resolution variables are
-\begin{equation}
-\Ph_1\leftrightarrow Z+1\text{ parton},\qquad
-\Ph_2\leftrightarrow Z+2\text{ partons},\qquad
-\Ph_3\leftrightarrow Z+3\text{ partons},
-\label{eq:z1j-multiplicities}
-\end{equation}
-with
-\begin{equation}
-\rnm=\mathcal T_0\ \mathrm{or}\ q_T ,\qquad
-\rn=\mathcal T_1,\qquad
-\rnp=\mathcal T_2.
-\label{eq:z1j-resolution-identification}
-\end{equation}
-The LHE replacement relevant here is therefore
-\begin{equation}
-\Ph_3\longrightarrow
-\widehat\Ph_2=\Pi_2(\Ph_3)
-\qquad
-\text{for }\mathcal T_2<\mathcal T_2^{\cut}.
-\label{eq:z1j-higher-projection}
-\end{equation}
-The simultaneous lower unresolved limit is conveniently described by
-\begin{equation}
-\epsilon=\frac{\mathcal T_1}{Q}\to0,
-\qquad
-z=\frac{\mathcal T_2}{\mathcal T_1}=\mathcal O(1).
-\label{eq:z1j-simultaneous-limit}
-\end{equation}
-For the axis-minimized jettiness variables on a three-parton configuration,
-Eq.~\eqref{eq:njettiness-nested-pair-bound} gives the kinematic restriction
-\begin{equation}
-0\le z\le\frac23.
-\label{eq:z1j-t2-t1-bound}
-\end{equation}
-Thus the physically relevant finite-$z$ region is compact, but it need not be strongly ordered.
-
-A qualitative difference from Drell--Yan is that preserving the colour-singlet momentum does not completely
-fix the limiting $\Ph_1$ point. At one-parton Born level, transverse momentum conservation gives
-\begin{equation}
-\vec p_{T,J}=-\vec q_T,
-\qquad
-p_{T,J}=q_T,
-\label{eq:z1j-born-transverse-balance}
-\end{equation}
-while the longitudinal jet coordinate remains independent at fixed $q^\mu$. Locally one may therefore think
-of the limiting one-jet Born manifold as being characterized by $q^\mu$ together with one additional
-longitudinal coordinate, which may equivalently be represented by the jet rapidity or, in a suitable region,
-by $\mathcal T_0$. Schematically, for a beam-thrust-like definition,
-\begin{equation}
-\mathcal T_0(\Ph_1)
-\sim
-q_T\,e^{-|y_J-Y_Z|},
-\label{eq:z1j-t0-born-coordinate}
-\end{equation}
-up to the precise convention used for the resolution measure. Hence preservation of $q^\mu$ alone does not
-imply preservation of the complete one-jet Born configuration.
-
-This point is directly relevant for a $\mathcal T_1^{\rm FR}$ projection that preserves the vector-boson
-four-momentum and the lower resolution variable $\mathcal T_1$ at leading power, but does not preserve $\mathcal T_0$ exactly.
-The latter fact by itself does \emph{not} imply a failure of uniform nested infrared locality. The decisive
-quantity is the scaling of
-\begin{equation}
-\Delta\mathcal T_0
-=
-\mathcal T_0(\Ph_3)
--
-\mathcal T_0\!\left(\Pi_2(\Ph_3)\right)
-\label{eq:z1j-delta-t0}
-\end{equation}
-along the finite-$z$ paths of Eq.~\eqref{eq:z1j-simultaneous-limit}. A nested-local map may perfectly well
-satisfy
-\begin{equation}
-\frac{\Delta\mathcal T_0}{Q}
-\sim
-\left(\frac{\mathcal T_1}{Q}\right)^q
-h_0(z,\omega),
-\qquad q>0,
-\label{eq:z1j-t0-nested-local-scaling}
-\end{equation}
-with $h_0$ finite over the allowed range $0\le z\le2/3$. By contrast, a nonzero finite limit
-\begin{equation}
-\lim_{\mathcal T_1\to0}
-\frac{\Delta\mathcal T_0}{Q}
-=h_0(z,\omega)\neq0
-\qquad
-\text{at fixed }z>0
-\label{eq:z1j-t0-nested-failure}
-\end{equation}
-would demonstrate that exact and projected configurations approach different points of the limiting
-$\Ph_1$ manifold.
-
-The geometric reason why this question is not answered by exact preservation of $\mathcal T_1$ is simple.
-The condition $\mathcal T_1\to0$ measures the approach to the one-jet manifold, and is therefore naturally
-viewed as controlling a direction normal to that manifold. Every point of $\Ph_1$ has $\mathcal T_1=0$.
-Preserving $\mathcal T_1$ consequently does not by itself prevent a displacement tangential to $\Ph_1$,
-for example in the jet rapidity or $\mathcal T_0$ direction. Uniform nested infrared locality requires that
-such tangential displacements vanish as the common unresolved scale is taken to zero.
-
-{\bfseries We should look carefully in our mapping and determine whether this property is present or not.}
-
-Jet observables introduce a second effect that is logically distinct from the locality of the projection map.
-The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization,
-whereas the analysis commonly uses inclusive anti-$k_T$ jets. The anti-$k_T$ measurement is only piecewise
-smooth in phase space: the clustering history changes across boundaries where two candidate distances become
-equal, for example $d_{ij}=d_{kB}$, while the identity of the leading jet changes across
-\begin{equation}
-p_{T,j_a}=p_{T,j_b}.
-\label{eq:z1j-leading-jet-boundary}
-\end{equation}
-These are codimension-one boundaries, since one equality separates neighboring phase-space regions with
-different clustering or jet ordering. IRC safety guarantees the correct soft and collinear limit, but not
-uniform differentiability of the measurement across such boundaries.
-
-A particularly relevant boundary is the analysis requirement $p_{T,j_1}>p_T^{\min}$. For the projection-induced
-shift $\Delta p_{T,j_1}=p_{T,j_1}(\Ph_3)-p_{T,j_1}(\widehat\Ph_2)$ one has distributionally
-\begin{equation}
-\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
--
-\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
-\simeq
--\Delta p_{T,j_1}\,
-\delta\!\left(p_{T,j_1}-p_T^{\min}\right).
-\label{eq:z1j-pt-threshold-migration}
-\end{equation}
-Thus a parametrically small displacement can generate a sizeable relative correction when the jet spectrum
-is steep or the event lies close to a clustering, ordering or acceptance boundary. This enhancement does not
-by itself signal a failure of nested locality: for a smooth underlying distribution the phase-space layer
-that changes classification still shrinks with the size of the displacement.
-
-There is nevertheless an important asymptotic protection for the leading-jet transverse momentum if the
-$\mathcal T_1^{\rm FR}$ map preserves $q^\mu$. In the strict one-jet limit both exact and projected
-configurations must satisfy Eq.~\eqref{eq:z1j-born-transverse-balance}, independently of the jet rapidity.
-Therefore, provided both configurations genuinely approach a one-jet limit,
-\begin{equation}
-\Delta p_{T,j_1}\longrightarrow0
-\qquad
-(\mathcal T_1\to0,\ z\text{ finite}),
-\label{eq:z1j-leading-pt-protected}
-\end{equation}
-even if the limiting jet rapidities differ. A persistent nonzero plateau in $\Delta p_{T,j_1}$ would thus
-signal a stronger problem than the mere non-preservation of $\mathcal T_0$. By contrast, a plateau in
-$\Delta y_{j_1}$ or in $\Delta\mathcal T_0/Q$ at fixed finite $z$ would directly diagnose a failure to
-approach the same point on the one-jet Born manifold.
-
-
-The decisive test of the nested-locality properties of the two mappings is local: apply both projections to
-the same exact $\Ph_3$ configurations and study, in bins of
-\begin{equation}
-z=\frac{\mathcal T_2}{\mathcal T_1},
-\label{eq:z1j-z-diagnostic}
-\end{equation}
-the approach to the lower unresolved limit of
-\begin{equation}
-\frac{\Delta\mathcal T_0}{Q},
-\qquad
-\Delta y_{j_1}^{\rm anti-k_T},
-\qquad
-\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q}.
-\label{eq:z1j-local-diagnostics}
-\end{equation}
-A positive-power fall with $\mathcal T_1/Q$ establishes nested locality for the corresponding coordinate,
-whereas a nonzero plateau at fixed finite $z$ signals its failure. For the fiducial jet cuts one should
-separately monitor the signed classification migration
-\begin{equation}
-\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
--
-\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
-\label{eq:z1j-signed-threshold-migration}
-\end{equation}
-for the relevant values of $p_T^{\min}$.
-
-
-The $Z+1$-jet example therefore illustrates why exact preservation of the chosen resolution variable is only
-one part of a robust event projection. The map must also approach the correct point of the lower Born manifold
-in all tangential coordinates relevant to the measurement, while the observable itself must be examined for
-nonuniform response near jet-clustering and fiducial boundaries.
-
-\section{Differential locality of the lower map}
+\section{Lower-map locality and nested consistency before NNLO observables}
 \label{sec:lower-map-locality}
 
-We now turn to the lower projection
+Section~\ref{sec:higher-singular-spectrum} analyzed a very specific object: the modification induced by the
+higher projection $\Pi_{N+1}$ on the singular spectrum that is still differential in the lower resolution
+variable $\rn$.  It would be premature to integrate that spectrum over $\rn$ and interpret the result as the
+projection effect on an NNLO observable.  The reason is that an NNLO event definition contains two adjacent
+$\rn$ regions.  For $\rn>\rn^{\cut}$ the calculation is the NLO $(N+1)$-parton contribution discussed above,
+including the possible $\Ph_{N+2}\to\widehat\Ph_{N+1}$ LHE replacement.  For
+$\rn<\rn^{\cut}$, however, the event is represented on $N$-parton kinematics and the unresolved
+$(N+1)$-parton configurations are related to that representation by the lower map
 \begin{equation}
-\Pi_N:\Ph_{N+1}\to\widehat\Ph_N.
+\Pi_N:\Ph_{N+1}\longrightarrow\widehat\Ph_N.
 \label{eq:lower-map}
 \end{equation}
-Suppose the singular \(N\)-body prediction is kept differential in
-\begin{equation}
-x\equiv\rnm.
-\label{eq:x-def}
-\end{equation}
-This requirement exists independently of whether a generation cut on \(x\) is imposed.
+Before adding the two regions and integrating over $\rn$, one must therefore establish that this second
+projection is local in the variables on which the lower-multiplicity singular prediction depends.  Otherwise
+one could attribute to the higher $\rnp^{\cut}$ projection an effect that actually originates in the
+representation of the lower $\rn<\rn^{\cut}$ bin.
 
-For local matching in the measured variable \(x\), one wants
+This section is therefore a necessary intermediate step rather than a digression into a different problem.
+It repeats one rung lower the logic developed for $\Pi_{N+1}$ in Sec.~\ref{sec:higher-singular-spectrum}:
+$\rnp$ is replaced by $\rn$, the singular spectrum in $\rn$ is replaced by the next lower spectrum in
+$\rnm$, and the relevant projection becomes $\Pi_N$.  The discussion also separates differential locality
+from migration across an optional process-defining boundary in $\rnm$.  Only after these lower-map properties
+have been made explicit will Sec.~\ref{sec:nnlo-differential-predictions} integrate over $\rn$ and discuss
+physical NNLO observables.
+
+\subsection{Differential locality of \texorpdfstring{$\Pi_N$}{PiN} in \texorpdfstring{$r_{N-1}$}{rN-1}}
+\label{subsec:lower-map-differential-locality}
+
+Let $\rnm^{(N+1)}(\Ph_{N+1})$ denote the extension of the lower resolution variable to the
+$(N+1)$-parton configuration and define the displacement generated by the lower projection with the same
+exact-minus-projected convention used above,
 \begin{equation}
-x(\widehat\Ph_N)
-=
-x^{\rm LP}(\Ph_{N+1})
-+
-\Delta x,
+\Delta\rnm(\Ph_{N+1})
+\equiv
+\rnm^{(N+1)}(\Ph_{N+1})
+-
+\rnm\!\left(\Pi_N(\Ph_{N+1})\right).
+\label{eq:delta-rnm}
+\end{equation}
+If the $N$-parton singular prediction is kept differential in $\rnm$, locality requires the exact and
+projected configurations to approach the same value of this coordinate as the extra emission becomes
+unresolved.  Introducing a finite nonsingular characteristic scale $r_{N-1,\rm char}$, a minimal condition is
+\begin{equation}
+\frac{\Delta\rnm}{r_{N-1,\rm char}}
+\longrightarrow0
 \qquad
-\frac{\Delta x}{x}\to0
-\quad\text{in the unresolved limit}.
-\label{eq:lp-locality-lower}
+\text{for }\rn/Q\to0
+\text{ at fixed lower-multiplicity kinematics}.
+\label{eq:lower-map-locality-condition}
 \end{equation}
 Exact preservation,
 \begin{equation}
-x(\widehat\Ph_N)=x^{\rm LP}(\Ph_{N+1}),
+\rnm\!\left(\Pi_N(\Ph_{N+1})\right)
+=
+\rnm^{(N+1)}(\Ph_{N+1}),
 \label{eq:exact-lower-preservation}
 \end{equation}
-is sufficient and particularly convenient, but LP-consistent preservation is the essential requirement for the LP construction.
-If \(x\) is shifted by the map,
-\begin{equation}
-x(\widehat\Ph_N)=x^{\rm LP}+\Delta x,
-\label{eq:shift-lower}
-\end{equation}
-the projection delta expands as
-\begin{align}
-\delta\!\left(x-x^{\rm LP}-\Delta x\right)
-={}&
-\delta\!\left(x-x^{\rm LP}\right)
--
-\Delta x\,
-\partial_x
-\delta\!\left(x-x^{\rm LP}\right)
-+\mathcal{O}(\Delta x^2).
-\label{eq:delta-expansion}
-\end{align}
-The first term is the LP contribution.
-The second is a migration term and, after integration over the unresolved emission, generates derivatives of the singular lower-multiplicity spectrum.
+is sufficient but is stronger than necessary.  What matters for the leading-power construction is that the
+mismatch vanish with a positive power, or otherwise sufficiently rapidly, in the unresolved limit.
 
-\section{Toy model for migration in \texorpdfstring{\(r_{N-1}\)}{rN-1}}
+There is a second nested limit when $\rnm$ itself becomes small.  In a strongly ordered region
+\begin{equation}
+\rn\ll\rnm\ll Q,
+\label{eq:lower-strong-ordering}
+\end{equation}
+a possible power-like behavior is
+\begin{equation}
+\frac{\Delta\rnm}{r_{N-1,\rm char}}
+\sim
+c(\mathbf X,\Ph_{\rm rad})
+\left(\frac{\rn}{\rnm}\right)^p,
+\qquad p>0.
+\label{eq:lower-map-strong-scaling}
+\end{equation}
+As in Sec.~\ref{subsec:uniform-nested-locality}, this expression is meaningful only in the ordered regime.
+If $\rn/\rnm$ remains finite while both variables vanish, the appropriate requirement is the one-rung-lower
+analogue of uniform nested infrared locality: the exact $(N+1)$-parton state and its projected $N$-parton
+representative must approach the same underlying $(N-1)$-body point for finite kinematically allowed values
+of $\rn/\rnm$.  This condition concerns the differential structure of the lower singular prediction and is
+present whether or not a cut on $\rnm$ is imposed.
+
+\subsection{Migration of the singular \texorpdfstring{$r_{N-1}$}{rN-1} spectrum}
 \label{sec:lower-map-toy}
 
-Take \(x=\rnm\) and assume the singular unresolved \(N+1\)-body contribution below \(\rn^{\cut}\) behaves as
+The consequence of a nonzero $\Delta\rnm$ can be derived directly, without introducing a separate toy
+variable.  Schematically, the singular $(N+1)$-parton contribution in the lower unresolved region has the
+form
 \begin{equation}
-d\sigma_{N+1}^{\rm sing}
+\frac{d\sigma_{N+1}^{\rm sing}}
+{d\rn\,d\rnm}
 \sim
-\frac{d\rn}{\rn}\,
-F(x)\,dx.
-\label{eq:toy-singular}
+\frac{1}{\rn}
+F\!\left(\rnm,\mathbf X,
+\ln\frac{\rn}{Q},\ldots\right),
+\label{eq:lower-singular-spectrum}
 \end{equation}
-Let the map assign
+where $F$ may itself become singular as $\rnm\to0$.  The projected and exact measurements of $\rnm$ differ by
+\begin{align}
+&\delta\!\left(
+\rnm^{\rm obs}-\rnm\!\left(\Pi_N(\Ph_{N+1})\right)
+\right)
+-
+\delta\!\left(
+\rnm^{\rm obs}-\rnm^{(N+1)}(\Ph_{N+1})
+\right)
+\nonumber\\
+&\hspace{1cm}\simeq
+\Delta\rnm\,
+\partial_{\rnm^{\rm obs}}
+\delta\!\left(
+\rnm^{\rm obs}-\rnm^{(N+1)}(\Ph_{N+1})
+\right),
+\label{eq:lower-delta-expansion}
+\end{align}
+where Eq.~\eqref{eq:delta-rnm} fixes the sign convention.  After integrating the unresolved region
+$0<\rn<\rn^{\cut}$, the map-dependent contribution therefore has the generic derivative form
 \begin{equation}
-x_{\rm proj}=x+\Delta x(\rn).
-\label{eq:toy-map}
-\end{equation}
-Then the projected contribution is
-\begin{equation}
-\frac{d\sigma^{\rm proj}}{dx}
+\Delta_{\Pi_N}
+\frac{d\sigma}{d\rnm}
 \sim
-\int_0^{\rn^{\cut}}
-\frac{d\rn}{\rn}\,
-F\!\left(x-\Delta x(\rn)\right),
-\label{eq:toy-projected}
-\end{equation}
-whereas the LP subtraction/resummed-expanded contribution contains
-\begin{equation}
-\int_0^{\rn^{\cut}}
-\frac{d\rn}{\rn}\,
-F(x).
-\label{eq:toy-lp}
-\end{equation}
-The residual map-dependent term is therefore
-\begin{equation}
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
+\partial_{\rnm}
 \int_0^{\rn^{\cut}}
 \frac{d\rn}{\rn}
 \left[
-F\!\left(x-\Delta x(\rn)\right)-F(x)
+F(\rnm,\ldots)\,\Delta\rnm
 \right].
-\label{eq:toy-residual}
+\label{eq:lower-map-migration-master}
 \end{equation}
-For small \(\Delta x\),
-\begin{equation}
-F(x-\Delta x)-F(x)
-=
--\Delta x\,F'(x)+\mathcal{O}(\Delta x^2),
-\label{eq:toy-expand-F}
-\end{equation}
-so
-\begin{equation}
-\boxed{
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
--F'(x)
-\int_0^{\rn^{\cut}}
-\frac{d\rn}{\rn}\,
-\Delta x(\rn)
-}.
-\label{eq:toy-master}
-\end{equation}
+This is the direct lower-level counterpart of the migration derivative in
+Eq.~\eqref{eq:rnp-contamination-rn}.  A projection mismatch that is power suppressed in the unresolved
+emission can still multiply a spectrum that is singular in the next lower resolution variable.
 
-A useful nested scaling is
+For the strongly ordered scaling in Eq.~\eqref{eq:lower-map-strong-scaling}, suppressing logarithmic
+reshuffling and finite coefficients gives
 \begin{equation}
-\frac{\Delta x}{x}
+\Delta_{\Pi_N}
+\frac{d\sigma}{d\rnm}
 \sim
-c(\zeta)
-\left(\frac{\rn}{x}\right)^p,
-\qquad p>0,
-\label{eq:toy-nested-scaling}
+\frac{1}{p}
+\left(\frac{\rn^{\cut}}{\rnm}\right)^p
+\partial_{\rnm}
+\left[
+r_{N-1,\rm char}\,\widetilde F(\rnm,\mathbf X)
+\right].
+\label{eq:lower-map-integrated-scaling}
 \end{equation}
-whenever \(\rn\) and \(x\) admit such a homogeneous comparison.
-Equation~\eqref{eq:toy-master} then yields
-\begin{equation}
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
--\frac{1}{p}\,
-xF'(x)
-\left(\frac{\rn^{\cut}}{x}\right)^p.
-\label{eq:toy-general-scaling}
-\end{equation}
+Thus the correction vanishes at fixed nonzero $\rnm$ as $\rn^{\cut}\to0$, but the convergence can be
+nonuniform when $\rnm$ is simultaneously small.  If the lower spectrum behaves as $F\sim1/\rnm$ and the
+map displacement is naturally measured relative to $\rnm$, the relative correction inherits the familiar
+neighboring-scale behavior $(\rn^{\cut}/\rnm)^p$ in the ordered region.  This estimate must again not be
+extrapolated to $\rn\sim\rnm$; there one needs the simultaneous-limit locality of the lower map.
 
-For a singular spectrum
-\begin{equation}
-F(x)\sim\frac{1}{x},
-\label{eq:toy-1overx}
-\end{equation}
-one obtains
-\begin{equation}
-\frac{
-\Delta(d\sigma/dx)
-}{
-d\sigma/dx
-}
-\sim
-\left(\frac{\rn^{\cut}}{x}\right)^p.
-\label{eq:toy-relative}
-\end{equation}
-The projection effect therefore vanishes at fixed \(x\) when \(\rn^{\cut}\to0\), but the convergence is not uniform as \(x\to0\).
-Near an active lower cut \(x\sim\rnm^{\cut}\), the relevant ratio becomes
-\begin{equation}
-\frac{\rn^{\cut}}{\rnm^{\cut}}.
-\label{eq:toy-cut-ratio}
-\end{equation}
+A map for which $\Delta\rnm$ approaches a nonzero fraction of a lower-multiplicity scale at fixed $\rnm$ as
+$\rn\to0$ is not infrared local in this differential variable and can leave logarithmic sensitivity to the
+lower technical cut.  Conversely, a displacement that vanishes with a positive but small power of
+$\rn/Q$ is formally local but can converge slowly.  This distinction is exactly analogous to the distinction
+between failure of uniform nested locality and a large finite-cut coefficient for the higher map.
 
-\subsection{Pathological and slowly convergent maps}
-
-A shift
-\begin{equation}
-\Delta x\sim c\,x
-\label{eq:pathological-map}
-\end{equation}
-does not vanish at fixed \(x\) as \(\rn\to0\), and therefore does not define an IR-local projection for the variable \(x\).
-It leads to logarithmic sensitivity,
-\begin{equation}
-\Delta\!\left(\frac{d\sigma}{dx}\right)
-\sim
--c\,xF'(x)\ln \rn^{\cut},
-\label{eq:pathological-log}
-\end{equation}
-but this case should be regarded as a deliberately pathological example, not as an acceptable IR-safe map.
-
-By contrast, a map with a slower but still vanishing shift, e.g.
-\begin{equation}
-\frac{\Delta x}{X_{\rm char}}
-\sim
-c\left(\frac{\rn}{X_{\rm char}}\right)^{1/2},
-\label{eq:sqrt-map}
-\end{equation}
-is IR local but converges more slowly than a linear power correction.
-
-\section{Optional Born-level fiducial or generation boundaries}
+\subsection{Optional lower generation or fiducial boundaries}
 \label{sec:born-boundaries}
 
-If \(\ThetaB=1\), there is no additional lower-boundary migration issue.
-If instead the process is defined in a restricted Born-like region,
+The differential-locality issue above exists even when the full range of $\rnm$ is retained.  A separate
+condition arises only if the process definition contains an actual lower boundary, for example
 \begin{equation}
 \ThetaB(\Ph_M)
 =
 \Theta\!\left(
 \rnm^{(M)}(\Ph_M)-\rnm^{\cut}
-\right),
+\right).
 \label{eq:active-born-boundary}
 \end{equation}
-then the local NLO subtraction between \(N\) and \(N+1\) must also treat this boundary consistently.
-
-For the lower map \(\Pi_N\), the real and counterterm contributions contain the acceptances
-\begin{align}
-&
-R_{N+1}(\Ph_{N+1})
-\Theta\!\left(
-\rnm^{(N+1)}(\Ph_{N+1})-\rnm^{\cut}
-\right),
-\nonumber\\
-&
-C_{N+1}(\Ph_{N+1})
-\Theta\!\left(
-\rnm(\widehat\Ph_N)-\rnm^{\cut}
-\right).
-\label{eq:real-counter-born-cut}
-\end{align}
-Their difference contains the boundary mismatch
+Then exact and projected $(N+1)$-parton configurations can be classified differently by the lower map.  The
+relevant difference is
 \begin{equation}
 \Delta\Theta_B
 =
 \Theta\!\left(
-\rnm(\widehat\Ph_N)-\rnm^{\cut}
+\rnm\!\left(\Pi_N(\Ph_{N+1})\right)-\rnm^{\cut}
 \right)
 -
 \Theta\!\left(
 \rnm^{(N+1)}(\Ph_{N+1})-\rnm^{\cut}
-\right).
+\right),
 \label{eq:delta-thetaB}
 \end{equation}
-Defining
-\begin{equation}
-\Delta\rnm
-=
-\rnm^{(N+1)}(\Ph_{N+1})
--
-\rnm(\widehat\Ph_N),
-\label{eq:delta-rnm}
-\end{equation}
-one finds near the boundary
+and for a small displacement defined in Eq.~\eqref{eq:delta-rnm},
 \begin{equation}
 \Delta\Theta_B
 \simeq
 -\Delta\rnm\,
 \delta\!\left(
-\rnm(\widehat\Ph_N)-\rnm^{\cut}
+\rnm^{(N+1)}(\Ph_{N+1})-\rnm^{\cut}
 \right).
 \label{eq:boundary-expansion}
 \end{equation}
-This is a fiducial boundary correction localized at \(\rnm=\rnm^{\cut}\).
+The resulting correction is localized on the process-defining boundary.  Exact preservation of $\rnm$ removes
+it identically; more generally it is sufficient that the exact and projected configurations remain on the
+same side of the boundary throughout the singular region.  If no lower generation or fiducial cut is present,
+this boundary term is absent, even though the differential-locality condition of the previous subsections
+still applies.  If the underlying lower-multiplicity spectrum is itself enhanced near $\rnm=0$, the event
+density at an active boundary can make the corresponding classification migration numerically important.
 
-Exact preservation,
-\begin{equation}
-\rnm(\widehat\Ph_N)
-=
-\rnm^{(N+1)}(\Ph_{N+1}),
-\label{eq:exact-born-boundary-preservation}
-\end{equation}
-eliminates this migration.
-A weaker condition sufficient to avoid crossing the chosen boundary is
-\begin{equation}
-\Theta\!\left(
-\rnm(\widehat\Ph_N)-\rnm^{\cut}
-\right)
-=
-\Theta\!\left(
-\rnm^{(N+1)}(\Ph_{N+1})-\rnm^{\cut}
-\right)
-\label{eq:theta-boundary-preservation}
-\end{equation}
-in the relevant singular region.
-
-If the underlying Born process is itself singular as \(\rnm\to0\), the coefficient of the boundary correction may be enhanced because the cut can lie near a region where the Born spectrum is large.
-If the Born process is finite, the same migration mechanism exists whenever the fiducial boundary is imposed, but without this additional singular enhancement.
-
-\section{Consistency conditions for the nested event definition}
+\subsection{Consistency of the two nested projections}
 \label{sec:nested-event-consistency}
 
-For
+The two maps now have distinct but complementary responsibilities.  The higher map
 \begin{equation}
-\Pi_{N+1}:\Ph_{N+2}\to\widehat\Ph_{N+1},
-\label{eq:higher-map-repeat}
+\Pi_{N+1}:\Ph_{N+2}\to\widehat\Ph_{N+1}
 \end{equation}
-the most important nested-locality condition is preservation of the already-defined \(\rn\) boundary,
+must be ordinary one-step IR local in the $\rnp\to0$ limit and, for an LHE event definition, uniformly
+nested-local as the projected $(N+1)$-parton state also approaches $\rn\to0$.  It should in addition preserve
+the already active $\rn$ event classification,
 \begin{equation}
-\rn(\widehat\Ph_{N+1})
+\Theta\!\left(
+\rn(\widehat\Ph_{N+1})-\rn^{\cut}
+\right)
 =
-\rn(\Ph_{N+2}),
-\label{eq:rn-preservation-higher-map}
+\Theta\!\left(
+\rn(\Ph_{N+2})-\rn^{\cut}
+\right),
+\label{eq:rn-boundary-preservation-higher-map}
 \end{equation}
-or at least preservation to the accuracy required by the construction.
-Otherwise the \(\rnp<\rnp^{\cut}\) projection can migrate events across the lower multiplicity boundary \(\rn=\rn^{\cut}\).
+with exact preservation of $\rn$ being the simplest sufficient realization.
 
-If an additional lower Born-level fiducial boundary is active, the higher map should also preserve its classification,
+The lower map $\Pi_N$ must instead be local in every coordinate in which the $N$-parton singular prediction
+is retained differential, in particular $\rnm$ when applicable, and it must preserve the classification of
+any active lower process-defining boundary.  In the simultaneous $\rnp,\rn\to0$ limit these requirements must
+also be mutually compatible.  Denoting by $\Ph_N^{\rm lim}$ the underlying $N$-body point approached by the
+exact $\Ph_{N+2}$ configuration, one requires for any smooth coordinate $Y_a$ on the relevant $N$-body
+manifold
 \begin{equation}
-\ThetaB(\widehat\Ph_{N+1})
-=
-\ThetaB(\Ph_{N+2}),
-\label{eq:higher-map-born-boundary}
+Y_a\!\left(
+\Pi_N\!\left(\Pi_{N+1}(\Ph_{N+2})\right)
+\right)
+-
+Y_a(\Ph_N^{\rm lim})
+\longrightarrow0
+\label{eq:composed-map-consistency}
 \end{equation}
-again at least in the singular region relevant for the projection.
+as the common unresolved scale is taken to zero along finite kinematically allowed values of
+$\rnp/\rn$.  This is not a demand that every intermediate resolution variable be exactly preserved.  It is
+a statement that the successive physical event representations approach the same lower-multiplicity
+kinematics and respect the boundaries that define the event samples.
 
-This suggests the general principle:
-\begin{equation}
-\boxed{
-\text{a nested projection should preserve all lower resolution/fiducial boundaries
-that are already active in the event definition}
-}.
-\label{eq:nested-principle}
-\end{equation}
-In addition, it should preserve at LP the Born-like coordinates in which the corresponding lower-multiplicity singular prediction is kept differential. For comparable neighboring resolution scales, the uniform nested infrared locality condition of Sec.~\ref{subsec:uniform-nested-locality} ensures that the map continues to approach the same lower-multiplicity kinematics in the simultaneous unresolved limit.
+The distinction from a pure fixed-order subtraction map remains important.  An auxiliary map can violate
+some of these stronger event-level properties while still giving an exact fixed-order result if its dependence
+cancels between local and integrated subtraction terms.  Once a projected configuration is retained as an
+LHE event, however, there is no compensating measurement on the discarded exact kinematics.  The locality
+and boundary conditions discussed here then become properties of the physical event definition itself.
 
-
-The conditions on the lower map $\Pi_N$ are complementary rather than redundant.  As discussed in
-Secs.~\ref{sec:lower-map-locality}--\ref{sec:born-boundaries}, $\Pi_N$ must be local in any lower variable in
-which the singular prediction is kept differential, and it must preserve the classification of any active
-Born-level generation or fiducial boundary.  The complete event definition therefore contains two distinct
-locality layers: the nested behavior of $\Pi_{N+1}$ in the $N+2\to N+1\to N$ limit and the differential and
-boundary locality of $\Pi_N$ in the $N+1\to N\to N-1$ limit.  Only after these local properties have been
-specified is it useful to integrate over $\rn$ and discuss their net effect on an NNLO prediction.
+We have now analyzed both locality layers required by the nested construction: the effect of $\Pi_{N+1}$ on
+the singular $\rn$ spectrum and the consistency of $\Pi_N$ with the lower $\rnm$ structure.  We can therefore
+turn to the quantity of phenomenological interest and integrate over $\rn$ to construct distributions
+that are differential only in the physical observables $\mathbf X$.
 
 \section{From local projection effects to NNLO differential predictions}
 \label{sec:nnlo-differential-predictions}
 
-Sections~\ref{sec:higher-singular-spectrum}--\ref{sec:nested-event-consistency} characterized the local
-singular structure and the locality requirements of the nested maps.  We now perform the logically separate
-step of integrating over the lower resolution variable.  Schematically, the contribution of the higher
+Sections~\ref{sec:higher-singular-spectrum} and \ref{sec:lower-map-locality} have now established the
+local structure of both projections before any final integration over $\rn$. We now perform the logically
+separate step of constructing NNLO distributions differential only in the physical observables, integrating
+the resolved spectrum over the lower resolution variable and combining it with the lower-multiplicity bin.  Schematically, the contribution of the higher
 projection to a distribution differential only in $X_i$ is obtained from
 \begin{equation}
 \left.\Delta_{\rm proj}^{(\rnp)}\frac{d\sigma}{dX_i}\right|_{\rn>\rn^{\cut}}
@@ -1742,10 +1431,78 @@ this saturated interval exists for \(\kappa>c_M\), and the common-scale factor b
 up to logarithms and finite coefficients. Hence a large ratio of the technical cuts cannot make the physical
 ratio \(\mathcal T_1/\mathcal T_0\) arbitrarily large at fixed multiplicity; it simply saturates at \(c_M\).
 
-\subsubsection{Drell--Yan consequence}
+\subsection{Complete process examples}
 
-The local Drell--Yan analysis in Sec.~\ref{subsubsec:dy-illustration} can now be integrated over
-$\mathcal T_0$.  In the saturated region,
+\subsubsection{Drell--Yan illustration}
+\label{subsubsec:dy-illustration}
+
+For Drell--Yan double-real kinematics, the relevant configuration is \(\Ph_2\), and therefore
+\begin{equation}
+\mathcal T_1(\Ph_2)
+\le\frac{1}{2}\,\mathcal T_0(\Ph_2),
+\qquad
+0\le z=\frac{\mathcal T_1}{\mathcal T_0}\le\frac12.
+\label{eq:dy-t1-t0-bound}
+\end{equation}
+The higher-cut transition consequently occurs at
+\begin{equation}
+\mathcal T_0=2\,\mathcal T_1^{\cut}.
+\label{eq:dy-t1cut-transition}
+\end{equation}
+
+
+Drell--Yan production provides a useful illustration. Taking
+\begin{equation}
+\rn=\mathcal T_0,
+\qquad
+\rnp=\mathcal T_1,
+\qquad
+Q\sim M_{\ell\ell},
+\label{eq:dy-resolution-identification}
+\end{equation}
+the vector-boson rapidity is preserved by the projection in both the FKS and $\mathcal T_0^{\mathrm FR}$-preserving mappings and therefore has no migration of the type discussed
+here. On the other end, the transverse momenta of the decay leptons are IRC safe but are not preserved by either mapping. For the local singular spectrum at fixed \(\mathcal T_0\), two features are important. First,
+Eq.~\eqref{eq:dy-t1-t0-bound} guarantees that the physical ratio \(\mathcal T_1/\mathcal T_0\) never exceeds
+\(1/2\) on the \(\Ph_2\) configurations relevant to the higher projection, independently of the ratio of the
+two technical cuts. Second, since both maps have uniform nested infrared locality, the exact and projected states
+approach the same Born configuration as \(\mathcal T_0\to0\) for all finite allowed values
+\(0\le\mathcal T_1/\mathcal T_0\le1/2\). IRC safety then implies that the absolute displacement of the lepton
+transverse momentum vanishes in this common unresolved limit.
+
+
+The important exception is the region
+\begin{equation}
+p_{T,\ell}\simeq \frac{M_{\ell\ell}}{2},
+\label{eq:dy-sudakov-shoulder}
+\end{equation}
+which corresponds to the Born kinematic endpoint and develops a Sudakov shoulder once QCD radiation is
+included. There the spectrum varies rapidly and its fixed-order derivatives are enhanced. Consequently the
+local variation scale in Eq.~\eqref{eq:local-variation-scale} becomes small. A projection-induced shift
+\(\Delta p_{T,\ell}\) can therefore be much smaller than \(M_{\ell\ell}\) and still be comparable to the
+scale over which the spectrum changes. Large local discrepancies near the shoulder are thus compatible with
+a map satisfying uniform nested infrared locality: they need not signal a failure of the nested unresolved
+limit, but rather a nonuniform response of the measurement to a small kinematic migration. Very close to the
+shoulder, where
+\begin{equation}
+\left|p_{T,\ell}-\frac{M_{\ell\ell}}{2}\right|
+\lesssim
+|\Delta p_{T,\ell}|,
+\label{eq:shoulder-migration-region}
+\end{equation}
+one should not expect the linearized measurement expansion to be quantitatively reliable; the exact
+migration across the shoulder must be retained.
+
+In summary, these two sources of nonuniformity should therefore be kept conceptually separate. Strong ordering can fail
+because neighboring resolution scales remain at a finite ratio inside their allowed kinematic domain, in
+which case uniform nested infrared locality controls the simultaneous unresolved limit. Independently, even
+an IRC-safe observable can have a nonuniform differential response to a uniformly vanishing displacement when
+its spectrum contains a sharp kinematic feature. For the \(\mathcal T_1/\mathcal T_0\) pair there is in
+addition the multiplicity-dependent kinematic bound in Eq.~\eqref{eq:t1-t0-multiplicity-bound}. The
+Drell--Yan behavior described above is consistent with the combination of this kinematic restriction and
+nested locality away from the shoulder, while the largest local projection differences in the lepton
+transverse-momentum distribution can still arise from the nonuniform response near the shoulder.
+
+\subsubsection{Drell--Yan consequence}
 
 If \(\mathcal T_1^{\cut}\) is held fixed while \(\mathcal T_0^{\cut}\) is made much smaller, the higher cut
 becomes kinematically inactive near the lower endpoint and the fully allowed interval
@@ -1755,9 +1512,195 @@ does not generate a growing cut-ratio enhancement. The transition to a cut-limit
 residual integrated scale associated with the saturated region is parametrically set by
 \((2\mathcal T_1^{\cut}/Q)^{q_i}\), up to logarithms and finite coefficients.
 
+\subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} illustration}
+\label{subsubsec:z1jet-illustration}
+
+For a three-parton configuration, relevant for the next multiplicity in the colour-singlet-plus-jet NNLO
+calculation, Eq.~\eqref{eq:t1-t0-multiplicity-bound} instead gives
+\(\mathcal T_1/\mathcal T_0\le2/3\).
+
+
+The colour-singlet-plus-jet case provides a more stringent test of the higher projection than Drell--Yan.
+For the NNLO $Z+1$-jet calculation the relevant multiplicities and neighboring resolution variables are
+\begin{equation}
+\Ph_1\leftrightarrow Z+1\text{ parton},\qquad
+\Ph_2\leftrightarrow Z+2\text{ partons},\qquad
+\Ph_3\leftrightarrow Z+3\text{ partons},
+\label{eq:z1j-multiplicities}
+\end{equation}
+with
+\begin{equation}
+\rnm=\mathcal T_0\ \mathrm{or}\ q_T ,\qquad
+\rn=\mathcal T_1,\qquad
+\rnp=\mathcal T_2.
+\label{eq:z1j-resolution-identification}
+\end{equation}
+The LHE replacement relevant here is therefore
+\begin{equation}
+\Ph_3\longrightarrow
+\widehat\Ph_2=\Pi_2(\Ph_3)
+\qquad
+\text{for }\mathcal T_2<\mathcal T_2^{\cut}.
+\label{eq:z1j-higher-projection}
+\end{equation}
+The simultaneous lower unresolved limit is conveniently described by
+\begin{equation}
+\epsilon=\frac{\mathcal T_1}{Q}\to0,
+\qquad
+z=\frac{\mathcal T_2}{\mathcal T_1}=\mathcal O(1).
+\label{eq:z1j-simultaneous-limit}
+\end{equation}
+For the axis-minimized jettiness variables on a three-parton configuration,
+Eq.~\eqref{eq:njettiness-nested-pair-bound} gives the kinematic restriction
+\begin{equation}
+0\le z\le\frac23.
+\label{eq:z1j-t2-t1-bound}
+\end{equation}
+Thus the physically relevant finite-$z$ region is compact, but it need not be strongly ordered.
+
+A qualitative difference from Drell--Yan is that preserving the colour-singlet momentum does not completely
+fix the limiting $\Ph_1$ point. At one-parton Born level, transverse momentum conservation gives
+\begin{equation}
+\vec p_{T,J}=-\vec q_T,
+\qquad
+p_{T,J}=q_T,
+\label{eq:z1j-born-transverse-balance}
+\end{equation}
+while the longitudinal jet coordinate remains independent at fixed $q^\mu$. Locally one may therefore think
+of the limiting one-jet Born manifold as being characterized by $q^\mu$ together with one additional
+longitudinal coordinate, which may equivalently be represented by the jet rapidity or, in a suitable region,
+by $\mathcal T_0$. Schematically, for a beam-thrust-like definition,
+\begin{equation}
+\mathcal T_0(\Ph_1)
+\sim
+q_T\,e^{-|y_J-Y_Z|},
+\label{eq:z1j-t0-born-coordinate}
+\end{equation}
+up to the precise convention used for the resolution measure. Hence preservation of $q^\mu$ alone does not
+imply preservation of the complete one-jet Born configuration.
+
+This point is directly relevant for a $\mathcal T_1^{\rm FR}$ projection that preserves the vector-boson
+four-momentum and the lower resolution variable $\mathcal T_1$ at leading power, but does not preserve $\mathcal T_0$ exactly.
+The latter fact by itself does \emph{not} imply a failure of uniform nested infrared locality. The decisive
+quantity is the scaling of
+\begin{equation}
+\Delta\mathcal T_0
+=
+\mathcal T_0(\Ph_3)
+-
+\mathcal T_0\!\left(\Pi_2(\Ph_3)\right)
+\label{eq:z1j-delta-t0}
+\end{equation}
+along the finite-$z$ paths of Eq.~\eqref{eq:z1j-simultaneous-limit}. A nested-local map may perfectly well
+satisfy
+\begin{equation}
+\frac{\Delta\mathcal T_0}{Q}
+\sim
+\left(\frac{\mathcal T_1}{Q}\right)^q
+h_0(z,\omega),
+\qquad q>0,
+\label{eq:z1j-t0-nested-local-scaling}
+\end{equation}
+with $h_0$ finite over the allowed range $0\le z\le2/3$. By contrast, a nonzero finite limit
+\begin{equation}
+\lim_{\mathcal T_1\to0}
+\frac{\Delta\mathcal T_0}{Q}
+=h_0(z,\omega)\neq0
+\qquad
+\text{at fixed }z>0
+\label{eq:z1j-t0-nested-failure}
+\end{equation}
+would demonstrate that exact and projected configurations approach different points of the limiting
+$\Ph_1$ manifold.
+
+The geometric reason why this question is not answered by exact preservation of $\mathcal T_1$ is simple.
+The condition $\mathcal T_1\to0$ measures the approach to the one-jet manifold, and is therefore naturally
+viewed as controlling a direction normal to that manifold. Every point of $\Ph_1$ has $\mathcal T_1=0$.
+Preserving $\mathcal T_1$ consequently does not by itself prevent a displacement tangential to $\Ph_1$,
+for example in the jet rapidity or $\mathcal T_0$ direction. Uniform nested infrared locality requires that
+such tangential displacements vanish as the common unresolved scale is taken to zero.
+
+{\bfseries We should look carefully in our mapping and determine whether this property is present or not.}
+
+Jet observables introduce a second effect that is logically distinct from the locality of the projection map.
+The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization,
+whereas the analysis commonly uses inclusive anti-$k_T$ jets. The anti-$k_T$ measurement is only piecewise
+smooth in phase space: the clustering history changes across boundaries where two candidate distances become
+equal, for example $d_{ij}=d_{kB}$, while the identity of the leading jet changes across
+\begin{equation}
+p_{T,j_a}=p_{T,j_b}.
+\label{eq:z1j-leading-jet-boundary}
+\end{equation}
+These are codimension-one boundaries, since one equality separates neighboring phase-space regions with
+different clustering or jet ordering. IRC safety guarantees the correct soft and collinear limit, but not
+uniform differentiability of the measurement across such boundaries.
+
+A particularly relevant boundary is the analysis requirement $p_{T,j_1}>p_T^{\min}$. For the projection-induced
+shift $\Delta p_{T,j_1}=p_{T,j_1}(\Ph_3)-p_{T,j_1}(\widehat\Ph_2)$ one has distributionally
+\begin{equation}
+\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
+-
+\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
+\simeq
+-\Delta p_{T,j_1}\,
+\delta\!\left(p_{T,j_1}-p_T^{\min}\right).
+\label{eq:z1j-pt-threshold-migration}
+\end{equation}
+Thus a parametrically small displacement can generate a sizeable relative correction when the jet spectrum
+is steep or the event lies close to a clustering, ordering or acceptance boundary. This enhancement does not
+by itself signal a failure of nested locality: for a smooth underlying distribution the phase-space layer
+that changes classification still shrinks with the size of the displacement.
+
+There is nevertheless an important asymptotic protection for the leading-jet transverse momentum if the
+$\mathcal T_1^{\rm FR}$ map preserves $q^\mu$. In the strict one-jet limit both exact and projected
+configurations must satisfy Eq.~\eqref{eq:z1j-born-transverse-balance}, independently of the jet rapidity.
+Therefore, provided both configurations genuinely approach a one-jet limit,
+\begin{equation}
+\Delta p_{T,j_1}\longrightarrow0
+\qquad
+(\mathcal T_1\to0,\ z\text{ finite}),
+\label{eq:z1j-leading-pt-protected}
+\end{equation}
+even if the limiting jet rapidities differ. A persistent nonzero plateau in $\Delta p_{T,j_1}$ would thus
+signal a stronger problem than the mere non-preservation of $\mathcal T_0$. By contrast, a plateau in
+$\Delta y_{j_1}$ or in $\Delta\mathcal T_0/Q$ at fixed finite $z$ would directly diagnose a failure to
+approach the same point on the one-jet Born manifold.
+
+
+The decisive test of the nested-locality properties of the two mappings is local: apply both projections to
+the same exact $\Ph_3$ configurations and study, in bins of
+\begin{equation}
+z=\frac{\mathcal T_2}{\mathcal T_1},
+\label{eq:z1j-z-diagnostic}
+\end{equation}
+the approach to the lower unresolved limit of
+\begin{equation}
+\frac{\Delta\mathcal T_0}{Q},
+\qquad
+\Delta y_{j_1}^{\rm anti-k_T},
+\qquad
+\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q}.
+\label{eq:z1j-local-diagnostics}
+\end{equation}
+A positive-power fall with $\mathcal T_1/Q$ establishes nested locality for the corresponding coordinate,
+whereas a nonzero plateau at fixed finite $z$ signals its failure. For the fiducial jet cuts one should
+separately monitor the signed classification migration
+\begin{equation}
+\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
+-
+\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
+\label{eq:z1j-signed-threshold-migration}
+\end{equation}
+for the relevant values of $p_T^{\min}$.
+
+
+The $Z+1$-jet example therefore illustrates why exact preservation of the chosen resolution variable is only
+one part of a robust event projection. The map must also approach the correct point of the lower Born manifold
+in all tangential coordinates relevant to the measurement, while the observable itself must be examined for
+nonuniform response near jet-clustering and fiducial boundaries.
+
 \subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} consequence}
 
-The local map and jet-response diagnostics were discussed in Sec.~\ref{subsubsec:z1jet-illustration}.
 For the actual NNLO LHE comparison, the numerical hierarchy of the technical cuts must be treated using their
 actual definitions. In the
 setup considered here the lower cut is dynamical,
