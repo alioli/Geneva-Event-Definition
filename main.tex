@@ -129,7 +129,7 @@ for the two successive projections.
 
 Two logically distinct notions of map consistency will be important:
 \begin{enumerate}[label=(\alph*)]
-\item \emph{differential locality}: preservation, at least at LP, of variables in which the singular lower-multiplicity prediction is kept differential;
+\item \emph{differential locality}: preservation, to the accuracy required by the construction, of variables in which the singular lower-multiplicity prediction is kept differential;
 \item \emph{fiducial-boundary preservation}: avoidance of migration across any lower-multiplicity cut that is part of the process definition.
 \end{enumerate}
 The first requirement can be relevant even when no generation cut exists; the second is conditional on such a boundary being present.
@@ -158,14 +158,15 @@ C_{N+2}(\Ph_{N+2})\Mcal(\widehat\Ph_{N+1})
 \end{align}
 
 The important point is that this is a dynamically exact NLO calculation.
-There is no replacement
+In particular, there is no replacement
 \begin{equation}
 R_{N+2}\longrightarrow R_{N+2}^{\rm LP}(\rnp)
 \label{eq:no-lp-rnp}
 \end{equation}
-in this contribution.
-Hence, in the setup considered here, there is no genuine dynamical LP truncation associated with
-\(\rnp^{\cut}\).
+in this contribution. Equation~\eqref{eq:no-lp-rnp} is only an illustrative LP example of the more general
+statement: the higher separation \(\rnp^{\cut}\) does not replace the exact real-emission dynamics by any
+truncated power-expanded approximation. Hence there is no dynamical truncation remainder associated with
+\(\rnp^{\cut}\) in the setup considered here.
 
 \section{Fixed-order analysis versus LHE event generation dependence on  \texorpdfstring{\(r_{N+1}^{\rm cut}\)}{rN+1cut}}
 
@@ -923,9 +924,9 @@ Sec.~\ref{sec:fixed-order-nested-slicing}.
 \label{sec:nnlo-differential-predictions}
 
 This section completes the LHE-specific problem studied in Sec.~\ref{sec:higher-singular-spectrum}. The
-higher cut $\rnp^{\cut}$ does not represent a dynamical LP approximation in the underlying fixed-order
-calculation. A dependence on it appears here only because, for the LHE sample, the measurement on exact
-$\Ph_{N+2}$ kinematics is replaced below the cut by the measurement on the projected
+higher cut $\rnp^{\cut}$ does not truncate or approximate the fixed-order dynamics: it merely partitions the
+dynamically exact NLO $(N+1)$ contribution. A dependence on it appears here only because, for the LHE sample,
+the measurement on exact $\Ph_{N+2}$ kinematics is replaced below the cut by the measurement on the projected
 $\widehat\Ph_{N+1}$ event. The resulting effect is therefore a \emph{kinematic event-definition effect}.
 It is absent if the same NNLO calculation is analyzed purely at fixed order with exact partonic kinematics.
 
