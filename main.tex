@@ -841,6 +841,35 @@ The higher technical cut is kinematically inactive whenever
 \end{equation}
 and becomes the limiting upper bound only above this value.
 
+Equation~\eqref{eq:t1-cut-inactive} is useful because it identifies the scale at which the role of the
+higher-multiplicity technical cut changes qualitatively. For
+\(\mathcal T_0<\mathcal T_1^{\cut}/c_M\), the kinematic bound
+\(\mathcal T_1\le c_M\mathcal T_0\) is stronger than the imposed cut
+\(\mathcal T_1<\mathcal T_1^{\cut}\). Hence every physically allowed configuration at that value of
+\(\mathcal T_0\) automatically lies below the higher cut. The latter is therefore completely inactive, and
+the projected region covers the full allowed finite-ratio interval
+\[
+0\le z=\frac{\mathcal T_1}{\mathcal T_0}\le c_M.
+\]
+In particular, making the nominal ratio
+\(\mathcal T_1^{\cut}/\mathcal T_0\) larger does not open an ever larger hierarchy in \(z\): once the
+kinematic bound is saturated, the physically accessible ratio simply remains bounded by \(c_M\).
+
+Conversely, for
+\(\mathcal T_0>\mathcal T_1^{\cut}/c_M\), the technical cut becomes the restrictive condition and
+\[
+z_{\max}=\frac{\mathcal T_1^{\cut}}{\mathcal T_0}<c_M.
+\]
+As \(\mathcal T_0\) is increased further above \(\mathcal T_1^{\cut}\), this ratio becomes parametrically
+small and the strongly ordered description becomes appropriate. Equation~\eqref{eq:t1-cut-inactive}
+therefore identifies the transition between a lower-\(\mathcal T_0\) region in which finite-\(z\)
+configurations are fully present and an upper region in which the higher cut itself enforces strong ordering.
+It also tells us immediately whether a ``saturated'' finite-\(z\) interval exists above the lower technical
+boundary: this happens only if
+\(\mathcal T_0^{\cut}<\mathcal T_1^{\cut}/c_M\).
+This observation is what allows the subsequent \(\mathcal T_0\) integration to be separated into regions
+with genuinely different power counting.
+
 
 \subsection{Observable response to projection-induced migrations}
 \label{subsec:observable-response-projection}
@@ -883,9 +912,9 @@ and the effect is better viewed as migration across the feature rather than as a
 The preceding discussion deliberately stops at the singular spectrum differential in $\rn$.
 It concerns a problem that is specific to the \emph{LHE event definition}: below $\rnp^{\cut}$ an exact
 $\Ph_{N+2}$ configuration is discarded and the projected $\widehat\Ph_{N+1}$ configuration is retained as the
-physical event representative.  In a pure fixed-order calculation the same higher-multiplicity partition is
+physical event representative. In a pure fixed-order calculation the same higher-multiplicity partition is
 only an internal organization of an exact NLO contribution and does not generate this residual projection
-effect.  We now integrate the fixed-$\rn$ result to obtain its consequences for NNLO LHE observables.  The
+effect. We now integrate the fixed-$\rn$ result to obtain its consequences for NNLO LHE observables. The
 separate question of genuine slicing power corrections in a pure fixed-order NNLO calculation, and of using
 such a sliced NNLO result inside an $\mathrm{N}^3\mathrm{LO}$ slicing calculation, is postponed to
 Sec.~\ref{sec:fixed-order-nested-slicing}.
@@ -893,14 +922,14 @@ Sec.~\ref{sec:fixed-order-nested-slicing}.
 \section{From the lower singular spectrum to NNLO LHE observables}
 \label{sec:nnlo-differential-predictions}
 
-This section completes the LHE-specific problem studied in Sec.~\ref{sec:higher-singular-spectrum}.  The
+This section completes the LHE-specific problem studied in Sec.~\ref{sec:higher-singular-spectrum}. The
 higher cut $\rnp^{\cut}$ does not represent a dynamical LP approximation in the underlying fixed-order
-calculation.  A dependence on it appears here only because, for the LHE sample, the measurement on exact
+calculation. A dependence on it appears here only because, for the LHE sample, the measurement on exact
 $\Ph_{N+2}$ kinematics is replaced below the cut by the measurement on the projected
-$\widehat\Ph_{N+1}$ event.  The resulting effect is therefore a \emph{kinematic event-definition effect}.
+$\widehat\Ph_{N+1}$ event. The resulting effect is therefore a \emph{kinematic event-definition effect}.
 It is absent if the same NNLO calculation is analyzed purely at fixed order with exact partonic kinematics.
 
-The local analysis of Sec.~\ref{sec:higher-singular-spectrum} kept $\rn$ differential.  We now perform the
+The local analysis of Sec.~\ref{sec:higher-singular-spectrum} kept $\rn$ differential. We now perform the
 logically separate integration over the resolved region,
 \begin{equation}
 \left.\Delta_{\rm proj}^{(\rnp)}\frac{d\sigma}{dX_i}\right|_{\rn>\rn^{\cut}}
@@ -910,8 +939,8 @@ logically separate integration over the resolved region,
 \label{eq:integrated-higher-projection-definition}
 \end{equation}
 This integration converts the local behavior of the singular $\rn$ spectrum into a finite-cut dependence of
-NNLO LHE distributions.  It should not be confused with the lower-region approximation used in a sliced
-fixed-order NNLO calculation.  That second problem contains both genuine dynamical power corrections and
+NNLO LHE distributions. It should not be confused with the lower-region approximation used in a sliced
+fixed-order NNLO calculation. That second problem contains both genuine dynamical power corrections and
 kinematic projection power corrections and is discussed only in Sec.~\ref{sec:fixed-order-nested-slicing}.
 
 \subsection{Higher $\Ph_{N+2}\to\widehat\Ph_{N+1}$ LHE projection}
@@ -1065,7 +1094,7 @@ cuts are taken to zero together.
 \subsubsection{Axis-minimized $N$-jettiness}
 
 Using the kinematic bounds derived in Sec.~\ref{subsec:uniform-nested-locality}, the corresponding integrated
-region is obtained only after the fixed-$\mathcal T_0$ spectrum has been understood.  In particular,
+region is obtained only after the fixed-$\mathcal T_0$ spectrum has been understood. In particular,
 
 If \(\mathcal T_0^{\cut}<\mathcal T_1^{\cut}/c_M\), the interval in which the kinematic bound rather than
 the technical \(\mathcal T_1\) cut sets the full allowed \(z\) range is
@@ -1224,7 +1253,7 @@ Eq.~\eqref{eq:njettiness-nested-pair-bound} gives the kinematic restriction
 \end{equation}
 Thus the physically relevant finite-$z$ region is compact, but it need not be strongly ordered.
 
-In the setup considered here $q_T$ is the actual lower process-defining variable.  The quantity
+In the setup considered here $q_T$ is the actual lower process-defining variable. The quantity
 $\mathcal T_0$ introduced below is not used as a generation cut; it is only a useful diagnostic coordinate
 for identifying the point approached on the limiting one-jet Born manifold.
 
@@ -1442,8 +1471,8 @@ this shows that the large residual is map dependent. The jet measurement can amp
 by itself be its primary origin.
 
 The observed hierarchy between the two mappings does not by itself establish a formal failure of uniform
-nested infrared locality.  The $\mathcal T_1^{\rm FR}$ map could instead be nested-local with a larger
-coefficient or a slower approach to the simultaneous unresolved limit than FKS.  The event-by-event scaling
+nested infrared locality. The $\mathcal T_1^{\rm FR}$ map could instead be nested-local with a larger
+coefficient or a slower approach to the simultaneous unresolved limit than FKS. The event-by-event scaling
 test of Eq.~\eqref{eq:z1j-local-diagnostics}, performed at fixed finite $z$, is the appropriate way to
 distinguish these possibilities.
 
@@ -1472,12 +1501,12 @@ coefficient would indicate slow but formally acceptable convergence.
 \section{Pure fixed-order slicing and nested sliced calculations}
 \label{sec:fixed-order-nested-slicing}
 
-The discussion now changes problem.  Sections~\ref{sec:higher-singular-spectrum} and
+The discussion now changes problem. Sections~\ref{sec:higher-singular-spectrum} and
 \ref{sec:nnlo-differential-predictions} concerned the replacement of an exact configuration by a projected
-\emph{physical LHE event}.  In a pure fixed-order calculation projections play a different role: they are
-auxiliary devices used to organize subtraction or to evaluate the LP contribution below a slicing cut.  If
+\emph{physical LHE event}. In a pure fixed-order calculation projections play a different role: they are
+auxiliary devices used to organize subtraction or to evaluate the LP contribution below a slicing cut. If
 exact and projected terms are kept correlated, kinematic information lost by the projection can in principle
-be restored.  What cannot be restored in this way is dynamics that was never retained because the cross
+be restored. What cannot be restored in this way is dynamics that was never retained because the cross
 section itself was replaced by its leading-power expansion.
 
 It is therefore useful to separate from the outset two kinds of slicing power corrections,
@@ -1493,7 +1522,7 @@ It is therefore useful to separate from the outset two kinds of slicing power co
 \end{equation}
 where $\Delta_{\rm dyn}^{(\rn)}$ denotes the genuine dynamical error of the LP expansion in $\rn$, while
 $\Delta_{\rm kin}^{(\rn)}$ denotes the error induced by evaluating the measurement on projected
-lower-multiplicity kinematics.  Projection-to-Born can restore the second contribution, but not the first.
+lower-multiplicity kinematics. Projection-to-Born can restore the second contribution, but not the first.
 
 \subsection{What a slicing cut does in a pure fixed-order NNLO calculation}
 \label{subsec:fixed-order-nnlo-slicing}
@@ -1515,7 +1544,7 @@ The difference
 \frac{d\Sigma_{N,\rm LP}^{\rm NNLO}}{d\Ph_N}(\rn^{\cut})
 \label{eq:dynamic-pc}
 \end{equation}
-is a genuine dynamical power correction.  Schematically,
+is a genuine dynamical power correction. Schematically,
 \begin{equation}
 \Delta_{\rm dyn}^{(\rn)}
 \sim
@@ -1524,9 +1553,9 @@ is a genuine dynamical power correction.  Schematically,
 \qquad q>0,
 \label{eq:dynamic-pc-scaling}
 \end{equation}
-when $Q$ is the relevant finite hard scale.  This error is present even for a completely inclusive
-measurement of the Born variables.  It is not caused by a recoil prescription or by a mismatch between exact
-and projected kinematics, and no P2B correction can reconstruct it.  Removing it requires taking a smaller
+when $Q$ is the relevant finite hard scale. This error is present even for a completely inclusive
+measurement of the Born variables. It is not caused by a recoil prescription or by a mismatch between exact
+and projected kinematics, and no P2B correction can reconstruct it. Removing it requires taking a smaller
 slicing cut, calculating subleading-power terms, or otherwise improving the dynamical approximation.
 
 There is separately a kinematic power correction whenever exact higher-multiplicity kinematics are replaced
@@ -1536,7 +1565,7 @@ inside the measurement by a projection,
 \Mcal\!\left(\Pi_N(\Ph_{N+1})\right).
 \label{eq:fixed-order-lower-measurement-projection}
 \end{equation}
-This part is observable dependent and includes ordinary fiducial power corrections.  Unlike
+This part is observable dependent and includes ordinary fiducial power corrections. Unlike
 Eq.~\eqref{eq:dynamic-pc}, it can be restored at fixed order by keeping the exact and projected measurements
 correlated.
 
@@ -1554,27 +1583,27 @@ classes of power corrections associated with its \emph{outer} cut,
 \label{eq:n3lo-outer-pc-decomposition}
 \end{equation}
 Here $\Delta_{\rm dyn}^{(\rnm)}$ is the genuine subleading-power error of the outer LP factorization theorem,
-while $\Delta_{\rm kin}^{(\rnm)}$ is caused by dropping exact kinematic dependence below the outer cut.  At
+while $\Delta_{\rm kin}^{(\rnm)}$ is caused by dropping exact kinematic dependence below the outer cut. At
 fixed order a suitable P2B construction can restore the latter, including fiducial migrations, but it cannot
-restore the former.  This statement is independent of how the resolved NNLO ingredient is computed.
+restore the former. This statement is independent of how the resolved NNLO ingredient is computed.
 
 There is then a \emph{second}, nested issue if the NNLO ingredient required above the outer cut is itself
-obtained from a slicing calculation.  Consider an outer $\mathrm{N}^3\mathrm{LO}$ calculation sliced in
-$\rnm$.  Its resolved region requires an NNLO prediction for multiplicity $N$ that is differential in the
+obtained from a slicing calculation. Consider an outer $\mathrm{N}^3\mathrm{LO}$ calculation sliced in
+$\rnm$. Its resolved region requires an NNLO prediction for multiplicity $N$ that is differential in the
 outer resolution variable and in the Born-like coordinates,
 \begin{equation}
 \frac{d\sigma_N^{\rm NNLO}}
 {d\rnm\,d\mathbf X}.
 \label{eq:nnlo-ingredient-for-n3lo}
 \end{equation}
-Suppose this NNLO ingredient is itself obtained with a slicing calculation in $\rn$.  Then the relevant
-internal approximation is the \emph{lower-multiplicity NNLO cut} $\rn^{\cut}$.  It is this cut that can
+Suppose this NNLO ingredient is itself obtained with a slicing calculation in $\rn$. Then the relevant
+internal approximation is the \emph{lower-multiplicity NNLO cut} $\rn^{\cut}$. It is this cut that can
 contaminate the singular spectrum in $\rnm$ needed by the outer calculation.
 
 By contrast, an additional $\rnp^{\cut}$ used only to organize the exact NLO $(N+1)$ contribution inside the
-embedded NNLO calculation is not a new fixed-order slicing approximation.  When both sides of that partition
+embedded NNLO calculation is not a new fixed-order slicing approximation. When both sides of that partition
 are treated with exact kinematics and the local and integrated subtraction terms are combined consistently,
-its dependence cancels.  Thus, for a pure fixed-order nested calculation, the potentially problematic
+its dependence cancels. Thus, for a pure fixed-order nested calculation, the potentially problematic
 neighboring hierarchy is
 \begin{equation}
 \boxed{
@@ -1582,20 +1611,20 @@ neighboring hierarchy is
 }
 \label{eq:relevant-inner-outer-hierarchy}
 \end{equation}
-not $\rnp^{\cut}$ versus $\rn$.  The latter becomes a physical issue only when the projected
+not $\rnp^{\cut}$ versus $\rn$. The latter becomes a physical issue only when the projected
 $\widehat\Ph_{N+1}$ configuration is retained as an LHE event, as in Secs.~\ref{sec:higher-singular-spectrum}
 and \ref{sec:nnlo-differential-predictions}.
 
 For the outer slicing to inherit the correct singular structure, the sliced NNLO ingredient must reproduce
-Eq.~\eqref{eq:nnlo-ingredient-for-n3lo} with an error that is sufficiently suppressed as $\rnm\to0$.  Both
-parts of Eq.~\eqref{eq:fixed-order-pc-decomposition} must therefore be examined in the nested limit.  P2B can
+Eq.~\eqref{eq:nnlo-ingredient-for-n3lo} with an error that is sufficiently suppressed as $\rnm\to0$. Both
+parts of Eq.~\eqref{eq:fixed-order-pc-decomposition} must therefore be examined in the nested limit. P2B can
 remove the kinematic part; the dynamical part remains and may itself become nonuniform if the relevant scale
 of the inner unresolved limit is set by $\rnm$ rather than by a fixed hard scale.
 
 \subsection{Toy model for the locality of the embedded subtraction}
 \label{subsec:nested-slicing-toy-model}
 
-The original locality issue is most transparent in a simple toy model.  In the lower unresolved region of
+The original locality issue is most transparent in a simple toy model. In the lower unresolved region of
 the embedded NNLO calculation, take the singular contribution schematically as
 \begin{equation}
 \frac{d\sigma_{N+1}^{\rm sing}}
@@ -1606,7 +1635,7 @@ F\!\left(\rnm,\mathbf X,
 \ln\frac{\rn}{Q},\ldots\right).
 \label{eq:nested-toy-singular}
 \end{equation}
-The outer calculation needs the dependence on $\rnm$ and $\mathbf X$ to remain correct.  Define the
+The outer calculation needs the dependence on $\rnm$ and $\mathbf X$ to remain correct. Define the
 exact-minus-projected displacements
 \begin{align}
 \Delta\rnm(\Ph_{N+1})
@@ -1623,7 +1652,7 @@ X_i(\Ph_{N+1})
 X_i\!\left(\Pi_N(\Ph_{N+1})\right).
 \label{eq:delta-x-lower-map}
 \end{align}
-Linearizing the measurement mismatch gives two distinct migration operators.  After integrating the inner
+Linearizing the measurement mismatch gives two distinct migration operators. After integrating the inner
 unresolved region, the kinematic contribution has the schematic form
 \begin{align}
 \Delta_{\rm kin}^{(\rn)}
@@ -1643,9 +1672,9 @@ unresolved region, the kinematic contribution has the schematic form
 \label{eq:nested-toy-kinematic-migration}
 \end{align}
 The first line is the direct statement of locality of the inner subtraction with respect to the singular
-outer variable $\rnm$.  The second line shows that preserving the singular variable alone is not sufficient
+outer variable $\rnm$. The second line shows that preserving the singular variable alone is not sufficient
 for a fully differential prediction: migrations in Born-like variables also modify the coefficient of the
-$\rnm$ singular spectrum.  If an $X_i$ is integrated over its full range, its derivative term reduces to a
+$\rnm$ singular spectrum. If an $X_i$ is integrated over its full range, its derivative term reduces to a
 boundary contribution and can disappear; the $\rnm$ dependence, however, is intrinsic to the outer slicing
 problem.
 
@@ -1662,7 +1691,7 @@ let a generic kinematic displacement obey
 \qquad p>0,
 \label{eq:nested-toy-kinematic-scaling}
 \end{equation}
-where $Y$ stands for either $\rnm$ or one of the $X_i$.  Then Eq.~\eqref{eq:nested-toy-kinematic-migration}
+where $Y$ stands for either $\rnm$ or one of the $X_i$. Then Eq.~\eqref{eq:nested-toy-kinematic-migration}
 contains the neighboring-scale behavior
 \begin{equation}
 \Delta_{\rm kin}^{(\rn)}
@@ -1671,13 +1700,13 @@ contains the neighboring-scale behavior
 \times\hbox{derivatives of the lower singular spectrum},
 \label{eq:nested-toy-kinematic-ratio}
 \end{equation}
-up to logarithms and finite coefficients.  Hence a cut that is harmless at fixed nonzero $\rnm$ can become
-nonuniform as the outer singular limit is approached.  When the outer calculation itself probes
+up to logarithms and finite coefficients. Hence a cut that is harmless at fixed nonzero $\rnm$ can become
+nonuniform as the outer singular limit is approached. When the outer calculation itself probes
 $\rnm\sim\rnm^{\cut}$, the natural ordered expansion parameter becomes
 $\rn^{\cut}/\rnm^{\cut}$.
 
 The same neighboring-scale issue can occur in the genuine dynamical power correction, but with a different
-origin.  If the exact inner singular dynamics differ from their LP expansion by
+origin. If the exact inner singular dynamics differ from their LP expansion by
 \begin{equation}
 \frac{d\sigma^{\rm exact}-d\sigma^{\rm LP}}
 {d\rn\,d\rnm\,d\mathbf X}
@@ -1697,14 +1726,14 @@ then integration below $\rn^{\cut}$ gives parametrically
 D(\rnm,\mathbf X,\ldots),
 \label{eq:nested-toy-dynamic-ratio}
 \end{equation}
-again up to logarithms.  This term is not a migration derivative and cannot be generated by changing the
-measurement function.  It is therefore outside the reach of P2B.
+again up to logarithms. This term is not a migration derivative and cannot be generated by changing the
+measurement function. It is therefore outside the reach of P2B.
 
 \subsection{What P2B restores, and what it cannot restore}
 \label{subsec:p2b-scope}
 
 At fixed order, the kinematic term in Eq.~\eqref{eq:fixed-order-pc-decomposition} can be restored through a
-projection-to-Born construction.  Schematically, suppressing the detailed subtraction structure,
+projection-to-Born construction. Schematically, suppressing the detailed subtraction structure,
 \begin{equation}
 \Delta_{\rm P2B}^{(\rn)}[\Mcal]
 \sim
@@ -1717,33 +1746,33 @@ w_{\rm exact}(\Ph_{N+1})
 \label{eq:p2b-fpc-correlated}
 \end{equation}
 The two measurements are evaluated on the same exact higher-multiplicity phase-space point and carry
-correlated weights.  This exactly targets the kinematic information lost by the projection: fiducial
+correlated weights. This exactly targets the kinematic information lost by the projection: fiducial
 migrations, recoil effects, and the derivative terms in Eq.~\eqref{eq:nested-toy-kinematic-migration}.
 Within the perturbative order for which the exact higher-multiplicity ingredient is available, these
 kinematic power corrections can therefore be recovered at fixed order.
 
-P2B does \emph{not} modify the LP factorization theorem used for the dynamics below $\rn^{\cut}$.  It cannot
+P2B does \emph{not} modify the LP factorization theorem used for the dynamics below $\rn^{\cut}$. It cannot
 supply the missing term $D$ in Eq.~\eqref{eq:nested-toy-dynamic-local}, and hence cannot remove
-$\Delta_{\rm dyn}^{(\rn)}$.  After a P2B restoration the residual slicing dependence of a pure fixed-order
-calculation is therefore the genuine dynamical power correction.  Controlling it requires a sufficiently
+$\Delta_{\rm dyn}^{(\rn)}$. After a P2B restoration the residual slicing dependence of a pure fixed-order
+calculation is therefore the genuine dynamical power correction. Controlling it requires a sufficiently
 small inner cut or explicit subleading-power information.
 
-This distinction is especially important for an embedded NNLO calculation.  Without P2B, both
+This distinction is especially important for an embedded NNLO calculation. Without P2B, both
 $\Delta_{\rm kin}^{(\rn)}$ and $\Delta_{\rm dyn}^{(\rn)}$ must be sufficiently local in the outer singular
-variable.  With P2B, the kinematic part can be restored, but the dynamical part must still reproduce the
+variable. With P2B, the kinematic part can be restored, but the dynamical part must still reproduce the
 required $\rnm$ singular spectrum to the accuracy needed by the outer $\mathrm{N}^3\mathrm{LO}$ subtraction.
 
 \subsection{Optional lower boundaries}
 \label{sec:born-boundaries}
 
-A process-defining lower boundary is an additional kinematic issue, not a new dynamical one.  If, for
+A process-defining lower boundary is an additional kinematic issue, not a new dynamical one. If, for
 example,
 \begin{equation}
 \Theta_B(\Ph_M)=
 \Theta\!\left(\rnm(\Ph_M)-\rnm^{\cut}\right),
 \label{eq:active-born-boundary}
 \end{equation}
-then a lower projection can move an event across that boundary.  For a small displacement,
+then a lower projection can move an event across that boundary. For a small displacement,
 \begin{equation}
 \Theta\!\left(\rnm(\Pi_N\Ph_{N+1})-\rnm^{\cut}\right)
 -
@@ -1754,7 +1783,7 @@ then a lower projection can move an event across that boundary.  For a small dis
 \label{eq:boundary-expansion}
 \end{equation}
 At fixed order this migration belongs to $\Delta_{\rm kin}$ and can be included in the correlated P2B
-restoration.  If no such lower boundary is part of the process definition, this term is absent; the separate
+restoration. If no such lower boundary is part of the process definition, this term is absent; the separate
 requirement of reproducing the differential $\rnm$ spectrum remains.
 
 \subsection{Auxiliary subtraction maps versus physical event projections}
@@ -1865,11 +1894,9 @@ genuine projection effect in the LHE event sample even though the same map could
 an auxiliary fixed-order subtraction map. This is the precise sense in which the mapping requirements for
 GENEVA event generation are stronger than those required for formal fixed-order NNLO accuracy.
 
-
-
 The counterexample above also explains why the higher $\rnp^{\cut}$ projection must not be imported into the
-fixed-order nesting discussion.  As long as $\Pi_{N+1}$ is used only inside the add--subtract organization of
-the exact NLO $(N+1)$ contribution, its auxiliary map dependence cancels.  The stronger simultaneous-limit
+fixed-order nesting discussion. As long as $\Pi_{N+1}$ is used only inside the add--subtract organization of
+the exact NLO $(N+1)$ contribution, its auxiliary map dependence cancels. The stronger simultaneous-limit
 condition derived in Sec.~\ref{subsec:uniform-nested-locality} becomes physically relevant only when the
 projected configuration is retained as an event, not when it is merely an internal subtraction coordinate.
 
@@ -1879,14 +1906,14 @@ The main conclusions are most clearly organized by separating three applications
 
 \begin{enumerate}
 \item \textbf{NNLO LHE event definition.}
-The higher separation $\rnp^{\cut}$ sits inside a dynamically exact NLO $(N+1)$ contribution.  It generates
-no fixed-order LP truncation.  A residual dependence appears only when exact $\Ph_{N+2}$ kinematics below the
+The higher separation $\rnp^{\cut}$ sits inside a dynamically exact NLO $(N+1)$ contribution. It generates
+no fixed-order LP truncation. A residual dependence appears only when exact $\Ph_{N+2}$ kinematics below the
 cut are replaced by a projected $\widehat\Ph_{N+1}$ configuration that is retained as the physical LHE event.
 The relevant questions are then uniform nested locality of $\Pi_{N+1}$, migration of Born-like variables
 $X_i$, and nonuniform observable response near shoulders, jet-clustering boundaries or fiducial cuts.
 
 \item \textbf{Pure fixed-order NNLO slicing.}
-The lower cut $\rn^{\cut}$ does introduce a genuine LP approximation below the cut.  Its error naturally
+The lower cut $\rn^{\cut}$ does introduce a genuine LP approximation below the cut. Its error naturally
 splits into a dynamical part and a kinematic part,
 \[
 \Delta_{\rm slice}^{(\rn)}
@@ -1895,25 +1922,25 @@ splits into a dynamical part and a kinematic part,
 \Delta_{\rm kin}^{(\rn)}.
 \]
 The kinematic part is the loss of exact measurement dependence under the lower projection and can be restored
-with a correlated P2B construction.  The dynamical part is the missing subleading-power QCD contribution to
+with a correlated P2B construction. The dynamical part is the missing subleading-power QCD contribution to
 the LP factorization theorem and cannot be reconstructed by P2B.
 
 \item \textbf{Pure fixed-order $\mathrm{N}^3\mathrm{LO}$ slicing and a sliced NNLO ingredient.}
 The outer $\rnm^{\cut}$ slicing has its own dynamical and kinematic power corrections, exactly as at NNLO:
-P2B can restore the outer kinematic part but not the outer dynamical LP truncation.  If the resolved NNLO
-ingredient is itself sliced, an additional nested requirement appears.  The internal cut that can contaminate
+P2B can restore the outer kinematic part but not the outer dynamical LP truncation. If the resolved NNLO
+ingredient is itself sliced, an additional nested requirement appears. The internal cut that can contaminate
 the lower singular spectrum is $\rn^{\cut}$, the lower-multiplicity cut of the embedded NNLO calculation.
 In a strongly ordered nested region the relevant parameters can be $\rn^{\cut}/\rnm$ and, near the outer
-boundary, $\rn^{\cut}/\rnm^{\cut}$.  Kinematic contamination from the inner slicing can again be removed by
+boundary, $\rn^{\cut}/\rnm^{\cut}$. Kinematic contamination from the inner slicing can again be removed by
 P2B; genuine dynamical contamination remains and must be controlled by the inner cut or by subleading-power
-information.  The still higher $\rnp^{\cut}$ used only inside the exact NLO component is not an additional
+information. The still higher $\rnp^{\cut}$ used only inside the exact NLO component is not an additional
 fixed-order nesting error.
 \end{enumerate}
 
 The same projection map can therefore be perfectly adequate as an auxiliary fixed-order subtraction map and
-yet be inadequate as a physical LHE event map.  Conversely, restoring exact kinematics with P2B can remove
+yet be inadequate as a physical LHE event map. Conversely, restoring exact kinematics with P2B can remove
 all projection-induced kinematic power corrections at fixed order without curing the genuinely dynamical
-power corrections of the slicing expansion.  Keeping these distinctions explicit is essential when several
+power corrections of the slicing expansion. Keeping these distinctions explicit is essential when several
 nested resolution variables are used in GENEVA.
 
 \end{document}
