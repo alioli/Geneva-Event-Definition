@@ -1516,12 +1516,28 @@ This part is observable dependent and includes ordinary fiducial power correctio
 Eq.~\eqref{eq:dynamic-pc}, it can be restored at fixed order by keeping the exact and projected measurements
 correlated.
 
-\subsection{Why a sliced NNLO ingredient is more restrictive inside an \texorpdfstring{$\mathrm{N}^3\mathrm{LO}$}{N3LO} slicing calculation}
+\subsection{Outer $\mathrm{N}^3\mathrm{LO}$ slicing and an embedded sliced NNLO ingredient}
 \label{subsec:n3lo-embedding}
 
-Consider now an outer $\mathrm{N}^3\mathrm{LO}$ calculation sliced in $\rnm$.  Its resolved region requires an
-NNLO prediction for multiplicity $N$ that is differential in the outer resolution variable and in the
-Born-like coordinates,
+A pure fixed-order $\mathrm{N}^3\mathrm{LO}$ calculation sliced directly in $\rnm$ already has the same two
+classes of power corrections associated with its \emph{outer} cut,
+\begin{equation}
+\Delta_{\rm slice}^{(\rnm)}
+=
+\Delta_{\rm dyn}^{(\rnm)}
++
+\Delta_{\rm kin}^{(\rnm)}.
+\label{eq:n3lo-outer-pc-decomposition}
+\end{equation}
+Here $\Delta_{\rm dyn}^{(\rnm)}$ is the genuine subleading-power error of the outer LP factorization theorem,
+while $\Delta_{\rm kin}^{(\rnm)}$ is caused by dropping exact kinematic dependence below the outer cut.  At
+fixed order a suitable P2B construction can restore the latter, including fiducial migrations, but it cannot
+restore the former.  This statement is independent of how the resolved NNLO ingredient is computed.
+
+There is then a \emph{second}, nested issue if the NNLO ingredient required above the outer cut is itself
+obtained from a slicing calculation.  Consider an outer $\mathrm{N}^3\mathrm{LO}$ calculation sliced in
+$\rnm$.  Its resolved region requires an NNLO prediction for multiplicity $N$ that is differential in the
+outer resolution variable and in the Born-like coordinates,
 \begin{equation}
 \frac{d\sigma_N^{\rm NNLO}}
 {d\rnm\,d\mathbf X}.
@@ -1858,14 +1874,16 @@ The kinematic part is the loss of exact measurement dependence under the lower p
 with a correlated P2B construction.  The dynamical part is the missing subleading-power QCD contribution to
 the LP factorization theorem and cannot be reconstructed by P2B.
 
-\item \textbf{A sliced NNLO calculation embedded in an $\mathrm{N}^3\mathrm{LO}$ slicing calculation.}
-The outer calculation requires the NNLO ingredient differential in $\rnm$ and in the Born-like variables.
-The internal cut that can contaminate this lower singular spectrum is $\rn^{\cut}$, the lower-multiplicity cut
-of the embedded NNLO calculation.  In a strongly ordered nested region the relevant parameters can be
-$\rn^{\cut}/\rnm$ and, near the outer boundary, $\rn^{\cut}/\rnm^{\cut}$.  Kinematic contamination can be
-removed by P2B; genuine dynamical contamination remains and must be controlled by the inner cut or by
-subleading-power information.  The still higher $\rnp^{\cut}$ used only inside the exact NLO component is not
-an additional fixed-order nesting error.
+\item \textbf{Pure fixed-order $\mathrm{N}^3\mathrm{LO}$ slicing and a sliced NNLO ingredient.}
+The outer $\rnm^{\cut}$ slicing has its own dynamical and kinematic power corrections, exactly as at NNLO:
+P2B can restore the outer kinematic part but not the outer dynamical LP truncation.  If the resolved NNLO
+ingredient is itself sliced, an additional nested requirement appears.  The internal cut that can contaminate
+the lower singular spectrum is $\rn^{\cut}$, the lower-multiplicity cut of the embedded NNLO calculation.
+In a strongly ordered nested region the relevant parameters can be $\rn^{\cut}/\rnm$ and, near the outer
+boundary, $\rn^{\cut}/\rnm^{\cut}$.  Kinematic contamination from the inner slicing can again be removed by
+P2B; genuine dynamical contamination remains and must be controlled by the inner cut or by subleading-power
+information.  The still higher $\rnp^{\cut}$ used only inside the exact NLO component is not an additional
+fixed-order nesting error.
 \end{enumerate}
 
 The same projection map can therefore be perfectly adequate as an auxiliary fixed-order subtraction map and
