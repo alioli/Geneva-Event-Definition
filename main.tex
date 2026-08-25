@@ -1307,31 +1307,33 @@ such tangential displacements vanish as the common unresolved scale is taken to 
 {\bfseries We should look carefully in our mapping and determine whether this property is present or not.}
 
 Jet observables introduce a second effect that is logically distinct from the locality of the projection map.
-The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization
-procedure, whereas phenomenological observables are commonly constructed from inclusive anti-$k_T$ jets.
-Consequently, exact preservation of $\mathcal T_1$ does not imply preservation of the anti-$k_T$ leading-jet
-momentum or rapidity. Moreover, the anti-$k_T$ measurement contains non-smooth codimension-one surfaces,
-including the analysis threshold
+The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization,
+whereas the analysis commonly uses inclusive anti-$k_T$ jets. The anti-$k_T$ measurement is only piecewise
+smooth in phase space: the clustering history changes across boundaries where two candidate distances become
+equal, for example $d_{ij}=d_{kB}$, while the identity of the leading jet changes across
 \begin{equation}
-p_{T,j_1}=p_T^{\min},
-\label{eq:z1j-jet-threshold-surface}
+p_{T,j_a}=p_{T,j_b}.
+\label{eq:z1j-leading-jet-boundary}
 \end{equation}
-clustering boundaries and changes in the identity of the leading jet. IRC safety ensures a well-defined
-unresolved limit, but it does not make the differential response to a small projection displacement uniform
-across such surfaces. For the threshold measurement one has distributionally
+These are codimension-one boundaries, since one equality separates neighboring phase-space regions with
+different clustering or jet ordering. IRC safety guarantees the correct soft and collinear limit, but not
+uniform differentiability of the measurement across such boundaries.
+
+A particularly relevant boundary is the analysis requirement $p_{T,j_1}>p_T^{\min}$. For the projection-induced
+shift $\Delta p_{T,j_1}=p_{T,j_1}(\Ph_3)-p_{T,j_1}(\widehat\Ph_2)$ one has distributionally
 \begin{equation}
 \Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
 -
 \Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
 \simeq
 -\Delta p_{T,j_1}\,
-\delta\!\left(p_{T,j_1}-p_T^{\min}\right),
+\delta\!\left(p_{T,j_1}-p_T^{\min}\right).
 \label{eq:z1j-pt-threshold-migration}
 \end{equation}
-with the sign convention
-$\Delta p_{T,j_1}=p_{T,j_1}(\Ph_3)-p_{T,j_1}(\widehat\Ph_2)$.
-A steeply falling jet spectrum can therefore amplify a parametrically small kinematic migration into a
-large relative change of a fiducial cross section.
+Thus a parametrically small displacement can generate a sizeable relative correction when the jet spectrum
+is steep or the event lies close to a clustering, ordering or acceptance boundary. This enhancement does not
+by itself signal a failure of nested locality: for a smooth underlying distribution the phase-space layer
+that changes classification still shrinks with the size of the displacement.
 
 There is nevertheless an important asymptotic protection for the leading-jet transverse momentum if the
 $\mathcal T_1^{\rm FR}$ map preserves $q^\mu$. In the strict one-jet limit both exact and projected
@@ -1400,16 +1402,30 @@ finite-$z$ region spanning the two decades that a naive comparison of $10^{-5}$ 
 At larger $m_T^Z$ the ratio in Eq.~\eqref{eq:z1j-cut-ratio} decreases and the higher cut enforces a progressively
 stronger restriction on $z$ already near the lower boundary.
 
-This observation is useful when interpreting the numerically large LHE projection effects found in observables
-involving the hardest anti-$k_T$ jet, including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV.
-Differences at the level of tens of percent cannot be attributed solely to a parametrically huge ratio of the
-technical cuts. They may instead arise from one or a combination of three effects: a genuine failure of
-uniform nested locality in tangential one-jet Born coordinates; a nested-local but slowly convergent recoil
-map; or amplification of a small kinematic displacement by the steep jet spectrum and the non-smooth
-anti-$k_T$ measurement boundaries.
+The event sample is defined with the generation cut
+\begin{equation}
+q_T>q_T^{\rm gen}=10^{-3}\ {\rm GeV}.
+\label{eq:z1j-generation-cut}
+\end{equation}
+Both the FKS and the $\mathcal T_1^{\rm FR}$ mappings considered here preserve $q_T$, and therefore preserve
+this process-defining boundary exactly. The observed LHE differences cannot consequently be attributed to a
+migration across the generation cut; the non-preservation of $\mathcal T_0$ by the $\mathcal T_1^{\rm FR}$ map
+is relevant instead as a diagnostic of motion along the limiting one-jet Born manifold.
 
-The most direct diagnostic is to apply the competing $\Ph_3\to\Ph_2$ projections, for example an FKS map
-and the $\mathcal T_1^{\rm FR}$ map, to the same exact $\Ph_3$ points and study, in bins of
+The direct comparison of mappings is particularly informative. For
+$\mathcal T_2^{\cut}=10^{-3}\ {\rm GeV}$ the LHE differences obtained with the FKS mapping are much smaller than
+those obtained with the $\mathcal T_1^{\rm FR}$ mapping for observables involving the hardest anti-$k_T$ jet,
+including analyses with $p_{T,j}^{\min}=10$, $50$ and $100$ GeV. For both mappings the differences grow when
+$\mathcal T_2^{\cut}$ is increased, becoming much larger for $\mathcal T_2^{\cut}=1\ {\rm GeV}$, but the
+$\mathcal T_1^{\rm FR}$ residual remains substantially larger even at the smallest cut. Since the two mappings
+are exposed to the same anti-$k_T$ clustering and threshold boundaries and preserve the same generation cut,
+this shows that the large residual is map dependent. The jet measurement can amplify the migration, but cannot
+by itself be its primary origin.
+
+This pattern does not yet establish a formal failure of uniform nested infrared locality. The
+$\mathcal T_1^{\rm FR}$ map could instead be nested-local with a larger coefficient or a slower approach to the
+simultaneous unresolved limit than FKS. The decisive next test is therefore local: apply both projections to
+the same exact $\Ph_3$ configurations and study, in bins of
 \begin{equation}
 z=\frac{\mathcal T_2}{\mathcal T_1},
 \label{eq:z1j-z-diagnostic}
