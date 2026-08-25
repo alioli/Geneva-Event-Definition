@@ -3,67 +3,73 @@ from pathlib import Path
 p = Path('main.tex')
 t = p.read_text()
 
-# The two process examples are now self-contained. Remove the old internal
-# 'consequence' headings so each process reads as one continuous discussion.
-for heading in [
-    '\\subsubsection{Drell--Yan consequence}\n\n',
-    '\\subsubsection{\\texorpdfstring{$Z+1$-jet}{Z+1-jet} consequence}\n\n',
-]:
-    if t.count(heading) != 1:
-        raise SystemExit(f'expected one obsolete process heading: {heading!r}')
-    t = t.replace(heading, '', 1)
-
-# Give the container subsection a phenomenological title.
-old = '\\subsection{Complete process examples}\n'
-new = '\\subsection{Process-specific NNLO observables}\n'
+# Keep the transition from Sec. 6 concise; Sec. 7 itself gives the full reason
+# for delaying the final r_N integration.
+old = (
+    'The preceding discussion deliberately stops at the singular spectrum differential in $\\rn$. '
+    'Concrete process examples are postponed until Sec.~\\ref{sec:nnlo-differential-predictions}, where '
+    'the $\\rn$ integration and the complete NNLO measurement can be considered together. Before performing '
+    'that integration, however, the representation of the complementary $\\rn<\\rn^{\\cut}$ bin must first '
+    'be examined, which requires the lower projection $\\Pi_N$.\n\n')
+new = (
+    'The preceding discussion deliberately stops at the singular spectrum differential in $\\rn$. '
+    'Before integrating it into a final NNLO observable, the complementary $\\rn<\\rn^{\\cut}$ event '
+    'representation and its lower projection $\\Pi_N$ must first be understood.\n\n')
 if t.count(old) != 1:
-    raise SystemExit('process-example subsection heading not found uniquely')
+    raise SystemExit('Sec. 6 to Sec. 7 bridge not found uniquely')
 t = t.replace(old, new, 1)
 
-# The K=0 Phi_3 specialization is true but not the bound relevant to the
-# higher Z+1j projection; the relevant neighboring bound T2/T1<=2/3 is derived
-# explicitly a few lines later. Remove the distracting specialization here.
-old = (
-    'For a three-parton configuration, relevant for the next multiplicity in the colour-singlet-plus-jet NNLO\n'
-    'calculation, Eq.~\\eqref{eq:t1-t0-multiplicity-bound} instead gives\n'
-    '\\(\\mathcal T_1/\\mathcal T_0\\le2/3\\).\n\n\n')
-if t.count(old) != 1:
-    raise SystemExit('distracting Z+1jet T1/T0 specialization not found uniquely')
-t = t.replace(old, '', 1)
+# Clarify the role of the r_N integration in the lower-map section. It is used
+# to expose the next-lower singular spectrum, not yet to construct d sigma/dX.
+marker = r'''\label{eq:lower-map-migration-master}
+\end{equation}
+'''
+addition = r'''\label{eq:lower-map-migration-master}
+\end{equation}
+The integration over $\rn$ in Eq.~\eqref{eq:lower-map-migration-master} should not be confused with the
+final integration that constructs an NNLO distribution in the physical observables $\mathbf X$.  Here it is
+performed only to expose how the lower projection feeds into the next lower singular spectrum, which remains
+differential in $\rnm$.
+'''
+if t.count(marker) != 1:
+    raise SystemExit('lower-map master equation marker not found uniquely')
+t = t.replace(marker, addition, 1)
 
-# In the lower-map strong-ordering estimate the r_{N-1} derivative acts on
-# the full r_{N-1}-dependent bracket, including the neighboring-scale power.
+# In the actual Z+1jet setup the process-defining lower variable is q_T.
 old = r'''\begin{equation}
-\Delta_{\Pi_N}
-\frac{d\sigma}{d\rnm}
-\sim
-\frac{1}{p}
-\left(\frac{\rn^{\cut}}{\rnm}\right)^p
-\partial_{\rnm}
-\left[
-r_{N-1,\rm char}\,\widetilde F(\rnm,\mathbf X)
-\right].
-\label{eq:lower-map-integrated-scaling}
+\rnm=\mathcal T_0\ \mathrm{or}\ q_T ,\qquad
+\rn=\mathcal T_1,\qquad
+\rnp=\mathcal T_2.
+\label{eq:z1j-resolution-identification}
 \end{equation}
 '''
 new = r'''\begin{equation}
-\Delta_{\Pi_N}
-\frac{d\sigma}{d\rnm}
-\sim
-\frac{1}{p}
-\partial_{\rnm}
-\left[
-r_{N-1,\rm char}\,\widetilde F(\rnm,\mathbf X)
-\left(\frac{\rn^{\cut}}{\rnm}\right)^p
-\right].
-\label{eq:lower-map-integrated-scaling}
+\rnm=q_T,\qquad
+\rn=\mathcal T_1,\qquad
+\rnp=\mathcal T_2.
+\label{eq:z1j-resolution-identification}
 \end{equation}
 '''
 if t.count(old) != 1:
-    raise SystemExit('lower-map integrated scaling equation not found uniquely')
+    raise SystemExit('Z+1jet resolution identification not found uniquely')
 t = t.replace(old, new, 1)
 
-# Remove the obsolete 'toy' terminology from the label as well.
-t = t.replace('sec:lower-map-toy', 'subsec:lower-spectrum-migration')
+# T0 remains useful only as a diagnostic coordinate on the limiting one-jet
+# manifold; it is not an active generation variable in this setup.
+marker = r'''Thus the physically relevant finite-$z$ region is compact, but it need not be strongly ordered.
+
+A qualitative difference from Drell--Yan is that preserving the colour-singlet momentum does not completely
+'''
+addition = r'''Thus the physically relevant finite-$z$ region is compact, but it need not be strongly ordered.
+
+In the setup considered here $q_T$ is the actual lower process-defining variable.  The quantity
+$\mathcal T_0$ introduced below is not used as a generation cut; it is only a useful diagnostic coordinate
+for identifying the point approached on the limiting one-jet Born manifold.
+
+A qualitative difference from Drell--Yan is that preserving the colour-singlet momentum does not completely
+'''
+if t.count(marker) != 1:
+    raise SystemExit('Z+1jet diagnostic-coordinate insertion point not found uniquely')
+t = t.replace(marker, addition, 1)
 
 p.write_text(t)
