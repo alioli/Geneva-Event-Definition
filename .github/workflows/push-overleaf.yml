@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths-ignore:
-      - '.github/**'
 
 permissions:
   contents: read
@@ -21,10 +19,6 @@ env:
 
 jobs:
   sync:
-    # Commits produced by the inverse Overleaf -> GitHub sync already
-    # originate from Overleaf and must not be sent back again. Other bot
-    # commits (for example a scripted edit of main.tex) are allowed.
-    if: github.event.head_commit.message != 'Sync changes from Overleaf'
     runs-on: ubuntu-latest
 
     steps:
@@ -70,27 +64,44 @@ jobs:
           echo "GIT_ASKPASS=$ASKPASS" >> "$GITHUB_ENV"
           echo "GIT_TERMINAL_PROMPT=0" >> "$GITHUB_ENV"
 
-      - name: Build the GitHub change patch
+      - name: Build the GitHub project-file patch
         shell: bash
         env:
           BASE_SHA: ${{ github.event.before }}
           HEAD_SHA: ${{ github.sha }}
+          HEAD_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           set -euo pipefail
 
-          # Apply only the changes introduced by this GitHub push. The
-          # workflow itself is deliberately excluded from the Overleaf tree.
-          git diff --binary "$BASE_SHA" "$HEAD_SHA" -- . ':(exclude).github/**' \
-            > "$RUNNER_TEMP/github-to-overleaf.patch"
+          PATCH="$RUNNER_TEMP/github-to-overleaf.patch"
+          : > "$PATCH"
 
-          if [[ ! -s "$RUNNER_TEMP/github-to-overleaf.patch" ]]; then
-            echo "No project-file changes to send to Overleaf."
+          # A commit created by the inverse Overleaf -> GitHub sync already
+          # originates from Overleaf. Run the job normally, but do not send it
+          # back to Overleaf and create a loop.
+          if [[ "$HEAD_MESSAGE" == "Sync changes from Overleaf" ]]; then
+            echo "Commit originated from Overleaf; nothing to send back."
+            exit 0
           fi
 
-      - name: Fetch Overleaf first and apply the GitHub changes
+          # Send only project-file changes. Repository automation files never
+          # belong in the Overleaf project tree.
+          git diff --binary "$BASE_SHA" "$HEAD_SHA" -- . ':(exclude).github/**' > "$PATCH"
+
+          if [[ ! -s "$PATCH" ]]; then
+            echo "This push contains no project-file changes to send to Overleaf."
+          fi
+
+      - name: Fetch current Overleaf state and apply the patch
         shell: bash
         run: |
           set -euo pipefail
+
+          PATCH="$RUNNER_TEMP/github-to-overleaf.patch"
+          if [[ ! -s "$PATCH" ]]; then
+            echo "Nothing to synchronize."
+            exit 0
+          fi
 
           git remote add overleaf "$OVERLEAF_REMOTE"
 
@@ -105,19 +116,11 @@ jobs:
           echo "Using Overleaf branch: $OVERLEAF_BRANCH"
           git fetch --prune overleaf "$OVERLEAF_BRANCH"
 
-          # Work on top of the current Overleaf branch, not on top of the
-          # possibly stale GitHub copy. This preserves edits made directly
-          # in Overleaf.
+          # Always apply the GitHub patch on top of the current Overleaf HEAD.
+          # If the same lines were edited independently in Overleaf, --3way
+          # fails instead of overwriting those edits.
           git switch --detach "overleaf/$OVERLEAF_BRANCH"
 
-          PATCH="$RUNNER_TEMP/github-to-overleaf.patch"
-          if [[ ! -s "$PATCH" ]]; then
-            exit 0
-          fi
-
-          # --3way uses the GitHub pre-push blobs as the merge base. If the
-          # same lines were edited independently in Overleaf, the job fails
-          # with a conflict instead of overwriting either version.
           if ! git apply --3way --index "$PATCH"; then
             echo "::error::The GitHub changes conflict with edits already present in Overleaf. Nothing was pushed."
             git status --short
@@ -125,7 +128,7 @@ jobs:
           fi
 
           if git diff --cached --quiet; then
-            echo "Overleaf already contains these changes."
+            echo "Overleaf already contains these project-file changes."
             exit 0
           fi
 
