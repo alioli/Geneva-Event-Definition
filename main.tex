@@ -1050,7 +1050,7 @@ of $\rn/\rnm$.  This condition concerns the differential structure of the lower 
 present whether or not a cut on $\rnm$ is imposed.
 
 \subsection{Migration of the singular \texorpdfstring{$r_{N-1}$}{rN-1} spectrum}
-\label{sec:lower-map-toy}
+\label{subsec:lower-spectrum-migration}
 
 The consequence of a nonzero $\Delta\rnm$ can be derived directly, without introducing a separate toy
 variable.  Schematically, the singular $(N+1)$-parton contribution in the lower unresolved region has the
@@ -1107,10 +1107,10 @@ reshuffling and finite coefficients gives
 \frac{d\sigma}{d\rnm}
 \sim
 \frac{1}{p}
-\left(\frac{\rn^{\cut}}{\rnm}\right)^p
 \partial_{\rnm}
 \left[
 r_{N-1,\rm char}\,\widetilde F(\rnm,\mathbf X)
+\left(\frac{\rn^{\cut}}{\rnm}\right)^p
 \right].
 \label{eq:lower-map-integrated-scaling}
 \end{equation}
@@ -1431,7 +1431,7 @@ this saturated interval exists for \(\kappa>c_M\), and the common-scale factor b
 up to logarithms and finite coefficients. Hence a large ratio of the technical cuts cannot make the physical
 ratio \(\mathcal T_1/\mathcal T_0\) arbitrarily large at fixed multiplicity; it simply saturates at \(c_M\).
 
-\subsection{Complete process examples}
+\subsection{Process-specific NNLO observables}
 
 \subsubsection{Drell--Yan illustration}
 \label{subsubsec:dy-illustration}
@@ -1502,8 +1502,6 @@ Drell--Yan behavior described above is consistent with the combination of this k
 nested locality away from the shoulder, while the largest local projection differences in the lepton
 transverse-momentum distribution can still arise from the nonuniform response near the shoulder.
 
-\subsubsection{Drell--Yan consequence}
-
 If \(\mathcal T_1^{\cut}\) is held fixed while \(\mathcal T_0^{\cut}\) is made much smaller, the higher cut
 becomes kinematically inactive near the lower endpoint and the fully allowed interval
 \(0\le\mathcal T_1/\mathcal T_0\le1/2\) is sampled there. Lowering \(\mathcal T_0^{\cut}\) further therefore
@@ -1514,11 +1512,6 @@ residual integrated scale associated with the saturated region is parametrically
 
 \subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} illustration}
 \label{subsubsec:z1jet-illustration}
-
-For a three-parton configuration, relevant for the next multiplicity in the colour-singlet-plus-jet NNLO
-calculation, Eq.~\eqref{eq:t1-t0-multiplicity-bound} instead gives
-\(\mathcal T_1/\mathcal T_0\le2/3\).
-
 
 The colour-singlet-plus-jet case provides a more stringent test of the higher projection than Drell--Yan.
 For the NNLO $Z+1$-jet calculation the relevant multiplicities and neighboring resolution variables are
@@ -1698,8 +1691,6 @@ The $Z+1$-jet example therefore illustrates why exact preservation of the chosen
 one part of a robust event projection. The map must also approach the correct point of the lower Born manifold
 in all tangential coordinates relevant to the measurement, while the observable itself must be examined for
 nonuniform response near jet-clustering and fiducial boundaries.
-
-\subsubsection{\texorpdfstring{$Z+1$-jet}{Z+1-jet} consequence}
 
 For the actual NNLO LHE comparison, the numerical hierarchy of the technical cuts must be treated using their
 actual definitions. In the
