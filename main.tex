@@ -435,13 +435,10 @@ shift dimensionless. We denote this normalized migration by
 \]
 The lowercase subscript labels the normalized version of the shift in \(X_i\); it does not introduce a new
 kinematic variable \(x_i\). The characteristic scale \(X_{i,\rm char}\) is a fixed local reference scale,
-introduced only to normalize the migration. For each underlying Born point it is chosen before performing
-the \(X_i\)-migration expansion and is then held fixed under the migration derivative below. It may depend
-parametrically on the reference Born kinematics, including the reference value of \(X_i\), only provided
-that it remains uniformly finite and bounded away from zero throughout the region under consideration. In
-particular, choices such as \(X_{i,\rm char}=|X_i|\) are not admissible in a region where \(X_i\) can vanish.
-Unlike the physical hard scale \(Q(\mathbf X)\), \(X_{i,\rm char}\) is not a dynamical function on which the
-\(X_i\) derivative acts.
+introduced only to normalize the migration. It may depend parametrically on the reference Born kinematics,
+including the reference value of \(X_i\), only provided that it remains uniformly finite and bounded away
+from zero throughout the region under consideration. In particular, choices such as
+\(X_{i,\rm char}=|X_i|\) are not admissible in a region where \(X_i\) can vanish.
 
 If the map approaches the exact kinematics smoothly, the relative migration can then have a generic nested
 scaling
@@ -476,9 +473,10 @@ The origin of the migration derivative can be seen directly by expanding the mea
 \delta\!\left(X_i-X_i(\Ph_{N+2})\right).
 \]
 Here \(\mathbf X_{\neq i}\) denotes all Born variables other than \(X_i\). The derivative is taken at fixed
-\(\rn\) and \(\mathbf X_{\neq i}\). Hence \(\ln(\rnp^{\cut}/\rn)\) is independent of \(X_i\) and is pulled
-outside the derivative, whereas \(\ln[\rn/Q(\mathbf X)]\) remains inside because the hard scale can depend on
-the Born kinematics.
+\(\rn\) and \(\mathbf X_{\neq i}\). The reference scale \(X_{i,\rm char}\) is fixed at the underlying Born
+point before applying this expansion and is therefore not acted on by the derivative. Similarly,
+\(\ln(\rnp^{\cut}/\rn)\) is independent of \(X_i\) and is pulled outside the derivative, whereas
+\(\ln[\rn/Q(\mathbf X)]\) remains inside because the physical hard scale can depend on the Born kinematics.
 
 Combining the measurement expansion with Eqs.~\eqref{eq:double-singular} and \eqref{eq:delta-x-scaling}, and
 integrating the higher unresolved region up to \(\rnp^{\cut}\), gives parametrically
