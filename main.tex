@@ -69,12 +69,11 @@ It is useful to encode this optional restriction in a generic Born-level accepta
 \ThetaB(\Ph_M)=
 \begin{cases}
 1, & \text{no lower Born-level restriction},\\[2mm]
-\Theta\!\left(\rnm^{(M)}(\Ph_M)-\rnm^{\cut}\right),
+\Theta\!\left(\rnm(\Ph_M)-\rnm^{\cut}\right),
 & \text{if the restriction \eqref{eq:born-cut} is imposed},
 \end{cases}
 \label{eq:thetaB}
 \end{equation}
-where \(\rnm^{(M)}\) denotes the extension of the lower resolution variable to multiplicity \(M\).
 
 At NNLO one then introduces the technical resolution cuts
 \begin{equation}
@@ -94,7 +93,9 @@ cut & role \\
 \end{tabular}
 \end{center}
 
-\section{Measurement functions and projection maps}
+\section{Higher-multiplicity NLO contribution and LHE projections}
+
+\subsection{Measurement functions and projection maps}
 
 For a generic observable we write
 \begin{equation}
@@ -127,14 +128,7 @@ We shall use
 \end{equation}
 for the two successive projections.
 
-Two logically distinct notions of map consistency will be important:
-\begin{enumerate}[label=(\alph*)]
-\item \emph{differential locality}: preservation, to the accuracy required by the construction, of variables in which the singular lower-multiplicity prediction is kept differential;
-\item \emph{fiducial-boundary preservation}: avoidance of migration across any lower-multiplicity cut that is part of the process definition.
-\end{enumerate}
-The first requirement can be relevant even when no generation cut exists; the second is conditional on such a boundary being present.
-
-\section{Exact NLO higher-multiplicity contribution}
+\subsection{Exact NLO higher-multiplicity contribution}
 
 For \(\rn>\rn^{\cut}\), the NNLO construction contains the NLO prediction for multiplicity \(N+1\).
 With a local subtraction term \(C_{N+2}\),
@@ -168,7 +162,7 @@ statement: the higher separation \(\rnp^{\cut}\) does not replace the exact real
 truncated power-expanded approximation. Hence there is no dynamical truncation remainder associated with
 \(\rnp^{\cut}\) in the setup considered here.
 
-\section{Fixed-order analysis versus LHE event generation dependence on  \texorpdfstring{\(r_{N+1}^{\rm cut}\)}{rN+1cut}}
+\subsection{Fixed-order analysis versus LHE event generation dependence on \texorpdfstring{\(r_{N+1}^{\rm cut}\)}{rN+1cut}}
 
 The phase-space identity
 \begin{equation}
@@ -216,7 +210,7 @@ This is an observable-dependent kinematic effect induced by the LHE projection. 
 confused with the fiducial power corrections appearing in a projection-to-Born construction for the
 lower \(N+1\to N\) projection at fixed-order NNLO.
 
-\section{Observables preserved and violated by the  NLO projection}
+\subsection{Observables preserved and violated by the NLO projection}
 
 Suppose a particular Born-like variable \(X_i\) is exactly preserved by \(\Pi_{N+1}\),
 \begin{equation}
