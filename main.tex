@@ -716,14 +716,14 @@ lower scale by writing
 G_i\!\left(\mathbf X,\ln\frac{\rn}{Q(\mathbf X)};z_{\max}\right)
 =
 \sum_m
-\ln^m\!\frac{Q(\mathbf X)}{\rn}\,
+\ln^m\!\frac{\rn}{Q(\mathbf X)}\,
 G_{i,m}(\mathbf X;z_{\max}),
 \label{eq:Gi-log-decomposition}
 \end{equation}
 where the coefficients \(G_{i,m}\) contain the integration over \(z\) and the remaining radiation variables,
 including \(h_i\). They may themselves contain finite logarithms associated with the \(z\) integration or
 with a Born-dependent endpoint \(z_{\max}\); such dependence is part of the coefficient and is differentiated
-when it depends on \(X_i\). The powers of \(\ln[Q(\mathbf X)/\rn]\) also remain inside the \(X_i\) derivative.
+when it depends on \(X_i\). The powers of \(\ln[\rn/Q(\mathbf X)]\) also remain inside the \(X_i\) derivative.
 
 Combining Eq.~\eqref{eq:simultaneous-singular-measure} with the power-like realization of uniform nested
 infrared locality then gives schematically
@@ -740,7 +740,7 @@ X_{i,\rm char}\,
 \left[
 \left(\frac{\rn}{Q(\mathbf X)}\right)^{q_i}
 G_{i,m}(\mathbf X;z_{\max})\,
-\ln^m\!\frac{Q(\mathbf X)}{\rn}
+\ln^m\!\frac{\rn}{Q(\mathbf X)}
 \right].
 \label{eq:uniform-nested-locality-spectrum}
 \end{equation}
@@ -753,16 +753,17 @@ Eq.~\eqref{eq:uniform-nested-locality-spectrum}. They can become numerically lar
 of a fixed-order expansion if they are not resummed, but they do not by themselves change the power
 classification of the \(\rn\) singularity. For every finite logarithmic power \(m\) and every \(q_i>0\),
 \[
-\left(\frac{\rn}{Q}\right)^{q_i}
-\ln^m\!\frac{Q}{\rn}
+\left(\frac{\rn}{Q(\mathbf X)}\right)^{q_i}
+\ln^m\!\frac{\rn}{Q(\mathbf X)}
 \longrightarrow0
-\qquad (\rn/Q\to0).
+\qquad (\rn/Q(\mathbf X)\to0).
 \]
 Thus the logarithms can enhance and modify the logarithmic structure of the correction, but they cannot
 compensate the positive-power suppression implied by uniform nested locality. Parametrically a term in
 Eq.~\eqref{eq:uniform-nested-locality-spectrum} behaves as
-\(\rn^{q_i-1}L_N^m\): for \(0<q_i<1\) it can still diverge as \(\rn\to0\), but only through an integrable
-singularity weaker than the leading \(1/\rn\) spectrum; for \(q_i=1\) at most a logarithmic singularity remains;
+\(\rn^{q_i-1}\ln^m[\rn/Q(\mathbf X)]\): for \(0<q_i<1\) it can still diverge as \(\rn\to0\), but only
+through an integrable singularity weaker than the leading \(1/\rn\) spectrum; for \(q_i=1\) at most a
+logarithmic singularity remains;
 and for \(q_i>1\) the spectrum-level correction vanishes up to logarithms. An inverse-power growth hidden
 inside one of the \(G_{i,m}\) would instead signal that the assumed nested-local power counting is incomplete,
 for example because an additional singular region has not been isolated.
