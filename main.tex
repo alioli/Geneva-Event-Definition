@@ -588,11 +588,11 @@ resolution variables can impose additional kinematic restrictions on the finite 
 The singular spectrum in this region must therefore be analyzed directly in the simultaneous unresolved
 limit, independently of the later integration over $\rn$.
 
-\subsubsection{Uniform nested infrared locality of the map}
+\subsubsection{Simultaneous limit and uniform nested infrared locality}
 
-To formulate the map property generically, introduce
+To describe the simultaneous region, introduce
 \begin{equation}
-\epsilon=\frac{\rn}{Q},
+\epsilon=\frac{\rn}{Q(\mathbf X)},
 \qquad
 z=\frac{\rnp}{\rn},
 \label{eq:epsilon-z-def}
@@ -610,8 +610,65 @@ z=\mathcal O(1),
 where \(z\) is understood to remain finite inside the kinematically allowed domain of the particular
 resolution variables. Thus \(\rn\) and \(\rnp\) approach zero together rather than hierarchically.
 
-It is useful to distinguish clearly a property of the projection map from a property of the measured
-observable. Ordinary one-step infrared locality of \(\Pi_{N+1}\) requires that, at fixed nonzero \(\rn\),
+Before imposing any locality property on the projection map, a convenient schematic form of the singular
+measure in this region is
+\begin{equation}
+d\sigma_{N+2}^{\rm sing}
+\sim
+\frac{d\rn}{\rn}\,
+d\mu(z,\omega)\,
+\mathcal F\!\left(
+\mathbf X,z,\omega,
+\ln\epsilon
+\right),
+\label{eq:simultaneous-singular-measure}
+\end{equation}
+where \(d\mu(z,\omega)\) contains the remaining unresolved-emission measure and reduces to a logarithmic
+\(dz/z\)-type measure in the strongly ordered \(z\to0\) limit. No expansion in \(z\) is made when \(z\) is
+finite. Introduce the normalized mismatch
+\[
+H_i(\epsilon,z,\omega)
+\equiv
+\frac{\Delta X_i}{X_{i,\rm char}}.
+\]
+Combining Eq.~\eqref{eq:simultaneous-singular-measure} with the measurement-delta expansion that generates
+the migration derivative gives the general simultaneous-region formula
+\begin{equation}
+\begin{aligned}
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX_i}
+&\sim
+\frac{1}{\rn}
+X_{i,\rm char}\,
+\left.
+\frac{\partial}{\partial X_i}
+\right|_{\rn,\mathbf X_{\neq i}}
+\left[
+\mathcal I_i(\epsilon,\mathbf X;z_{\max})
+\right],
+\\
+\mathcal I_i(\epsilon,\mathbf X;z_{\max})
+&\equiv
+\int_0^{z_{\max}}
+d\mu(z,\omega)\,
+H_i(\epsilon,z,\omega)\,
+\mathcal F(\mathbf X,z,\omega,\ln\epsilon).
+\end{aligned}
+\label{eq:general-simultaneous-migration}
+\end{equation}
+Here \(z_{\max}\) is set jointly by the higher technical cut and the kinematic range. Equation~\eqref{eq:general-simultaneous-migration}
+makes no nested-locality assumption and is the appropriate starting point for any map. If \(H_i\) has a
+nonzero limit over a region of nonvanishing radiation measure, \(\mathcal I_i\) need not contain a positive
+power of \(\epsilon\), and the migration can retain the leading \(1/\rn\) singular power. Pointwise convergence
+at every fixed \(z\) is not sufficient if it is nonuniform: a shrinking region in \(z\) can retain an
+\(\mathcal O(1)\) mismatch, preventing the \(\epsilon\to0\) limit from being interchanged with the radiation
+integral. Such a region must be isolated and power counted separately. A particular observable can still be
+protected by an accidental preservation or cancellation, but this does not provide a generic
+Born-differential event definition.
+
+To obtain map-level control of \(\mathcal I_i\), it is useful to distinguish a property of the projection map
+from a property of the measured observable. Ordinary one-step infrared locality of \(\Pi_{N+1}\) requires
+that, at fixed nonzero \(\rn\),
 removing the additional unresolved emission sends the projected configuration to the same \((N+1)\)-body
 infrared limit as the exact configuration. This controls \(\rnp\to0\) at fixed \(\rn\), but does not by
 itself guarantee uniform behavior when the projected \((N+1)\)-body state simultaneously approaches its own
@@ -671,8 +728,6 @@ rate at which the difference in Eq.~\eqref{eq:irc-safe-consequence-uniform-map} 
 When this approach is power-like, the latter rate can be parametrized as
 \begin{equation}
 H_i(\epsilon,z,\omega)
-\equiv
-\frac{\Delta X_i}{X_{i,\rm char}}
 =
 \epsilon^{q_i}
  h_i(z,\omega)
@@ -680,38 +735,14 @@ H_i(\epsilon,z,\omega)
 \qquad q_i>0,
 \label{eq:uniform-nested-locality-power}
 \end{equation}
-with \(h_i\) finite for finite allowed \(z\). The exponent \(q_i\) is not fixed by IRC safety. It depends on
+with \(h_i\) finite for finite allowed \(z\), and with the expansion understood uniformly over the integrated
+\(z\) domain. The exponent \(q_i\) is not fixed by IRC safety. It depends on
 the recoil prescription, on the resolution variables and on how the particular observable responds to the
 small kinematic displacement. The approach need not even be a pure power; Eq.~\eqref{eq:uniform-nested-locality-power}
-is a convenient parametrization when a power expansion exists. In the overlap with the strongly ordered
-limit one expects
-\begin{equation}
-h_i(z,\omega)\sim z^{p_i}
-\qquad (z\to0),
-\label{eq:uniform-nested-strong-overlap}
-\end{equation}
-up to logarithms and nonsingular coefficients. Equations~\eqref{eq:uniform-nested-locality-power} and
-\eqref{eq:uniform-nested-strong-overlap} make explicit a feature that was not fixed by
-Eq.~\eqref{eq:delta-x-scaling}: the coefficient of the strong-ordering suppression may itself vanish when
-the lower resolution scale becomes unresolved. The strongly ordered estimate therefore describes the
-\(z\)-dependence but need not give the complete power counting in the common unresolved scale.
-
-A convenient schematic form of the singular measure in the simultaneous region is
-\begin{equation}
-d\sigma_{N+2}^{\rm sing}
-\sim
-\frac{d\rn}{\rn}\,
-d\mu(z,\omega)\,
-\mathcal F\!\left(
-\mathbf X,z,\omega,
-\ln\epsilon
-\right),
-\label{eq:simultaneous-singular-measure}
-\end{equation}
-where \(d\mu(z,\omega)\) contains the remaining unresolved-emission measure and reduces to a logarithmic
-\(dz/z\)-type measure in the strongly ordered \(z\to0\) limit. No expansion in \(z\) is made when \(z\) is
-finite. At any fixed perturbative order, it is convenient to separate the explicit logarithms of the common
-lower scale by writing
+is a convenient parametrization when a power expansion exists. Substituting this behavior into the general
+integral in Eq.~\eqref{eq:general-simultaneous-migration}, and then performing the integration over \(z\) and
+the remaining radiation variables, gives a function \(G_i\). At any fixed perturbative order, it is convenient
+to separate its explicit logarithms of the common lower scale by writing
 \begin{equation}
 G_i\!\left(\mathbf X,\ln\frac{\rn}{Q(\mathbf X)};z_{\max}\right)
 =
@@ -723,10 +754,12 @@ G_{i,m}(\mathbf X;z_{\max}),
 where the coefficients \(G_{i,m}\) contain the integration over \(z\) and the remaining radiation variables,
 including \(h_i\). They may themselves contain finite logarithms associated with the \(z\) integration or
 with a Born-dependent endpoint \(z_{\max}\); such dependence is part of the coefficient and is differentiated
-when it depends on \(X_i\). The powers of \(\ln[\rn/Q(\mathbf X)]\) also remain inside the \(X_i\) derivative.
+when it depends on \(X_i\). They need only remain finite in the power-counting sense, but must not contain
+additional inverse powers of \(\epsilon\); such powers would signal a radiation region not isolated in the
+assumed scaling. The powers of \(\ln[\rn/Q(\mathbf X)]\) also remain inside the \(X_i\) derivative.
 
-Combining Eq.~\eqref{eq:simultaneous-singular-measure} with the power-like realization of uniform nested
-infrared locality then gives schematically
+Inserting Eqs.~\eqref{eq:uniform-nested-locality-power} and \eqref{eq:Gi-log-decomposition} into the general
+formula \eqref{eq:general-simultaneous-migration} then gives
 \begin{equation}
 \Delta_{\rm proj}^{(\rnp)}
 \frac{d\sigma}{d\rn\,dX_i}
@@ -744,10 +777,6 @@ G_{i,m}(\mathbf X;z_{\max})\,
 \right].
 \label{eq:uniform-nested-locality-spectrum}
 \end{equation}
-Here \(z_{\max}\) is set jointly by the higher technical cut and the kinematic range. Uniform nested infrared
-locality requires the underlying map mismatch to remain uniformly small over any finite allowed range of
-\(z\). The coefficient functions \(G_{i,m}\) need only remain finite in the power-counting sense; they need
-not be constants, and can contain logarithms generated by the finite or strongly ordered \(z\) integration.
 The common-scale suppression and its explicit large logarithms remain inside the migration derivative in
 Eq.~\eqref{eq:uniform-nested-locality-spectrum}. They can become numerically large and can spoil the usefulness
 of a fixed-order expansion if they are not resummed, but they do not by themselves change the power
@@ -763,46 +792,19 @@ compensate the positive-power suppression implied by uniform nested locality. Pa
 Eq.~\eqref{eq:uniform-nested-locality-spectrum} behaves as
 \(\rn^{q_i-1}\ln^m[\rn/Q(\mathbf X)]\): for \(0<q_i<1\) it can still diverge as \(\rn\to0\), but only
 through an integrable singularity weaker than the leading \(1/\rn\) spectrum; for \(q_i=1\) at most a
-logarithmic singularity remains;
-and for \(q_i>1\) the spectrum-level correction vanishes up to logarithms. An inverse-power growth hidden
-inside one of the \(G_{i,m}\) would instead signal that the assumed nested-local power counting is incomplete,
-for example because an additional singular region has not been isolated.
+logarithmic singularity remains; and for \(q_i>1\) the spectrum-level correction vanishes up to logarithms.
 
-The essential role of uniformity can be seen by considering a map that is local in the strongly ordered
-limit \(z\to0\), but not along all simultaneous-unresolved paths with finite allowed \(z\). If the normalized
-mismatch has a nonzero limit over a region of nonvanishing radiation measure, the positive power in
-Eq.~\eqref{eq:uniform-nested-locality-spectrum} is absent. Schematically,
-\begin{align}
-H_i(\epsilon,z,\omega)
-&\longrightarrow
-h_i^{(0)}(z,\omega)\neq0
-\nonumber\\
-\Delta_{\rm proj}^{(\rnp)}
-\frac{d\sigma}{d\rn\,dX_i}
-&\sim
-\frac{1}{\rn}
-\sum_m
-X_{i,\rm char}\,
-\left.
-\frac{\partial}{\partial X_i}
-\right|_{\rn,\mathbf X_{\neq i}}
-\left[
-G_{i,m}^{(0)}(\mathbf X;z_{\max})\,
-\ln^m\!\frac{\rn}{Q(\mathbf X)}
-\right].
-\label{eq:nonuniform-nested-locality-spectrum}
-\end{align}
-This contribution has the same \(1/\rn\) singular power as the leading spectrum and can modify its
-Born-differential coefficient; it is therefore not a power correction controlled by the common unresolved
-scale.
-
-Pointwise convergence of \(H_i\) at every fixed \(z\) is also insufficient if it is not uniform: a shrinking
-region in \(z\) can retain an \(\mathcal O(1)\) mismatch, so that the \(\epsilon\to0\) limit cannot be
-interchanged with the radiation integral and the resulting coefficient need not be power suppressed. Such a
-region must be isolated and power counted separately. A particular observable may still be protected by an
-accidental preservation or cancellation, but uniform nested infrared locality, together with the power-like
-approach in Eq.~\eqref{eq:uniform-nested-locality-power}, is what makes the conclusion in
-Eq.~\eqref{eq:uniform-nested-locality-spectrum} valid generically for Born-differential measurements.
+In the overlap with the strongly ordered region, consistency with Eq.~\eqref{eq:delta-x-scaling} requires
+\begin{equation}
+h_i(z,\omega)\sim z^{p_i}
+\qquad (z\to0),
+\label{eq:uniform-nested-strong-overlap}
+\end{equation}
+up to logarithms and nonsingular coefficients. This condition is not needed to derive
+Eq.~\eqref{eq:uniform-nested-locality-spectrum}; it connects the simultaneous-region result to the
+strongly ordered estimate. The latter controls the \(z\)-dependence, while
+Eq.~\eqref{eq:uniform-nested-locality-power} supplies the independent suppression in the common unresolved
+scale \(\epsilon\).
 
 
 \subsubsection{Kinematic restriction for minimized \(N\)-jettiness}
