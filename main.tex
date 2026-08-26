@@ -1280,7 +1280,7 @@ up to the precise convention used for the resolution measure. Hence preservation
 imply preservation of the complete one-jet Born configuration.
 
 This point is directly relevant for a $\mathcal T_1^{\rm FR}$ projection that preserves the vector-boson
-four-momentum and the lower resolution variable $\mathcal T_1$ at leading power, but does not preserve $\mathcal T_0$ exactly.
+four-momentum and the lower resolution variable $\mathcal T_1$ by construction, but does not in general preserve $\mathcal T_0$ exactly.
 The latter fact by itself does \emph{not} imply a failure of uniform nested infrared locality. The decisive
 quantity is the scaling of
 \begin{equation}
@@ -1320,7 +1320,7 @@ Preserving $\mathcal T_1$ consequently does not by itself prevent a displacement
 for example in the jet rapidity or $\mathcal T_0$ direction. Uniform nested infrared locality requires that
 such tangential displacements vanish as the common unresolved scale is taken to zero.
 
-{\bfseries We should look carefully in our mapping and determine whether this property is present or not.}
+We return to this locality test after presenting the numerical comparison of the two mappings below.
 
 Jet observables introduce a second effect that is logically distinct from the locality of the projection map.
 The $\mathcal T_1$ resolution variable is defined through its own exclusive clustering or minimization,
@@ -1366,7 +1366,6 @@ signal a stronger problem than the mere non-preservation of $\mathcal T_0$. By c
 $\Delta y_{j_1}$ or in $\Delta\mathcal T_0/Q$ at fixed finite $z$ would directly diagnose a failure to
 approach the same point on the one-jet Born manifold.
 
-
 The decisive test of the nested-locality properties of the two mappings is local: apply both projections to
 the same exact $\Ph_3$ configurations and study, in bins of
 \begin{equation}
@@ -1392,7 +1391,6 @@ separately monitor the signed classification migration
 \label{eq:z1j-signed-threshold-migration}
 \end{equation}
 for the relevant values of $p_T^{\min}$.
-
 
 The $Z+1$-jet example therefore illustrates why exact preservation of the chosen resolution variable is only
 one part of a robust event projection. The map must also approach the correct point of the lower Born manifold
@@ -1471,33 +1469,179 @@ are exposed to the same anti-$k_T$ clustering and threshold boundaries and prese
 this shows that the large residual is map dependent. The jet measurement can amplify the migration, but cannot
 by itself be its primary origin.
 
-The observed hierarchy between the two mappings does not by itself establish a formal failure of uniform
-nested infrared locality. The $\mathcal T_1^{\rm FR}$ map could instead be nested-local with a larger
-coefficient or a slower approach to the simultaneous unresolved limit than FKS. The event-by-event scaling
-test of Eq.~\eqref{eq:z1j-local-diagnostics}, performed at fixed finite $z$, is the appropriate way to
-distinguish these possibilities.
+The numerical hierarchy alone would not establish a formal failure of uniform nested infrared locality.
+However, the explicit mapping formulas allow this question to be settled analytically, as follows.
 
-A complementary cut study can distinguish formal from merely numerical problems. Keeping the dynamical
-$\mathcal T_1^{\cut}=10^{-5}m_T^Z$ fixed, one may lower the higher cut through, for example,
+\paragraph{Analytic diagnosis of the mapping dependence.}
+The relevant distinction is between ordinary one-step locality, which tests $\mathcal T_2\to0$ at fixed
+nonzero $\mathcal T_1$, and the uniform nested condition of Eq.~\eqref{eq:uniform-nested-locality-definition},
+which takes $\mathcal T_1/Q\to0$ at fixed finite $z=\mathcal T_2/\mathcal T_1$.  The standard FKS mapping and
+the $\mathcal T_1^{\rm FR}$ mapping are both one-step infrared local.  They differ, however, in how the
+recoil behaves when the lower and higher unresolved limits are approached simultaneously.
+
+The difference can be exposed explicitly in the ISR$\times$FSR sector of the $\mathcal T_1^{\rm FR}$ map.
+In the colour-singlet frame define
+\begin{equation}
+\mathcal T_{12}
+\equiv
+\hat p_{12}^0-\lvert\hat{\boldsymbol p}_{12}\rvert,
+\qquad
+R_{12}
+\equiv
+\hat p_{12}^0+\lvert\hat{\boldsymbol p}_{12}\rvert.
+\label{eq:z1j-t1fr-t12-R12}
+\end{equation}
+The explicit ISR$\times$FSR construction has
+\begin{equation}
+\mathcal T_2=\hat p_3^{\pm},
+\qquad
+\mathcal T_1=\mathcal T_{12}+\mathcal T_2,
+\label{eq:z1j-t1fr-isrfsr-jettiness}
+\end{equation}
+and imposes on the projected configuration
+\begin{equation}
+\bar q=q,
+\qquad
+\bar p_{12}^{\,2}=p_{12}^{\,2},
+\qquad
+\bar{\mathcal T}_{12}=\mathcal T_1,
+\label{eq:z1j-t1fr-isrfsr-map}
+\end{equation}
+where $\bar{\mathcal T}_{12}=\hat{\bar p}_{12}^0-\lvert\hat{\boldsymbol{\bar p}}_{12}\rvert$.
+Since
+\begin{equation}
+p_{12}^2=\mathcal T_{12}R_{12},
+\qquad
+\bar p_{12}^{\,2}=\bar{\mathcal T}_{12}\bar R_{12},
+\label{eq:z1j-t1fr-mass-factorization}
+\end{equation}
+and at fixed $z$
+\begin{equation}
+\mathcal T_{12}
+=\mathcal T_1-\mathcal T_2
+=(1-z)\mathcal T_1,
+\label{eq:z1j-t1fr-t12-fixed-z}
+\end{equation}
+Eq.~\eqref{eq:z1j-t1fr-isrfsr-map} implies the exact relation
+\begin{equation}
+\boxed{
+\bar R_{12}=(1-z)R_{12}
+}.
+\label{eq:z1j-t1fr-R12-relation}
+\end{equation}
+This is the crucial result.  In the simultaneous unresolved limit the cluster $p_{12}$ approaches the hard
+one-jet momentum, so $R_{12}\to R_{12}^{(0)}=\mathcal O(Q)$ rather than zero.  Hence, along any allowed path
+with fixed nonzero $z$,
+\begin{equation}
+\bar R_{12}-R_{12}
+\longrightarrow
+-zR_{12}^{(0)}
+=\mathcal O(Q),
+\label{eq:z1j-t1fr-hard-mismatch}
+\end{equation}
+and the projected and exact configurations approach different points of the one-jet Born manifold.  The
+ISR$\times$FSR sector therefore violates uniform nested infrared locality.  This does not contradict its
+ordinary infrared locality: if the strongly ordered limit $z\to0$ is taken first,
+Eq.~\eqref{eq:z1j-t1fr-R12-relation} gives $\bar R_{12}/R_{12}\to1$.
+
+This failure can be made directly observable with a smooth Born coordinate.  In the common one-jet limit,
+transverse momentum conservation and exact preservation of $q^\mu$ imply
+$p_{T,J}\to q_T$ for both configurations.  For a massless limiting jet in the colour-singlet frame,
+\begin{equation}
+R_J=2p_{T,J}\cosh(y_J-Y_Z),
+\label{eq:z1j-RJ-rapidity}
+\end{equation}
+so Eq.~\eqref{eq:z1j-t1fr-R12-relation} gives, on the kinematically allowed part of this sector,
+\begin{equation}
+\cosh(\bar y_J-Y_Z)
+=(1-z)\cosh(y_J-Y_Z)
+\qquad (\mathcal T_1/Q\to0,\ z\text{ fixed}).
+\label{eq:z1j-t1fr-rapidity-relation}
+\end{equation}
+The mapping exists only where the right-hand side is compatible with a real projected rapidity; in
+particular one needs $(1-z)\cosh(y_J-Y_Z)\ge1$.  There is nevertheless a finite allowed region satisfying
+this condition, and a single such finite-$z$ family is sufficient to disprove uniform nested locality.
+Equation~\eqref{eq:z1j-t1fr-rapidity-relation} therefore predicts a finite limiting displacement in the jet
+rapidity, and consequently also in other longitudinal Born coordinates such as the jet energy and, generically,
+$\mathcal T_0$ at fixed $q_T$.
+
+This also explains why the failure can be invisible in some observables.  The $\mathcal T_1^{\rm FR}$ map
+preserves $q^\mu$ exactly in the explicit sectors considered here, so $q_T$, $Y_Z$ and the colour-singlet
+invariant mass are blind to the nonlocal tangential recoil.  Moreover, the leading-jet transverse momentum
+is asymptotically protected by $p_{T,J}=q_T$ in the one-jet limit.  By contrast, $y_J$, the jet energy and
+$\mathcal T_0$ can retain a finite displacement.  A map can therefore fail the map-level criterion of
+Eq.~\eqref{eq:uniform-nested-locality-definition} while still being perfectly local for a restricted set of
+observables.
+
+Inspection of the other explicit $\mathcal T_1^{\rm FR}$ sectors does not reveal an analogous hard
+$\mathcal O(Q)$ recoil.  In ISR$\times$ISR the finite changes are carried by momenta that themselves become
+lower-unresolved; in FSR$\times$same-ISR and FSR$\times$different-ISR the light-cone components of the hard
+FSR cluster are inherited directly while the remaining displacement is attached to the lower-unresolved
+parton.  The FSR$\times$FSR sector is stronger still: the map identifies the projected hard parent with the
+full pre-projection parent, $\hat{\bar p}_{12}=\hat p_{123}$.  Thus these sectors are compatible with uniform
+nested locality in regular hard regions.  Nevertheless, the single ISR$\times$FSR counterexample is enough
+to show that the $\mathcal T_1^{\rm FR}$ map does not possess the property globally.
+
+The standard FKS construction behaves differently.  For an initial-state singular region the recoil of the
+hard final state is generated by longitudinal and transverse boosts whose deviation from the identity is
+controlled by the transverse momentum of the unresolved emission.  For a final-state singular region the
+recoil system is likewise boosted so that the clustered parent becomes massless, and that boost tends to the
+identity as the parent virtuality vanishes.  Consequently, when $\mathcal T_1/Q\to0$ and
+$z=\mathcal T_2/\mathcal T_1$ is kept finite, the displacement of any smooth hard Born coordinate vanishes
+with a positive power of the common unresolved scale, provided one stays away from additional singular or
+phase-space boundaries.  In the regular regions relevant here, the FKS map therefore satisfies uniform nested
+infrared locality.  Exact preservation of $\mathcal T_1$ is not required for this statement: FKS may change
+$\mathcal T_1$ by an amount comparable to $\mathcal T_1$ itself while both exact and projected values vanish.
+The resolution variable measures the distance normal to the Born manifold, whereas nested locality requires
+the finite coordinates along that manifold to agree.
+
+\medskip
+\noindent
+\fbox{%
+\parbox{0.94\linewidth}{%
+\textbf{Mapping conclusion for $Z+1$ jet.}
+The $\mathcal T_1^{\rm FR}$ map is ordinarily local in the $\mathcal T_2\to0$ limit and becomes local again
+in the strongly ordered $z\to0$ limit, but it is not uniformly nested-local because its ISR$\times$FSR sector
+contains the finite hard recoil in Eq.~\eqref{eq:z1j-t1fr-R12-relation}.  The FKS map has no analogous finite
+hard recoil and is uniformly nested-local in the regular hard regions relevant to the comparison.  Large
+anti-$k_T$ effects must still be kept conceptually separate: clustering, ordering and $p_T$-threshold
+boundaries can amplify a small displacement for either map, but such observable nonuniformity is not itself a
+failure of map locality.
+}%
+}
+\medskip
+
+The explicit result above sharpens the interpretation of the numerical hierarchy.  The much smaller FKS
+residual is consistent with a genuinely nested-local recoil, while the larger $\mathcal T_1^{\rm FR}$ effect
+has an analytic source that survives at the map level when $\mathcal T_1$ and $\mathcal T_2$ approach zero
+with finite ratio.  The event-by-event diagnostics in Eq.~\eqref{eq:z1j-local-diagnostics} remain valuable as
+a direct numerical confirmation: the ISR$\times$FSR contribution should show a plateau in a sensitive smooth
+coordinate such as $\Delta y_{j_1}$ or $\Delta\mathcal T_0/Q$ at fixed finite $z$, whereas FKS should show a
+positive-power fall away from measurement boundaries.
+
+A complementary cut study then has a more precise interpretation. Keeping the dynamical
+$\mathcal T_1^{\cut}=10^{-5}m_T^Z$ fixed while lowering the higher cut through, for example,
 \begin{equation}
 \mathcal T_2^{\cut}
 =
-10^{-3},\ 5\times10^{-4},\ 2\times10^{-4},\ 10^{-4}\ {\rm GeV}.
+10^{-3},\ 5\times10^{-4},\ 2\times10^{-4},\ 10^{-4}\ {\rm GeV},
 \label{eq:z1j-t2cut-scan}
 \end{equation}
-If the LHE discrepancy decreases with a positive power of $\mathcal T_2^{\cut}$, the projection remains
-formally convergent even if its coefficient is numerically large. An even cleaner nested test is to lower the
-two cuts together at fixed ratio,
+progressively enforces the strongly ordered regime and should therefore reduce the $\mathcal T_1^{\rm FR}$
+problem.  Such a scan tests ordinary strong-ordering convergence, but by itself does not establish uniform
+nested locality.  The cleaner test is to lower the two cuts together at fixed ratio,
 \begin{equation}
 \mathcal T_2^{\cut}
 =\kappa\,\mathcal T_1^{\cut}
 =\kappa\,10^{-5}m_T^Z,
 \label{eq:z1j-correlated-cut-scan}
 \end{equation}
-with fixed $\kappa$. A residual that survives this joint scaling would point to a failure of the LHE event
-representation in the simultaneous unresolved limit, whereas a vanishing residual with a large finite-cut
-coefficient would indicate slow but formally acceptable convergence.
-
+with fixed $\kappa$.  For a uniformly nested-local map such as FKS, hard-coordinate mismatches vanish with the
+common unresolved scale at fixed finite $\kappa$.  In the ISR$\times$FSR sector of the
+$\mathcal T_1^{\rm FR}$ map, by contrast, Eq.~\eqref{eq:z1j-t1fr-R12-relation} shows that the local hard
+mismatch has no positive-power suppression in the common scale at fixed finite $z$.  Integrated observables
+can still exhibit cancellations or additional enhancement from jet boundaries, so the local event-by-event
+test remains the cleanest diagnostic of the map property.
 
 \section{Pure fixed-order slicing and nested sliced calculations}
 \label{sec:fixed-order-nested-slicing}
@@ -1797,7 +1941,6 @@ $\Delta_{\rm kin}^{(\rn)}$ and $\Delta_{\rm dyn,trunc}^{(\rn)}$ must be sufficie
 singular variable. With P2B, the kinematic part can be restored, but the dynamical truncation remainder must
 still reproduce the required $\rnm$ singular spectrum to the accuracy needed by the outer
 $\mathrm{N}^3\mathrm{LO}$ subtraction.
-
 \subsection{Optional lower boundaries}
 \label{sec:born-boundaries}
 
