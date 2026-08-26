@@ -703,7 +703,7 @@ d\sigma_{N+2}^{\rm sing}
 \frac{d\rn}{\rn}\,
 d\mu(z,\omega)\,
 \mathcal F\!\left(
-\mathbf X,\epsilon,z,\omega,
+\mathbf X,z,\omega,
 \ln\epsilon
 \right),
 \label{eq:simultaneous-singular-measure}
@@ -767,6 +767,42 @@ logarithmic singularity remains;
 and for \(q_i>1\) the spectrum-level correction vanishes up to logarithms. An inverse-power growth hidden
 inside one of the \(G_{i,m}\) would instead signal that the assumed nested-local power counting is incomplete,
 for example because an additional singular region has not been isolated.
+
+The essential role of uniformity can be seen by considering a map that is local in the strongly ordered
+limit \(z\to0\), but not along all simultaneous-unresolved paths with finite allowed \(z\). If the normalized
+mismatch has a nonzero limit over a region of nonvanishing radiation measure, the positive power in
+Eq.~\eqref{eq:uniform-nested-locality-spectrum} is absent. Schematically,
+\begin{align}
+H_i(\epsilon,z,\omega)
+&\longrightarrow
+h_i^{(0)}(z,\omega)\neq0
+\nonumber\\
+\Delta_{\rm proj}^{(\rnp)}
+\frac{d\sigma}{d\rn\,dX_i}
+&\sim
+\frac{1}{\rn}
+\sum_m
+X_{i,\rm char}\,
+\left.
+\frac{\partial}{\partial X_i}
+\right|_{\rn,\mathbf X_{\neq i}}
+\left[
+G_{i,m}^{(0)}(\mathbf X;z_{\max})\,
+\ln^m\!\frac{\rn}{Q(\mathbf X)}
+\right].
+\label{eq:nonuniform-nested-locality-spectrum}
+\end{align}
+This contribution has the same \(1/\rn\) singular power as the leading spectrum and can modify its
+Born-differential coefficient; it is therefore not a power correction controlled by the common unresolved
+scale.
+
+Pointwise convergence of \(H_i\) at every fixed \(z\) is also insufficient if it is not uniform: a shrinking
+region in \(z\) can retain an \(\mathcal O(1)\) mismatch, so that the \(\epsilon\to0\) limit cannot be
+interchanged with the radiation integral and the resulting coefficient need not be power suppressed. Such a
+region must be isolated and power counted separately. A particular observable may still be protected by an
+accidental preservation or cancellation, but uniform nested infrared locality, together with the power-like
+approach in Eq.~\eqref{eq:uniform-nested-locality-power}, is what makes the conclusion in
+Eq.~\eqref{eq:uniform-nested-locality-spectrum} valid generically for Born-differential measurements.
 
 
 \subsubsection{Kinematic restriction for minimized \(N\)-jettiness}
