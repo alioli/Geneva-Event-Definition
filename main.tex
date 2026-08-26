@@ -395,17 +395,18 @@ factors and couplings. Equivalently, at fixed order the singular terms generated
 have the familiar schematic form \(\ln^m(r_i/Q_i)/r_i\). Iterating two strongly ordered unresolved limits
 therefore produces a leading singular structure containing one inverse power of each resolution variable.
 We focus on the migration of one particular component \(X_i\) of \(\mathbf X\), while
-\(\mathbf X_{\neq i}\) denotes all the remaining Born-like variables. We use \(\Ph_{\rm rad}\) collectively
-for the remaining radiation variables associated with the unresolved emissions, including energy fractions,
-angles, recoil variables, and any other coordinates needed to parametrize the corresponding splittings.
-This gives schematically
+\(\mathbf X_{\neq i}\) denotes all the remaining Born-like variables. We use
+\(\Ph_{\rm rad}^{\rm rest}\) for the residual radiation variables after \(\rn\) and \(\rnp\) have been
+displayed explicitly. In particular, \(d\Ph_{\rm rad}^{\rm rest}\) does not include \(d\rnp\); it contains
+the remaining energy fractions, angles, recoil variables, and any other coordinates needed to parametrize
+the corresponding splittings, with the associated Jacobian absorbed into \(F\). This gives schematically
 \begin{equation}
 \frac{d\sigma_{N+2}}
-{d\rn\,d\rnp\,dX_i\,d\mathbf X_{\neq i}\,d\Ph_{\rm rad}}
+{d\rn\,d\rnp\,dX_i\,d\mathbf X_{\neq i}\,d\Ph_{\rm rad}^{\rm rest}}
 \sim
 \frac{1}{\rn}\frac{1}{\rnp}
 F\!\left(
-\mathbf X,\Ph_{\rm rad},
+\mathbf X,\Ph_{\rm rad}^{\rm rest},
 \ln\frac{\rn}{Q},
 \ln\frac{\rnp}{\rn}
 \right).
@@ -426,7 +427,14 @@ resolution variable \(\rn\).
 The projection mismatch \(\Delta X_i\) has already been defined in Eq.~\eqref{eq:delta-x-fiducial}. To
 characterize its size, introduce a nonsingular characteristic scale \(X_{i,\rm char}\) associated with the
 particular Born-like variable \(X_i\) whose migration is being studied. Its role is only to render the relative
-shift \(\Delta X_i/X_{i,\rm char}\) dimensionless. The scale \(X_{i,\rm char}\) may depend on the underlying
+shift dimensionless. We denote this normalized migration by
+\[
+\Delta_{x_i}
+\equiv
+\frac{\Delta X_i}{X_{i,\rm char}}.
+\]
+The lowercase subscript labels the normalized version of the shift in \(X_i\); it does not introduce a new
+kinematic variable \(x_i\). The scale \(X_{i,\rm char}\) may depend on the underlying
 Born kinematics \(\mathbf X\), but it should remain finite and nonzero in the region in which the scaling is
 considered. It is treated as an external reference scale, held fixed under the migration derivative below.
 In particular, it should not generically be identified with \(X_i\) itself, since \(X_i\) may vanish in an
@@ -435,9 +443,9 @@ otherwise regular region of phase space.
 If the map approaches the exact kinematics smoothly, the relative migration can then have a generic nested
 scaling
 \begin{equation}
-\frac{\Delta X_i}{X_{i,\rm char}}
+\Delta_{x_i}
 \sim
-c_i(\mathbf X,\Ph_{\rm rad})
+c_i(\mathbf X,\Ph_{\rm rad}^{\rm rest})
 \left(\frac{\rnp}{\rn}\right)^p,
 \qquad p>0,
 \label{eq:delta-x-scaling}
@@ -625,12 +633,7 @@ d\mu(z,\omega)\,
 \end{equation}
 where \(d\mu(z,\omega)\) contains the remaining unresolved-emission measure and reduces to a logarithmic
 \(dz/z\)-type measure in the strongly ordered \(z\to0\) limit. No expansion in \(z\) is made when \(z\) is
-finite. Introduce the normalized mismatch
-\[
-H_i(\epsilon,z,\omega)
-\equiv
-\frac{\Delta X_i}{X_{i,\rm char}}.
-\]
+finite. The normalized migration \(\Delta_{x_i}\) can depend on \(\epsilon\), \(z\), and \(\omega\).
 Combining Eq.~\eqref{eq:simultaneous-singular-measure} with the measurement-delta expansion that generates
 the migration derivative gives the general simultaneous-region formula
 \begin{equation}
@@ -651,13 +654,13 @@ X_{i,\rm char}\,
 &\equiv
 \int_0^{z_{\max}}
 d\mu(z,\omega)\,
-H_i(\epsilon,z,\omega)\,
+\Delta_{x_i}(\epsilon,z,\omega)\,
 \mathcal F(\mathbf X,z,\omega,\ln\epsilon).
 \end{aligned}
 \label{eq:general-simultaneous-migration}
 \end{equation}
 Here \(z_{\max}\) is set jointly by the higher technical cut and the kinematic range. Equation~\eqref{eq:general-simultaneous-migration}
-makes no nested-locality assumption and is the appropriate starting point for any map. If \(H_i\) has a
+makes no nested-locality assumption and is the appropriate starting point for any map. If \(\Delta_{x_i}\) has a
 nonzero limit over a region of nonvanishing radiation measure, \(\mathcal I_i\) need not contain a positive
 power of \(\epsilon\), and the migration can retain the leading \(1/\rn\) singular power. Pointwise convergence
 at every fixed \(z\) is not sufficient if it is nonuniform: a shrinking region in \(z\) can retain an
@@ -680,17 +683,21 @@ limit of Eq.~\eqref{eq:simultaneous-unresolved}, the projected \((N+1)\)-parton 
 \emph{same} underlying \(N\)-parton point, uniformly for finite kinematically allowed values of \(z\).
 Equivalently, for every finite set of smooth IRC-safe coordinates
 \(\mathbf Y=(Y_1,\ldots,Y_s)\) that characterize the relevant lower-multiplicity kinematics, with finite
-nonsingular characteristic scales \(Y_{a,\rm char}\), the map must satisfy
+nonsingular characteristic scales \(Y_{a,\rm char}\), define
+\[
+\Delta_{y_a}(\epsilon,z,\omega)
+\equiv
+\frac{
+Y_a(\Ph_{N+2}(\epsilon,z,\omega))
+-Y_a(\Pi_{N+1}(\Ph_{N+2}(\epsilon,z,\omega)))
+}{Y_{a,\rm char}}.
+\]
+The map must then satisfy
 \begin{equation}
 \lim_{\epsilon\to0}
 \sup_{0\le z\le z_*}
 \max_a
-\left|
-\frac{
-Y_a(\Ph_{N+2}(\epsilon,z,\omega))
--Y_a(\Pi_{N+1}(\Ph_{N+2}(\epsilon,z,\omega)))
-}{Y_{a,\rm char}}
-\right|
+\left|\Delta_{y_a}(\epsilon,z,\omega)\right|
 =0,
 \label{eq:uniform-nested-locality-definition}
 \end{equation}
@@ -712,22 +719,21 @@ must lead to the same underlying \(N\)-body kinematics.
 Once the map has uniform nested infrared locality, ordinary IRC safety of a particular observable \(X_i\) is
 enough to imply
 \begin{equation}
-\Delta X_i
-=
-X_i(\Ph_{N+2})-X_i(\Pi_{N+1}(\Ph_{N+2}))
+\Delta_{x_i}
 \longrightarrow0
 \qquad
 (\epsilon\to0,\ z\text{ finite and allowed}).
 \label{eq:irc-safe-consequence-uniform-map}
 \end{equation}
-Thus the vanishing of \(\Delta X_i\) in the simultaneous limit should not be regarded as an additional
-independent requirement on every IRC-safe observable. What IRC safety alone does \emph{not} guarantee is
+Thus the vanishing of the normalized migration \(\Delta_{x_i}\), or equivalently of \(\Delta X_i\) for
+finite nonzero \(X_{i,\rm char}\), should not be regarded as an additional independent requirement on every
+IRC-safe observable. What IRC safety alone does \emph{not} guarantee is
 that an arbitrary projection map approaches the same lower-multiplicity point, nor does it determine the
 rate at which the difference in Eq.~\eqref{eq:irc-safe-consequence-uniform-map} vanishes.
 
 When this approach is power-like, the latter rate can be parametrized as
 \begin{equation}
-H_i(\epsilon,z,\omega)
+\Delta_{x_i}(\epsilon,z,\omega)
 =
 \epsilon^{q_i}
  h_i(z,\omega)
@@ -962,12 +968,21 @@ L_i(\rn,X_i)
 \end{equation}
 Then a small displacement produces parametrically
 \begin{equation}
+\Delta_{s_i}
+\equiv
 \frac{\Delta S_i}{S_i}
 \sim
 \frac{\Delta X_i}{L_i(\rn,X_i)}
+=
+\Delta_{x_i}
+\frac{X_{i,\rm char}}{L_i(\rn,X_i)}
 \label{eq:relative-observable-sensitivity}
 \end{equation}
-when \(|\Delta X_i|\ll L_i\). In a smooth region \(L_i\) is of the order of a hard or characteristic
+when \(|\Delta X_i|\ll L_i\). Although both \(\Delta_{x_i}\) and \(\Delta_{s_i}\) are dimensionless, they
+describe different objects. The former is the normalized kinematic displacement generated by the map; the
+latter is the induced fractional response of the spectrum and also depends on its local variation scale.
+They are therefore not interchangeable, and a small \(\Delta_{x_i}\) does not by itself guarantee a small
+\(\Delta_{s_i}\). In a smooth region \(L_i\) is of the order of a hard or characteristic
 kinematic scale, so uniform nested infrared locality of the map together with IRC safety of the observable
 translates into a small projection effect. Near a kinematic boundary, Jacobian feature or Sudakov shoulder,
 however, \(L_i\) can become parametrically much smaller than the hard scale. A displacement that is small in
@@ -1360,10 +1375,16 @@ quantity is the scaling of
 \mathcal T_0\!\left(\Pi_2(\Ph_3)\right)
 \label{eq:z1j-delta-t0}
 \end{equation}
-along the finite-$z$ paths of Eq.~\eqref{eq:z1j-simultaneous-limit}. A nested-local map may perfectly well
-satisfy
+along the finite-$z$ paths of Eq.~\eqref{eq:z1j-simultaneous-limit}. Using \(Q\) as its characteristic scale,
+denote the corresponding normalized migration by
+\[
+\Delta_{t_0}
+\equiv
+\frac{\Delta\mathcal T_0}{Q}.
+\]
+A nested-local map may perfectly well satisfy
 \begin{equation}
-\frac{\Delta\mathcal T_0}{Q}
+\Delta_{t_0}
 \sim
 \left(\frac{\mathcal T_1}{Q}\right)^q
 h_0(z,\omega),
@@ -1373,7 +1394,7 @@ h_0(z,\omega),
 with $h_0$ finite over the allowed range $0\le z\le2/3$. By contrast, a nonzero finite limit
 \begin{equation}
 \lim_{\mathcal T_1\to0}
-\frac{\Delta\mathcal T_0}{Q}
+\Delta_{t_0}
 =h_0(z,\omega)\neq0
 \qquad
 \text{at fixed }z>0
@@ -1420,6 +1441,18 @@ is steep or the event lies close to a clustering, ordering or acceptance boundar
 by itself signal a failure of nested locality: for a smooth underlying distribution the phase-space layer
 that changes classification still shrinks with the size of the displacement.
 
+For the local diagnostics below, use the same normalized-shift convention,
+\[
+\Delta_{p_{T,j_1}}^{\rm anti-k_T}
+\equiv
+\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q},
+\qquad
+\Delta_{y_{j_1}}^{\rm anti-k_T}
+\equiv
+\Delta y_{j_1}^{\rm anti-k_T},
+\]
+where the rapidity shift is already dimensionless.
+
 There is nevertheless an important asymptotic protection for the leading-jet transverse momentum if the
 $\mathcal T_1^{\rm FR}$ map preserves $q^\mu$. In the strict one-jet limit both exact and projected
 configurations must satisfy Eq.~\eqref{eq:z1j-born-transverse-balance}, independently of the jet rapidity.
@@ -1432,7 +1465,7 @@ Therefore, provided both configurations genuinely approach a one-jet limit,
 \end{equation}
 even if the limiting jet rapidities differ. A persistent nonzero plateau in $\Delta p_{T,j_1}$ would thus
 signal a stronger problem than the mere non-preservation of $\mathcal T_0$. By contrast, a plateau in
-$\Delta y_{j_1}$ or in $\Delta\mathcal T_0/Q$ at fixed finite $z$ would directly diagnose a failure to
+$\Delta_{y_{j_1}}^{\rm anti-k_T}$ or in $\Delta_{t_0}$ at fixed finite $z$ would directly diagnose a failure to
 approach the same point on the one-jet Born manifold.
 
 The decisive test of the nested-locality properties of the two mappings is local: apply both projections to
@@ -1443,11 +1476,11 @@ z=\frac{\mathcal T_2}{\mathcal T_1},
 \end{equation}
 the approach to the lower unresolved limit of
 \begin{equation}
-\frac{\Delta\mathcal T_0}{Q},
+\Delta_{t_0},
 \qquad
-\Delta y_{j_1}^{\rm anti-k_T},
+\Delta_{y_{j_1}}^{\rm anti-k_T},
 \qquad
-\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q}.
+\Delta_{p_{T,j_1}}^{\rm anti-k_T}.
 \label{eq:z1j-local-diagnostics}
 \end{equation}
 A positive-power fall with $\mathcal T_1/Q$ establishes nested locality for the corresponding coordinate,
@@ -1926,15 +1959,17 @@ In a strongly ordered region
 \rn\ll\rnm\ll Q,
 \label{eq:lower-strong-ordering}
 \end{equation}
-let a generic kinematic displacement obey
+let a generic kinematic displacement $Y_a$ obey
 \begin{equation}
-\frac{\Delta Y}{Y_{\rm char}}
+\Delta_{y_a}
+\equiv
+\frac{\Delta Y_a}{Y_{a,\rm char}}
 \sim
 \left(\frac{\rn}{\rnm}\right)^p,
 \qquad p>0,
 \label{eq:nested-toy-kinematic-scaling}
 \end{equation}
-where $Y$ stands for either $\rnm$ or one of the $X_i$. Then Eq.~\eqref{eq:nested-toy-kinematic-migration}
+where $Y_a$ stands for either $\rnm$ or one of the $X_i$. Then Eq.~\eqref{eq:nested-toy-kinematic-migration}
 contains the neighboring-scale behavior
 \begin{equation}
 \Delta_{\rm kin}^{(\rn)}
@@ -2081,7 +2116,9 @@ In the simultaneous unresolved limit, however, taking \(y=z x\) gives
 \alpha(x,zx)=\frac{z}{1+z},
 \label{eq:bad-map-simultaneous-alpha}
 \end{equation}
-which remains finite as \(x\to0\) for any fixed nonzero \(z\). Hence
+which remains finite as \(x\to0\) for any fixed nonzero \(z\). Since lowercase $y$ already labels the
+resolution ratio in Eq.~\eqref{eq:bad-map-definition}, we write the normalized $Y$-migration explicitly
+here rather than denoting it by \(\Delta_y\):
 \begin{equation}
 \frac{
 Y(\Ph_{N+2})
