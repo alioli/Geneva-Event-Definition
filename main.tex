@@ -434,11 +434,14 @@ shift dimensionless. We denote this normalized migration by
 \frac{\Delta X_i}{X_{i,\rm char}}.
 \]
 The lowercase subscript labels the normalized version of the shift in \(X_i\); it does not introduce a new
-kinematic variable \(x_i\). The scale \(X_{i,\rm char}\) may depend on the underlying
-Born kinematics \(\mathbf X\), but it should remain finite and nonzero in the region in which the scaling is
-considered. It is treated as an external reference scale, held fixed under the migration derivative below.
-In particular, it should not generically be identified with \(X_i\) itself, since \(X_i\) may vanish in an
-otherwise regular region of phase space.
+kinematic variable \(x_i\). The characteristic scale \(X_{i,\rm char}\) is a fixed local reference scale,
+introduced only to normalize the migration. For each underlying Born point it is chosen before performing
+the \(X_i\)-migration expansion and is then held fixed under the migration derivative below. It may depend
+parametrically on the reference Born kinematics, including the reference value of \(X_i\), only provided
+that it remains uniformly finite and bounded away from zero throughout the region under consideration. In
+particular, choices such as \(X_{i,\rm char}=|X_i|\) are not admissible in a region where \(X_i\) can vanish.
+Unlike the physical hard scale \(Q(\mathbf X)\), \(X_{i,\rm char}\) is not a dynamical function on which the
+\(X_i\) derivative acts.
 
 If the map approaches the exact kinematics smoothly, the relative migration can then have a generic nested
 scaling
