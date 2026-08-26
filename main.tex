@@ -301,45 +301,37 @@ A_{X_i}\!\left(X_i(\Ph_{N+2})\right)
 \right].
 \label{eq:x-fiducial-migration}
 \end{align}
-Thus a fiducial cut does not merely reduce the integration range: it converts the trivial \(1-1\)
-cancellation in Eq.~\eqref{eq:x-full-range-cancellation} into a difference of two event classifications.
-The contribution is nonzero precisely for configurations for which the exact and projected kinematics
-lie on opposite sides of a fiducial boundary.
-
-For a single lower cut,
-\begin{equation}
-A_{X_i}(X_i)=\Theta(X_i-X_{i,\rm cut}),
-\label{eq:x-lower-acceptance}
-\end{equation}
-Eq.~\eqref{eq:x-fiducial-migration} contains the factor
-\begin{equation}
-\Theta\!\left(X_i(\widehat\Ph_{N+1})-X_{i,\rm cut}\right)
--
-\Theta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right).
-\label{eq:x-cut-classification-difference}
-\end{equation}
-Define the migration in \(X_i\) as
+Equation~\eqref{eq:x-fiducial-migration} is exact and makes no assumption about the size of the migration.
+For a binary fiducial acceptance, the contribution is nonzero precisely for configurations for which the
+exact and projected kinematics lie on opposite sides of an acceptance boundary. Define the migration in
+\(X_i\) as
 \begin{equation}
 \Delta X_i
 =
 X_i(\Ph_{N+2})-X_i(\widehat\Ph_{N+1}),
 \label{eq:delta-x-fiducial}
 \end{equation}
-for a small migration one obtains
-\begin{equation}
-\Theta\!\left(X_i(\widehat\Ph_{N+1})-X_{i,\rm cut}\right)
--
-\Theta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right)
-\simeq
+If \(\Delta X_i\) is small on the relevant local kinematic scales, the generic acceptance difference can be
+expanded as
+\begin{align}
+&A_{X_i}\!\left(X_i(\widehat\Ph_{N+1})\right)
+-A_{X_i}\!\left(X_i(\Ph_{N+2})\right)
+\nonumber\\
+&\qquad\simeq
 -\Delta X_i\,
-\delta\!\left(X_i(\Ph_{N+2})-X_{i,\rm cut}\right).
-\label{eq:x-boundary-localization}
-\end{equation}
-Therefore the projection effect from a hard fiducial cut is localized at the cut boundary. Its size is
-controlled by the amount by which the projection moves \(X_i\), multiplied by the event density at the
-boundary. This makes the effect potentially important even when \(\Delta X_i\) is parametrically small:
-a steep spectrum or a large cross section near the fiducial boundary can enhance the resulting migration.
-For a two-sided window the same reasoning applies independently at both boundaries, with opposite signs.
+A_{X_i}'\!\left(X_i(\Ph_{N+2})\right).
+\label{eq:x-acceptance-linearization}
+\end{align}
+For a smooth acceptance weight, \(A_{X_i}'\) is an ordinary derivative. For a hard lower cut it is understood
+distributionally,
+\[
+A_{X_i}(X_i)=\Theta(X_i-X_{i,\rm cut}),
+\qquad
+A_{X_i}'(X_i)=\delta(X_i-X_{i,\rm cut}).
+\]
+Only in this small-migration approximation is the hard-cut contribution localized at the boundary. Without
+that approximation, Eq.~\eqref{eq:x-fiducial-migration} describes a finite migration layer containing all
+configurations whose exact and projected values lie on opposite sides of the cut.
 
 More generally, if several components of \(\mathbf X\) are changed by the projection, integrating over the
 full range of one of them removes only the migration associated with that component. Any remaining differential
