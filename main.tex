@@ -1753,6 +1753,500 @@ failure of map locality.
 }
 \medskip
 
+\paragraph{A uniformly nested-local repair of the ISR$\boldsymbol\times$FSR sector.}
+The obstruction in Eq.~\eqref{eq:z1j-t1fr-R12-relation} is not caused by preserving
+$\mathcal T_1$ itself.  It results from preserving simultaneously $\mathcal T_1$ and the cluster virtuality
+$p_{12}^2$.  The latter is an unresolved quantity in the common one-jet limit and can instead be allowed to
+change in order to keep fixed a hard coordinate along the limiting $\Ph_1$ manifold.  A particularly simple
+choice is to preserve the rapidity of the $p_{12}$ cluster.
+
+It is useful first to introduce a kinematic function.  For a four-vector with transverse momentum magnitude
+$k$, rapidity $u$ in the colour-singlet frame, invariant mass $m$, and
+\begin{equation}
+T=p^0-|\boldsymbol p|,
+\label{eq:isrfsr-repair-T-definition}
+\end{equation}
+the relation
+\begin{equation}
+T
+=
+\sqrt{m^2+k^2}\cosh u
+-
+\sqrt{k^2+(m^2+k^2)\sinh^2u}
+\label{eq:isrfsr-repair-T-mass-relation}
+\end{equation}
+can be inverted analytically. Define
+\begin{align}
+\mathfrak m^2(T,k,u)
+&\equiv
+T^2\cosh(2u)
++2T\cosh u\,
+\sqrt{k^2+T^2\sinh^2u},
+\label{eq:isrfsr-repair-mass-function}
+\\
+\mathfrak a(T,k,u)
+&\equiv
+\sqrt{k^2+T^2\sinh^2u},
+\label{eq:isrfsr-repair-a-function}
+\\
+\mathfrak m_T(T,k,u)
+&\equiv
+\sqrt{\mathfrak m^2(T,k,u)+k^2}
+=\mathfrak a(T,k,u)+T\cosh u.
+\label{eq:isrfsr-repair-mt-function}
+\end{align}
+Thus $m^2=\mathfrak m^2(T,k,u)$ is the unique nonnegative virtuality on the physical branch connected to
+$m^2=0$ as $T\to0$.
+
+\medskip
+\noindent
+\textit{Direct map.}
+Given an exact $\Ph_3$ point in the ISR$\times$FSR sector, define
+\begin{equation}
+p_{12}=p_1+p_2,
+\qquad
+\mathcal T_{12}=\hat p_{12}^0-|\hat{\boldsymbol p}_{12}|,
+\qquad
+\mathcal T_1=\mathcal T_{12}+\mathcal T_2,
+\qquad
+u=y_{12}-y_{\rm CS}.
+\label{eq:isrfsr-repair-direct-inputs}
+\end{equation}
+The repaired projection is specified by
+\begin{equation}
+\boxed{
+\bar q=q,
+\qquad
+\bar y_{12}=y_{12},
+\qquad
+\bar{\mathcal T}_{12}=\mathcal T_1,
+\qquad
+\bar\Phi_{12}=\Phi_{12}
+}
+\label{eq:isrfsr-repair-direct-map}
+\end{equation}
+instead of Eq.~\eqref{eq:z1j-t1fr-isrfsr-map}.  Since $\bar q=q$, transverse momentum conservation fixes
+\begin{equation}
+\hat{\boldsymbol{\bar p}}_{12T}=-\boldsymbol q_T,
+\qquad
+|\hat{\boldsymbol{\bar p}}_{12T}|=q_T.
+\label{eq:isrfsr-repair-projected-pt}
+\end{equation}
+The projected cluster virtuality is not preserved, but is determined by the $\mathcal T_1$ constraint,
+\begin{equation}
+\boxed{
+\bar p_{12}^{\,2}
+=
+\mathfrak m^2(\mathcal T_1,q_T,u)
+}.
+\label{eq:isrfsr-repair-projected-mass}
+\end{equation}
+Equivalently, in the colour-singlet frame,
+\begin{align}
+\hat{\bar p}_{12}^0
+&=
+\mathfrak m_T(\mathcal T_1,q_T,u)\cosh u,
+\nonumber\\
+\hat{\bar p}_{12}^z
+&=
+\mathfrak m_T(\mathcal T_1,q_T,u)\sinh u,
+\qquad
+\hat{\boldsymbol{\bar p}}_{12T}=-\boldsymbol q_T.
+\label{eq:isrfsr-repair-projected-components}
+\end{align}
+The two massless momenta $\bar p_1$ and $\bar p_2$ are then reconstructed by decaying $\bar p_{12}$ with
+the same two-body angles $\bar\Phi_{12}=\Phi_{12}$.  The incoming fractions are finally fixed by momentum
+conservation.  Since the massless two-body phase-space measure is independent of the parent mass, retaining
+$\Phi_{12}$ introduces no additional mass-dependent decay Jacobian.
+
+\medskip
+\noindent
+\textit{Inverse map.}
+To distinguish the splitting variable used to parametrize the ISR radiation from the nested ratio used in
+the locality analysis, denote the former by $z_{\rm spl}$ and reserve
+\begin{equation}
+\zeta\equiv\frac{\mathcal T_2}{\mathcal T_1}
+\label{eq:isrfsr-repair-zeta-definition}
+\end{equation}
+for the latter.  Let $\sigma=+1$ or $-1$ label the two beam branches, so that
+$\mathcal T_2=\hat p_3^\sigma$.  Given $(\bar\Ph_2,\mathcal T_2,z_{\rm spl},\phi)$, the original ISR
+radiation parametrization can be retained unchanged:
+\begin{align}
+\hat p_3^\sigma
+&=\mathcal T_2,
+\nonumber\\
+\hat p_3^{-\sigma}
+&=
+B_\sigma\frac{1-z_{\rm spl}}{z_{\rm spl}},
+\qquad
+B_\sigma
+\equiv
+e^{-\sigma y_{\rm CS}}\sqrt S\,\bar x_{-\sigma},
+\nonumber\\
+p_{3T}
+&=
+\sqrt{
+\mathcal T_2 B_\sigma
+\frac{1-z_{\rm spl}}{z_{\rm spl}}
+},
+\qquad
+\phi_3=\phi.
+\label{eq:isrfsr-repair-radiation-map}
+\end{align}
+Here $\bar x_{-\sigma}$ denotes the momentum fraction associated with the light-cone component opposite to
+$\sigma$.  The exact pre-projection cluster is reconstructed from
+\begin{align}
+\mathcal T_{12}
+&=\mathcal T_1-\mathcal T_2,
+\label{eq:isrfsr-repair-inverse-T12}
+\\
+q&=\bar q,
+\qquad
+y_{12}=\bar y_{12},
+\label{eq:isrfsr-repair-inverse-preserved}
+\\
+\boldsymbol p_{12T}
+&=-\boldsymbol q_T-\boldsymbol p_{3T},
+\qquad
+k_{12}=|\boldsymbol p_{12T}|,
+\label{eq:isrfsr-repair-inverse-pt}
+\\
+p_{12}^2
+&=
+\mathfrak m^2(\mathcal T_{12},k_{12},u),
+\label{eq:isrfsr-repair-inverse-mass}
+\\
+\hat p_{12}^0
+&=
+\mathfrak m_T(\mathcal T_{12},k_{12},u)\cosh u,
+\qquad
+\hat p_{12}^z
+=
+\mathfrak m_T(\mathcal T_{12},k_{12},u)\sinh u.
+\label{eq:isrfsr-repair-inverse-components}
+\end{align}
+The exact $p_1,p_2$ are obtained using the same internal angles $\Phi_{12}=\bar\Phi_{12}$, and the exact
+incoming fractions are determined from total momentum conservation.  Equations
+\eqref{eq:isrfsr-repair-direct-map}--\eqref{eq:isrfsr-repair-inverse-components} are mutually inverse on
+the projectable domain.
+
+\medskip
+\noindent
+\textit{Jacobian.}
+The derivative required by the change from the exact to the projected cluster virtuality is
+\begin{align}
+\mathfrak D(T,k,u)
+&\equiv
+\frac{\partial\mathfrak m^2(T,k,u)}{\partial T}
+\nonumber\\
+&=
+2T\cosh(2u)
++2\cosh u\,\mathfrak a(T,k,u)
++\frac{
+2T^2\cosh u\sinh^2u
+}{
+\mathfrak a(T,k,u)
+}.
+\label{eq:isrfsr-repair-D-function}
+\end{align}
+At fixed $q$, the FKS radiation variables, and $u=\bar u$, the nontrivial kinematic Jacobian is therefore
+\begin{equation}
+\boxed{
+\mathcal J_{12,\rm FKS}^{\rm repair}
+\equiv
+\left|
+\frac{d p_{12}^2\,dy_{12}}
+{d\bar p_{12}^{\,2}\,d\bar y_{12}}
+\right|
+=
+\frac{
+\mathfrak D(\mathcal T_{12},k_{12},u)
+}{
+\mathfrak D(\mathcal T_1,q_T,u)
+}
+}.
+\label{eq:isrfsr-repair-cluster-jacobian}
+\end{equation}
+It replaces the factor $dy_{12}/d\bar y_{12}$ in the original construction.  The FKS Jacobian becomes
+\begin{equation}
+\boxed{
+\frac{d\Ph_3}
+{d\bar\Ph_2\,d\xi\,dy\,d\phi}
+=
+\frac{S\xi}{(4\pi)^3}
+\mathcal J_{12,\rm FKS}^{\rm repair}
+},
+\label{eq:isrfsr-repair-fks-jacobian}
+\end{equation}
+where $y$ on the left-hand side is the usual FKS angular variable, not the cluster rapidity.
+
+For the splitting variables one further dependence must be retained.  At fixed
+$(\mathcal T_2,z_{\rm spl},\phi)$, the emitted momentum in
+Eq.~\eqref{eq:isrfsr-repair-radiation-map} depends on the projected Born point through
+$B_\sigma$.  Define
+\begin{align}
+\bar m_T
+&\equiv
+\mathfrak m_T(\mathcal T_1,q_T,u)
+=\sqrt{\bar p_{12}^{\,2}+q_T^2},
+\nonumber\\
+\beta_\sigma
+&\equiv
+\left.
+\frac{\partial B_\sigma}{\partial\bar p_{12}^{\,2}}
+\right|_{q,\bar y_{12}}
+=
+\frac{e^{-\sigma u}}{2\bar m_T},
+\label{eq:isrfsr-repair-B-derivative}
+\end{align}
+where the last equality follows from
+$B_\sigma=\hat q^{-\sigma}+\hat{\bar p}_{12}^{-\sigma}$ and
+$\hat{\bar p}_{12}^{-\sigma}=\bar m_T e^{-\sigma u}$ in the colour-singlet frame.  Writing
+$\Delta\phi=\phi-\phi_q$, one obtains
+\begin{equation}
+\left.
+\frac{\partial k_{12}}{\partial\bar p_{12}^{\,2}}
+\right|_{\mathcal T_2,z_{\rm spl},\phi}
+=
+\frac{
+p_{3T}\bigl(p_{3T}+q_T\cos\Delta\phi\bigr)
+}{
+2k_{12}B_\sigma
+}
+\beta_\sigma .
+\label{eq:isrfsr-repair-k-derivative}
+\end{equation}
+Consequently, the complete kinematic factor for the splitting parametrization is
+\begin{equation}
+\boxed{\begin{aligned}
+\mathcal J_{12,\rm spl}^{\rm repair}
+&\equiv
+\left|
+\frac{d p_{12}^2\,dy_{12}}
+{d\bar p_{12}^{\,2}\,d\bar y_{12}}
+\right|_{\mathcal T_2,z_{\rm spl},\phi}
+\\
+&=
+\left|
+\frac{
+\mathfrak D(\mathcal T_{12},k_{12},u)
+}{
+\mathfrak D(\mathcal T_1,q_T,u)
+}
++
+\frac{
+\mathcal T_{12}\cosh u\,
+p_{3T}\bigl(p_{3T}+q_T\cos\Delta\phi\bigr)
+}{
+\mathfrak a(\mathcal T_{12},k_{12},u)B_\sigma
+}
+\beta_\sigma
+\right|
+\end{aligned}}
+\label{eq:isrfsr-repair-splitting-kinematic-jacobian}
+\end{equation}
+The second term is absent at fixed FKS variables because then $p_3$ does not depend on the projected Born
+point.  Omitting it at fixed $z_{\rm spl}$ would therefore mix two different choices of independent
+radiation variables.  The full splitting Jacobian is
+\begin{equation}
+\boxed{
+\frac{d\Ph_3}
+{d\bar\Ph_2\,d\mathcal T_2\,dz_{\rm spl}\,d\phi}
+=
+\frac{
+\sqrt S\,\bar x_{-\sigma}e^{-\sigma y_{\rm CS}}
+}{
+4(2\pi)^3z_{\rm spl}^{\,2}
+}
+\mathcal J_{12,\rm spl}^{\rm repair}
+}.
+\label{eq:isrfsr-repair-splitting-jacobian}
+\end{equation}
+
+\medskip
+\noindent
+\textit{Integration domain.}
+The region-defining constraints that assign a $\Ph_3$ point to the ISR$\times$FSR sector are unchanged as
+statements about the exact reconstructed momenta: $\mathcal T_2$ must be the first clustering distance,
+$\mathcal T_1=\mathcal T_2+\mathcal T_{12}$ must be the selected second clustering history, and all competing
+beam and final-state distances must satisfy the original sector inequalities.  Their numerical endpoints do
+change because the inverse map has changed, so they must be evaluated on
+Eqs.~\eqref{eq:isrfsr-repair-radiation-map}--\eqref{eq:isrfsr-repair-inverse-components}.
+
+For the usual strictly ordered sector partition, the first-clustering condition includes
+\begin{equation}
+0<\mathcal T_2
+<
+\min\!\left\{
+\mathcal T_2^{\cut},\frac{\mathcal T_1}{2}
+\right\},
+\label{eq:isrfsr-repair-T2-range}
+\end{equation}
+where the second bound follows from
+$\mathcal T_2<\mathcal T_{12}=\mathcal T_1-\mathcal T_2$.  If equality surfaces are assigned with a
+different convention, only the endpoint prescription changes.
+
+At fixed $(\bar\Ph_2,\mathcal T_2)$, positivity of the ISR radiation gives the elementary ranges
+\begin{equation}
+0<z_{\rm spl}<1,
+\qquad
+0\le\phi<2\pi.
+\label{eq:isrfsr-repair-elementary-domain}
+\end{equation}
+The remaining mapping bounds can be written explicitly and are convenient for a robust implementation by
+one-dimensional root finding.  Define
+\begin{align}
+w(z_{\rm spl})
+&\equiv
+B_\sigma\frac{1-z_{\rm spl}}{z_{\rm spl}},
+\nonumber\\
+p_{3T}(z_{\rm spl})
+&=\sqrt{\mathcal T_2 w(z_{\rm spl})},
+\nonumber\\
+k_{12}^2(z_{\rm spl},\phi)
+&=
+q_T^2+p_{3T}^2(z_{\rm spl})
++2q_Tp_{3T}(z_{\rm spl})
+\cos(\phi-\phi_q),
+\label{eq:isrfsr-repair-domain-kinematics}
+\\
+A_{12}(z_{\rm spl},\phi)
+&\equiv
+\mathfrak a(\mathcal T_{12},k_{12}(z_{\rm spl},\phi),u),
+\nonumber\\
+m_{T,12}(z_{\rm spl},\phi)
+&=
+A_{12}(z_{\rm spl},\phi)
++\mathcal T_{12}\cosh u.
+\label{eq:isrfsr-repair-domain-mt}
+\end{align}
+The exact light-cone components are
+\begin{equation}
+p_{12}^{\pm}
+=
+m_{T,12}e^{\pm y_{12}},
+\qquad
+x_\pm
+=
+\frac{
+q^\pm+p_{12}^\pm+p_3^\pm
+}{\sqrt S},
+\label{eq:isrfsr-repair-exact-xfractions}
+\end{equation}
+and projectability requires
+\begin{align}
+F_\pm(z_{\rm spl},\phi)
+&\equiv
+\sqrt S-q^\pm-p_3^\pm(z_{\rm spl})
+-e^{\pm y_{12}}
+\left[
+A_{12}(z_{\rm spl},\phi)
++\mathcal T_{12}\cosh u
+\right]
+\ge0.
+\label{eq:isrfsr-repair-Fpm-bounds}
+\end{align}
+These are exactly the conditions $x_\pm\le1$; positivity of $x_\pm$ is automatic on the physical branch.
+Let $\Theta_{\rm reg}^{\rm ISR\times FSR}$ denote the product of the unchanged nearest-clustering and
+second-history constraints evaluated on the reconstructed exact momenta.  For each azimuth, the exact allowed
+set is
+\begin{equation}
+\mathcal Z(\phi)
+=
+\left\{
+z_{\rm spl}\in(0,1):
+F_+(z_{\rm spl},\phi)\ge0,
+F_-(z_{\rm spl},\phi)\ge0,
+\Theta_{\rm reg}^{\rm ISR\times FSR}=1
+\right\}.
+\label{eq:isrfsr-repair-Z-domain}
+\end{equation}
+In general this set should be represented as a union of intervals,
+\begin{equation}
+\mathcal Z(\phi)
+=
+\bigcup_n
+\left[
+z_{n,-}(\phi),z_{n,+}(\phi)
+\right],
+\label{eq:isrfsr-repair-Z-intervals}
+\end{equation}
+whose endpoints are the roots of $F_+=0$, $F_-=0$, or of one of the sector-boundary equalities.  The exact
+integration can therefore be written as
+\begin{equation}
+\int d\mathcal T_2
+\int_0^{2\pi}d\phi
+\sum_n
+\int_{z_{n,-}(\phi)}^{z_{n,+}(\phi)}
+dz_{\rm spl}\,
+\frac{d\Ph_3}
+{d\bar\Ph_2\,d\mathcal T_2\,dz_{\rm spl}\,d\phi},
+\label{eq:isrfsr-repair-final-integration-domain}
+\end{equation}
+with the $\mathcal T_2$ range in Eq.~\eqref{eq:isrfsr-repair-T2-range}.  This implicit root representation is
+preferable to assuming a single $z_{\min}$ and $z_{\max}$: it remains exact when PDF bounds and clustering
+constraints split the allowed domain into disconnected intervals.  Equivalently, one may integrate over the
+elementary rectangle in Eq.~\eqref{eq:isrfsr-repair-elementary-domain} and retain the three theta functions
+in Eq.~\eqref{eq:isrfsr-repair-Z-domain} in the integrand.
+
+\medskip
+\noindent
+\textit{Nested-locality check.}
+At fixed finite $\zeta=\mathcal T_2/\mathcal T_1$ and away from additional phase-space boundaries,
+\begin{equation}
+\mathcal T_{12}=(1-\zeta)\mathcal T_1,
+\qquad
+p_{3T}=\mathcal O\!\left(\sqrt{Q\mathcal T_1}\right),
+\qquad
+k_{12}-q_T
+=
+\mathcal O\!\left(\sqrt{Q\mathcal T_1}\right).
+\label{eq:isrfsr-repair-nested-scaling}
+\end{equation}
+Both $p_{12}^2$ and $\bar p_{12}^{\,2}$ are $\mathcal O(Q\mathcal T_1)$, while
+$\bar y_{12}=y_{12}$ exactly and $\bar q=q$.  Moreover,
+\begin{equation}
+\frac{\bar R_{12}}{R_{12}}
+=
+\frac{
+\mathfrak m^2(\mathcal T_1,q_T,u)/\mathcal T_1
+}{
+\mathfrak m^2(\mathcal T_{12},k_{12},u)/\mathcal T_{12}
+}
+\longrightarrow1,
+\label{eq:isrfsr-repair-R12-limit}
+\end{equation}
+because
+\begin{equation}
+\frac{\mathfrak m^2(T,k,u)}{T}
+\longrightarrow2k\cosh u,
+\qquad
+\mathfrak D(T,k,u)
+\longrightarrow2k\cosh u
+\qquad(T\to0).
+\label{eq:isrfsr-repair-small-T-limits}
+\end{equation}
+It follows simultaneously that
+\begin{equation}
+\frac{\bar p_{12}^\mu-p_{12}^\mu}{Q}
+\longrightarrow0,
+\qquad
+\mathcal J_{12,\rm FKS}^{\rm repair}\longrightarrow1,
+\qquad
+\mathcal J_{12,\rm spl}^{\rm repair}\longrightarrow1,
+\label{eq:isrfsr-repair-locality-result}
+\end{equation}
+uniformly over every regular finite-$\zeta$ interval.  The repaired map is therefore uniformly nested-local.
+It is also ordinarily one-step local: when $\mathcal T_2\to0$ at fixed nonzero $\mathcal T_1$,
+$k_{12}\to q_T$, $\mathcal T_{12}\to\mathcal T_1$, and the direct map approaches the identity.
+
+The most direct implementation checks are closure of the direct and inverse maps, exact preservation of
+$q^\mu$ and $\mathcal T_1$, on-shellness and momentum conservation, and fixed-$\zeta$ scans of
+$\bar R_{12}/R_{12}$, $\Delta y_J$, $\Delta\mathcal T_0/Q$, and
+$|\bar p_{12}-p_{12}|/Q$.  The old map predicts the plateau
+$\bar R_{12}/R_{12}\to1-\zeta$; the repaired map must instead approach one with a positive power of
+$\mathcal T_1/Q$.
+
 The explicit result above sharpens the interpretation of the numerical hierarchy.  The much smaller FKS
 residual is consistent with a genuinely nested-local recoil, while the larger $\mathcal T_1^{\rm FR}$ effect
 has an analytic source that survives at the map level when $\mathcal T_1$ and $\mathcal T_2$ approach zero
