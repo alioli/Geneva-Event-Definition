@@ -1633,26 +1633,39 @@ ISR$\times$FSR sector therefore violates uniform nested infrared locality.  This
 ordinary infrared locality: if the strongly ordered limit $z\to0$ is taken first,
 Eq.~\eqref{eq:z1j-t1fr-R12-relation} gives $\bar R_{12}/R_{12}\to1$.
 
-This failure can be made directly observable with a smooth Born coordinate.  In the common one-jet limit,
-transverse momentum conservation and exact preservation of $q^\mu$ imply
-$p_{T,J}\to q_T$ for both configurations.  For a massless limiting jet in the colour-singlet frame,
+This failure can be made directly observable with the smooth Born coordinate given by the jet rapidity.  Define
+\(\eta_J=y_J-Y_Z\) and \(\bar\eta_J=\bar y_J-Y_Z\).  Exact preservation of $q^\mu$ fixes the same $Y_Z$ and
+$q_T$ in the exact and projected configurations.  In the common massless one-jet limit, the common transverse
+factor therefore cancels in the ratio \(\bar R_J/R_J\), and Eq.~\eqref{eq:z1j-t1fr-R12-relation} gives
 \begin{equation}
-R_J=2p_{T,J}\cosh(y_J-Y_Z),
-\label{eq:z1j-RJ-rapidity}
-\end{equation}
-so Eq.~\eqref{eq:z1j-t1fr-R12-relation} gives, on the kinematically allowed part of this sector,
-\begin{equation}
-\cosh(\bar y_J-Y_Z)
-=(1-z)\cosh(y_J-Y_Z)
+\frac{\cosh\bar\eta_J}{\cosh\eta_J}
+\longrightarrow
+1-z
 \qquad (\mathcal T_1/Q\to0,\ z\text{ fixed}).
 \label{eq:z1j-t1fr-rapidity-relation}
 \end{equation}
-The mapping exists only where the right-hand side is compatible with a real projected rapidity; in
-particular one needs $(1-z)\cosh(y_J-Y_Z)\ge1$.  There is nevertheless a finite allowed region satisfying
-this condition, and a single such finite-$z$ family is sufficient to disprove uniform nested locality.
-Equation~\eqref{eq:z1j-t1fr-rapidity-relation} therefore predicts a finite limiting displacement in the jet
-rapidity, and consequently also in other longitudinal Born coordinates such as the jet energy and, generically,
-$\mathcal T_0$ at fixed $q_T$.
+On the rapidity branch continuously connected to the exact configuration as $z\to0$, this implies the direct
+limiting shift
+\begin{equation}
+\boxed{
+\Delta y_J
+\equiv
+y_J-\bar y_J
+\longrightarrow
+\operatorname{sgn}(\eta_J)
+\left[
+|\eta_J|
+-
+\operatorname{arcosh}\!\left((1-z)\cosh|\eta_J|\right)
+\right]
+}.
+\label{eq:z1j-t1fr-rapidity-shift}
+\end{equation}
+The mapping exists only where the projected rapidity is real, namely where
+$(1-z)\cosh|\eta_J|\ge1$.  This condition leaves a finite allowed region, and for every fixed nonzero $z$ in
+that region Eq.~\eqref{eq:z1j-t1fr-rapidity-shift} gives a finite nonzero displacement.  A single such family
+is sufficient to disprove uniform nested locality.  By contrast, when the strongly ordered limit $z\to0$ is
+taken first, the bracket vanishes and $\Delta y_J\to0$, consistently with ordinary one-step locality.
 
 This also explains why the failure can be invisible in some observables.  The $\mathcal T_1^{\rm FR}$ map
 preserves $q^\mu$ exactly in the explicit sectors considered here, so $q_T$, $Y_Z$ and the colour-singlet
