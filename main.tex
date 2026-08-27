@@ -1920,6 +1920,9 @@ The process-specific examples in Sec.~\ref{sec:nnlo-differential-predictions} co
 projected configurations are retained as physical LHE events. To isolate why the simultaneous-limit behavior
 matters in that setting, it is useful to compare such a physical event projection with the same map used only
 as an auxiliary coordinate in an exact NLO subtraction.
+The complementary fixed-order test, in which the lower $1\to2$ splitting is treated with and without the
+correlated P2B measurement difference, is described for the embedded $Z+1$-jet calculation in
+Sec.~\ref{subsec:n3lo-embedding}.
 
 Uniform nested infrared locality is stronger than what is required of an auxiliary map used only inside the NLO part above the cut for a
 fixed-order NNLO slicing calculation. A concrete counterexample can be constructed by starting from any ordinary one-step
@@ -2081,6 +2084,87 @@ hierarchy is
 \label{eq:relevant-inner-outer-hierarchy}
 \end{equation}
 not $\rnp^{\cut}$ versus $\rn$.
+
+\paragraph{Concrete $Z+1$-jet mapping test.}
+For the NNLO $Z+1$-jet ingredient needed in an outer $\mathcal T_0$ slicing calculation, the identifications
+are
+\begin{equation}
+\rnm=\mathcal T_0,
+\qquad
+\rn=\mathcal T_1.
+\label{eq:z1j-embedded-identification}
+\end{equation}
+A direct numerical test is obtained by generating the lower $1\to2$ splitting below
+$\mathcal T_1^{\cut}$ with the FKS map and comparing two uses of the internal analyzer. Without P2B, the
+below-cut measurement is evaluated on the projected one-parton configuration,
+\begin{equation}
+\Mcal\!\left(\Pi_1^{\rm FKS}(\Ph_2)\right),
+\label{eq:z1j-fks-no-p2b-measurement}
+\end{equation}
+whereas the P2B-improved result includes the correlated exact-minus-projected difference
+\begin{equation}
+\Mcal(\Ph_2)
+-
+\Mcal\!\left(\Pi_1^{\rm FKS}(\Ph_2)\right).
+\label{eq:z1j-fks-p2b-measurement}
+\end{equation}
+Thus the phrase ``internal analyzer'' does not by itself imply exact kinematics below the slicing cut: the
+no-P2B analyzer sees the projected configuration, while the P2B contribution restores the measurement on
+the exact $\Ph_2$ kinematics.
+
+The FKS projection is particularly discriminating for the $\mathcal T_0$ spectrum because it does not
+preserve $\mathcal T_0$ exactly. In the strongly ordered region its recoil can induce a relative displacement
+of the schematic form
+\begin{equation}
+\frac{
+\mathcal T_0(\Ph_2)
+-
+\mathcal T_0\!\left(\Pi_1^{\rm FKS}(\Ph_2)\right)
+}{\mathcal T_0(\Ph_2)}
+\sim
+\left(\frac{\mathcal T_1}{\mathcal T_0}\right)^p,
+\qquad p>0,
+\label{eq:z1j-fks-t0-migration-scaling}
+\end{equation}
+with $p=1$ when the leading recoil is linear. After integration below $\mathcal T_1^{\cut}$ this produces
+the nonuniform behavior
+\begin{equation}
+\Delta_{\rm kin}^{(\mathcal T_1)}
+\frac{d\sigma}{d\mathcal T_0}
+\sim
+\left(\frac{\mathcal T_1^{\cut}}{\mathcal T_0}\right)^p
+\times
+\hbox{derivatives of the singular $\mathcal T_0$ spectrum},
+\label{eq:z1j-fks-t0-cut-scaling}
+\end{equation}
+up to logarithms and finite coefficients. Consequently, at finite $\mathcal T_1^{\cut}$ the FKS result
+without P2B can distort the singular $\mathcal T_0$ spectrum even though the calculation is fixed order and
+uses an internal analyzer. The difference between the FKS results with and without P2B isolates this
+kinematic contamination. P2B must restore it in full; any cut dependence common to the two results belongs
+instead to the dynamical truncation remainder.
+
+A useful four-way comparison is therefore
+\begin{enumerate}[label=(\alph*)]
+\item a $\mathcal T_0^{\rm FR}$ map without P2B;
+\item the same $\mathcal T_0^{\rm FR}$ map with P2B;
+\item the FKS map without P2B;
+\item the FKS map with P2B.
+\end{enumerate}
+For a measurement only of $\mathcal T_0$ and fully inclusive in the other kinematic variables, the first two
+results provide a null test because the $\mathcal T_0^{\rm FR}$ map preserves $\mathcal T_0$. The third result
+should display the map-induced migration, while the fourth should return to the exact-kinematic result, up to
+the common dynamical remainder and numerical errors. Repeating the comparison for several
+$\mathcal T_1^{\cut}$ values and organizing the differences in
+$\mathcal T_1^{\cut}/\mathcal T_0$ directly tests the scaling in
+Eq.~\eqref{eq:z1j-fks-t0-cut-scaling}.
+
+This lower $1\to2$ test also makes explicit why the higher $2\to3$ splitting is different in the fixed-order
+calculation. The latter belongs to the dynamically exact NLO two-parton contribution: when the exact
+$\Ph_3$ real event and its projected counterevent are both kept correlated and filled by the internal
+analyzer, the auxiliary-map dependence cancels as in
+Eq.~\eqref{eq:bad-map-subtracted-nlo}. A physical effect from that higher map arises only when the projected
+$\Ph_2$ configuration is retained in place of the exact event, as in the LHE event definition discussed in
+Secs.~\ref{sec:higher-singular-spectrum} and \ref{sec:nnlo-differential-predictions}.
 
 For the outer slicing to inherit the correct singular structure, the sliced NNLO ingredient must reproduce
 Eq.~\eqref{eq:nnlo-ingredient-for-n3lo} with an error that is sufficiently suppressed as $\rnm\to0$. Both
