@@ -1438,18 +1438,6 @@ is steep or the event lies close to a clustering, ordering or acceptance boundar
 by itself signal a failure of nested locality: for a smooth underlying distribution the phase-space layer
 that changes classification still shrinks with the size of the displacement.
 
-For the local diagnostics below, use the same normalized-shift convention,
-\[
-\Delta_{p_{T,j_1}}^{\rm anti-k_T}
-\equiv
-\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q},
-\qquad
-\Delta_{y_{j_1}}^{\rm anti-k_T}
-\equiv
-\Delta y_{j_1}^{\rm anti-k_T},
-\]
-where the rapidity shift is already dimensionless.
-
 There is nevertheless an important asymptotic protection for the leading-jet transverse momentum if the
 $\mathcal T_1^{\rm FR}$ map preserves $q^\mu$. In the strict one-jet limit both exact and projected
 configurations must satisfy Eq.~\eqref{eq:z1j-born-transverse-balance}, independently of the jet rapidity.
@@ -1464,32 +1452,6 @@ even if the limiting jet rapidities differ. A persistent nonzero plateau in $\De
 signal a stronger problem than the mere non-preservation of $\mathcal T_0$. By contrast, a plateau in
 $\Delta_{y_{j_1}}^{\rm anti-k_T}$ or in $\Delta_{t_0}$ at fixed finite $z$ would directly diagnose a failure to
 approach the same point on the one-jet Born manifold.
-
-The decisive test of the nested-locality properties of the two mappings is local: apply both projections to
-the same exact $\Ph_3$ configurations and study, in bins of
-\begin{equation}
-z=\frac{\mathcal T_2}{\mathcal T_1},
-\label{eq:z1j-z-diagnostic}
-\end{equation}
-the approach to the lower unresolved limit of
-\begin{equation}
-\Delta_{t_0},
-\qquad
-\Delta_{y_{j_1}}^{\rm anti-k_T},
-\qquad
-\Delta_{p_{T,j_1}}^{\rm anti-k_T}.
-\label{eq:z1j-local-diagnostics}
-\end{equation}
-A positive-power fall with $\mathcal T_1/Q$ establishes nested locality for the corresponding coordinate,
-whereas a nonzero plateau at fixed finite $z$ signals its failure. For the fiducial jet cuts one should
-separately monitor the signed classification migration
-\begin{equation}
-\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
--
-\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
-\label{eq:z1j-signed-threshold-migration}
-\end{equation}
-for the relevant values of $p_T^{\min}$.
 
 The $Z+1$-jet example therefore illustrates why exact preservation of the chosen resolution variable is only
 one part of a robust event projection. The map must also approach the correct point of the lower Born manifold
@@ -1571,7 +1533,9 @@ by itself be its primary origin.
 The numerical hierarchy alone would not establish a formal failure of uniform nested infrared locality.
 However, the explicit mapping formulas allow this question to be settled analytically, as follows.
 
-\paragraph{Analytic diagnosis of the mapping dependence.}
+\subsection{Analytic diagnosis of the nonuniform \texorpdfstring{ISR$\times$FSR}{ISR x FSR} mapping}
+\label{subsec:z1j-isrfsr-mapping-diagnosis}
+
 The relevant distinction is between ordinary one-step locality, which tests $\mathcal T_2\to0$ at fixed
 nonzero $\mathcal T_1$, and the uniform nested condition of Eq.~\eqref{eq:uniform-nested-locality-definition},
 which takes $\mathcal T_1/Q\to0$ at fixed finite $z=\mathcal T_2/\mathcal T_1$.  The standard FKS mapping and
@@ -1753,7 +1717,9 @@ failure of map locality.
 }
 \medskip
 
-\paragraph{A uniformly nested-local repair of the ISR$\boldsymbol\times$FSR sector.}
+\subsection{Uniformly nested-local repair of the \texorpdfstring{ISR$\times$FSR}{ISR x FSR} mapping}
+\label{subsec:z1j-isrfsr-mapping-repair}
+
 The obstruction in Eq.~\eqref{eq:z1j-t1fr-R12-relation} is not caused by preserving
 $\mathcal T_1$ itself.  It results from preserving simultaneously $\mathcal T_1$ and the cluster virtuality
 $p_{12}^2$.  The latter is an unresolved quantity in the common one-jet limit and can instead be allowed to
@@ -1894,7 +1860,15 @@ p_{3T}
 \label{eq:isrfsr-repair-radiation-map}
 \end{align}
 Here $\bar x_{-\sigma}$ denotes the momentum fraction associated with the light-cone component opposite to
-$\sigma$.  The exact pre-projection cluster is reconstructed from
+$\sigma$.  With the conventions $p^-=p^0+p^z$ and $p^+=p^0-p^z$ used in the splitting construction, the
+components entering the laboratory-frame momentum fractions are
+\begin{equation}
+p_3^\rho=e^{-\rho y_{\rm CS}}\hat p_3^\rho,
+\qquad
+\rho=\pm1.
+\label{eq:isrfsr-repair-radiation-boost}
+\end{equation}
+The exact pre-projection cluster is reconstructed from
 \begin{align}
 \mathcal T_{12}
 &=\mathcal T_1-\mathcal T_2,
@@ -1996,12 +1970,12 @@ $B_\sigma$.  Define
 \frac{\partial B_\sigma}{\partial\bar p_{12}^{\,2}}
 \right|_{q,\bar y_{12}}
 =
-\frac{e^{-\sigma u}}{2\bar m_T},
+\frac{e^{\sigma u}}{2\bar m_T},
 \label{eq:isrfsr-repair-B-derivative}
 \end{align}
 where the last equality follows from
 $B_\sigma=\hat q^{-\sigma}+\hat{\bar p}_{12}^{-\sigma}$ and
-$\hat{\bar p}_{12}^{-\sigma}=\bar m_T e^{-\sigma u}$ in the colour-singlet frame.  Writing
+$\hat{\bar p}_{12}^{-\sigma}=\bar m_T e^{\sigma u}$ in the colour-singlet frame.  Writing
 $\Delta\phi=\phi-\phi_q$, one obtains
 \begin{equation}
 \left.
@@ -2073,7 +2047,7 @@ beam and final-state distances must satisfy the original sector inequalities.  T
 change because the inverse map has changed, so they must be evaluated on
 Eqs.~\eqref{eq:isrfsr-repair-radiation-map}--\eqref{eq:isrfsr-repair-inverse-components}.
 
-For the usual strictly ordered sector partition, the first-clustering condition includes
+For the recursive definition of $\mathcal T_1$ used in this sector, the first-clustering condition includes
 \begin{equation}
 0<\mathcal T_2
 <
@@ -2086,13 +2060,50 @@ where the second bound follows from
 $\mathcal T_2<\mathcal T_{12}=\mathcal T_1-\mathcal T_2$.  If equality surfaces are assigned with a
 different convention, only the endpoint prescription changes.
 
-At fixed $(\bar\Ph_2,\mathcal T_2)$, positivity of the ISR radiation gives the elementary ranges
+At fixed $(\bar\Ph_2,\mathcal T_2)$, positivity of the ISR radiation gives
+$0<z_{\rm spl}<1$ and $0\le\phi<2\pi$.  In addition, the beam distance selected for the first clustering
+must obey $\mathcal T_2\le\hat p_3^{-\sigma}$.  Using
+Eq.~\eqref{eq:isrfsr-repair-radiation-map}, this gives the explicit upper bound
 \begin{equation}
-0<z_{\rm spl}<1,
+0<z_{\rm spl}
+\le
+z_{\rm beam}^{\max}
+\equiv
+\frac{B_\sigma}{B_\sigma+\mathcal T_2}
+<1,
 \qquad
 0\le\phi<2\pi.
 \label{eq:isrfsr-repair-elementary-domain}
 \end{equation}
+The remaining recursive ISR$\times$FSR sector constraints can be kept in a compact exact form.  Define
+\begin{equation}
+d_{ij}\equiv
+\hat p_{ij}^0-\lvert\hat{\boldsymbol p}_{ij}\rvert,
+\qquad
+p_{ij}=p_i+p_j.
+\label{eq:isrfsr-repair-pair-distances}
+\end{equation}
+Up to the convention used to assign equality surfaces, the sector indicator is
+\begin{align}
+\Theta_{\rm reg}^{\rm ISR\times FSR}
+={}&
+\Theta(\mathcal T_{12}-\mathcal T_2)\,
+\Theta(\hat p_3^{-\sigma}-\mathcal T_2)
+\nonumber\\
+&\times
+\prod_{i=1}^{2}
+\Theta(\hat p_i^--\mathcal T_{12})\,
+\Theta(\hat p_i^+-\mathcal T_{12})
+\nonumber\\
+&\times
+\Theta(d_{13}-\mathcal T_2)\,
+\Theta(d_{23}-\mathcal T_2).
+\label{eq:isrfsr-repair-sector-theta}
+\end{align}
+This is the compact form of the unchanged first- and second-clustering inequalities.  The constraint involving
+the $p_{12}$ pair is saturated identically because the inverse map reconstructs
+$d_{12}=\mathcal T_{12}$.  All momenta in Eq.~\eqref{eq:isrfsr-repair-sector-theta} are the exact momenta
+obtained with the repaired inverse map.
 The remaining mapping bounds can be written explicitly and are convenient for a robust implementation by
 one-dimensional root finding.  Define
 \begin{align}
@@ -2120,11 +2131,16 @@ A_{12}(z_{\rm spl},\phi)
 +\mathcal T_{12}\cosh u.
 \label{eq:isrfsr-repair-domain-mt}
 \end{align}
-The exact light-cone components are
+The exact light-cone components, in the conventions stated below
+Eq.~\eqref{eq:isrfsr-repair-radiation-map}, are
 \begin{equation}
-p_{12}^{\pm}
+p_{12}^-
 =
-m_{T,12}e^{\pm y_{12}},
+m_{T,12}e^{y_{12}},
+\qquad
+p_{12}^+
+=
+m_{T,12}e^{-y_{12}},
 \qquad
 x_\pm
 =
@@ -2135,10 +2151,20 @@ q^\pm+p_{12}^\pm+p_3^\pm
 \end{equation}
 and projectability requires
 \begin{align}
-F_\pm(z_{\rm spl},\phi)
+F_-(z_{\rm spl},\phi)
 &\equiv
-\sqrt S-q^\pm-p_3^\pm(z_{\rm spl})
--e^{\pm y_{12}}
+\sqrt S-q^--p_3^-(z_{\rm spl})
+-e^{y_{12}}
+\left[
+A_{12}(z_{\rm spl},\phi)
++\mathcal T_{12}\cosh u
+\right]
+\ge0,
+\nonumber\\
+F_+(z_{\rm spl},\phi)
+&\equiv
+\sqrt S-q^+-p_3^+(z_{\rm spl})
+-e^{-y_{12}}
 \left[
 A_{12}(z_{\rm spl},\phi)
 +\mathcal T_{12}\cosh u
@@ -2147,14 +2173,12 @@ A_{12}(z_{\rm spl},\phi)
 \label{eq:isrfsr-repair-Fpm-bounds}
 \end{align}
 These are exactly the conditions $x_\pm\le1$; positivity of $x_\pm$ is automatic on the physical branch.
-Let $\Theta_{\rm reg}^{\rm ISR\times FSR}$ denote the product of the unchanged nearest-clustering and
-second-history constraints evaluated on the reconstructed exact momenta.  For each azimuth, the exact allowed
-set is
+For each azimuth, the exact allowed set is
 \begin{equation}
 \mathcal Z(\phi)
 =
 \left\{
-z_{\rm spl}\in(0,1):
+z_{\rm spl}\in(0,z_{\rm beam}^{\max}]:
 F_+(z_{\rm spl},\phi)\ge0,
 F_-(z_{\rm spl},\phi)\ge0,
 \Theta_{\rm reg}^{\rm ISR\times FSR}=1
@@ -2171,7 +2195,8 @@ z_{n,-}(\phi),z_{n,+}(\phi)
 \right],
 \label{eq:isrfsr-repair-Z-intervals}
 \end{equation}
-whose endpoints are the roots of $F_+=0$, $F_-=0$, or of one of the sector-boundary equalities.  The exact
+whose endpoints are $0$, $z_{\rm beam}^{\max}$, the roots of $F_+=0$ or $F_-=0$, or one of the
+sector-boundary equalities.  The exact
 integration can therefore be written as
 \begin{equation}
 \int d\mathcal T_2
@@ -2186,13 +2211,14 @@ dz_{\rm spl}\,
 with the $\mathcal T_2$ range in Eq.~\eqref{eq:isrfsr-repair-T2-range}.  This implicit root representation is
 preferable to assuming a single $z_{\min}$ and $z_{\max}$: it remains exact when PDF bounds and clustering
 constraints split the allowed domain into disconnected intervals.  Equivalently, one may integrate over the
-elementary rectangle in Eq.~\eqref{eq:isrfsr-repair-elementary-domain} and retain the three theta functions
-in Eq.~\eqref{eq:isrfsr-repair-Z-domain} in the integrand.
+elementary domain in Eq.~\eqref{eq:isrfsr-repair-elementary-domain} and retain the two projectability theta
+functions together with the full sector indicator in Eq.~\eqref{eq:isrfsr-repair-Z-domain}.
 
 \medskip
 \noindent
 \textit{Nested-locality check.}
-At fixed finite $\zeta=\mathcal T_2/\mathcal T_1$ and away from additional phase-space boundaries,
+At fixed $\zeta=\mathcal T_2/\mathcal T_1$ in a regular compact interval
+$0\le\zeta\le\zeta_*<1/2$ and away from additional phase-space boundaries,
 \begin{equation}
 \mathcal T_{12}=(1-\zeta)\mathcal T_1,
 \qquad
@@ -2238,7 +2264,50 @@ It follows simultaneously that
 \end{equation}
 uniformly over every regular finite-$\zeta$ interval.  The repaired map is therefore uniformly nested-local.
 It is also ordinarily one-step local: when $\mathcal T_2\to0$ at fixed nonzero $\mathcal T_1$,
-$k_{12}\to q_T$, $\mathcal T_{12}\to\mathcal T_1$, and the direct map approaches the identity.
+$k_{12}\to q_T$ and $\mathcal T_{12}\to\mathcal T_1$, so the mapped hard final-state kinematics approach
+the exact ones.  A finite longitudinal ISR momentum-fraction reshuffling can remain, as expected in an
+initial-state collinear limit; it is not a hard final-state recoil.
+
+\subsection{Possible validation tests in NNLO LHE event generation}
+\label{subsec:z1j-nnlo-lhe-mapping-tests}
+
+The analytic diagnosis in Sec.~\ref{subsec:z1j-isrfsr-mapping-diagnosis} and the repaired construction in
+Sec.~\ref{subsec:z1j-isrfsr-mapping-repair} are map-level statements.  They can be tested independently of
+integrated observables by applying the original, repaired, and FKS projections to the same exact $\Ph_3$
+configurations.  Use
+\[
+\Delta_{p_{T,j_1}}^{\rm anti-k_T}
+\equiv
+\frac{\Delta p_{T,j_1}^{\rm anti-k_T}}{Q},
+\qquad
+\Delta_{y_{j_1}}^{\rm anti-k_T}
+\equiv
+\Delta y_{j_1}^{\rm anti-k_T},
+\]
+where the rapidity shift is already dimensionless, and bin the events in
+\begin{equation}
+z=\frac{\mathcal T_2}{\mathcal T_1}.
+\label{eq:z1j-z-diagnostic}
+\end{equation}
+The local observables to follow as $\mathcal T_1/Q\to0$ at fixed $z$ are
+\begin{equation}
+\Delta_{t_0},
+\qquad
+\Delta_{y_{j_1}}^{\rm anti-k_T},
+\qquad
+\Delta_{p_{T,j_1}}^{\rm anti-k_T}.
+\label{eq:z1j-local-diagnostics}
+\end{equation}
+A positive-power fall establishes nested locality for the corresponding coordinate, whereas a nonzero
+plateau signals its failure.  For fiducial jet cuts one should separately monitor the signed classification
+migration
+\begin{equation}
+\Theta\!\left(\widehat p_{T,j_1}-p_T^{\min}\right)
+-
+\Theta\!\left(p_{T,j_1}-p_T^{\min}\right)
+\label{eq:z1j-signed-threshold-migration}
+\end{equation}
+for the relevant values of $p_T^{\min}$.
 
 The most direct implementation checks are closure of the direct and inverse maps, exact preservation of
 $q^\mu$ and $\mathcal T_1$, on-shellness and momentum conservation, and fixed-$\zeta$ scans of
