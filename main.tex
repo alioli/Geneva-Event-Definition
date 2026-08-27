@@ -1779,16 +1779,137 @@ mismatch has no positive-power suppression in the common scale at fixed finite $
 can still exhibit cancellations or additional enhancement from jet boundaries, so the local event-by-event
 test remains the cleanest diagnostic of the map property.
 
+\subsection{Auxiliary subtraction maps versus physical event projections}
+\label{subsec:fixed-order-does-not-require-uniform-nested-locality}
+
+The preceding process-specific examples concern maps whose projected configurations are retained as physical
+LHE events. To isolate why the simultaneous-limit behavior matters in that setting, it is useful to compare
+such a physical event projection with the same map used only as an auxiliary coordinate in an exact NLO
+subtraction.
+
+Uniform nested infrared locality is stronger than what is required of an auxiliary map used only inside the NLO part above the cut for a
+fixed-order NNLO slicing calculation. A concrete counterexample can be constructed by starting from any ordinary one-step
+IR-local map \(\Pi_{N+1}^{(0)}\), and composing it with a smooth recoil transformation
+\(\mathcal R_\alpha\) acting on the projected \((N+1)\)-body state,
+\begin{equation}
+\Pi_{N+1}^{\rm bad}
+=
+\mathcal R_{\alpha(x,y)}\circ\Pi_{N+1}^{(0)},
+\qquad
+x=\frac{\rn}{Q},
+\qquad
+y=\frac{\rnp}{Q},
+\qquad
+\alpha(x,y)=\frac{y}{x+y}.
+\label{eq:bad-map-definition}
+\end{equation}
+Assume that \(\mathcal R_\alpha\) preserves the on-shell and momentum-conservation constraints of the
+\((N+1)\)-body phase space and changes one smooth lower-multiplicity coordinate \(Y\) according to
+\begin{equation}
+Y\!\left(\mathcal R_\alpha(\Ph_{N+1})\right)
+=
+Y(\Ph_{N+1})
++
+\alpha\,Y_{\rm char}
++
+\mathcal O(\alpha^2),
+\label{eq:bad-map-recoil}
+\end{equation}
+with a finite nonsingular scale \(Y_{\rm char}\). At fixed nonzero \(x\),
+\begin{equation}
+y\to0
+\quad\Longrightarrow\quad
+\alpha(x,y)\to0,
+\label{eq:bad-map-one-step-local}
+\end{equation}
+so \(\Pi_{N+1}^{\rm bad}\) has exactly the same one-step \(N+2\to N+1\) infrared limit as
+\(\Pi_{N+1}^{(0)}\). It is therefore perfectly admissible from the point of view of local NLO subtraction,
+provided the usual phase-space factorization and invertibility requirements are satisfied.
+
+In the simultaneous unresolved limit, however, taking \(y=z x\) gives
+\begin{equation}
+\alpha(x,zx)=\frac{z}{1+z},
+\label{eq:bad-map-simultaneous-alpha}
+\end{equation}
+which remains finite as \(x\to0\) for any fixed nonzero \(z\). Since lowercase $y$ already labels the
+resolution ratio in Eq.~\eqref{eq:bad-map-definition}, we write the normalized $Y$-migration explicitly
+here rather than denoting it by \(\Delta_y\):
+\begin{equation}
+\frac{
+Y(\Ph_{N+2})
+-Y\!\left(\Pi_{N+1}^{\rm bad}(\Ph_{N+2})\right)
+}{Y_{\rm char}}
+\longrightarrow
+-\frac{z}{1+z}
+\label{eq:bad-map-violates-nested-locality}
+\end{equation}
+up to the convention for the sign of the recoil. The map is one-step IR local but violates uniform nested
+infrared locality maximally: exact and projected configurations approach different points of the limiting
+\(N\)-body phase space along a finite-\(z\) path.
+
+This does not spoil the fixed-order NLO calculation of the \((N+1)\)-body contribution that enters an NNLO
+calculation. Schematically, for \(\rn>\rn^{\cut}\), one has
+\begin{align}
+\sigma_{N+1}^{\rm NLO}[\Ocal]
+={}&
+\int_{\rn>\rn^{\cut}}d\Ph_{N+2}
+\Bigl[
+R_{N+2}(\Ph_{N+2})\Ocal(\Ph_{N+2})
+-
+C_{N+2}(\Ph_{N+2})
+\Ocal\!\left(\Pi_{N+1}^{\rm bad}(\Ph_{N+2})\right)
+\Bigr]
+\nonumber\\
+&+
+\int_{\rn>\rn^{\cut}}d\Ph_{N+1}
+\Bigl[V_{N+1}+I_{N+1}^{\rm bad}\Bigr](\Ph_{N+1})
+\Ocal(\Ph_{N+1}),
+\label{eq:bad-map-subtracted-nlo}
+\end{align}
+where \(I_{N+1}^{\rm bad}\) is obtained by integrating the same counterterm with the same map. The counterterm
+has only been added and subtracted. For every fixed nonzero \(\rn^{\cut}\), ordinary one-step locality is
+sufficient to make the real-minus-counterterm contribution locally integrable in the
+\(\rnp\to0\) limit. The map dependence cancels between the subtracted real contribution and its integrated
+counterpart, so Eq.~\eqref{eq:bad-map-subtracted-nlo} is the exact NLO result independently of the bad
+simultaneous-limit behavior of \(\Pi_{N+1}^{\rm bad}\).
+
+Embedding this exact NLO contribution in a sliced NNLO calculation therefore does not require the higher map
+to be uniformly nested-local. The lower region \(\rn<\rn^{\cut}\) is supplied by the separate
+lower-multiplicity NNLO contribution, while the higher-multiplicity NLO calculation only requires the
+ordinary \(\rnp\to0\) cancellation at fixed resolved \(\rn>\rn^{\cut}\). Individual subtraction pieces may
+develop increasingly large and numerically delicate cancellations as \(\rn^{\cut}\) is reduced, but this is
+a subtraction-scheme issue rather than a loss of formal NNLO accuracy.
+
+The situation changes when the projected \((N+1)\)-body configuration is used as the physical representative
+of the event below \(\rnp^{\cut}\). In that case the replacement
+\begin{equation}
+\Ocal(\Ph_{N+2})
+\longrightarrow
+\Ocal\!\left(\Pi_{N+1}(\Ph_{N+2})\right)
+\label{eq:physical-projection-replacement}
+\end{equation}
+is part of the event definition. There is no compensating integrated counterterm that restores the discarded
+measurement on the exact \(\Ph_{N+2}\) kinematics. A failure of uniform nested locality therefore becomes a
+genuine projection effect in the LHE event sample even though the same map could be entirely legitimate as
+an auxiliary fixed-order subtraction map. This is the precise sense in which the mapping requirements for
+GENEVA event generation are stronger than those required for formal fixed-order NNLO accuracy.
+
+The counterexample above therefore closes the discussion of the higher $\rnp^{\cut}$ projection. As long as
+$\Pi_{N+1}$ is used only inside the add--subtract organization of the exact NLO $(N+1)$ contribution, its
+auxiliary map dependence cancels. The stronger simultaneous-limit condition derived in
+Sec.~\ref{subsec:uniform-nested-locality} becomes physically relevant only when the projected configuration is
+retained as an event, not when it is merely an internal subtraction coordinate. We now turn to the distinct
+problem of a genuinely sliced fixed-order ingredient, for which the relevant nested hierarchy is
+$\rn^{\cut}$ versus $\rnm$.
+
 \section{Pure fixed-order slicing and nested sliced calculations}
 \label{sec:fixed-order-nested-slicing}
 
-The discussion now changes problem. Sections~\ref{sec:higher-singular-spectrum} and
-\ref{sec:nnlo-differential-predictions} concerned the replacement of an exact configuration by a projected
-\emph{physical LHE event}. In a pure fixed-order calculation projections play a different role: they are
-auxiliary devices used to organize subtraction or to evaluate a truncated power-expanded approximation below
-a slicing cut. If exact and projected terms are kept correlated, kinematic information lost by the projection
-can in principle be restored. What cannot be restored in this way are dynamical terms that were not retained
-in the below-cut approximation itself.
+Having isolated the higher-cut LHE event-definition effect from the use of an auxiliary NLO subtraction map,
+we now turn to genuine fixed-order slicing approximations. Here projections are used to evaluate a truncated
+power-expanded approximation below a slicing cut. If exact and projected terms are kept correlated, kinematic
+information lost by the projection can in principle be restored. What cannot be restored in this way are
+dynamical terms that were not retained in the below-cut approximation itself.
 
 It is therefore useful to separate from the outset two conceptually different sources of finite-cut error,
 \begin{equation}
@@ -1896,20 +2017,17 @@ outer resolution variable and in the Born-like coordinates,
 internal approximation on the \emph{lower-multiplicity NNLO cut} $\rn^{\cut}$ can
 contaminate the singular spectrum in $\rnm$ needed by the outer calculation.
 
-By contrast, we will assume that the additional $\rnp^{\cut}$ used only to organize the exact NLO $(N+1)$ contribution inside the
-embedded NNLO calculation is not a new fixed-order slicing approximation. This is because we can always use local NLO subtractions and when both sides of that partition
-are treated with exact kinematics and the local and integrated subtraction terms are combined consistently,
-its dependence cancels. Thus, for a pure fixed-order nested calculation, the potentially problematic
-neighboring hierarchy is
+As established in Sec.~\ref{subsec:fixed-order-does-not-require-uniform-nested-locality}, an additional
+$\rnp^{\cut}$ used only to organize the exact NLO $(N+1)$ contribution inside the embedded NNLO calculation
+does not constitute a new fixed-order slicing approximation. Thus the potentially problematic neighboring
+hierarchy is
 \begin{equation}
 \boxed{
 \rn^{\cut}\quad\hbox{versus}\quad \rnm,
 }
 \label{eq:relevant-inner-outer-hierarchy}
 \end{equation}
-not $\rnp^{\cut}$ versus $\rn$. The latter becomes a physical issue only when the projected
-$\widehat\Ph_{N+1}$ configuration is retained as an LHE event, as in Secs.~\ref{sec:higher-singular-spectrum}
-and \ref{sec:nnlo-differential-predictions}.
+not $\rnp^{\cut}$ versus $\rn$.
 
 For the outer slicing to inherit the correct singular structure, the sliced NNLO ingredient must reproduce
 Eq.~\eqref{eq:nnlo-ingredient-for-n3lo} with an error that is sufficiently suppressed as $\rnm\to0$. Both
@@ -2089,121 +2207,9 @@ At fixed order this migration belongs to $\Delta_{\rm kin}$ and can be included 
 restoration. If no such lower boundary is part of the process definition, this term is absent; the separate
 requirement of reproducing the differential $\rnm$ spectrum remains.
 
-\subsection{Auxiliary subtraction maps versus physical event projections}
-\label{subsec:fixed-order-does-not-require-uniform-nested-locality}
-
-Uniform nested infrared locality is stronger than what is required of an auxiliary map used only inside the NLO part above the cut for a
-fixed-order NNLO slicing calculation. A concrete counterexample can be constructed by starting from any ordinary one-step
-IR-local map \(\Pi_{N+1}^{(0)}\), and composing it with a smooth recoil transformation
-\(\mathcal R_\alpha\) acting on the projected \((N+1)\)-body state,
-\begin{equation}
-\Pi_{N+1}^{\rm bad}
-=
-\mathcal R_{\alpha(x,y)}\circ\Pi_{N+1}^{(0)},
-\qquad
-x=\frac{\rn}{Q},
-\qquad
-y=\frac{\rnp}{Q},
-\qquad
-\alpha(x,y)=\frac{y}{x+y}.
-\label{eq:bad-map-definition}
-\end{equation}
-Assume that \(\mathcal R_\alpha\) preserves the on-shell and momentum-conservation constraints of the
-\((N+1)\)-body phase space and changes one smooth lower-multiplicity coordinate \(Y\) according to
-\begin{equation}
-Y\!\left(\mathcal R_\alpha(\Ph_{N+1})\right)
-=
-Y(\Ph_{N+1})
-+
-\alpha\,Y_{\rm char}
-+
-\mathcal O(\alpha^2),
-\label{eq:bad-map-recoil}
-\end{equation}
-with a finite nonsingular scale \(Y_{\rm char}\). At fixed nonzero \(x\),
-\begin{equation}
-y\to0
-\quad\Longrightarrow\quad
-\alpha(x,y)\to0,
-\label{eq:bad-map-one-step-local}
-\end{equation}
-so \(\Pi_{N+1}^{\rm bad}\) has exactly the same one-step \(N+2\to N+1\) infrared limit as
-\(\Pi_{N+1}^{(0)}\). It is therefore perfectly admissible from the point of view of local NLO subtraction,
-provided the usual phase-space factorization and invertibility requirements are satisfied.
-
-In the simultaneous unresolved limit, however, taking \(y=z x\) gives
-\begin{equation}
-\alpha(x,zx)=\frac{z}{1+z},
-\label{eq:bad-map-simultaneous-alpha}
-\end{equation}
-which remains finite as \(x\to0\) for any fixed nonzero \(z\). Since lowercase $y$ already labels the
-resolution ratio in Eq.~\eqref{eq:bad-map-definition}, we write the normalized $Y$-migration explicitly
-here rather than denoting it by \(\Delta_y\):
-\begin{equation}
-\frac{
-Y(\Ph_{N+2})
--Y\!\left(\Pi_{N+1}^{\rm bad}(\Ph_{N+2})\right)
-}{Y_{\rm char}}
-\longrightarrow
--\frac{z}{1+z}
-\label{eq:bad-map-violates-nested-locality}
-\end{equation}
-up to the convention for the sign of the recoil. The map is one-step IR local but violates uniform nested
-infrared locality maximally: exact and projected configurations approach different points of the limiting
-\(N\)-body phase space along a finite-\(z\) path.
-
-This does not spoil the fixed-order NLO calculation of the \((N+1)\)-body contribution that enters an NNLO
-calculation. Schematically, for \(\rn>\rn^{\cut}\), one has
-\begin{align}
-\sigma_{N+1}^{\rm NLO}[\Ocal]
-={}&
-\int_{\rn>\rn^{\cut}}d\Ph_{N+2}
-\Bigl[
-R_{N+2}(\Ph_{N+2})\Ocal(\Ph_{N+2})
--
-C_{N+2}(\Ph_{N+2})
-\Ocal\!\left(\Pi_{N+1}^{\rm bad}(\Ph_{N+2})\right)
-\Bigr]
-\nonumber\\
-&+
-\int_{\rn>\rn^{\cut}}d\Ph_{N+1}
-\Bigl[V_{N+1}+I_{N+1}^{\rm bad}\Bigr](\Ph_{N+1})
-\Ocal(\Ph_{N+1}),
-\label{eq:bad-map-subtracted-nlo}
-\end{align}
-where \(I_{N+1}^{\rm bad}\) is obtained by integrating the same counterterm with the same map. The counterterm
-has only been added and subtracted. For every fixed nonzero \(\rn^{\cut}\), ordinary one-step locality is
-sufficient to make the real-minus-counterterm contribution locally integrable in the
-\(\rnp\to0\) limit. The map dependence cancels between the subtracted real contribution and its integrated
-counterpart, so Eq.~\eqref{eq:bad-map-subtracted-nlo} is the exact NLO result independently of the bad
-simultaneous-limit behavior of \(\Pi_{N+1}^{\rm bad}\).
-
-Embedding this exact NLO contribution in a sliced NNLO calculation therefore does not require the higher map
-to be uniformly nested-local. The lower region \(\rn<\rn^{\cut}\) is supplied by the separate
-lower-multiplicity NNLO contribution, while the higher-multiplicity NLO calculation only requires the
-ordinary \(\rnp\to0\) cancellation at fixed resolved \(\rn>\rn^{\cut}\). Individual subtraction pieces may
-develop increasingly large and numerically delicate cancellations as \(\rn^{\cut}\) is reduced, but this is
-a subtraction-scheme issue rather than a loss of formal NNLO accuracy.
-
-The situation changes when the projected \((N+1)\)-body configuration is used as the physical representative
-of the event below \(\rnp^{\cut}\). In that case the replacement
-\begin{equation}
-\Ocal(\Ph_{N+2})
-\longrightarrow
-\Ocal\!\left(\Pi_{N+1}(\Ph_{N+2})\right)
-\label{eq:physical-projection-replacement}
-\end{equation}
-is part of the event definition. There is no compensating integrated counterterm that restores the discarded
-measurement on the exact \(\Ph_{N+2}\) kinematics. A failure of uniform nested locality therefore becomes a
-genuine projection effect in the LHE event sample even though the same map could be entirely legitimate as
-an auxiliary fixed-order subtraction map. This is the precise sense in which the mapping requirements for
-GENEVA event generation are stronger than those required for formal fixed-order NNLO accuracy.
-
-The counterexample above also explains why the higher $\rnp^{\cut}$ projection must not be imported into the
-fixed-order nesting discussion. As long as $\Pi_{N+1}$ is used only inside the add--subtract organization of
-the exact NLO $(N+1)$ contribution, its auxiliary map dependence cancels. The stronger simultaneous-limit
-condition derived in Sec.~\ref{subsec:uniform-nested-locality} becomes physically relevant only when the
-projected configuration is retained as an event, not when it is merely an internal subtraction coordinate.
+This completes the fixed-order analysis: after any kinematic information recoverable through a correlated
+P2B construction has been restored, the remaining nested-cut requirement concerns the locality of the
+dynamical truncation remainder in the outer singular variable.
 
 \section{Summary: three distinct uses of cuts and projections}
 
