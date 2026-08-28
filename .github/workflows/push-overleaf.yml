@@ -1,13 +1,15 @@
-name: Push changes to Overleaf
+name: Bidirectional GitHub Overleaf sync
 
 on:
   push:
     branches:
       - main
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 permissions:
-  contents: read
-  statuses: write
+  contents: write
 
 concurrency:
   group: overleaf-sync
@@ -16,31 +18,20 @@ concurrency:
 env:
   OVERLEAF_TOKEN: ${{ secrets.OVERLEAF_TOKEN }}
   OVERLEAF_REMOTE: https://git@git.overleaf.com/69ce2c30f9afe0bef5ae7ddf
+  STATE_FILE: .github/overleaf-sync-state
 
 jobs:
   sync:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out GitHub history
+      - name: Check out current GitHub main
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
-      - name: Mark sync pending
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          gh api --method POST \
-            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
-            -f state=pending \
-            -f context=overleaf-sync \
-            -f description='Syncing changes to Overleaf' \
-            -f target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-
-      - name: Configure Overleaf authentication
+      - name: Configure synchronization identity and Overleaf authentication
         shell: bash
         run: |
           set -euo pipefail
@@ -49,6 +40,9 @@ jobs:
             echo "::error::Repository secret OVERLEAF_TOKEN is not configured."
             exit 1
           fi
+
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
           ASKPASS="$RUNNER_TEMP/overleaf-askpass.sh"
           cat > "$ASKPASS" <<'EOF'
@@ -64,47 +58,25 @@ jobs:
           echo "GIT_ASKPASS=$ASKPASS" >> "$GITHUB_ENV"
           echo "GIT_TERMINAL_PROMPT=0" >> "$GITHUB_ENV"
 
-      - name: Build the GitHub project-file patch
-        shell: bash
-        env:
-          BASE_SHA: ${{ github.event.before }}
-          HEAD_SHA: ${{ github.sha }}
-          HEAD_MESSAGE: ${{ github.event.head_commit.message }}
-        run: |
-          set -euo pipefail
-
-          PATCH="$RUNNER_TEMP/github-to-overleaf.patch"
-          : > "$PATCH"
-
-          # A commit created by the inverse Overleaf -> GitHub sync already
-          # originates from Overleaf. Run the job normally, but do not send it
-          # back to Overleaf and create a loop.
-          if [[ "$HEAD_MESSAGE" == "Sync changes from Overleaf" ]]; then
-            echo "Commit originated from Overleaf; nothing to send back."
-            exit 0
-          fi
-
-          # Send only project-file changes. Repository automation files never
-          # belong in the Overleaf project tree.
-          git diff --binary "$BASE_SHA" "$HEAD_SHA" -- . ':(exclude).github/**' > "$PATCH"
-
-          if [[ ! -s "$PATCH" ]]; then
-            echo "This push contains no project-file changes to send to Overleaf."
-          fi
-
-      - name: Fetch current Overleaf state and apply the patch
+      - name: Merge and synchronize both repositories
         shell: bash
         run: |
           set -euo pipefail
 
-          PATCH="$RUNNER_TEMP/github-to-overleaf.patch"
-          if [[ ! -s "$PATCH" ]]; then
-            echo "Nothing to synchronize."
-            exit 0
+          if [[ ! -f "$STATE_FILE" ]]; then
+            echo "::error::Missing bidirectional synchronization state: $STATE_FILE"
+            exit 1
+          fi
+
+          GITHUB_BASE="$(awk -F= '$1 == "github_base" {print $2}' "$STATE_FILE" | tr -d '[:space:]')"
+          OVERLEAF_BASE="$(awk -F= '$1 == "overleaf_base" {print $2}' "$STATE_FILE" | tr -d '[:space:]')"
+
+          if [[ -z "$GITHUB_BASE" || -z "$OVERLEAF_BASE" ]]; then
+            echo "::error::The synchronization state must define github_base and overleaf_base."
+            exit 1
           fi
 
           git remote add overleaf "$OVERLEAF_REMOTE"
-
           OVERLEAF_BRANCH="$({ git ls-remote --symref overleaf HEAD || true; } \
             | awk '/^ref:/ {sub("refs/heads/", "", $2); print $2; exit}')"
 
@@ -113,52 +85,117 @@ jobs:
             exit 1
           fi
 
-          echo "Using Overleaf branch: $OVERLEAF_BRANCH"
           git fetch --prune overleaf "$OVERLEAF_BRANCH"
 
-          # Always apply the GitHub patch on top of the current Overleaf HEAD.
-          # If the same lines were edited independently in Overleaf, --3way
-          # fails instead of overwriting those edits.
-          git switch --detach "overleaf/$OVERLEAF_BRANCH"
+          GITHUB_HEAD="$(git rev-parse HEAD)"
+          OVERLEAF_HEAD="$(git rev-parse "overleaf/$OVERLEAF_BRANCH")"
 
-          if ! git apply --3way --index "$PATCH"; then
-            echo "::error::The GitHub changes conflict with edits already present in Overleaf. Nothing was pushed."
-            git status --short
+          for ref in "$GITHUB_BASE" "$OVERLEAF_BASE" "$GITHUB_HEAD" "$OVERLEAF_HEAD"; do
+            if ! git cat-file -e "${ref}^{commit}" 2>/dev/null; then
+              echo "::error::Synchronization commit $ref is not available."
+              exit 1
+            fi
+          done
+
+          if ! git diff --quiet "$GITHUB_BASE" "$OVERLEAF_BASE" -- . ':(exclude).github/**'; then
+            echo "::error::The stored GitHub and Overleaf bases do not describe the same project tree."
             exit 1
           fi
 
-          if git diff --cached --quiet; then
-            echo "Overleaf already contains these project-file changes."
+          github_changed=false
+          overleaf_changed=false
+          if ! git diff --quiet "$GITHUB_BASE" "$GITHUB_HEAD" -- . ':(exclude).github/**'; then
+            github_changed=true
+          fi
+          if ! git diff --quiet "$OVERLEAF_BASE" "$OVERLEAF_HEAD" -- . ':(exclude).github/**'; then
+            overleaf_changed=true
+          fi
+
+          echo "GitHub base:   $GITHUB_BASE"
+          echo "GitHub head:   $GITHUB_HEAD"
+          echo "Overleaf base: $OVERLEAF_BASE"
+          echo "Overleaf head: $OVERLEAF_HEAD"
+          echo "Project changes: GitHub=$github_changed Overleaf=$overleaf_changed"
+
+          if [[ "$github_changed" == false && "$overleaf_changed" == false ]]; then
+            echo "GitHub and Overleaf are already synchronized."
             exit 0
           fi
 
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git commit -m "Sync GitHub changes ${GITHUB_SHA::12}"
-          git push overleaf "HEAD:$OVERLEAF_BRANCH"
+          # If a previous run propagated the merged tree to both remotes but was
+          # interrupted before recording the new bases, recover idempotently.
+          if git diff --quiet "$GITHUB_HEAD" "$OVERLEAF_HEAD" -- . ':(exclude).github/**'; then
+            printf 'github_base=%s\noverleaf_base=%s\n' \
+              "$GITHUB_HEAD" "$OVERLEAF_HEAD" > "$STATE_FILE"
+            git add "$STATE_FILE"
+            git commit -m "Record synchronized GitHub and Overleaf state"
+            git push origin HEAD:main
+            echo "Recovered an already synchronized project tree."
+            exit 0
+          fi
 
-      - name: Mark sync successful
-        if: success()
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api --method POST \
-            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
-            -f state=success \
-            -f context=overleaf-sync \
-            -f description='Changes synced to Overleaf' \
-            -f target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          OVERLEAF_PATCH="$RUNNER_TEMP/overleaf-changes.patch"
+          TO_OVERLEAF_PATCH="$RUNNER_TEMP/merged-to-overleaf.patch"
+          MERGED_DIR="$RUNNER_TEMP/github-merged"
+          OVERLEAF_DIR="$RUNNER_TEMP/overleaf-merged"
+          CONFLICT_DIR="$RUNNER_TEMP/overleaf-sync-conflict"
 
-      - name: Mark sync failed
+          git diff --binary "$OVERLEAF_BASE" "$OVERLEAF_HEAD" \
+            -- . ':(exclude).github/**' > "$OVERLEAF_PATCH"
+
+          git worktree add --detach "$MERGED_DIR" "$GITHUB_HEAD"
+          cd "$MERGED_DIR"
+
+          if [[ -s "$OVERLEAF_PATCH" ]]; then
+            if ! git apply --3way --index "$OVERLEAF_PATCH"; then
+              mkdir -p "$CONFLICT_DIR"
+              cp "$OVERLEAF_PATCH" "$CONFLICT_DIR/overleaf-changes.patch"
+              git status --short > "$CONFLICT_DIR/status.txt"
+              git diff --cc > "$CONFLICT_DIR/conflict.diff" || true
+              echo "::error::GitHub and Overleaf changed overlapping project lines. Nothing was pushed."
+              exit 1
+            fi
+          fi
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Merge changes from Overleaf"
+          fi
+          MERGED_GITHUB_HEAD="$(git rev-parse HEAD)"
+
+          # Publish the merged project to GitHub first. A rejected push leaves
+          # Overleaf untouched and a later run can retry from the new main.
+          if [[ "$MERGED_GITHUB_HEAD" != "$GITHUB_HEAD" ]]; then
+            git push origin HEAD:main
+          fi
+
+          cd "$GITHUB_WORKSPACE"
+          git diff --binary "$OVERLEAF_HEAD" "$MERGED_GITHUB_HEAD" \
+            -- . ':(exclude).github/**' > "$TO_OVERLEAF_PATCH"
+
+          git worktree add --detach "$OVERLEAF_DIR" "$OVERLEAF_HEAD"
+          cd "$OVERLEAF_DIR"
+
+          if [[ -s "$TO_OVERLEAF_PATCH" ]]; then
+            git apply --index "$TO_OVERLEAF_PATCH"
+            git commit -m "Synchronize merged project from GitHub"
+            git push overleaf "HEAD:$OVERLEAF_BRANCH"
+          fi
+          NEW_OVERLEAF_HEAD="$(git rev-parse HEAD)"
+
+          cd "$MERGED_DIR"
+          printf 'github_base=%s\noverleaf_base=%s\n' \
+            "$MERGED_GITHUB_HEAD" "$NEW_OVERLEAF_HEAD" > "$STATE_FILE"
+          git add "$STATE_FILE"
+          git commit -m "Record synchronized GitHub and Overleaf state"
+          git push origin HEAD:main
+
+          echo "Synchronized GitHub $MERGED_GITHUB_HEAD with Overleaf $NEW_OVERLEAF_HEAD."
+
+      - name: Upload conflict diagnostics
         if: failure()
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api --method POST \
-            "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
-            -f state=failure \
-            -f context=overleaf-sync \
-            -f description='Overleaf sync failed; nothing was pushed' \
-            -f target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+        uses: actions/upload-artifact@v4
+        with:
+          name: overleaf-sync-conflict-${{ github.run_id }}
+          path: ${{ runner.temp }}/overleaf-sync-conflict
+          if-no-files-found: ignore
+          retention-days: 14
