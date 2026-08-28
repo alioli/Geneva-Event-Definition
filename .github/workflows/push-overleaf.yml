@@ -70,6 +70,7 @@ jobs:
 
           GITHUB_BASE="$(awk -F= '$1 == "github_base" {print $2}' "$STATE_FILE" | tr -d '[:space:]')"
           OVERLEAF_BASE="$(awk -F= '$1 == "overleaf_base" {print $2}' "$STATE_FILE" | tr -d '[:space:]')"
+          BOOTSTRAP_MODE="$(awk -F= '$1 == "bootstrap" {print $2}' "$STATE_FILE" | tr -d '[:space:]')"
 
           if [[ -z "$GITHUB_BASE" || -z "$OVERLEAF_BASE" ]]; then
             echo "::error::The synchronization state must define github_base and overleaf_base."
@@ -98,8 +99,33 @@ jobs:
           done
 
           if ! git diff --quiet "$GITHUB_BASE" "$OVERLEAF_BASE" -- . ':(exclude).github/**'; then
-            echo "::error::The stored GitHub and Overleaf bases do not describe the same project tree."
-            exit 1
+            if [[ "$BOOTSTRAP_MODE" != "overleaf" ]]; then
+              echo "::error::The stored GitHub and Overleaf bases do not describe the same project tree."
+              exit 1
+            fi
+
+            echo "Bootstrapping the common project tree from the current Overleaf state."
+            BOOTSTRAP_PATCH="$RUNNER_TEMP/overleaf-bootstrap.patch"
+            BOOTSTRAP_DIR="$RUNNER_TEMP/github-bootstrap"
+            git diff --binary "$GITHUB_HEAD" "$OVERLEAF_HEAD" \
+              -- . ':(exclude).github/**' > "$BOOTSTRAP_PATCH"
+            git worktree add --detach "$BOOTSTRAP_DIR" "$GITHUB_HEAD"
+            cd "$BOOTSTRAP_DIR"
+            if [[ -s "$BOOTSTRAP_PATCH" ]]; then
+              git apply --index "$BOOTSTRAP_PATCH"
+              git commit -m "Bootstrap synchronized project from Overleaf"
+            fi
+            BOOTSTRAP_GITHUB_HEAD="$(git rev-parse HEAD)"
+            if [[ "$BOOTSTRAP_GITHUB_HEAD" != "$GITHUB_HEAD" ]]; then
+              git push origin HEAD:main
+            fi
+            printf 'github_base=%s\noverleaf_base=%s\n' \
+              "$BOOTSTRAP_GITHUB_HEAD" "$OVERLEAF_HEAD" > "$STATE_FILE"
+            git add "$STATE_FILE"
+            git commit -m "Record synchronized GitHub and Overleaf state"
+            git push origin HEAD:main
+            echo "Established a new common GitHub and Overleaf project base."
+            exit 0
           fi
 
           github_changed=false
