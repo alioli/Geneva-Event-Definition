@@ -434,28 +434,53 @@ including the reference value of \(X_i\), only provided that it remains uniforml
 from zero throughout the region under consideration. In particular, choices such as
 \(X_{i,\rm char}=|X_i|\) are not admissible in a region where \(X_i\) can vanish.
 
-If the map approaches the exact kinematics smoothly, the relative migration can then have a generic nested
-scaling
+At fixed nonzero \(\rn\), introduce the strong-ordering variable
+\[
+z\equiv\frac{\rnp}{\rn}.
+\]
+Ordinary one-step infrared locality requires the normalized migration to vanish as \(z\to0\). On a regular
+phase-space branch, a smooth map therefore admits an asymptotic expansion
+\[
+\Delta_{x_i}
+=
+\sum_{a>0}
+c_{i,a}\!\left(
+\mathbf X,\Ph_{\rm rad}^{\rm rest},
+\frac{\rn}{Q}
+\right)z^a .
+\]
+Denoting the first nonvanishing power by \(p>0\), this gives
 \begin{equation}
 \Delta_{x_i}
 \sim
-c_i(\mathbf X,\Ph_{\rm rad}^{\rm rest})
+c_{i,p}\!\left(
+\mathbf X,\Ph_{\rm rad}^{\rm rest},
+\frac{\rn}{Q}
+\right)
 \left(\frac{\rnp}{\rn}\right)^p,
 \qquad p>0,
 \label{eq:delta-x-scaling}
 \end{equation}
-where \(c_i\) is a nonsingular dimensionless coefficient and \(p\) is nonuniversal and depends on the
-resolution variables and recoil prescription. 
+up to possible logarithmic factors.
 
-INVESTIGARE DA DOVA ARRIVA EQUAZIONE PRECEDENTE
-
-Equation~\eqref{eq:delta-x-scaling} should therefore be
-understood only as a parametrization of how rapidly the projection becomes local in \(X_i\) as the second
-emission becomes unresolved relative to the first one; it does not assume that the absolute shift
-\(\Delta X_i\) is set by \(\rnp\) itself. In particular, Eq.~\eqref{eq:delta-x-scaling} isolates the dependence
-on the strong-ordering ratio \(\rnp/\rn\); it does not by itself determine whether the coefficient multiplying
-this ratio receives an additional suppression when \(\rn/Q\to0\). That separate question will be addressed
-in Sec.~\ref{subsec:uniform-nested-locality}.
+The appearance of \(\rn\) in the denominator does not by itself imply that the physical migration is
+enhanced by an inverse power of \(\rn\). The expansion above is performed at fixed \(\rn\), and the
+dependence obtained when \(\rn\) is varied is controlled jointly by the explicit power of \(z\) and by the
+\(\rn/Q\) dependence of its coefficient. For example, a hard-scale recoil satisfying
+\[
+\Delta_{x_i}\sim
+\left(\frac{\rnp}{Q}\right)^p
+\]
+corresponds to
+\[
+c_{i,p}\!\left(\frac{\rn}{Q}\right)
+\sim
+\left(\frac{\rn}{Q}\right)^p,
+\]
+so that the apparent inverse power of \(\rn\) cancels. A genuine neighboring-scale behavior
+\(\Delta_{x_i}\sim z^p\) arises only if \(c_{i,p}\) has a finite nonzero leading term as
+\(\rn/Q\to0\). Whether this occurs is a property of the specific projection map and cannot be inferred
+from one-step locality or from the double-singular cross section alone.
 
 The origin of the migration derivative can be seen directly by expanding the measurement delta. Since
 \(X_i(\widehat\Ph_{N+1})=X_i(\Ph_{N+2})-\Delta X_i\),
