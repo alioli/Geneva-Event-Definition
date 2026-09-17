@@ -1988,74 +1988,69 @@ It replaces the factor $dy_{12}/d\bar y_{12}$ in the original construction.  The
 \end{equation}
 where $y$ on the left-hand side is the usual FKS angular variable, not the cluster rapidity.
 
-For the splitting variables one further dependence must be retained.  At fixed
-$(\mathcal T_2,z_{\rm spl},\phi)$, the emitted momentum in
-Eq.~\eqref{eq:isrfsr-repair-radiation-map} depends on the projected Born point through
-$B_\sigma$.  Define
-\begin{align}
-\bar m_T
-&\equiv
-\mathfrak m_T(\mathcal T_1,q_T,u)
-=\sqrt{\bar p_{12}^{\,2}+q_T^2},
-\nonumber\\
-\beta_\sigma
-&\equiv
-\left.
-\frac{\partial B_\sigma}{\partial\bar p_{12}^{\,2}}
-\right|_{q,\bar y_{12}}
-=
-\frac{e^{\sigma u}}{2\bar m_T},
-\label{eq:isrfsr-repair-B-derivative}
-\end{align}
-where the last equality follows from
-$B_\sigma=\hat q^{-\sigma}+\hat{\bar p}_{12}^{-\sigma}$ and
-$\hat{\bar p}_{12}^{-\sigma}=\bar m_T e^{\sigma u}$ in the colour-singlet frame.  Writing
-$\Delta\phi=\phi-\phi_q$, one obtains
+For the splitting variables the full change of variables must include the component of the emitted momentum
+that depends on the projected Born point.  Define
 \begin{equation}
-\left.
-\frac{\partial k_{12}}{\partial\bar p_{12}^{\,2}}
-\right|_{\mathcal T_2,z_{\rm spl},\phi}
-=
-\frac{
-p_{3T}\bigl(p_{3T}+q_T\cos\Delta\phi\bigr)
-}{
-2k_{12}B_\sigma
-}
-\beta_\sigma .
-\label{eq:isrfsr-repair-k-derivative}
+w\equiv\hat p_3^{-\sigma}
+=B_\sigma\frac{1-z_{\rm spl}}{z_{\rm spl}},
+\qquad
+\boldsymbol b\equiv(\bar p_{12}^{\,2},\bar y_{12}),
+\qquad
+\boldsymbol X\equiv(p_{12}^2,y_{12}).
+\label{eq:isrfsr-repair-full-jacobian-variables}
 \end{equation}
-Consequently, the complete kinematic factor for the splitting parametrization is
+At fixed $(\mathcal T_2,\phi)$, one has $\boldsymbol X=\boldsymbol X(\boldsymbol b,w)$ and
+$w=w(\boldsymbol b,z_{\rm spl})$.  The complete derivative matrix is therefore
 \begin{equation}
-\boxed{\begin{aligned}
-\mathcal J_{12,\rm spl}^{\rm repair}
-&\equiv
-\left|
-\frac{d p_{12}^2\,dy_{12}}
-{d\bar p_{12}^{\,2}\,d\bar y_{12}}
-\right|_{\mathcal T_2,z_{\rm spl},\phi}
+\frac{\partial(\boldsymbol X,w)}
+{\partial(\boldsymbol b,z_{\rm spl})}
+=
+\begin{pmatrix}
+\left.\partial_{\boldsymbol b}\boldsymbol X\right|_w
++(\partial_w\boldsymbol X)(\partial_{\boldsymbol b}w)
+&
+(\partial_w\boldsymbol X)(\partial_{z_{\rm spl}}w)
 \\
-&=
+\partial_{\boldsymbol b}w
+&
+\partial_{z_{\rm spl}}w
+\end{pmatrix}.
+\label{eq:isrfsr-repair-full-jacobian-matrix}
+\end{equation}
+Subtracting the last column times
+$(\partial_{\boldsymbol b}w)/(\partial_{z_{\rm spl}}w)$ from the first two columns shows that all derivatives
+of $w$ with respect to the Born variables cancel from the determinant.  Hence
+\begin{equation}
+\det\frac{\partial(\boldsymbol X,w)}
+{\partial(\boldsymbol b,z_{\rm spl})}
+=
+-\frac{B_\sigma}{z_{\rm spl}^{\,2}}
+\det\left.\frac{\partial\boldsymbol X}{\partial\boldsymbol b}\right|_w.
+\label{eq:isrfsr-repair-full-jacobian-determinant}
+\end{equation}
+The factor $B_\sigma/z_{\rm spl}^{\,2}$ is already part of the standard ISR radiation measure.  The residual
+splitting-variable factor is thus exactly the fixed-emission Born factor,
+\begin{equation}
+\boxed{
+\mathcal J_{12,\rm spl}^{\rm repair}
+\equiv
+\frac{z_{\rm spl}^{\,2}}{B_\sigma}
 \left|
+\frac{d p_{12}^2\,dy_{12}\,dw}
+{d\bar p_{12}^{\,2}\,d\bar y_{12}\,dz_{\rm spl}}
+\right|
+=
+\mathcal J_{12,\rm FKS}^{\rm repair}
+=
 \frac{
 \mathfrak D(\mathcal T_{12},k_{12},u)
 }{
 \mathfrak D(\mathcal T_1,q_T,u)
 }
-+
-\frac{
-\mathcal T_{12}\cosh u\,
-p_{3T}\bigl(p_{3T}+q_T\cos\Delta\phi\bigr)
-}{
-\mathfrak a(\mathcal T_{12},k_{12},u)B_\sigma
-}
-\beta_\sigma
-\right|
-\end{aligned}}
+}.
 \label{eq:isrfsr-repair-splitting-kinematic-jacobian}
 \end{equation}
-The second term is absent at fixed FKS variables because then $p_3$ does not depend on the projected Born
-point.  Omitting it at fixed $z_{\rm spl}$ would therefore mix two different choices of independent
-radiation variables.  The full splitting Jacobian is
+The full splitting Jacobian is
 \begin{equation}
 \boxed{
 \frac{d\Ph_3}
@@ -2291,9 +2286,10 @@ It follows simultaneously that
 \frac{\bar p_{12}^\mu-p_{12}^\mu}{Q}
 \longrightarrow0,
 \qquad
-\mathcal J_{12,\rm FKS}^{\rm repair}\longrightarrow1,
-\qquad
-\mathcal J_{12,\rm spl}^{\rm repair}\longrightarrow1,
+\mathcal J_{12,\rm spl}^{\rm repair}
+=
+\mathcal J_{12,\rm FKS}^{\rm repair}
+\longrightarrow1,
 \label{eq:isrfsr-repair-locality-result}
 \end{equation}
 uniformly over every regular finite-$\zeta$ interval.  The repaired map is therefore uniformly nested-local.
@@ -2502,107 +2498,21 @@ and the complete FKS Jacobian retains its original form,
 \medskip
 \noindent
 \textit{Jacobian at fixed splitting variables.}
-At fixed $(\mathcal T_2,z_{\rm spl},\phi)$, $p_3$ depends on the projected Born point through
-$B_\sigma$.  For the present mapping,
-\begin{align}
-B_\sigma
-&=
-\hat q^{-\sigma}+\hat{\bar p}_{12}^{-\sigma}
-\nonumber\\
-&=
-\hat q^{-\sigma}
-+\mathfrak e(\mathcal T_1,q_T,\bar v_{12})
-+\sigma\bar v_{12},
-\label{eq:isrfsr-zrepair-B-function}
-\\
-\left.
-\frac{\partial B_\sigma}{\partial\mathcal T_1}
-\right|_{q,\bar v_{12}}
-&=1,
-\qquad
-\left.
-\frac{\partial B_\sigma}{\partial\bar v_{12}}
-\right|_{q,\mathcal T_1}
-=
-\sigma+\frac{\bar v_{12}}{\bar P_{12}},
-\qquad
-\bar P_{12}\equiv\sqrt{q_T^2+\bar v_{12}^2}.
-\label{eq:isrfsr-zrepair-B-derivative}
-\end{align}
-Writing $\Delta\phi=\phi-\phi_q$ and using
-$p_{3T}^2=\mathcal T_2B_\sigma(1-z_{\rm spl})/z_{\rm spl}$ gives
-\begin{align}
-\mathcal K_\sigma
-&\equiv
-\frac{
-p_{3T}\bigl(p_{3T}+q_T\cos\Delta\phi\bigr)
-}{
-2k_{12}B_\sigma
-},
-\label{eq:isrfsr-zrepair-K-definition}
-\\
-\left.
-\frac{\partial k_{12}}{\partial\mathcal T_1}
-\right|_{\mathcal T_2,z_{\rm spl},\phi,\bar v_{12}}
-&=\mathcal K_\sigma,
-\nonumber\\
-\left.
-\frac{\partial k_{12}}{\partial\bar v_{12}}
-\right|_{\mathcal T_2,z_{\rm spl},\phi,\mathcal T_1}
-&=
-\mathcal K_\sigma
-\left(
-\sigma+\frac{\bar v_{12}}{\bar P_{12}}
-\right).
-\label{eq:isrfsr-zrepair-k-derivative}
-\end{align}
-Both derivatives contribute to the two-dimensional determinant.  To display the result compactly, define
-\begin{equation}
-P_{12}\equiv\sqrt{k_{12}^2+v_{12}^2},
-\qquad
-E_{12}\equiv\mathcal T_{12}+P_{12},
-\qquad
-D_{12}\equiv E_{12}^2-v_{12}^2
-=k_{12}^2+p_{12}^2.
-\label{eq:isrfsr-zrepair-PED-definitions}
-\end{equation}
-At fixed independent $(\mathcal T_{12},v_{12},k_{12})$, the required oriented minors are
-\begin{align}
-\frac{\partial(p_{12}^2,y_{12})}
-{\partial(\mathcal T_{12},v_{12})}
-&=2,
-\nonumber\\
-\frac{\partial(p_{12}^2,y_{12})}
-{\partial(k_{12},v_{12})}
-&=
-\frac{2\mathcal T_{12}k_{12}E_{12}}{P_{12}D_{12}},
-\nonumber\\
-\frac{\partial(p_{12}^2,y_{12})}
-{\partial(\mathcal T_{12},k_{12})}
-&=
--\frac{2k_{12}v_{12}}{D_{12}}.
-\label{eq:isrfsr-zrepair-jacobian-minors}
-\end{align}
-The complete kinematic factor is therefore
+The determinant identity in Eq.~\eqref{eq:isrfsr-repair-full-jacobian-determinant} applies unchanged.  At
+fixed $w=\hat p_3^{-\sigma}$, the emitted momentum and therefore $k_{12}$ are fixed, while
+$\mathcal T_{12}=\mathcal T_1-\mathcal T_2$ and $v_{12}=\bar v_{12}$.  Equation~\eqref{eq:isrfsr-zrepair-cluster-jacobian}
+then gives a unit Born factor.  After extracting the standard $B_\sigma/z_{\rm spl}^{\,2}$ radiation factor,
+the residual splitting-variable factor is therefore exactly
 \begin{equation}
 \boxed{
 \mathcal J_{12,\rm spl}^{(v)}
-=
+\equiv
+\frac{z_{\rm spl}^{\,2}}{B_\sigma}
 \left|
-1+
-\frac{
-p_{3T}\bigl(p_{3T}+q_T\cos\Delta\phi\bigr)
-}{
-2B_\sigma D_{12}
-}
-\left[
-\frac{\mathcal T_{12}E_{12}}{P_{12}}
--v_{12}
-\left(
-\sigma+\frac{v_{12}}{\bar P_{12}}
-\right)
-\right]
+\frac{d p_{12}^2\,dy_{12}\,dw}
+{d\bar p_{12}^{\,2}\,d\bar y_{12}\,dz_{\rm spl}}
 \right|
+=1
 }.
 \label{eq:isrfsr-zrepair-splitting-kinematic-jacobian}
 \end{equation}
@@ -2617,7 +2527,6 @@ The full splitting Jacobian becomes
 }{
 4(2\pi)^3z_{\rm spl}^{\,2}
 }
-\mathcal J_{12,\rm spl}^{(v)}
 }.
 \label{eq:isrfsr-zrepair-splitting-jacobian}
 \end{equation}
@@ -2733,10 +2642,7 @@ components coincide.  Furthermore,
 \begin{equation}
 \mathcal J_{12,\rm FKS}^{(v)}=1,
 \qquad
-\mathcal J_{12,\rm spl}^{(v)}-1
-=
-\mathcal O\!\left(\sqrt{\frac{\mathcal T_1}{Q}}\right)
-\longrightarrow0
+\mathcal J_{12,\rm spl}^{(v)}=1
 \label{eq:isrfsr-zrepair-locality-jacobians}
 \end{equation}
 in regular hard regions.  Thus the signed-longitudinal-component map is uniformly nested-local and ordinarily
@@ -2764,8 +2670,8 @@ FKS kinematic factor
 & ratio of $\mathfrak D$ functions
 & exactly one \\
 Splitting-variable factor
-& Eq.~\eqref{eq:isrfsr-repair-splitting-kinematic-jacobian}
-& Eq.~\eqref{eq:isrfsr-zrepair-splitting-kinematic-jacobian} \\
+& same as the FKS factor
+& exactly one \\
 Central region
 & regular
 & regular, with no division by $v_{12}$ \\
